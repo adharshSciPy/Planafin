@@ -1,0 +1,12 @@
+.elementorSpaceInner{
+    height: 50px;
+    background: #000;
+}
+.elementorWidgetContainer{
+    width: 100%;
+    }
+.elementorHeading{
+    text-align: center;
+    font-size: 36px;
+    font-weight: 400;
+}
