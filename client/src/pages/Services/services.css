@@ -1,0 +1,71 @@
+
+.services-container{
+    width: 100%;
+  }
+  .service-container2{
+      margin-top: 100px;
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 38px;
+      font-weight: 400;
+      word-spacing: 2px;
+      line-height: 60px
+  }
+  .service-content1{
+      width: 100%;
+      margin-top: 20px;
+      font-size: 22px;
+      word-spacing: 2px;
+      font-weight: 350;
+      text-align: center;
+      font-family: popins sans-serif;
+      color:#404040;
+  }
+  .service-image{
+      text-align: center;
+      margin-top: 50px;
+  }
+  .service-image .image-tag {
+      width: 50%;
+  }
+  .increment-section {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* padding: 10px; */
+    margin-top: 30px;
+  }
+  .js-contents {
+    padding: 10px;
+  }
+  .js-contents p {
+    font-size: 25px;
+    color:black;
+    line-height: 1.5;
+    font-weight: 700;
+  }
+  .num {
+    font-size: 40px;
+    color: #c1c1c1;
+    font-weight: 1000;
+  }
+  .span-contents {
+    font-size: 30px;
+    color: #C1C1C1;
+    font-weight: 1000;
+  }
+
+  .consulting-section{
+    width: 100%;
+    margin-top: 50px;
+    height: 500px;
+    background-color: #FFFCEE;
+  }
+  .consulting-left-section{
+    width: 50%;
+    height: 500px;
+    background-color: black;
+  }
+  
