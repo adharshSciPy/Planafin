@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import swiperImg from "../../assets/planafin.home.swiper-slider.png";
 import cardImg1 from "../../assets/card.image.1.png";
 import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx"
 function Home() {
   return (
     <div>
@@ -90,7 +91,7 @@ function Home() {
           </div>
         </div>
       </div>
-
+      <Footer/> 
     </div>
   );
 }

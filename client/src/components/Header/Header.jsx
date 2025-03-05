@@ -4,6 +4,7 @@ import navIcon from "../../assets/logo.png"
 import menuPic from "../../assets/menu.png"
 const Header = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isResourceOpen,setResourceOpen]=useState(false)
 
   return (
     <div className={styles.header}>
@@ -25,9 +26,9 @@ const Header = () => {
             <div className={styles.navItem}><a href="">Solutions</a></div>
             <div className={styles.navItem}><a href="">About Us</a></div>
             <div className={styles.navItem}><a href="">Career</a></div>
-            <div className={styles.navItem}>
+            <div className={`${styles.navItem} ${styles.dropDown}`}  onClick={() => setResourceOpen(!isResourceOpen)}>
               <a href="">Resources</a>
-              <ul className={styles.subMenuNav}>
+              <ul className={`${styles.subMenuNav} ${isResourceOpen? styles.active:""}`} >
                 <li><a href="">Webinars & Events</a></li>
               </ul>
             </div>
@@ -55,8 +56,8 @@ const Header = () => {
                         <a href="">About Us </a></div>
                     <div class={styles.mobileNavContents}>
                         <a href="">Career</a></div>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">Resources</a></div>
+                    <div className={`${styles.mobileNavContents} `}>
+                        <a href="" >Resources</a></div>
                     <div className={`${styles.mobileNavContents} ${styles.lastChildMob}`}>
                         <a href="">Let's Talk</a>
                     </div>
