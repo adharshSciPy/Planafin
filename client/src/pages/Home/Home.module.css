@@ -1,48 +1,56 @@
 .elementorSpaceInner {
     height: 50px;
-    /* background: #000; */
   }
+  
   .elementorElement {
     margin-bottom: 2rem;
   }
+  
   .elementorWidgetContainer {
     width: 100%;
   }
+  
   .elementorHeading {
     text-align: center;
     font-size: 36px;
     font-weight: 400;
     margin-bottom: 1rem;
   }
+  
   .elementorPara {
     text-align: center;
     font-size: 18px;
     font-weight: 400;
     color: #000000;
   }
+  
   .swiperSliderContainer {
     object-fit: fill;
   }
+  
   .swiperSliderImage {
     width: 100%;
     height: 100%;
   }
+  
   .elementorSectionContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-bottom: 5rem;
   }
+  
   .elementorColumnMain {
     width: 90%;
     background-color: #f4f6fe;
     display: flex;
     justify-content: center;
   }
+  
   .elementorColumn {
     margin: 30px 0px 0px 30px;
-    /* padding: 0px 0px 0px 0px; */
   }
+  
   .elementorWidgetContainerHead {
     padding: 2rem 0 0.5rem 0;
     text-align: left;
@@ -54,19 +62,19 @@
   
   .widgetContainerPara {
     padding: 0 2rem 0 0;
-  
     text-align: justify;
     color: #000000;
     font-family: "Roboto", Sans-serif;
     font-size: 18px;
     font-weight: 400;
   }
+  
   .elementorColumnQuotes {
     width: 90%;
-    /* background-color:#2341b8; */
     display: flex;
     justify-content: center;
   }
+  
   .widgetContainerQuotesPara {
     padding: 0 2.7rem 0;
     text-align: center;
@@ -74,31 +82,30 @@
     font-family: "Roboto", Sans-serif;
     font-size: 28px;
     font-weight: 500;
-    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
   }
+  
   .elementorServiceOffering {
     background-image: linear-gradient(180deg, #f4f6fe 0%, #f4f6fe 100%);
     width: 100%;
-    /* height: 100px; */
-    /* opacity: 0.7; */
   }
+  
   .serviceOfferingHeadDiv {
     padding: 49px 0px 39px 0px;
   }
+  
   .serviceOfferingHead {
     text-align: center;
     color: #152246;
     font-family: "Roboto", Sans-serif;
     font-size: 36px;
     font-weight: 600;
-    line-height: 22px;
-    letter-spacing: -0.1px;
-    word-spacing: 0px;
   }
+  
   .serviceOfferingParaDiv {
     width: 96%;
     margin: auto;
   }
+  
   .serviceOfferingPara {
     padding: 0 2rem 0;
     text-align: center;
@@ -106,39 +113,116 @@
     line-height: 23px;
     word-spacing: 3px;
   }
-  .serviseOfferingInnerMain{
-      width: 93%;
-      /* background: #000; */
-      /* height: 100px; */
-      margin: auto;
-  }
-  .serviceCardImage{
-      width: 28%;
-  }
-  .serviceCard{
-      width: 31%;
-      position: relative;
   
-      
+  .serviseOfferingInnerMain {
+    width: 93%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
   }
-  .cardHead{
-      
-      font-family: "Poppins", Sans-serif;
-      font-size: 26px;
-      font-weight: 600;
-      line-height: 39px;
-      color: #152246;
-      }
-      .cardHead::after {
-          content: "";
-          background: #000;
-          width: 60px;
-          height: 2px;
-          position: absolute;
-          left: 0;
-          bottom: 0px;
-        }
-        .serviceCardReadMoreDiv{
-          position: absolute;
-          bottom: 0px;
-        }
+  
+  .serviceCard {
+    width: 31%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px;
+ 
+  }
+  
+  .serviceCardImage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .serviceCardImage img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .serviceCardHeadings {
+    position: relative;
+    margin-top: 1rem;
+    /* text-align: center; */
+  }
+  
+  .cardHead {
+    font-family: "Poppins", Sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 39px;
+    color: #152246;
+    position: relative;
+  }
+  
+  .cardHead::after {
+    content: "";
+    width: 60px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    left: 0px;
+    /* transform: translateX(-50%); */
+    bottom: -10px;
+  }
+  
+  .serviceCardReadMoreDiv {
+    margin-top: 1.5rem;
+  }
+  
+  .readMore {
+    color: #152246;
+    display: inline-block;
+    /* margin-top: 10px; */
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  /* .readMore span {
+    font-size: 16px;
+    color: #007bff;
+  } */
+  .enterprisePerfomanceMain{
+    width: 85%;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 3rem;
+  }
+  .enterpriseContentDiv{
+    width: 50%;
+
+  }
+  .enterpriseContentMainHead{
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: #152246;
+    
+    
+  }
+  .enterpriseContentSubHead{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #152246;
+    margin: 1rem 0 1rem;
+  }
+  .enterpriseContentSubHead2{
+    font-size: 16px;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+  }
+  .enterpriseContentParagraph{
+
+  }
+  .enterpriseImageDiv{
+    width: 50%;
+  }
+  .enterpriseImageDisplay{
+    object-fit: fill;
+  }
+  .enterpriseImgShow{
+width: 100%;
+  }
