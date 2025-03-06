@@ -6,6 +6,7 @@ import cardImg2 from "../../assets/card.image.2.png";
 import cardImg3 from "../../assets/card.image.3.png";
 import enterpriseImg from "../../assets/businesspeople-working-finance-accounting-analyze-financi-2048x1349.jpg";
 import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx"
 
 function Home() {
   return (
@@ -147,6 +148,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer/> 
     </div>
   );
 }
