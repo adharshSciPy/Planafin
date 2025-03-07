@@ -1,228 +1,634 @@
 .elementorSpaceInner {
-    height: 50px;
-  }
+  height: 50px;
+}
+
+.elementorElement {
+  margin-bottom: 2rem;
+}
+
+.elementorWidgetContainer {
+  width: 100%;
+}
+
+.elementorHeading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.elementorPara {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.swiperSliderContainer {
+  object-fit: fill;
+}
+
+.swiperSliderImage {
+  width: 100%;
+  height: 100%;
+}
+
+.elementorSectionContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+
+.elementorColumnMain {
+  width: 90%;
+  background-color: #f4f6fe;
+  display: flex;
+  justify-content: center;
+}
+
+.elementorColumn {
+  margin: 30px 0px 0px 30px;
+}
+
+.elementorWidgetContainerHead {
+  padding: 2rem 0 0.5rem 0;
+  text-align: left;
+  color: #152246;
+  /* font-family: "Roboto", Sans-serif; */
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.widgetContainerPara {
+  padding: 0 2rem 0 0;
+  text-align: justify;
+  color: #000000;
+  /* font-family: "Roboto", Sans-serif; */
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.elementorColumnQuotes {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.widgetContainerQuotesPara {
+  padding: 0 2.7rem 0;
+  text-align: center;
+  color: #59c2a5;
+  /* font-family: "Roboto", Sans-serif; */
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.elementorServiceOffering {
+  background-image: linear-gradient(180deg, #f4f6fe 0%, #f4f6fe 100%);
+  width: 100%;
+}
+
+.serviceOfferingHeadDiv {
+  padding: 49px 0px 39px 0px;
+}
+
+.serviceOfferingHead {
+  text-align: center;
+  color: #152246;
+  /* font-family: "Roboto", Sans-serif; */
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.serviceOfferingParaDiv {
+  width: 96%;
+  margin: auto;
+}
+
+.serviceOfferingPara {
+  padding: 0 2rem 0;
+  text-align: center;
+  font-size: 18px;
+  line-height: 23px;
+  word-spacing: 3px;
+}
+
+.serviseOfferingInnerMain {
+  width: 93%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.serviceCard {
+  width: 31%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute space between elements */
+  min-height: 350px;
+  padding: 20px;
+}
+
+.serviceCardImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.serviceCardImage img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.serviceCardHeadings {
+  position: relative;
+  margin-top: 1rem;
+  /* text-align: center; */
+}
+.headingAndLine {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1; /* Allow the heading section to grow and push the read more to the bottom */
+}
+.cardHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 39px;
+  color: #152246;
+  /* position: relative; */
+}
+.headingLine {
+  width: 60px;
+  height: 2px;
+  background: #000;
+  margin-top: auto; 
+  position: absolute;
+  bottom: 25px;
+  margin-right: 10px;
+}
+
+
+
+.serviceCardReadMoreDiv {
+  margin-top: auto; 
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.readMore {
+  color: #152246;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  position: relative;
+
+}
+
+
+.enterprisePerfomanceMain {
+  width: 85%;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 3rem;
+}
+
+.enterpriseContentDiv {
+  width: 50%;
+}
+
+.enterpriseContentMainHead {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #152246;
+}
+
+.enterpriseContentSubHead {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: #152246;
+  margin: 1rem 0;
+}
+
+.enterpriseContentSubHead2 {
+  font-size: 16px;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.enterpriseContentParaDiv {
+  text-align: justify;
+}
+
+.enterpriseContentParagraph {
+  font-size: 1rem;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.enterpriseImageDiv {
+  width: 50%;
+}
+
+.enterpriseImageDisplay {
+  width: 100%;
+  object-fit: fill;
+}
+
+.enterpriseImgShow {
+  width: 100%;
+  object-fit: fill;
+}
+.overlayMainDiv {
+  width: 100%;
+  background-image: url("../../assets//people.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 500px;
+    background-position: bottom center;
+    display: flex;
+    /* align-items: center;  */
+    /* justify-content: center; */
+    flex-direction: column;
+    margin: 3rem 0;
+}
+.elementorOverlayMainBox {
+  width: 75%;
+  /* margin: 4rem auto; */
+  background-color: transparent;
+  background-image: linear-gradient(180deg, #2d9bff 0%, #2d9bff 100%);
+  border-radius: 15px;
+  margin: 0 auto; 
+}
+.overlayMainHeading {
+  font-family: "Poppins", Sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 57px;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 2rem;
+}
+.overlayMainParaDiv {
+  text-align: center;
+  padding: 10px 0;
+}
+.overlayMainPara {
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+}
+.overlayMainBtnDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
-  .elementorElement {
-    margin-bottom: 2rem;
-  }
-  
-  .elementorWidgetContainer {
+  padding:0 0 1.5rem 0;
+}
+.overlayButton {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  background-color: #000;
+  color:#f6eeee;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+}
+.overlayImageMainDiv {
     width: 100%;
-  }
-  
-  .elementorHeading {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 400;
-    margin-bottom: 1rem;
-  }
-  
-  .elementorPara {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-  }
-  
-  .swiperSliderContainer {
-    object-fit: fill;
-  }
-  
-  .swiperSliderImage {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .elementorSectionContainer {
-    width: 100%;
+    /* border: 2px solid black; */
+    padding: 20px;
     display: flex;
     justify-content: center;
-    margin-bottom: 5rem;
-  }
+    align-items: center;
+    box-sizing: border-box; 
   
-  .elementorColumnMain {
-    width: 90%;
-    background-color: #f4f6fe;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .elementorColumn {
-    margin: 30px 0px 0px 30px;
-  }
-  
-  .elementorWidgetContainerHead {
-    padding: 2rem 0 0.5rem 0;
-    text-align: left;
-    color: #152246;
-    font-family: "Roboto", Sans-serif;
-    font-size: 36px;
-    font-weight: 400;
-  }
-  
-  .widgetContainerPara {
-    padding: 0 2rem 0 0;
-    text-align: justify;
-    color: #000000;
-    font-family: "Roboto", Sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-  }
-  
-  .elementorColumnQuotes {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .widgetContainerQuotesPara {
-    padding: 0 2.7rem 0;
-    text-align: center;
-    color: #59c2a5;
-    font-family: "Roboto", Sans-serif;
-    font-size: 28px;
-    font-weight: 500;
-  }
-  
-  .elementorServiceOffering {
-    background-image: linear-gradient(180deg, #f4f6fe 0%, #f4f6fe 100%);
+}
+
+.overlayImageDiv {
     width: 100%;
-  }
-  
-  .serviceOfferingHeadDiv {
-    padding: 49px 0px 39px 0px;
-  }
-  
-  .serviceOfferingHead {
-    text-align: center;
-    color: #152246;
-    font-family: "Roboto", Sans-serif;
+
+
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.expertiseHeading{
+    font-family: "Poppins", Sans-serif;
     font-size: 36px;
     font-weight: 600;
-  }
-  
-  .serviceOfferingParaDiv {
-    width: 96%;
-    margin: auto;
-  }
-  
-  .serviceOfferingPara {
-    padding: 0 2rem 0;
+    line-height: 57px;
+    color: #152246;
     text-align: center;
-    font-size: 18px;
-    line-height: 23px;
-    word-spacing: 3px;
-  }
-  
-  .serviseOfferingInnerMain {
-    width: 93%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .serviceCard {
-    width: 31%;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 20px;
- 
-  }
-  
-  .serviceCardImage {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .serviceCardImage img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .serviceCardHeadings {
-    position: relative;
-    margin-top: 1rem;
-    /* text-align: center; */
-  }
-  
-  .cardHead {
+}
+.expertiseParaDiv{
+   padding: 3rem;
+}
+.expertiseParagraph{
+    text-align: center;
+    color: #0F0F0F;
+    /* font-family: "Roboto", Sans-serif; */
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.expertiseGridMainDiv{
+    background-image: linear-gradient(180deg, #f4f6fe 0%, #f4f6fe 100%);
+    padding: 10px;
+    display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.expertiseHead{
     font-family: "Poppins", Sans-serif;
     font-size: 26px;
     font-weight: 600;
     line-height: 39px;
     color: #152246;
-    position: relative;
-  }
-  
-  .cardHead::after {
-    content: "";
-    width: 60px;
-    height: 2px;
-    background: #000;
-    position: absolute;
-    left: 0px;
-    /* transform: translateX(-50%); */
-    bottom: -10px;
-  }
-  
-  .serviceCardReadMoreDiv {
-    margin-top: 1.5rem;
-  }
-  
-  .readMore {
-    color: #152246;
-    display: inline-block;
-    /* margin-top: 10px; */
+    padding: 10px 0;
+}
+.expertisePara{
+    text-align: left;
+    color: #050404;
+    font-size: 22px;
+    line-height: 38px;
+    word-spacing: 3px;
+    /* font-weight: 400; */
+}
+.expertiseSingleCardOuterSolutions{
+    background-color: transparent;
+    background-image: linear-gradient(180deg, #5AC2A5 0%, #5AC2A5 100%);
+    padding: 10px;
+}
+.expertiseSingleCardSolutionHead{
+    padding: 2rem 0 0;
+    font-family: "Poppins", Sans-serif;
+    font-size: 26px;
     font-weight: 600;
-    font-size: 16px;
-  }
-  
-  /* .readMore span {
-    font-size: 16px;
-    color: #007bff;
-  } */
-  .enterprisePerfomanceMain{
-    width: 85%;
-    margin: auto;
+    line-height: 47px;
+    color: #FFFFFF;
+
+}
+.expertiseSingleCardSolutionPara{
+    text-align: left;
+    color: #FFFFFF;
+    /* font-family: "Roboto", Sans-serif; */
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 30px;
+    letter-spacing: 0.3px;
+    padding: 0.5rem 0 0;
+
+    
+}
+.overlayButton2{
+    font-size: 18px;
+  font-weight: 400;
+  /* line-height: 27px; */
+  background-color: #000;
+  color:#f6eeee;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+}
+.overlayMainBtnDiv2{
+    width: 100%;
     display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    margin-top: 3rem;
+    padding: 1rem 0 0;
+    justify-content: flex-start;
+    /* align-items: flex-start; */
+    
+    /* padding:0 0 1.5rem 0; */
+}
+.carouselOuterMain{
+    margin: 2rem 0;
+}
+.carouselMainHead{
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 57px;
+    color: #152246;
+    text-align: center;
+}
+.carouselPara{
+    
+    text-align: center;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.flickeringImageOuter{
+  width: 100%;
+  margin: 3rem 0;
+  position: relative;
+}
+.flickeringImgInner{
+  width: 70%;
+margin: auto;
+/* border: 2px solid red; */
+}
+.flickeingImg{
+  width: 100%;
+  object-fit: fill;
+  height: 350px;
+
+}
+.flickeringContentDiv{
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* border: 2px solid red; */
+}
+.flickeringContentHead{
+  z-index: 1;
+  text-align: center;
+  color: #152246;
+  /* font-family: "Roboto", Sans-serif; */
+  font-size: 32px;
+  font-weight: 600;
+}
+.overlayButton3{
+  font-size: 18px;
+  font-weight: 400;
+  /* line-height: 27px; */
+  background-color: #000;
+  color:#f6eeee;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  margin: 1rem 0;
+}
+@media (max-width:786px) {
+  .widgetContainerPara{
+    font-size: 20px;
+  }
+  .serviseOfferingInnerMain{
+    flex-direction: column;
+  }
+  .serviceOfferingPara{
+    font-weight: 400;
+    font-size: 20px;
+  }
+  .serviceCard{
+    width: 60%;
+    margin: 0 3rem;
+    /* justify-content: center; */
+    /* margin: auto; */
+  }
+  .serviceCardReadMoreDiv{
+    margin-top: 0;
+  }
+  .readMore{
+    font-size: 24px;
+  }
+  .headingLine{
+    /* height: 3px; */
+    bottom: 35px;
+
+    padding:2px;
+  }
+  .enterprisePerfomanceMain{
+    width: 90%;
+    flex-direction: column;
   }
   .enterpriseContentDiv{
-    width: 50%;
-
-  }
-  .enterpriseContentMainHead{
-    font-size: 2.5rem;
-    font-weight: bolder;
-    color: #152246;
-    
+    width: 100%;
     
   }
   .enterpriseContentSubHead{
-    font-size: 1.5rem;
-    font-weight: bolder;
-    color: #152246;
-    margin: 1rem 0 1rem;
+    font-size: 28px;
   }
   .enterpriseContentSubHead2{
-    font-size: 16px;
-    font-weight: bolder;
-    margin-bottom: 1rem;
+    font-size: 24px;
+    font-weight: bold;
   }
   .enterpriseContentParagraph{
-
+    font-size: 22px;
   }
   .enterpriseImageDiv{
-    width: 50%;
+    width: 100%;
   }
-  .enterpriseImageDisplay{
-    object-fit: fill;
+  .overlayMainDiv{
+    min-height: 400px;
   }
-  .enterpriseImgShow{
-width: 100%;
+  .overlayMainHeading{
+    margin-top: 1rem;
+    font-size: 28px;
   }
+  .elementorOverlayMainBox{
+    width: 90%;
+  }
+  .expertiseParaDiv{
+    padding: 1rem 1rem 2rem;
+  }
+  .expertisePara{
+    line-height: 30px;
+    font-size: 20px;
+  }
+  .expertiseParagraph{
+    font-size: 22px;
+  }
+  .expertiseGridMainDiv {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  .expertiseSingleCardOuter{
+    padding: 1rem;
+  }
+  .flickeringContentDiv{
+    top: 70px;
+    width: 60%;
+  }
+  .flickeringContentHead{
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .flickeingImg{
+    height: 300px;
+  }
+}
+@media (max-width:500px) {
+  .serviceOfferingHead{
+    font-size: 30px;
+  }
+  .serviceOfferingPara{
+    line-height: 38px;
+  }
+  .enterpriseContentMainHead{
+    font-size: 2rem;
+  }
+  .serviceCard{
+    width: 80%;
+  }
+  .overlayMainDiv{
+    min-height: 320px;
+  }
+  .elementorOverlayMainBox{
+    width: 95%;
+  }
+  .overlayMainHeading{
+    margin-top: 10px;
+    font-size: 24px;
+  }
+  .overlayMainParaDiv{
+    padding: 0 0 5px ;
+  }
+  .overlayMainPara{
+    font-size: 14px;
+    font-weight: 100;
+    letter-spacing: 0;
+    padding: 0 5px;
+    
+  }
+  .overlayMainBtnDiv{
+    padding-bottom: 10px;
+  }
+  .expertiseHeading{
+    font-size: 30px;
+  }
+  .expertiseParagraph{
+    line-height: 38px;
+  }
+  .expertiseGridMainDiv {
+    grid-template-columns: repeat(1, 1fr); 
+  }
+  .expertiseSingleCardOuter{
+    padding: 2rem;
+  }
+  .flickeringImageOuter{
+    display: none;
+  }
+  .carouselMainHead{
+    font-size: 28px;
+  }
+  .carouselPara{
+    font-size: 16px;
+    font-weight: 100;
+    word-spacing: 6px;
+  }
+}

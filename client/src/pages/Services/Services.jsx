@@ -1,6 +1,6 @@
 import React from "react";
 import "./services.css";
-import padam from "../../Assets/AdobeStock_369214822-Cropped-1024x451.jpg";
+import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
 function Services() {
   return (
     <div>

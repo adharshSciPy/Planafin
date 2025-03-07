@@ -6,7 +6,15 @@ import cardImg2 from "../../assets/card.image.2.png";
 import cardImg3 from "../../assets/card.image.3.png";
 import enterpriseImg from "../../assets/businesspeople-working-finance-accounting-analyze-financi-2048x1349.jpg";
 import Header from "../../components/Header/Header.jsx";
-import Footer from "../../components/Footer/Footer.jsx"
+import Footer from "../../components/Footer/Footer.jsx";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import peopleImg from "../../assets/people.png";
+import vector1 from "../../assets/Vector-1.png";
+import vector2 from "../../assets/Vector-2.png";
+import vector3 from "../../assets/Vector-3.png";
+import frame from "../../assets/Frame.png";
+import frame1 from "../../assets/Frame-1.png";
+import flickeringImg from "../../assets/flickeringImg.png";
 
 function Home() {
   return (
@@ -83,11 +91,17 @@ function Home() {
               <img src={cardImg1} alt="cardImg1" />
             </div>
             <div className={styles.serviceCardHeadings}>
+            <div className={styles.headingAndLine}>
+
               <h2 className={styles.cardHead}>
                 Business Advisory & Consulting
+                
               </h2>
+              </div>
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
+            <div className={styles.headingLine}></div>
+
               <h6 className={styles.readMore}>
                 Read More <span>&gt;&gt;</span>
               </h6>
@@ -98,12 +112,18 @@ function Home() {
               <img src={cardImg2} alt="cardImg2" />
             </div>
             <div className={styles.serviceCardHeadings}>
+            <div className={styles.headingAndLine}>
+
               <h2 className={styles.cardHead}>
-                Solution <br />
+                Solution 
                 Implementation
               </h2>
+              </div>
+
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
+            <div className={styles.headingLine}></div>
+
               <h6 className={styles.readMore}>
                 Read More <span>&gt;&gt;</span>
               </h6>
@@ -114,9 +134,14 @@ function Home() {
               <img src={cardImg3} alt="cardImg3" />
             </div>
             <div className={styles.serviceCardHeadings}>
+            <div className={styles.headingAndLine}>
+
               <h2 className={styles.cardHead}>Managed Services & Enablement</h2>
+</div>
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
+            <div className={styles.headingLine}></div>
+
               <h6 className={styles.readMore}>
                 Read More <span>&gt;&gt;</span>
               </h6>
@@ -130,25 +155,183 @@ function Home() {
             Enterprise Performance <br /> Management
           </h3>
           <h5 className={styles.enterpriseContentSubHead}>
-          Leading Implementation Partner
+            Leading Implementation Partner
           </h5>
           <h6 className={styles.enterpriseContentSubHead2}>
-          Business Planning and Digital Transformation 
+            Business Planning and Digital Transformation
           </h6>
           <div className={styles.enterpriseContentParaDiv}>
             <p className={styles.enterpriseContentParagraph}>
-            Planafin has proved its excellence in architecting and delivering cloud based planning and analytical solutions across various domains and sectors. Our goal is to partner and help  organizations attain a digitalized, intelligent, fully connected state, by effectively connecting business processes, leveraging the best in class technology, that is easy to adopt and business owned.
+              Planafin has proved its excellence in architecting and delivering
+              cloud based planning and analytical solutions across various
+              domains and sectors. Our goal is to partner and help organizations
+              attain a digitalized, intelligent, fully connected state, by
+              effectively connecting business processes, leveraging the best in
+              class technology, that is easy to adopt and business owned.
             </p>
           </div>
-
         </div>
         <div className={styles.enterpriseImageDiv}>
           <div className={styles.enterpriseImageDisplay}>
-            <img src={enterpriseImg} className={styles.enterpriseImgShow} alt="" />
+            <img
+              src={enterpriseImg}
+              className={styles.enterpriseImgShow}
+              alt="enterpriseImg"
+            />
           </div>
         </div>
       </div>
-      <Footer/> 
+
+      <div className={styles.overlayMainDiv}>
+        <div className={styles.elementorOverlayMainBox}>
+          <h2 className={styles.overlayMainHeading}>
+            Elevate your company's future
+          </h2>
+          <div className={styles.overlayMainParaDiv}>
+            <p className={styles.overlayMainPara}>
+              Get connected to experience the connected planning and business
+              transformation journey
+            </p>
+          </div>
+          <div className={styles.overlayMainBtnDiv}>
+            <button className={styles.overlayButton}>
+              Contact us
+              <span
+                className="fas fa-arrow-right"
+                style={{
+                  fontFamily: "Font Awesome 5 Free",
+                  fontWeight: 900,
+                  fill: "#FFFFFF",
+                  color: "#FFFFFF",
+                }}
+              ></span>
+            </button>
+          </div>
+        </div>
+        <div className={styles.overlayImageMainDiv}></div>
+      </div>
+      <div className={styles.expertiseMainDiv}>
+        <h2 className={styles.expertiseHeading}>Our Expertise and Solutions</h2>
+        <div className={styles.expertiseParaDiv}>
+          <p className={styles.expertiseParagraph}>
+            Planafin has expertise in providing business process-oriented
+            planning solutions in finance, workforce, supply chain, sales and
+            marketing, operational expenses, capital expenditure, across various
+            industries such as manufacturing, healthcare, retail, aviation,
+            consumer goods, shipping and logistics, oil and gas, e-commerce,
+            technology, mining and metals, real estate and education.
+          </p>
+        </div>
+        <div className={styles.expertiseGridMainDiv}>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div className={styles.expertiseCardImgDiv}>
+              <img src={vector1} alt="vector1" />
+            </div>
+            <h2 className={styles.expertiseHead}>Sales & Marketing</h2>
+            <p className={styles.expertisePara}>
+              Optimize and execute go-to-market strategies, drive revenue
+              growth, integrate marketing goals, and build agility into the
+              sales process
+            </p>
+          </div>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div className={styles.expertiseCardImgDiv}>
+              <img src={vector2} alt="vector2" />
+            </div>
+            <h2 className={styles.expertiseHead}>Finance & Accounting</h2>
+            <p className={styles.expertisePara}>
+              Advanced financial planning and automatic reporting with real-time
+              scenario analysis and in-depth data insights
+            </p>
+          </div>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div className={styles.expertiseCardImgDiv}>
+              <img src={vector3} alt="vector3" />
+            </div>
+            <h2 className={styles.expertiseHead}>Legal Consolidation</h2>
+            <p className={styles.expertisePara}>
+              Streamline consolidation of investments across legal entities,
+              accounting structures, intercompany elimination, and currency
+              translation.
+            </p>
+          </div>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div className={styles.expertiseCardImgDiv}>
+              <img src={frame} alt="frame" />
+            </div>
+            <h2 className={styles.expertiseHead}>HR & Workforce</h2>
+            <p className={styles.expertisePara}>
+              Get a holistic view of workforce operations, prioritize
+              investments, optimize utilization, track metrics, and hiring
+              needs.
+            </p>
+          </div>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div className={styles.expertiseCardImgDiv}>
+              <img src={frame1} alt="frame1" />
+            </div>
+            <h2 className={styles.expertiseHead}>Supply Chain</h2>
+            <p className={styles.expertisePara}>
+              Gain operational excellence and respond quickly to real-time
+              shifts in supply and customer demands with integrated S&OP
+              solutions.
+            </p>
+          </div>
+          <div className={styles.expertiseSingleCardOuterSolutions}>
+            <h2 className={styles.expertiseSingleCardSolutionHead}>
+              Solution Accelerators
+            </h2>
+            <p className={styles.expertiseSingleCardSolutionPara}>
+              We also offer an exclusive range of ready to use business planning
+              accelerators.
+            </p>
+            <div className={styles.overlayMainBtnDiv2}>
+              <button className={styles.overlayButton2}>
+                Read More
+                <span
+                  className="fas fa-arrow-right"
+                  style={{
+                    fontFamily: "Font Awesome 5 Free",
+                    fontWeight: 900,
+                    fill: "#FFFFFF",
+                    color: "#FFFFFF",
+                  }}
+                ></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* carousel div incomplete */}
+      <div className={styles.carouselOuterMain}>
+        <h2 className={styles.carouselMainHead}>Our Customer Experience</h2>
+        <p className={styles.carouselPara}>
+          Global leaders across various industries have trusted Planafin
+        </p>
+      </div>
+      <div className={styles.flickeringImageOuter}>
+        <div className={styles.flickeringImgInner}>
+          <img
+            src={flickeringImg}
+            alt="flickeringImg"
+            className={styles.flickeingImg}
+          />
+        </div>
+        <div className={styles.flickeringContentDiv}>
+          <h2 className={styles.flickeringContentHead}>
+            Upscale your business performance <br />
+            Enable faster and better decision making
+          </h2>
+          <div className={styles.overlayMainBtnDiv}>
+            <button className={styles.overlayButton3}>
+              Request a Call Back
+            
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
 }
