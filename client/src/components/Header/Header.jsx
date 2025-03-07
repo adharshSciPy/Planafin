@@ -21,11 +21,11 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div className={styles.headerItems}>
           <div className={styles.navContainer}>
-            <div className={styles.navItem}><a href="">Home</a></div>
-            <div className={styles.navItem}><a href="">Services</a></div>
-            <div className={styles.navItem}><a href="">Solutions</a></div>
-            <div className={styles.navItem}><a href="">About Us</a></div>
-            <div className={styles.navItem}><a href="">Career</a></div>
+            <div className={styles.navItem}><a href="/">Home</a></div>
+            <div className={styles.navItem}><a href="/services">Services</a></div>
+            <div className={styles.navItem}><a href="/solutions">Solutions</a></div>
+            <div className={styles.navItem}><a href="/about">About Us</a></div>
+            <div className={styles.navItem}><a href="/career">Career</a></div>
             <div className={`${styles.navItem} ${styles.dropDown}`} onClick={() => setResourceOpen(!isResourceOpen)}>
               <a href="">Resources</a>
               <ul className={`${styles.subMenuNav} ${isResourceOpen ? styles.active : ""}`} >

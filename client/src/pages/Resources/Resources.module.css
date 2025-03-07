@@ -54,3 +54,46 @@
 .content.active {
     display: block;
 }
+
+
+
+@media (max-width: 1024px) {
+    .tabs {
+        gap: 80px;
+        font-size: 18px;
+    }
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        gap: 20px;
+        font-size: 18px;
+    }
+
+    .tabs>h3 {
+        padding-bottom: 5px;
+        text-align: center;
+    }
+
+    .tabs.active {
+        border-bottom: 3px solid black;
+        width: 300px;
+        margin: 0 auto;
+    }
+}
+
+/* Media Query for Small Phones */
+@media (max-width: 480px) {
+    .tabs {
+        font-size: 18px;
+        gap: 10px;
+    }
+
+    .tabs.active {
+        border-bottom: 3px solid black;
+        width: 200px;
+        margin: 0 auto;
+    }
+}

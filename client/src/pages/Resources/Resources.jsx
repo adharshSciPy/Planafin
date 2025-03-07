@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from "../Resources/Resources.module.css"
 import Header from '../../components/Header/Header'
+import Footer from "../../components/Footer/Footer"
 
 function Resources() {
     const [activeTab, setActiveTab] = useState("upcoming")
@@ -14,21 +15,23 @@ function Resources() {
                         className={`${styles.tabs} ${activeTab === "upcoming" ? styles.active : ""}`}
                         onClick={() => setActiveTab("upcoming")}
                     >
-                        Upcoming Webinars
+                        Upcoming Webinar
                     </h3>
                     <h3
                         className={`${styles.tabs} ${activeTab === "on-demand" ? styles.active : ""}`}
                         onClick={() => setActiveTab("on-demand")}
                     >
-                        On-demand Webinars
+                        On-demand Webinar
                     </h3>
                 </div>
             </div>
             <div className={`${styles.content} ${activeTab === "upcoming" ? styles.active : ""}`}>
-                <p>List of upcoming webinars...</p>
+                <div className={styles.upcomingContent}>
+                    <Footer />
+                </div>
             </div>
             <div className={`${styles.content} ${activeTab === "on-demand" ? styles.active : ""}`}>
-                <p>List of on-demand webinars...</p>
+                <div className={styles.ondemandContent}></div>
             </div>
         </div>
     )
