@@ -366,8 +366,8 @@
 .expertisePara{
     text-align: left;
     color: #050404;
-    font-size: 22px;
-    line-height: 38px;
+    font-size: 18px;
+    line-height: 26px;
     word-spacing: 3px;
     /* font-weight: 400; */
 }
@@ -629,6 +629,6 @@ margin: auto;
   .carouselPara{
     font-size: 16px;
     font-weight: 100;
-    word-spacing: 6px;
+    /* word-spacing: 6px; */
   }
 }

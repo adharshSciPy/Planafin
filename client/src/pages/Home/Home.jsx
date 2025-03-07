@@ -15,8 +15,12 @@ import vector3 from "../../assets/Vector-3.png";
 import frame from "../../assets/Frame.png";
 import frame1 from "../../assets/Frame-1.png";
 import flickeringImg from "../../assets/flickeringImg.png";
+import Carousel from "../../components/Carousel/EmblaCarousel";
+
+
 
 function Home() {
+  const OPTIONS = { loop: true };
   return (
     <div>
       <Header />
@@ -308,6 +312,7 @@ function Home() {
         <p className={styles.carouselPara}>
           Global leaders across various industries have trusted Planafin
         </p>
+        <Carousel options={OPTIONS} />
       </div>
       <div className={styles.flickeringImageOuter}>
         <div className={styles.flickeringImgInner}>
