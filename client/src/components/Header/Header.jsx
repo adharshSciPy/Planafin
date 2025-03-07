@@ -4,7 +4,7 @@ import navIcon from "../../assets/logo.png"
 import menuPic from "../../assets/menu.png"
 const Header = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-  const [isResourceOpen,setResourceOpen]=useState(false)
+  const [isResourceOpen, setResourceOpen] = useState(false)
 
   return (
     <div className={styles.header}>
@@ -26,10 +26,10 @@ const Header = () => {
             <div className={styles.navItem}><a href="">Solutions</a></div>
             <div className={styles.navItem}><a href="">About Us</a></div>
             <div className={styles.navItem}><a href="">Career</a></div>
-            <div className={`${styles.navItem} ${styles.dropDown}`}  onClick={() => setResourceOpen(!isResourceOpen)}>
+            <div className={`${styles.navItem} ${styles.dropDown}`} onClick={() => setResourceOpen(!isResourceOpen)}>
               <a href="">Resources</a>
-              <ul className={`${styles.subMenuNav} ${isResourceOpen? styles.active:""}`} >
-                <li><a href="">Webinars & Events</a></li>
+              <ul className={`${styles.subMenuNav} ${isResourceOpen ? styles.active : ""}`} >
+                <li><a href="/resources">Webinars & Events</a></li>
               </ul>
             </div>
             <div className={`${styles.navItem} ${styles.lastChild}`}><a href="">Let's Talk</a></div>
@@ -43,25 +43,25 @@ const Header = () => {
         </div>
 
         <div className={`${styles.mobileNavMain} ${isMobileNavOpen ? styles.active : ""}`}>
-        <div class={styles.mobileNavItem}>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">Home</a>
-                    </div>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">Services</a>
-                    </div>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">Solutions</a></div>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">About Us </a></div>
-                    <div class={styles.mobileNavContents}>
-                        <a href="">Career</a></div>
-                    <div className={`${styles.mobileNavContents} `}>
-                        <a href="" >Resources</a></div>
-                    <div className={`${styles.mobileNavContents} ${styles.lastChildMob}`}>
-                        <a href="">Let's Talk</a>
-                    </div>
-                </div>
+          <div class={styles.mobileNavItem}>
+            <div class={styles.mobileNavContents}>
+              <a href="">Home</a>
+            </div>
+            <div class={styles.mobileNavContents}>
+              <a href="">Services</a>
+            </div>
+            <div class={styles.mobileNavContents}>
+              <a href="">Solutions</a></div>
+            <div class={styles.mobileNavContents}>
+              <a href="">About Us </a></div>
+            <div class={styles.mobileNavContents}>
+              <a href="">Career</a></div>
+            <div className={`${styles.mobileNavContents} `}>
+              <a href="" >Resources</a></div>
+            <div className={`${styles.mobileNavContents} ${styles.lastChildMob}`}>
+              <a href="">Let's Talk</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
