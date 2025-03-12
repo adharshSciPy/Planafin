@@ -1,4 +1,5 @@
 import { User } from "../model/userSchema.js";
+import { Contact } from "../model/contactSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -83,8 +84,8 @@ const loginUser = async (req, res) => {
             { expiresIn: "1d" } // Token expires in 1 hour
         );
 
-        return res.status(200).json({ 
-            message: "Login Successful", 
+        return res.status(200).json({
+            message: "Login Successful",
             token
         });
     } catch (err) {
@@ -92,4 +93,32 @@ const loginUser = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser }
+const ContactUs = async (req, res) => {
+    const { firstName, lastName, email, country, phone, jobTitle, company, message } = req.body
+    try {
+        const result = await Contact.create({
+            firstName,
+            lastName,
+            email,
+            country,
+            phone,
+            jobTitle,
+            company,
+            message
+        })
+        res.status(200).json({ message: "Successfully Created", data: result })
+    } catch (error) {
+        res.status(500).json({ message: `Internal Server Error`, data: error.message })
+    }
+}
+
+const ContactDetails = async (req, res) => {
+    try {
+        const result = await Contact.find();
+        res.status(200).json({ message: "Successfully Fetched", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails }
