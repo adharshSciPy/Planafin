@@ -1,56 +1,160 @@
 .maincontainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    background-color: #e7e7e7;
-    padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: #e7e7e7;
+  padding-top: 50px;
 }
 
-.maincontainer>h1 {
-    font-family: "Poppins", Sans-serif;
-    color: #152246;
-    font-size: 40px;
-    font-weight: 700;
-    margin: 50px 0px;
+.maincontainer > h1 {
+  font-family: "Poppins", Sans-serif;
+  color: #152246;
+  font-size: 40px;
+  font-weight: 700;
+  margin: 50px 0px;
 }
 
 .tabs {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-    gap: 150px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0px 10px;
-    border-bottom: 3px solid transparent;
-    transition: color 0.3s, border-bottom 0.3s;
-    font-family: "Poppins", sans-serif;
-    color: #333333;
-    font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 150px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0px 10px;
+  border-bottom: 3px solid transparent;
+  transition: color 0.3s, border-bottom 0.3s;
+  font-family: "Poppins", sans-serif;
+  color: #454545;
+  font-size: 20px;
 }
 
-.tabs>h3 {
-    display: flex;
-    flex-wrap: wrap;
-    font-family: "Poppins", sans-serif;
-    color: #333333;
-    padding-bottom: 15px;
-
+.tabs > h3 {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: "Poppins", sans-serif;
+  color: #454545;
+  padding-bottom: 15px;
 }
 
 .tabs.active {
-    color: black;
-    border-bottom: 3px solid black;
+  color: black;
+  border-bottom: 3px solid black;
 }
 
 .content {
-    display: none;
-    margin-top: 20px;
-    font-size: 18px;
+  display: none;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
 .content.active {
-    display: block;
+  display: block;
+}
+
+.upcomingContent {
+  padding-top: 150px;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 120px;
+  justify-content: center;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.cardone {
+  width: 100% !important;
+  max-width: 300px;
+  margin: auto;
+  height: fit-content;
+}
+
+.card img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}
+
+.webinar {
+  color: #454545;
+  background-color: #e5e6eb;
+  padding: 5px;
+  border-radius: 5px;
+  width: 75px;
+  text-align: center;
+  font-family: "Poppins", Sans-serif;
+  font-size: 12px;
+}
+
+.webinardata {
+  padding: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #2e9cff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.webinarContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  .tabs {
+    gap: 80px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+    gap: 20px;
+    font-size: 18px;
+  }
+
+  .tabs > h3 {
+    padding-bottom: 5px;
+    text-align: center;
+  }
+
+  .tabs.active {
+    border-bottom: 3px solid black;
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs {
+    font-size: 18px;
+    gap: 10px;
+  }
+
+  .tabs.active {
+    border-bottom: 3px solid black;
+    width: 200px;
+    margin: 0 auto;
+  }
 }
