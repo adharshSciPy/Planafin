@@ -45,6 +45,7 @@
   background-color: #f4f6fe;
   display: flex;
   justify-content: center;
+  padding: 2rem 0 4rem;
 }
 
 .elementorColumn {
@@ -52,7 +53,7 @@
 }
 
 .elementorWidgetContainerHead {
-  padding: 2rem 0 0.5rem 0;
+  /* padding: 2rem 0 0.5rem 0; */
   text-align: left;
   color: #152246;
   /* font-family: "Roboto", Sans-serif; */
