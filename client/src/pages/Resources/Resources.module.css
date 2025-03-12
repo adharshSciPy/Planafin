@@ -72,6 +72,7 @@
   width: 100% !important;
   max-width: 300px;
   margin: auto;
+  height: fit-content;
 }
 
 .card img {
@@ -95,6 +96,28 @@
 
 .webinardata {
   padding: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #2e9cff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.webinarContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px;
 }
 
 @media (max-width: 1024px) {

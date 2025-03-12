@@ -3,6 +3,7 @@ import styles from "../Resources/Resources.module.css"
 import Header from '../../components/Header/Header'
 import Footer from "../../components/Footer/Footer"
 import { Card } from "antd";
+import { CaretRight } from "phosphor-react";
 
 function Resources() {
     const [activeTab, setActiveTab] = useState("upcoming")
@@ -37,6 +38,7 @@ function Resources() {
                         <div className={styles.cardone}>
                             <Card
                                 hoverable
+                                style={{ height: "auto", display: "flex", flexDirection: "column" }}
                                 cover={
                                     <img
                                         height="213px"
@@ -52,6 +54,7 @@ function Resources() {
                                         <h3>S&OP Series: Episode 4 – Marketing Campaigns & Promotions Planning</h3>
                                         <p>This the fourth episode from our S&OP Series which demonstrates ‘Marketing Campaigns & Promotions Planning’ application built on Pigment.
                                             It showcases Marketing Expenditure, Campaigns Planning, Promotions Planning, Break-Even Analysis, Cost-Benefit Analysis, and Marketing ROI.</p>
+                                        <button className={styles.button}>Watch Now <CaretRight size={30} color="#FFFFFF" /></button>
                                     </div>
                                 </div>
                             </Card>
@@ -59,6 +62,7 @@ function Resources() {
                         <div className={styles.cardone}>
                             <Card
                                 hoverable
+                                style={{ height: "auto", display: "flex", flexDirection: "column" }}
                                 cover={
                                     <img
                                         height="213px"
@@ -72,8 +76,9 @@ function Resources() {
                                     <div className={styles.webinar}>WEBINAR</div>
                                     <div className={styles.webinardata}>
                                         <h3>S&OP Series: Episode 3 – Demand Forecasting</h3>
-                                        <p>This session is our main event. It is the third episode from our S&OP Series which demonstrates ‘Demand Forecasting’ application built on Pigment.
+                                        <p style={{lineHeight:"25px"}}>This session is our main event. It is the third episode from our S&OP Series which demonstrates ‘Demand Forecasting’ application built on Pigment.
                                             It showcases Product Lifecycle Management, Sales Collaboration, Statistical Forecasting, Demand Planning, and much more.</p>
+                                        <button className={styles.button}>Watch Now <CaretRight size={30} color="#FFFFFF" /></button>
                                     </div>
                                 </div>
                             </Card>
@@ -81,6 +86,7 @@ function Resources() {
                         <div className={styles.cardone}>
                             <Card
                                 hoverable
+                                style={{ height: "auto", display: "flex", flexDirection: "column" }}
                                 cover={
                                     <img
                                         height="213px"
@@ -94,8 +100,9 @@ function Resources() {
                                     <div className={styles.webinar}>WEBINAR</div>
                                     <div className={styles.webinardata}>
                                         <h3>S&OP Series: Episode 2 – Budgeting</h3>
-                                        <p>This is the second episode from our S&OP Series which demonstrates ‘Budgeting’ application built on Pigment.
+                                        <p style={{lineHeight:"32px"}}>This is the second episode from our S&OP Series which demonstrates ‘Budgeting’ application built on Pigment.
                                             It showcases Sales Budgeting, Manpower Budgeting, Operations Budgeting, and the overall Financial Budgeting.</p>
+                                        <button className={styles.button}>Watch Now <CaretRight size={30} color="#FFFFFF" /></button>
                                     </div>
                                 </div>
                             </Card>
@@ -103,6 +110,7 @@ function Resources() {
                         <div className={styles.cardone}>
                             <Card
                                 hoverable
+                                style={{ height: "auto", display: "flex", flexDirection: "column" }}
                                 cover={
                                     <img
                                         height="213px"
@@ -116,8 +124,9 @@ function Resources() {
                                     <div className={styles.webinar}>WEBINAR</div>
                                     <div className={styles.webinardata}>
                                         <h3>S&OP Series: Episode 1 – Target Setting</h3>
-                                        <p>This use case is specially curated by Planafin’s experienced techno-functional consultants and domain experts.
+                                        <p style={{lineHeight:"32px"}}>This use case is specially curated by Planafin’s experienced techno-functional consultants and domain experts.
                                             It is the first episode from our S&OP Series which demonstrates ‘Target Setting’ application built on Pigment. </p>
+                                        <button className={styles.button}>Watch Now <CaretRight size={30} color="#FFFFFF" /></button>
                                     </div>
                                 </div>
                             </Card>
