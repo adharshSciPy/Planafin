@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import styles from "./header.module.css"
-import navIcon from "../../assets/logo.png"
-import menuPic from "../../assets/menu.png"
+import React, { useState } from "react";
+import styles from "./header.module.css";
+import navIcon from "../../assets/logo.png";
+import menuPic from "../../assets/menu.png";
+import { Link } from "react-router-dom";
+
 const Header = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-  const [isResourceOpen, setResourceOpen] = useState(false)
+  const [isResourceOpen, setResourceOpen] = useState(false);
 
   return (
     <div className={styles.header}>
@@ -12,54 +14,89 @@ const Header = () => {
         {/* Logo */}
         <div className={styles.headerLogo}>
           <div className={styles.logoContainer}>
-            <a href="">
+          <Link to="/" className={styles.navLink}>
               <img src={navIcon} alt="Logo" />
-            </a>
+          </Link>
+            
           </div>
         </div>
 
         {/* Desktop Navigation */}
         <div className={styles.headerItems}>
           <div className={styles.navContainer}>
-            <div className={styles.navItem}><a href="/">Home</a></div>
-            <div className={styles.navItem}><a href="/services">Services</a></div>
-            <div className={styles.navItem}><a href="/solutions">Solutions</a></div>
-            <div className={styles.navItem}><a href="/about">About Us</a></div>
-            <div className={styles.navItem}><a href="/career">Career</a></div>
-            <div className={`${styles.navItem} ${styles.dropDown}`} onClick={() => setResourceOpen(!isResourceOpen)}>
-              <a href="">Resources</a>
-              <ul className={`${styles.subMenuNav} ${isResourceOpen ? styles.active : ""}`} >
-                <li><a href="/resources">Webinars & Events</a></li>
+            <div className={styles.navItem}>
+              <Link to="/" className={styles.navLink}>Home</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to="/Services" className={styles.navLink}>Services</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to="/Solutions" className={styles.navLink}>Solutions</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
+            </div>
+            <div className={styles.navItem}>
+              <Link to="/career" className={styles.navLink}>Career</Link>
+            </div>
+            <div
+              className={`${styles.navItem} ${styles.dropDown}`}
+              onClick={() => setResourceOpen(!isResourceOpen)}
+            >
+              <Link to="/Resources" className={styles.navLink}>Resources</Link>
+              <ul
+                className={`${styles.subMenuNav} ${
+                  isResourceOpen ? styles.active : ""
+                }`}
+              >
+                <li>
+                  <Link to="/webinar" className={styles.navLink}>Webinars & Events</Link>
+                </li>
               </ul>
             </div>
-            <div className={`${styles.navItem} ${styles.lastChild}`}><a href="">Let's Talk</a></div>
+            <div className={`${styles.navItem} ${styles.lastChild}`}>
+              <Link to="/letstalk" className={styles.navLink}>Let's Talk</Link>
+            </div>
           </div>
         </div>
 
         <div className={styles.mobileNavIcon}>
-          <button className={styles.mobileNav} onClick={() => setMobileNavOpen(!isMobileNavOpen)}>
+          <button
+            className={styles.mobileNav}
+            onClick={() => setMobileNavOpen(!isMobileNavOpen)}
+          >
             <img src={menuPic} alt="Menu" />
           </button>
         </div>
 
-        <div className={`${styles.mobileNavMain} ${isMobileNavOpen ? styles.active : ""}`}>
+        <div
+          className={`${styles.mobileNavMain} ${
+            isMobileNavOpen ? styles.active : ""
+          }`}
+        >
           <div class={styles.mobileNavItem}>
             <div class={styles.mobileNavContents}>
-              <a href="">Home</a>
+              <Link to="/" className={styles.navLink}>Home</Link>
             </div>
             <div class={styles.mobileNavContents}>
-              <a href="">Services</a>
+              <Link to="/Services" className={styles.navLink}>Services</Link>
             </div>
             <div class={styles.mobileNavContents}>
-              <a href="">Solutions</a></div>
+              <Link to="/Solutions" className={styles.navLink}> Solutions</Link>
+            </div>
             <div class={styles.mobileNavContents}>
-              <a href="">About Us </a></div>
+              <Link to="/About Us" className={styles.navLink}>About Us</Link>
+            </div>
             <div class={styles.mobileNavContents}>
-              <a href="">Career</a></div>
+              <Link to="/career" className={styles.navLink}>career</Link>
+            </div>
             <div className={`${styles.mobileNavContents} `}>
-              <a href="" >Resources</a></div>
-            <div className={`${styles.mobileNavContents} ${styles.lastChildMob}`}>
-              <a href="">Let's Talk</a>
+              <Link to="/Resources" className={styles.navLink}>Resources</Link>
+            </div>
+            <div
+              className={`${styles.mobileNavContents} ${styles.lastChildMob}`}
+            >
+              <Link to="/letstalk" className={styles.navLink}>Let's Talk</Link>  
             </div>
           </div>
         </div>
@@ -68,4 +105,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;

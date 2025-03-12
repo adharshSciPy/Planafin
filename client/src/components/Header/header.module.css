@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: space-around;
   }
-  .navContainer a {
+  .navLink {
     text-decoration: none;
     color: black;
     padding: 8px 11px;
@@ -46,7 +46,7 @@
     font-weight: 600;
     transition: 0.4s all ease-in-out;
   }
-  .navContainer a:hover {
+  .navLink:hover {
     color: #fcb900;
   }
   .dropDown {

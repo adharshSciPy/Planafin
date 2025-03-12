@@ -4,8 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Services from "./pages/Services/Services";
 import Resources from "./pages/Resources/Resources";
-
+import Webinar from "./pages/WebinarComponent/Webinarsub"
 import Aboutus from "./pages/Aboutus/Aboutus";
+import Demandforecasting from "./pages/WebinarComponent/Demandforecasting"
+import Budgeting from "./pages/WebinarComponent/Budgeting";
+import Targetsetting from "./pages/WebinarComponent/Targetsetting";
 
 function App() {
   return (
@@ -16,6 +19,12 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/aboutus" element={<Aboutus />} />
+          <Route path="/webinar" element={<Webinar />} />
+          <Route path="/webinar-2" element={<Demandforecasting />} />
+          <Route path="/webinar-3" element={<Budgeting />} />
+          <Route path="/webinar-4" element={<Targetsetting />} />
+
+
 
         </Routes>
       </BrowserRouter>
