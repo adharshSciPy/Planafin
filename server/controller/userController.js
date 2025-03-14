@@ -1,5 +1,6 @@
 import { User } from "../model/userSchema.js";
 import { Contact } from "../model/contactSchema.js";
+import { JobOpening } from "../model/jobopeningSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -121,4 +122,29 @@ const ContactDetails = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, ContactUs, ContactDetails }
+const jobOpenings = async (req, res) => {
+    const { title, location, jobDescription, requiredSkills, jobType } = req.body
+    try {
+        const result = await JobOpening.create({
+            title,
+            location,
+            jobDescription,
+            requiredSkills,
+            jobType
+        });
+        res.status(200).json({ message: "Jobs Created Successfully", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const jobListing = async (req, res) => {
+    try {
+        const result = await JobOpening.find();
+        res.status(200).json({ message: "Jobs Listed Successfully", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing }
