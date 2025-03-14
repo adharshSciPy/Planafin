@@ -133,3 +133,104 @@ strong {
 .consulting-btn:hover {
   background-color: #45a049;
 }
+.techpart-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 60px;
+  margin-top: 70px;
+}
+.techpart-container h1{
+  font-size: 40px;
+  color: #244bb7;
+}
+.techpart-container h3{
+  font-size: 16px;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+.overlaymaindiv {
+  width: 100%;
+  background-image: url("../../assets//Vector-4-3-1024x306.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 500px;
+    background-position: bottom center;
+    display: flex;
+    /* align-items: center;  */
+    /* justify-content: center; */
+    flex-direction: column;
+    margin: 3rem 0;
+}
+.elementoroverlaymainbox {
+  width: 55%;
+  /* margin: 4rem auto; */
+  background-color: transparent;
+  background-image: linear-gradient(180deg, #2d9bff 0%, #2d9bff 100%);
+  border-radius: 15px;
+  margin: 0 auto; 
+  padding: 20px;
+}
+.overlaymainheading {
+  font-family: "Poppins", Sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 57px;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 2rem;
+}
+.overlaymainparadiv {
+  text-align: center;
+  padding: 5px 0;
+}
+.overlaymainpara {
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: -0.2px;
+  color: #ffffff;
+}
+.overlaymainbtndiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:0 0 1.5rem 0;
+  margin-top: 10px;
+}
+.overlaybutton {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  background-color: #F1CE3B;
+  color:black;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+}
+.overlayimagemaindiv {
+    width: 100%;
+    /* border: 2px solid black; */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; 
+  
+}
+
+.overlayimagediv {
+    width: 100%;
+
+
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
