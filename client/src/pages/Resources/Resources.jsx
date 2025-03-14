@@ -3,7 +3,7 @@ import styles from "../Resources/Resources.module.css"
 import Header from '../../components/Header/Header'
 import Footer from "../../components/Footer/Footer"
 import { Card } from "antd";
-import { CaretRight } from "phosphor-react";
+import { CaretRight } from "@phosphor-icons/react";
 
 function Resources() {
     const [activeTab, setActiveTab] = useState("upcoming")
