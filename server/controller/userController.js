@@ -151,7 +151,13 @@ const jobListing = async (req, res) => {
 const addFeedback = async (req, res) => {
     try {
         const { name, jobPosition, message } = req.body;
-        const image = req.file ? req.file.path : null;
+        let image = req.file ? req.file.path : null;
+
+        // Convert Windows-style paths to URL-friendly format
+        if (image) {
+            image = image.replace(/\\/g, "/");
+        }
+
         if (!name || !jobPosition || !message) {
             return res.status(400).json({ message: "All fields are required!" });
         }
