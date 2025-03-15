@@ -1,6 +1,7 @@
 import { User } from "../model/userSchema.js";
 import { Contact } from "../model/contactSchema.js";
 import { JobOpening } from "../model/jobopeningSchema.js";
+import { Feedback } from "../model/feedbackSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -147,4 +148,29 @@ const jobListing = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing }
+const addFeedback = async (req, res) => {
+    try {
+        const { name, jobPosition, message } = req.body;
+        const image = req.file ? req.file.path : null;
+        if (!name || !jobPosition || !message) {
+            return res.status(400).json({ message: "All fields are required!" });
+        }
+        const result = await Feedback.create({
+            image, name, jobPosition, message
+        })
+        res.status(200).json({ message: "Feedback Received", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const viewFeedback = async (req, res) => {
+    try {
+        const result = await Feedback.find();
+        res.status(200).json({ message: "Feedback Viewed", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback }
