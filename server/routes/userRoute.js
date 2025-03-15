@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import upload from '../utils/uploads.js'
-import { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback } from "../controller/userController.js"
+import { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication } from "../controller/userController.js"
 const userRoute = Router()
 
 
@@ -12,6 +12,8 @@ userRoute.route('/jobopenings').post(jobOpenings)
 userRoute.route('/joblisting').get(jobListing)
 userRoute.route('/addFeedback').post(upload.single('image'), addFeedback)
 userRoute.route('/viewFeedback').get(viewFeedback)
+userRoute.route('/jobApplication').post(upload.single('image'), jobApplication)
+
 
 
 

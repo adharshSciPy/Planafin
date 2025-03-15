@@ -2,6 +2,7 @@ import { User } from "../model/userSchema.js";
 import { Contact } from "../model/contactSchema.js";
 import { JobOpening } from "../model/jobopeningSchema.js";
 import { Feedback } from "../model/feedbackSchema.js";
+import { JobApplication } from "../model/jobApplication.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -179,4 +180,39 @@ const viewFeedback = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback }
+const jobApplication = async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, jobTitle, company, resume, currentCompany, linkedIn, xUrl, github, portfolio, information } = req.body;
+        let image = req.file ? req.file.path : null;
+
+        // Convert Windows-style paths to URL-friendly format
+        if (image) {
+            image = image.replace(/\\/g, "/");
+        }
+
+        if (!firstName || !lastName || !email || !phone || !jobTitle || !company) {
+            return res.status(400).json({ message: "All fields are required!" });
+        }
+
+        const result = await JobApplication.create({
+            firstName,
+            lastName,
+            email,
+            phone,
+            jobTitle,
+            company,
+            resume,
+            currentCompany,
+            linkedIn,
+            xUrl,
+            github,
+            portfolio,
+            information
+        })
+        res.status(200).json({ message: "Application Received", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication }
