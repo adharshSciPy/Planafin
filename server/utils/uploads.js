@@ -19,11 +19,12 @@ const upload = multer({
         if (
             file.mimetype == 'image/jpeg' ||
             file.mimetype == 'image/jpg' ||
-            file.mimetype == 'image/png'
+            file.mimetype == 'image/png' ||
+            file.mimetype == 'application/pdf'
         ) {
             cb(null, true)
         } else {
-            console.log('Only jpeg/png/jpg formats are supported')
+            console.log('Only jpeg/png/jpg/pdf')
             cb(null, false)
         }
     },
