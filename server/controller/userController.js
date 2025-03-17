@@ -182,12 +182,12 @@ const viewFeedback = async (req, res) => {
 
 const jobApplication = async (req, res) => {
     try {
-        const { firstName, lastName, email, phone, jobTitle, company, resume, currentCompany, linkedIn, xUrl, github, portfolio, information } = req.body;
-        let image = req.file ? req.file.path : null;
+        const { firstName, lastName, email, phone, jobTitle, company, currentCompany, linkedIn, xUrl, github, portfolio, information } = req.body;
+        let resume = req.file ? req.file.path : null;
 
         // Convert Windows-style paths to URL-friendly format
-        if (image) {
-            image = image.replace(/\\/g, "/");
+        if (resume) {
+            resume = resume.replace(/\\/g, "/");
         }
 
         if (!firstName || !lastName || !email || !phone || !jobTitle || !company) {
@@ -215,4 +215,13 @@ const jobApplication = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication }
+const applicationDetails = async (req, res) => {
+    try {
+        const result = await JobApplication.find();
+        res.status(200).json({ message: "Applications Viewed", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails }
