@@ -1,4 +1,8 @@
 import { User } from "../model/userSchema.js";
+import { Contact } from "../model/contactSchema.js";
+import { JobOpening } from "../model/jobopeningSchema.js";
+import { Feedback } from "../model/feedbackSchema.js";
+import { JobApplication } from "../model/jobApplication.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -83,8 +87,8 @@ const loginUser = async (req, res) => {
             { expiresIn: "1d" } // Token expires in 1 hour
         );
 
-        return res.status(200).json({ 
-            message: "Login Successful", 
+        return res.status(200).json({
+            message: "Login Successful",
             token
         });
     } catch (err) {
@@ -92,4 +96,132 @@ const loginUser = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser }
+const ContactUs = async (req, res) => {
+    const { firstName, lastName, email, country, phone, jobTitle, company, message } = req.body
+    try {
+        const result = await Contact.create({
+            firstName,
+            lastName,
+            email,
+            country,
+            phone,
+            jobTitle,
+            company,
+            message
+        })
+        res.status(200).json({ message: "Successfully Created", data: result })
+    } catch (error) {
+        res.status(500).json({ message: `Internal Server Error`, data: error.message })
+    }
+}
+
+const ContactDetails = async (req, res) => {
+    try {
+        const result = await Contact.find();
+        res.status(200).json({ message: "Successfully Fetched", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const jobOpenings = async (req, res) => {
+    const { title, location, jobDescription, requiredSkills, jobType } = req.body
+    try {
+        const result = await JobOpening.create({
+            title,
+            location,
+            jobDescription,
+            requiredSkills,
+            jobType
+        });
+        res.status(200).json({ message: "Jobs Created Successfully", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const jobListing = async (req, res) => {
+    try {
+        const result = await JobOpening.find();
+        res.status(200).json({ message: "Jobs Listed Successfully", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const addFeedback = async (req, res) => {
+    try {
+        const { name, jobPosition, message } = req.body;
+        let image = req.file ? req.file.path : null;
+
+        // Convert Windows-style paths to URL-friendly format
+        if (image) {
+            image = image.replace(/\\/g, "/");
+        }
+
+        if (!name || !jobPosition || !message) {
+            return res.status(400).json({ message: "All fields are required!" });
+        }
+        const result = await Feedback.create({
+            image, name, jobPosition, message
+        })
+        res.status(200).json({ message: "Feedback Received", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const viewFeedback = async (req, res) => {
+    try {
+        const result = await Feedback.find();
+        res.status(200).json({ message: "Feedback Viewed", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const jobApplication = async (req, res) => {
+    try {
+        const { firstName, lastName, email, phone, jobTitle, company, currentCompany, linkedIn, xUrl, github, portfolio, information } = req.body;
+        let resume = req.file ? req.file.path : null;
+
+        // Convert Windows-style paths to URL-friendly format
+        if (resume) {
+            resume = resume.replace(/\\/g, "/");
+        }
+
+        if (!firstName || !lastName || !email || !phone || !jobTitle || !company) {
+            return res.status(400).json({ message: "All fields are required!" });
+        }
+
+        const result = await JobApplication.create({
+            firstName,
+            lastName,
+            email,
+            phone,
+            jobTitle,
+            company,
+            resume,
+            currentCompany,
+            linkedIn,
+            xUrl,
+            github,
+            portfolio,
+            information
+        })
+        res.status(200).json({ message: "Application Received", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+const applicationDetails = async (req, res) => {
+    try {
+        const result = await JobApplication.find();
+        res.status(200).json({ message: "Applications Viewed", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", data: error.message })
+    }
+}
+
+export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails }

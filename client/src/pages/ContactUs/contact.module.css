@@ -1,0 +1,332 @@
+.contactus {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.contactus {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.contactus h1 {
+  font-family: "Poppins", Sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  color: #152246;
+  line-height: 54px;
+  padding-bottom: 15px;
+}
+
+.contactus p {
+  width: 600px;
+  line-height: 1.75;
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #404040;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputfield {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+  width: 320px;
+  height: 50px;
+  padding: 20px;
+}
+
+.inputone {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+
+.inputone Input {
+  width: 400px;
+  height: 50px;
+}
+
+.inputtwo Input {
+  width: 810px;
+  height: 50px;
+}
+
+.inputtwo TextArea {
+  width: 810px;
+  height: 100px;
+}
+
+.smalltext p {
+  font-size: 10px;
+  text-align: center;
+  color: #000;
+  font-style: italic;
+}
+
+.sendbutton button {
+  font-family: "Poppins", Sans-serif;
+  width: 150px;
+  height: 50px;
+  background-color: #f1ce3b;
+  color: #000000;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+.location {
+  text-align: center;
+  margin-top: 500px;
+  padding: 20px;
+  width: 100%;
+}
+
+.locationtab {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.location h2 {
+  font-family: "Poppins", Sans-serif;
+  font-size: 26px;
+  color: #000000;
+}
+
+.firstlocation,
+.secondlocation,
+.thirdlocation {
+  background-color: #e8f2fc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  text-align: start;
+  padding: 20px;
+  min-height: 220px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.selected {
+  background-color: #5dc2a5 !important;
+  color: #000 !important;
+}
+
+.firstlocation h2,
+.secondlocation h2,
+.thirdlocation h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  width: auto;
+  height: 30px;
+}
+
+.firstlocation h3,
+.secondlocation h3,
+.thirdlocation h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.locationDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-content: flex-start;
+  margin-top: 30px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Map Container */
+.mapcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+/* Responsive Iframe Wrapper */
+.map {
+  width: 90%;
+  max-width: 1000px; /* Max width for large screens */
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Make the iframe responsive */
+.map iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* media query  */
+
+@media (max-width: 768px) {
+  .locationtab {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .contactus {
+    align-items: center;
+  }
+
+  .contactus p {
+    width: auto;
+  }
+
+  .inputone {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputtwo {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputone Input {
+    width: 600px;
+  }
+
+  .inputtwo Input {
+    width: 600px;
+  }
+
+  .inputtwo TextArea {
+    width: 600px;
+  }
+
+  .locationtab {
+    grid-template-columns: 1fr;
+  }
+
+  .location {
+    margin-top: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactus {
+    align-items: center;
+  }
+
+  .contactus p {
+    width: auto;
+  }
+
+  .inputone {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputtwo {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputone Input {
+    width: 500px;
+  }
+
+  .inputtwo Input {
+    width: 500px;
+  }
+
+  .inputtwo TextArea {
+    width: 500px;
+  }
+
+  .locationtab {
+    grid-template-columns: 1fr;
+  }
+
+  .location {
+    margin-top: 700px;
+  }
+
+  .map {
+    aspect-ratio: 16 / 16;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactus {
+    align-items: center;
+  }
+
+  .contactus p {
+    width: auto;
+  }
+
+  .inputone {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputtwo {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .inputone Input {
+    width: 300px;
+  }
+
+  .inputtwo Input {
+    width: 300px;
+  }
+
+  .inputtwo TextArea {
+    width: 300px;
+  }
+
+  .locationtab {
+    grid-template-columns: 1fr;
+  }
+
+  .location {
+    width: auto;
+  }
+
+  .map {
+    aspect-ratio: 16 / 21;
+  }
+}

@@ -1,0 +1,166 @@
+.solution-container1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    margin-top: 70px;
+  }
+  .solution-head1{
+    font-size: 35px;
+    font-weight: 540;
+  }
+  .solution-head2{
+    width: 70%;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+  
+  .getinbtndiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0 0 1.5rem 0;
+    margin-top: 30px;
+  }
+  .getinbutton {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 27px;
+    background-color: #F1CE3B;
+    color:black;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+  }
+  .square1{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  .sqr-content{
+    width: 500px;
+    margin-top: 20px;
+    margin-left: 30px;
+    
+  }
+  .sqr{
+    width: 550px;
+    border-style: solid;
+    border-color: #D7f0fd;
+    height: 340px;
+    border-radius: 15px;
+  }
+  .sqrh1{
+    text-align: left;
+    font-size: 27px;
+  }
+  .sqrp{
+    text-align: left;
+    margin-top: 10px;
+    line-height: 22px;
+  }
+  .sqrimg{
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .sqrh2{
+    text-align: left;
+    margin-top: 5px;
+    font-size: 18px;
+    color: #001E6c;
+    cursor: pointer;
+  }
+  .square2{
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
+  }
+  .sol-sec3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #e8f2fc;
+    height: 350px;
+    gap: 50px;
+  }
+  .sol-sec3h1{
+    font-size: 34px;
+    font-weight: 700;
+  }
+   .sol-sec3_1{
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 40px;
+   }
+.wrapper{
+  display: flex;
+  width: 250px;
+flex-wrap: wrap;
+gap: 20px;
+}
+.sol-sec3-img{
+  margin-left: 80px;
+}
+.sol-secp{
+  font-size: 15px;
+}
+.sol_sec4{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    margin-top: 70px;
+}
+.sec4-head1{
+  font-size: 40px;
+  font-weight: 700;
+}
+.sec4-head2{
+  width: 70%;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.sec4-icons{
+  align-content: center;  
+} 
+.sec4-1{
+  display: flex;
+}
+.sec4-2{
+  display: flex;
+  margin-top: 50px;
+}
+.sec4-3{
+  display: flex;
+  margin-top: 50px;
+}
+.wrapper2{
+  margin: auto;
+}
+.sec4-h1{
+  font-size: 25px;
+}
