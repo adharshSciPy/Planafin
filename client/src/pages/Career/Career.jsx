@@ -12,6 +12,11 @@ import imgGrid3 from "../../assets/about.people3.png";
 import workCulture from "../../assets/Rectangle-119.png";
 import SinglePerson from "../../assets/Biju-Abraham.jpg";
 import quotes from "../../assets/Quotes.png";
+import usaOffice from "../../assets/usaOffice.png";
+import uaeOffice from "../../assets/uaeOffice.png";
+import IndianOffice from "../../assets/IndianOffice.png";
+
+
 
 function Career() {
   const [showDetails, setShowDetails] = useState(false);
@@ -335,103 +340,223 @@ function Career() {
         <div className={styles.carouselInnerDiv}>
           <h2 className={styles.carouselHeading}>Our Employees Feedback</h2>
           <div className={styles.outerSingleFeedbackCard}>
-
-         
-          <div className={styles.carouselSingleCardOuter}>
-            <div className={styles.singleCardImageOuter}>
-              <div className={styles.singleCardPersonImage}>
-                <img
-                  src={SinglePerson}
-                  alt="single.person"
-                  className={styles.singlePersonImg}
-                />
+            <div className={styles.carouselSingleCardOuter}>
+              <div className={styles.singleCardImageOuter}>
+                <div className={styles.singleCardPersonImage}>
+                  <img
+                    src={SinglePerson}
+                    alt="single.person"
+                    className={styles.singlePersonImg}
+                  />
+                </div>
+                <div className={styles.singleCardStaticImg}>
+                  <img
+                    src={quotes}
+                    alt="static"
+                    className={styles.singleStaticImg}
+                  />
+                </div>
               </div>
-              <div className={styles.singleCardStaticImg}>
-                <img
-                  src={quotes}
-                  alt="static"
-                  className={styles.singleStaticImg}
-                />
+              <div className={styles.singleCardContentDiv}>
+                <p className={styles.feedbackPara}>
+                  “I have seen Planafin grow from the day-one. The experiences I
+                  have gained along the way are irreplaceable. Everyone at
+                  Planafin has a strong drive to get things done, regardless of
+                  the time of the day or day of the week”
+                </p>
+                <h6 className={styles.singleCardName}>Biju Abraham</h6>
+                <p className={styles.personPosition}>
+                  Senior Business Process Consultant - FP&A
+                </p>
               </div>
             </div>
-            <div className={styles.singleCardContentDiv}>
-              <p className={styles.feedbackPara}>
-              “I have seen Planafin grow from the day-one. The experiences I have gained along the way are irreplaceable. Everyone at Planafin has a strong drive to get things done, regardless of the time of the day or day of the week”
-              </p>
-              <h6 className={styles.singleCardName}>
-                Biju Abraham
-              </h6>
-              <p className={styles.personPosition}>
-              Senior Business Process Consultant - FP&A
-              </p>
+            <div className={styles.carouselSingleCardOuter}>
+              <div className={styles.singleCardImageOuter}>
+                <div className={styles.singleCardPersonImage}>
+                  <img
+                    src={SinglePerson}
+                    alt="single.person"
+                    className={styles.singlePersonImg}
+                  />
+                </div>
+                <div className={styles.singleCardStaticImg}>
+                  <img
+                    src={quotes}
+                    alt="static"
+                    className={styles.singleStaticImg}
+                  />
+                </div>
+              </div>
+              <div className={styles.singleCardContentDiv}>
+                <p className={styles.feedbackPara}>
+                  “I have seen Planafin grow from the day-one. The experiences I
+                  have gained along the way are irreplaceable. Everyone at
+                  Planafin has a strong drive to get things done, regardless of
+                  the time of the day or day of the week”
+                </p>
+                <h6 className={styles.singleCardName}>Biju Abraham</h6>
+                <p className={styles.personPosition}>
+                  Senior Business Process Consultant - FP&A
+                </p>
+              </div>
+            </div>
+            <div className={styles.carouselSingleCardOuter}>
+              <div className={styles.singleCardImageOuter}>
+                <div className={styles.singleCardPersonImage}>
+                  <img
+                    src={SinglePerson}
+                    alt="single.person"
+                    className={styles.singlePersonImg}
+                  />
+                </div>
+                <div className={styles.singleCardStaticImg}>
+                  <img
+                    src={quotes}
+                    alt="static"
+                    className={styles.singleStaticImg}
+                  />
+                </div>
+              </div>
+              <div className={styles.singleCardContentDiv}>
+                <p className={styles.feedbackPara}>
+                  “I have seen Planafin grow from the day-one. The experiences I
+                  have gained along the way are irreplaceable. Everyone at
+                  Planafin has a strong drive to get things done, regardless of
+                  the time of the day or day of the week”
+                </p>
+                <h6 className={styles.singleCardName}>Biju Abraham</h6>
+                <p className={styles.personPosition}>
+                  Senior Business Process Consultant - FP&A
+                </p>
+              </div>
             </div>
           </div>
-          <div className={styles.carouselSingleCardOuter}>
-            <div className={styles.singleCardImageOuter}>
-              <div className={styles.singleCardPersonImage}>
-                <img
-                  src={SinglePerson}
-                  alt="single.person"
-                  className={styles.singlePersonImg}
-                />
-              </div>
-              <div className={styles.singleCardStaticImg}>
-                <img
-                  src={quotes}
-                  alt="static"
-                  className={styles.singleStaticImg}
-                />
-              </div>
+          <div className={styles.dotOuterDiv}></div>
+        </div>
+      </div>
+      <div className={styles.applicationFormOuter}>
+        <div className={styles.applicationFormMain}>
+          <h2 className={styles.formTitle}>Submit your application</h2>
+          <div className={styles.formContainer}>
+            <div className={styles.formRow}>
+              <input
+                type="text"
+                placeholder="First Name*"
+                className={styles.formInput}
+              />
+              <input
+                type="text"
+                placeholder="Last Name*"
+                className={styles.formInput}
+              />
             </div>
-            <div className={styles.singleCardContentDiv}>
-              <p className={styles.feedbackPara}>
-              “I have seen Planafin grow from the day-one. The experiences I have gained along the way are irreplaceable. Everyone at Planafin has a strong drive to get things done, regardless of the time of the day or day of the week”
-              </p>
-              <h6 className={styles.singleCardName}>
-                Biju Abraham
-              </h6>
-              <p className={styles.personPosition}>
-              Senior Business Process Consultant - FP&A
-              </p>
+            <div className={styles.formRow}>
+              <input
+                type="email"
+                placeholder="Email*"
+                className={styles.formInput}
+              />
+              <input
+                type="tel"
+                placeholder="Phone*"
+                className={styles.formInput}
+              />
+            </div>
+            <div className={styles.formRow}>
+              <input
+                type="text"
+                placeholder="Job Title*"
+                className={styles.formInput}
+              />
+              <input
+                type="text"
+                placeholder="Company*"
+                className={styles.formInput}
+              />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Attach Your Resume</label>
+              <input type="file" className={styles.fileInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Current Company</label>
+              <input type="text" className={styles.fullWidthInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Linkedin URL</label>
+              <input type="text" className={styles.fullWidthInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Twitter URL</label>
+              <input type="text" className={styles.fullWidthInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>GitHub URL</label>
+              <input type="text" className={styles.fullWidthInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Portfolio URL</label>
+              <input type="text" className={styles.fullWidthInput} />
+            </div>
+            <div className={styles.formLabelWraper}>
+              <label className={styles.fileLabel}>Additional Information</label>
+              <textarea
+                rows={6}
+                placeholder="Add a cover letter or anything else you want to share."
+                className={styles.fullWidthInput}
+              />
             </div>
           </div>
-          <div className={styles.carouselSingleCardOuter}>
-            <div className={styles.singleCardImageOuter}>
-              <div className={styles.singleCardPersonImage}>
-                <img
-                  src={SinglePerson}
-                  alt="single.person"
-                  className={styles.singlePersonImg}
-                />
-              </div>
-              <div className={styles.singleCardStaticImg}>
-                <img
-                  src={quotes}
-                  alt="static"
-                  className={styles.singleStaticImg}
-                />
-              </div>
-            </div>
-            <div className={styles.singleCardContentDiv}>
-              <p className={styles.feedbackPara}>
-              “I have seen Planafin grow from the day-one. The experiences I have gained along the way are irreplaceable. Everyone at Planafin has a strong drive to get things done, regardless of the time of the day or day of the week”
-              </p>
-              <h6 className={styles.singleCardName}>
-                Biju Abraham
-              </h6>
-              <p className={styles.personPosition}>
-              Senior Business Process Consultant - FP&A
-              </p>
-            </div>
-          </div>
-          </div>
-          <div className={styles.dotOuterDiv}>
-            
+          <span className={styles.formCheckboxOuter}>
+            <input type="checkbox" className={styles.formCheckbox} />
+            <label className={styles.checkboxLabel}>
+              Yes, Planafin can contact me about future job opportunities for up
+              to 2 years
+            </label>
+          </span>
+          <div className={styles.subimtButtonDiv}>
+            <button className={styles.subimtButton}>
+              <span className={styles.subimtButtonSpan}>
+                SUBMIT APPLICATION
+              </span>
+            </button>
           </div>
         </div>
-        
+        {/* <Carousel options={OPTIONS} /> */}
       </div>
-
+      <div className={styles.locationOuterDiv}>
+        <div className={styles.locationInnerDiv}>
+          <h2 className={styles.locationHeading}>
+          Join one of our locations
+          </h2>
+          <div className={styles.locationImgOuter}>
+            <div className={styles.locationImgSingle}>
+              <div className={styles.imageSingleCard}>
+                <img src={usaOffice} alt="usaOffice" className={styles.singleImageLoc} />
+              </div>
+              <h5 className={styles.officeLocation}>
+                USA Office
+              </h5>
+            </div>
+            <div className={styles.locationImgSingle}>
+              <div className={styles.imageSingleCard}>
+                <img src={uaeOffice} alt="uaeOffice" className={styles.singleImageLoc}  />
+              </div>
+              <h5 className={styles.officeLocation}>
+                UAE Office
+              </h5>
+            </div>
+            <div className={styles.locationImgSingle}>
+              <div className={styles.imageSingleCard}>
+                <img src={IndianOffice} alt="IndianOffice" className={styles.singleImageLoc} />
+              </div>
+              <h5 className={styles.officeLocation}>
+                India Office
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* </div> */}
       <Footer />
     </div>

@@ -368,7 +368,7 @@
   border: 2px solid #e0e0e0;
   border-radius: 15px;
   height: 420px;
-  width: 560px;
+  
   margin: 2rem 0;
   float: left;
 }
@@ -401,4 +401,275 @@
   color: #404040;
   font-weight: 500;
   margin-top: -10px;
+}
+.applicationFormOuter {
+  background-color: #f1f9ff;
+  min-height: max-content;
+  /* display: flex;
+  justify-content: center; */
+}
+.applicationFormMain {
+  max-width: 710px;
+  background-color: #f0f7ff;
+  padding: 2rem;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.formContainer {
+  width: 100%;
+}
+
+.formRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.formInput {
+  width: 50%;
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  margin-bottom: 15px;
+}
+.formInput::placeholder {
+  color: #bdc1c9;
+}
+
+.fileLabel {
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  color: #222d4e;
+  margin: 10px 0;
+}
+
+.fileInput {
+  width: 100%;
+  float: left;
+  height: 108px;
+  background-color: #fff;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  color: #bdc1c9;
+  display: flex;
+  padding: 35px;
+  text-align-last: center;
+  margin-bottom: 15px;
+}
+
+.fullWidthInput {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  margin-bottom: 15px;
+}
+.fullWidthInput::placeholder {
+  color: #bdc1c9;
+}
+.formCheckboxOuter {
+  width: 100%;
+  margin: auto;
+  /* border: 2px solid; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.formCheckbox {
+  margin-right: 5px;
+}
+.checkboxLabel {
+  color: #222d4e;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 15px;
+  font-style: italic;
+}
+.subimtButtonDiv {
+  display: flex;
+  justify-content: center;
+}
+.subimtButton {
+  background-color: #f1ce3b;
+  color: #000000;
+}
+.subimtButton {
+  padding: 10px 25px;
+  margin: 15px 0;
+  font-family: "Poppins", Sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 27px;
+  border-style: none;
+  border-radius: 5px;
+}
+.locationOuterDiv {
+  width: 100%;
+  margin: auto;
+}
+.locationInnerDiv {
+  max-width: 1140px;
+  margin: auto;
+  padding: 10px;
+}
+.locationHeading {
+  text-align: center;
+  margin: 3rem 0;
+  font-family: "Poppins", Sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 38px;
+  color: #152246;
+}
+.locationImgOuter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.locationImgSingle {
+  width: 30%;
+  border: 3px solid #f2f2f2;
+  border-radius: 5px;
+  padding: 20px 0px;
+  text-align: center;
+}
+
+.imageSingleCard {
+  width: 100%;
+  height: 175px;
+  display: block; 
+}
+
+.singleImageLoc {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.officeLocation {
+  font-family: "Poppins", Sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 39px;
+  color: #000000;
+  text-align: center;
+  margin: 2rem 0;
+}
+@media (max-width:786px) {
+  .topElementOuter{
+    flex-direction: column-reverse;
+    padding: 2rem  ;
+  }
+  .topElementContentDiv,.topElementImageDiv{
+    width: 100%;
+  }
+  .outerSingleFeedbackCard{
+    flex-direction: column;
+    gap: 20px;
+  }
+  .carouselSingleCardOuter{
+    /* justify-content: center; */
+    margin: auto;
+
+  }
+  .carouselHeading{
+    text-align: center;
+  }
+  .carouselSingleCardOuter{
+  padding: 18px;
+   height: max-content;
+  }
+  .formRow{
+    flex-direction: column;
+    width: 100%;
+  }
+  .formInput{
+    width: 100%;
+  }
+  .locationImgOuter{
+    flex-direction: column;
+  }
+  .locationImgSingle{
+    width: 90%;
+    margin: auto;
+  }
+  .companyLocation{
+    flex-direction: column;
+    align-items: start;
+    margin-left: 30px;
+    gap: 20px;
+  }
+  .jobMoreDetailsOuter{
+    flex-direction: column;
+    width: 100%;
+  }
+  .jobDetailsListingDiv{
+    width: 90%;
+  }
+  .workCultureOuterDiv{
+    padding-top: 0;
+  }
+  .workCultureImg{
+    border-radius: 0;
+  }
+  .workCulture{
+    flex-direction: column;
+  }
+  .workCultureContentDiv{
+    text-align: center;
+  }
+  .singleCardStaticImg{
+  display: none;
+}}
+@media (max-width:486px) {
+  .topElementOuter{
+    padding: 1rem;
+  }
+  .aboutOuterDiv{
+    padding: 4rem 2rem;
+  }
+  .carouselOuterDiv{
+  padding: 1rem;
+  }
+  .singlePersonImg{
+ width: 100px;
+ height: 100px;
+
+  }
+  .carouselHeading{
+  font-size:30px;
+  }
+  .subimtButton{
+  padding: 8px 25px;
+  }
+  .locationImgSingle{
+  width: 80%;
+  }
+  .locationHeading{
+  font-size: 30px;
+  }
+  .officeLocation{
+  margin: 1rem 0;
+  }
 }
