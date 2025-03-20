@@ -15,6 +15,9 @@ import quotes from "../../assets/Quotes.png";
 import usaOffice from "../../assets/usaOffice.png";
 import uaeOffice from "../../assets/uaeOffice.png";
 import IndianOffice from "../../assets/IndianOffice.png";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 
 
@@ -23,6 +26,49 @@ function Career() {
   const showJobDetails = () => {
     setShowDetails((prev) => !prev);
   };
+  
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000, 
+    pauseOnDotsHover: true,
+    pauseOnFocus: true,
+    pauseOnHover: true, 
+    customPaging: (i) => (
+      <div className={styles.customDot}></div> 
+    ),
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+  
   return (
     <div>
       <Header />
@@ -337,103 +383,47 @@ function Career() {
         </div>
       </div>
       <div className={styles.carouselOuterDiv}>
-        <div className={styles.carouselInnerDiv}>
-          <h2 className={styles.carouselHeading}>Our Employees Feedback</h2>
-          <div className={styles.outerSingleFeedbackCard}>
-            <div className={styles.carouselSingleCardOuter}>
-              <div className={styles.singleCardImageOuter}>
-                <div className={styles.singleCardPersonImage}>
-                  <img
-                    src={SinglePerson}
-                    alt="single.person"
-                    className={styles.singlePersonImg}
-                  />
-                </div>
-                <div className={styles.singleCardStaticImg}>
-                  <img
-                    src={quotes}
-                    alt="static"
-                    className={styles.singleStaticImg}
-                  />
-                </div>
+  <h2 className={styles.carouselHeading}>Employee Feedback</h2>
+  <div className={styles.sliderWrapper}>
+    <Slider {...settings}>
+      {[...Array(5)].map((_, index) => (
+        <div key={index} className={styles.carouselSingleCardOuter}>
+          <div className={styles.singleWrapper}>
+            <div className={styles.singleCardImageOuter}>
+              <div className={styles.singleCardPersonImage}>
+                <img
+                  src={SinglePerson}
+                  alt="single.person"
+                  className={styles.singlePersonImg}
+                />
               </div>
-              <div className={styles.singleCardContentDiv}>
-                <p className={styles.feedbackPara}>
-                  “I have seen Planafin grow from the day-one. The experiences I
-                  have gained along the way are irreplaceable. Everyone at
-                  Planafin has a strong drive to get things done, regardless of
-                  the time of the day or day of the week”
-                </p>
-                <h6 className={styles.singleCardName}>Biju Abraham</h6>
-                <p className={styles.personPosition}>
-                  Senior Business Process Consultant - FP&A
-                </p>
+              <div className={styles.singleCardStaticImg}>
+                <img
+                  src={quotes}
+                  alt="static"
+                  className={styles.singleStaticImg}
+                />
               </div>
             </div>
-            <div className={styles.carouselSingleCardOuter}>
-              <div className={styles.singleCardImageOuter}>
-                <div className={styles.singleCardPersonImage}>
-                  <img
-                    src={SinglePerson}
-                    alt="single.person"
-                    className={styles.singlePersonImg}
-                  />
-                </div>
-                <div className={styles.singleCardStaticImg}>
-                  <img
-                    src={quotes}
-                    alt="static"
-                    className={styles.singleStaticImg}
-                  />
-                </div>
-              </div>
-              <div className={styles.singleCardContentDiv}>
-                <p className={styles.feedbackPara}>
-                  “I have seen Planafin grow from the day-one. The experiences I
-                  have gained along the way are irreplaceable. Everyone at
-                  Planafin has a strong drive to get things done, regardless of
-                  the time of the day or day of the week”
-                </p>
-                <h6 className={styles.singleCardName}>Biju Abraham</h6>
-                <p className={styles.personPosition}>
-                  Senior Business Process Consultant - FP&A
-                </p>
-              </div>
-            </div>
-            <div className={styles.carouselSingleCardOuter}>
-              <div className={styles.singleCardImageOuter}>
-                <div className={styles.singleCardPersonImage}>
-                  <img
-                    src={SinglePerson}
-                    alt="single.person"
-                    className={styles.singlePersonImg}
-                  />
-                </div>
-                <div className={styles.singleCardStaticImg}>
-                  <img
-                    src={quotes}
-                    alt="static"
-                    className={styles.singleStaticImg}
-                  />
-                </div>
-              </div>
-              <div className={styles.singleCardContentDiv}>
-                <p className={styles.feedbackPara}>
-                  “I have seen Planafin grow from the day-one. The experiences I
-                  have gained along the way are irreplaceable. Everyone at
-                  Planafin has a strong drive to get things done, regardless of
-                  the time of the day or day of the week”
-                </p>
-                <h6 className={styles.singleCardName}>Biju Abraham</h6>
-                <p className={styles.personPosition}>
-                  Senior Business Process Consultant - FP&A
-                </p>
-              </div>
+            <div className={styles.singleCardContentDiv}>
+              <p className={styles.feedbackPara}>
+                “I have seen Planafin grow from the day-one. The experiences I
+                have gained along the way are irreplaceable. Everyone at
+                Planafin has a strong drive to get things done, regardless of
+                the time of the day or day of the week.”
+              </p>
+              <h6 className={styles.singleCardName}>Biju Abraham</h6>
+              <p className={styles.personPosition}>
+                Senior Business Process Consultant - FP&A
+              </p>
             </div>
           </div>
-          <div className={styles.dotOuterDiv}></div>
         </div>
-      </div>
+      ))}
+    </Slider>
+  </div>
+</div>
+
       <div className={styles.applicationFormOuter}>
         <div className={styles.applicationFormMain}>
           <h2 className={styles.formTitle}>Submit your application</h2>
