@@ -14,16 +14,23 @@ function Services() {
     "Business Consulting": {
       title: "Business Consulting Services",
       description: [
-        "We provide expert business consulting services to help you achieve success.",
-        "Our solutions cover strategic planning, operational efficiency, and business growth.",
+        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey.",
       ],
       points: [
-        "Market research & analysis",
-        "Financial planning",
-        "Operational improvements",
-        "Risk assessment",
+        "Roadmap definition services",
+        "Business use case and user story development",
+        "Platform evaluation services",
+        "Proof of concept & personalized demonstrations",
+        "Program management & change management strategy",
       ],
-      image: {padam3}, // Change with actual image path
+      image: { padam3 }, // Change with actual image path
+
+      description: [
+        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
+        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
+        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
+        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
+      ],
     },
     "Solution Deployment": {
       title: "Solution Deployment Services",
@@ -37,7 +44,7 @@ function Services() {
         "Data integration",
         "Quality assurance",
       ],
-      image: {padam3},
+      image: { padam3 },
     },
     "Managed Support Services": {
       title: "Managed Support Services",
@@ -50,7 +57,7 @@ function Services() {
         "Performance monitoring",
         "Issue resolution",
       ],
-      image: {padam3},
+      image: { padam3 },
     },
     "Training & Enablement": {
       title: "Training & Enablement",
@@ -63,7 +70,7 @@ function Services() {
         "Expert-led sessions",
         "Certification programs",
       ],
-      image: {padam3},
+      image: { padam3 },
     },
   };
 
@@ -85,7 +92,7 @@ function Services() {
         experience
       </div>
       <div className="service-image">
-        <img src={padam} alt="t" className="image-tag" />
+        <img src={padam} alt="" className="image-tag" />
       </div>
       <div className="increment-content">
         <div className="increment-section">
@@ -127,37 +134,37 @@ function Services() {
         </h3>
       </div>
       <div className="tab-container">
-      {/* Tabs */}
-      <div className="tab-boxes">
-        {Object.keys(tabContent).map((tab, index) => (
-          <div
-            key={index}
-            className={`tab-box ${activeTab === tab ? "active" : ""}`}
-            onClick={() => setActiveTab(tab)}
-          >
-            <h2>{tab}</h2>
-          </div>
-        ))}
-      </div>
-
-      {/* Content Section */}
-      <div className="tab-content">
-        <div className="text-section">
-          <h1>{tabContent[activeTab].title}</h1>
-          {tabContent[activeTab].description.map((desc, index) => (
-            <p key={index}>{desc}</p>
+        {/* Tabs */}
+        <div className="tab-boxes">
+          {Object.keys(tabContent).map((tab, index) => (
+            <div
+              key={index}
+              className={`tab-box ${activeTab === tab ? "active" : ""}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              <h2>{tab}</h2>
+            </div>
           ))}
-          <ul>
-            {tabContent[activeTab].points.map((point, index) => (
-              <li key={index}>{point}</li>
+        </div>
+
+        {/* Content Section */}
+        <div className="tab-content">
+          <div className="text-section">
+            <h1>{tabContent[activeTab].title}</h1>
+            {tabContent[activeTab].description.map((desc, index) => (
+              <p key={index}>{desc}</p>
             ))}
-          </ul>
-          <a href="#">Know More &gt;&gt;</a>
+            <ul>
+              {tabContent[activeTab].points.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+            <a href="#">Know More &gt;&gt;</a>
+          </div>
+          <div className="image-section">
+            <img src={tabContent[activeTab].image} alt={activeTab} />
+          </div>
         </div>
-        <div className="image-section">
-          <img src={tabContent[activeTab].image} alt={activeTab} />
-        </div>
-      </div>
       </div>
 
       <section className="consulting-container">
@@ -213,8 +220,6 @@ function Services() {
         </div>
       </section>
       <div className="techpart-container">
-
-        
         <h1 className="tp-head1">Our Technology Partners</h1>
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
