@@ -348,7 +348,14 @@
   color: #404040;
 }
 .carouselOuterDiv {
-  padding: 3rem;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.sliderWrapper {
+  max-width: 1200px; 
+  width: 100%; 
+  margin: auto;
 }
 
 .carouselHeading {
@@ -357,54 +364,61 @@
   font-weight: 700;
   line-height: 57px;
   color: #152246;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
-.outerSingleFeedbackCard {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
+
 .carouselSingleCardOuter {
-  padding: 30px 50px;
+  padding: 30px;
   border: 2px solid #e0e0e0;
   border-radius: 15px;
-  height: 420px;
-  
-  margin: 2rem 0;
-  float: left;
+  max-width: 450px;  /* Keep it smaller */
+  text-align: center;
+
+  margin: auto;  /* Ensures cards are centered */
 }
-.singleCardPersonImage {
-  /* height: 170px; */
-  width: 50%;
+
+.singleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.singleCardImageOuter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .singlePersonImg {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
 }
-.singleCardImageOuter {
-  display: flex;
-}
+
 .feedbackPara {
   color: #20303d;
   font-weight: 500;
   line-height: 24px;
 }
+
 .singleCardName {
   color: #404040;
   font-weight: bolder;
   font-size: 14px;
-  /* margin: 0 0 14px; */
   margin: 1rem 0;
 }
+
 .personPosition {
   color: #404040;
   font-weight: 500;
-  margin-top: -10px;
 }
+
 .applicationFormOuter {
   background-color: #f1f9ff;
   min-height: max-content;
+  margin-top: 2rem;
   /* display: flex;
   justify-content: center; */
 }
@@ -576,6 +590,45 @@
   text-align: center;
   margin: 2rem 0;
 }
+.slick-dots {
+  bottom: -30px; /* Adjust positioning */
+}
+
+.slick-dots li {
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+}
+
+.slick-dots li button:before {
+  font-size: 12px;
+  color: rgb(211, 206, 206); /* Default dot color */
+  opacity: 0.6;
+  transition: all 0.3s ease-in-out;
+}
+
+.slick-dots li.slick-active button:before {
+  color: black; /* Active dot color */
+  opacity: 1;
+  transform: scale(1.2); /* Slightly enlarge active dot */
+}
+
+/* Custom Dot Design */
+.customDot {
+  width: 10px;
+  height: 10px;
+  background-color: grey;
+  border-radius: 50%;
+  display: inline-block;
+  margin: -10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.slick-dots li.slick-active .customDot {
+  transform: scale(1.5);
+  background-color:black;
+}
+
 @media (max-width:786px) {
   .topElementOuter{
     flex-direction: column-reverse;
@@ -590,7 +643,8 @@
   }
   .carouselSingleCardOuter{
     /* justify-content: center; */
-    margin: auto;
+    /* margin: auto; */
+    /* margin:0; */
 
   }
   .carouselHeading{
@@ -651,6 +705,10 @@
   }
   .carouselOuterDiv{
   padding: 1rem;
+  }
+  .imageGridOuterDiv{
+    gap: 10px;
+    padding: 0 6px;
   }
   .singlePersonImg{
  width: 100px;

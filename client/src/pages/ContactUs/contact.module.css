@@ -64,6 +64,11 @@
   height: 50px;
 }
 
+.select {
+  width: 400px;
+  height: 50px;
+}
+
 .inputtwo Input {
   width: 810px;
   height: 50px;
@@ -222,6 +227,10 @@
     width: 600px;
   }
 
+  .select {
+    width: 600px;
+  }
+
   .inputtwo Input {
     width: 600px;
   }
@@ -261,6 +270,10 @@
   }
 
   .inputone Input {
+    width: 500px;
+  }
+
+  .select {
     width: 500px;
   }
 
@@ -307,6 +320,10 @@
   }
 
   .inputone Input {
+    width: 300px;
+  }
+
+  .select {
     width: 300px;
   }
 
