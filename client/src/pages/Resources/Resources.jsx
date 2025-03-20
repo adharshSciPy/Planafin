@@ -4,9 +4,23 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { Card } from "antd";
 import { CaretRight } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 function Resources() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("upcoming");
+  const onnavigate = () =>{
+    navigate("/webinar")
+  }
+  const onnavigateTwo = () =>{
+    navigate("/webinar-2")
+  }
+  const onnavigateThree = () =>{
+    navigate("/webinar-3")
+  }
+  const onnavigatefour = () =>{
+    navigate("/webinar-4")
+  }
   return (
     <div>
       <Header />
@@ -14,17 +28,15 @@ function Resources() {
         <h1>Webinars & Events</h1>
         <div className={styles.tabs}>
           <h3
-            className={`${styles.tabs} ${
-              activeTab === "upcoming" ? styles.active : ""
-            }`}
+            className={`${styles.tabs} ${activeTab === "upcoming" ? styles.active : ""
+              }`}
             onClick={() => setActiveTab("upcoming")}
           >
             Upcoming Webinar
           </h3>
           <h3
-            className={`${styles.tabs} ${
-              activeTab === "on-demand" ? styles.active : ""
-            }`}
+            className={`${styles.tabs} ${activeTab === "on-demand" ? styles.active : ""
+              }`}
             onClick={() => setActiveTab("on-demand")}
           >
             On-demand Webinar
@@ -32,18 +44,16 @@ function Resources() {
         </div>
       </div>
       <div
-        className={`${styles.content} ${
-          activeTab === "upcoming" ? styles.active : ""
-        }`}
+        className={`${styles.content} ${activeTab === "upcoming" ? styles.active : ""
+          }`}
       >
         <div className={styles.upcomingContent}>
           <Footer className={styles.footer} />
         </div>
       </div>
       <div
-        className={`${styles.content} ${
-          activeTab === "on-demand" ? styles.active : ""
-        }`}
+        className={`${styles.content} ${activeTab === "on-demand" ? styles.active : ""
+          }`}
       >
         <div className={styles.ondemandContent}>
           <div className={styles.card}>
@@ -79,7 +89,7 @@ function Resources() {
                       Break-Even Analysis, Cost-Benefit Analysis, and Marketing
                       ROI.
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={onnavigate}>
                       Watch Now <CaretRight size={30} color="#FFFFFF" />
                     </button>
                   </div>
@@ -114,7 +124,7 @@ function Resources() {
                       Product Lifecycle Management, Sales Collaboration,
                       Statistical Forecasting, Demand Planning, and much more.
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={onnavigateTwo}>
                       Watch Now <CaretRight size={30} color="#FFFFFF" />
                     </button>
                   </div>
@@ -148,7 +158,7 @@ function Resources() {
                       showcases Sales Budgeting, Manpower Budgeting, Operations
                       Budgeting, and the overall Financial Budgeting.
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={onnavigateThree}>
                       Watch Now <CaretRight size={30} color="#FFFFFF" />
                     </button>
                   </div>
@@ -183,7 +193,7 @@ function Resources() {
                       which demonstrates ‘Target Setting’ application built on
                       Pigment.{" "}
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={onnavigatefour}>
                       Watch Now <CaretRight size={30} color="#FFFFFF" />
                     </button>
                   </div>
