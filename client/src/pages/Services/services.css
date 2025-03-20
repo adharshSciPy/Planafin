@@ -221,8 +221,6 @@ strong{
 
 .overlayimagediv {
     width: 100%;
-
-
     padding: 20px;
     box-sizing: border-box;
     overflow: hidden;
@@ -281,8 +279,27 @@ font-size: 18px;
   border-radius: 10px;
 }
 .text-section {
-  flex: 1;
+  flex: 5;
   padding-right: 20px;
+}
+.text-section h1{
+  margin-top: 20px;
+  font-size: 30px;
+}
+.text-section p{
+  margin-top: 20px;
+  font-size: 20px;
+  width: 50%;
+}
+.text-section p{
+  margin-top: 20px;
+  font-size: 18px;
+  width: 60%;
+  line-height: 30px;
+}
+.text-section li{
+margin-top: 20px;
+font-size: 18px;
 }
 .image-section {
   flex: 1;
@@ -312,182 +329,126 @@ a {
   color: #0056b3;
 }
 /* For tablets (max-width: 1024px) */
-@media screen and (max-width: 1024px) {
-  .increment-section, 
-  .consulting-content, 
-  .boxes, 
-  .vanish {
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+  .consulting-content {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
   
   .consulting-column {
     width: 80%;
-    text-align: center;
-  }
-  
-  .left-ctnr, 
-  .right-ctnr {
-    width: 100%;
-    margin: 0;
-    padding: 20px;
-  }
-  
-  .service-image .image-tag {
-    width: 70%;
-  }
-
-  .overlaymaindiv {
-    min-height: auto;
-    background-size: cover;
-  }
-  
-  .elementoroverlaymainbox {
-    width: 80%;
-  }
-}
-
-/* For mobile devices (max-width: 768px) */
-@media screen and (max-width: 768px) {
-  .service-container2 {
-    font-size: 28px;
-    line-height: 40px;
-  }
-
-  .service-content1 {
-    font-size: 18px;
-  }
-
-  .service-image .image-tag {
-    width: 90%;
   }
 
   .consulting-container h2 {
-    font-size: 24px;
-    margin-left: 20px;
     text-align: center;
+    margin-left: 0;
   }
-
-  .consulting-column li {
-    font-size: 15px;
-    text-align: center;
-  }
-
-  .techpart-container h1 {
-    font-size: 30px;
-  }
-
-  .boxes {
+  
+  .increment-section {
     flex-wrap: wrap;
-    gap: 20px;
+    text-align: center;
   }
-
-  .box1, .box2, .box3, .box4 {
-    width: 90%;
+  
+  .image-section {
+    width: 100%;
     height: auto;
-    padding: 15px;
+  }
+  
+  .image-section img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .tab-boxes {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
+  .tab-box {
+    width: 45%;
+  }
+
+  .text-section p {
+    width: 80%;
+  }
+  
+  .text-section h1 {
+    font-size: 28px;
+  }
+  
   .overlaymaindiv {
     background-size: cover;
-    padding: 20px;
+  }
+  
+  .overlaybutton {
+    font-size: 16px;
+    padding: 8px 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .services-container,
+  .service-container2,
+  .service-content1 {
+    text-align: center;
+  }
+
+  .consulting-column {
+    width: 90%;
+  }
+
+  .tab-box {
+    width: 100%;
+  }
+
+  .text-section p {
+    width: 100%;
+  }
+
+  .image-section {
+    width: 100%;
   }
 
   .overlaymainheading {
-    font-size: 28px;
+    font-size: 30px;
     line-height: 40px;
   }
-
+  
   .overlaymainpara {
     font-size: 16px;
-    line-height: 18px;
-  }
-
-  .overlaybutton {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
-
-  .vanish {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .left-ctnr {
-    width: 100%;
-    margin-left: 0;
-    padding: 20px;
-  }
-
-  .left-ctnt h1 {
-    font-size: 28px;
-  }
-
-  .left-ctnt p {
-    font-size: 16px;
-    line-height: 25px;
-  }
-
-  .right-ctnr {
-    width: 100%;
-    margin-right: 0;
-    padding: 20px;
-  }
-
-  .overlaybutton {
-    flex-direction: column;
-    text-align: center;
-  }
-  .overlayMainDiv{
-    min-height: 400px;
-  }
-  .overlayMainHeading{
-    margin-top: 1rem;
-    font-size: 28px;
-  }
-  .elementorOverlayMainBox{
-    width: 90%;
   }
 }
 
-/* For small mobile devices (max-width: 480px) */
-@media screen and (max-width: 480px) {
-  .service-container2 {
+@media screen and (max-width: 556px) {
+  .consulting-container {
+    padding: 10px;
+  }
+
+  .service-image .image-tag {
+    width: 80%;
+  }
+
+  .consulting-btn {
+    width: 100%;
+  }
+
+  .overlaymainheading {
     font-size: 24px;
   }
 
-  .service-content1 {
-    font-size: 16px;
+  .overlaymainpara {
+    font-size: 14px;
+  }
+
+  .overlaybutton {
+    font-size: 14px;
+    padding: 6px 12px;
   }
   .techpart-container img{
     width: 300px;
-  }
-  .techpart-container h1 {
-    font-size: 24px;
-  }
-
-  .consulting-container h2 {
-    font-size: 22px;
-  }
-
-  .elementorOverlayMainBox{
-    width: 95%;
-  }
-  .overlayMainHeading{
-    margin-top: 10px;
-    font-size: 24px;
-  }
-  .overlayMainParaDiv{
-    padding: 0 0 5px ;
-  }
-  .overlayMainPara{
-    font-size: 14px;
-    font-weight: 100;
-    letter-spacing: 0;
-    padding: 0 5px;
-    
-  }
-  .overlayMainBtnDiv{
-    padding-bottom: 10px;
   }
 }
