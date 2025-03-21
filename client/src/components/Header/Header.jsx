@@ -43,7 +43,7 @@ const Header = () => {
               className={`${styles.navItem} ${styles.dropDown}`}
               onClick={() => setResourceOpen(!isResourceOpen)}
             >
-              <Link to="/resources" className={styles.navLink}>Resources</Link>
+              <Link to="#" className={styles.navLink}>Resources</Link>
               <ul
                 className={`${styles.subMenuNav} ${
                   isResourceOpen ? styles.active : ""
