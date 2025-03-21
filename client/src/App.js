@@ -12,6 +12,7 @@ import Targetsetting from "./pages/WebinarComponent/Targetsetting";
 import Career from "./pages/Career/Career";
 import Solutions from "./pages/Solutions/Solutions";
 import ContactUs from "./pages/ContactUs/ContactUs";
+import SupplyChain from "./pages/SolutionComponent/SupplyChain";
 
 function App() {
   return (
@@ -26,11 +27,11 @@ function App() {
           <Route path="/webinar-2" element={<Demandforecasting />} />
           <Route path="/webinar-3" element={<Budgeting />} />
           <Route path="/webinar-4" element={<Targetsetting />} />
-          <Route path="solutions" element={<Solutions
-          />} />
-
+          <Route path="solutions" element={<Solutions/>} />
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
+          <Route path="/supply-chain" element={<SupplyChain />} />
+
         </Routes>
       </BrowserRouter>
     </div>

@@ -4,9 +4,11 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { Card } from "antd";
 import { CaretRight } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 function Resources() {
   const [activeTab, setActiveTab] = useState("upcoming");
+  const navigate=useNavigate()
   return (
     <div>
       <Header />
@@ -79,7 +81,7 @@ function Resources() {
                       Break-Even Analysis, Cost-Benefit Analysis, and Marketing
                       ROI.
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={navigate('/webinar-2')}> 
                       Watch Now <CaretRight size={30} color="#FFFFFF" />
                     </button>
                   </div>
