@@ -1,17 +1,31 @@
 import React, { useState } from "react";
-import { Button, Flex, Form, Input,  Upload } from "antd";
+import { Button, Flex, Form, Input, Upload } from "antd";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { MinusCircleOutlined,InboxOutlined, UploadOutlined  } from "@ant-design/icons";
+import {
+  MinusCircleOutlined,
+  InboxOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 
 function WebinarData() {
   const [form] = Form.useForm();
   const handleSubmit = (values) => {
     console.log("value", values);
   };
+
   const [inputvalue, setinputvalue] = useState("");
   const [section, setsection] = useState([]);
-  const [imageFile,setimageFile]=useState("")
+  const [imageFile, selectedFile] = useState("");
+  const handleFileChange = (e) => {
+    const selectFile = e.target.files[0];
+
+    if (selectFile) {
+        selectedFile(selectFile.name); 
+    }
+  };
+  console.log(imageFile);
+
   const addSection = () => {
     if (inputvalue.trim() !== "") {
       setsection([...section, inputvalue]);
@@ -93,16 +107,13 @@ function WebinarData() {
             <Input.TextArea rows={8} />
           </Form.Item>
 
-          
-          <Form.Item
-            name="upload"
-            label="Image Upload"
-            onChange={(e)=>setimageFile(e.target.value)}
-            
-          >
-            <Upload name="logo" action="/upload.do" listType="picture" maxCount={1}>
-              <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
+          <Form.Item name="upload" label="Image Upload">
+            <input
+              type="file"
+              required
+              accept="image/*"
+              onChange={handleFileChange}
+            />
           </Form.Item>
           <Form.Item
             wrapperCol={{
