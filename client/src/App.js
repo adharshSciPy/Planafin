@@ -13,6 +13,7 @@ import Career from "./pages/Career/Career";
 import Solutions from "./pages/Solutions/Solutions";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import SupplyChain from "./pages/SolutionComponent/SupplyChain";
+import WebinarData from "./pages/Admin/WebinarData";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
+          <Route path="/webinarData" element={<WebinarData />} />
+
 
         </Routes>
       </BrowserRouter>
