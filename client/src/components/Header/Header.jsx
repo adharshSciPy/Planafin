@@ -43,14 +43,14 @@ const Header = () => {
               className={`${styles.navItem} ${styles.dropDown}`}
               onClick={() => setResourceOpen(!isResourceOpen)}
             >
-              <Link to="/Resources" className={styles.navLink}>Resources</Link>
+              <Link to="#" className={styles.navLink}>Resources</Link>
               <ul
                 className={`${styles.subMenuNav} ${
                   isResourceOpen ? styles.active : ""
                 }`}
               >
                 <li>
-                  <Link to="/webinar" className={styles.navLink}>Webinars & Events</Link>
+                  <Link to="/resources" className={styles.navLink}>Webinars & Events</Link>
                 </li>
               </ul>
             </div>
