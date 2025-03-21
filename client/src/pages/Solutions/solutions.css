@@ -167,7 +167,9 @@ gap: 20px;
   display: flex;
   margin-top: 50px;
 } */
-
+/* .card-title{
+  al
+} */
 .sec4-h1{
   font-size: 26px;
   margin-top: 10px;
@@ -187,6 +189,14 @@ gap: 20px;
   background-color: #e1f4ff;
   height: auto;
 }
+.cards-wrapper ul{
+  line-height: 25px;
+  margin-top: 20px;
+}
+.card-list li{
+  text-align: left;
+}
+
 .left-content{
   display: flex;
   padding: 50px;

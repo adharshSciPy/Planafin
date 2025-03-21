@@ -315,8 +315,10 @@ font-size: 18px;
   border-radius: 10px;
 }
 h1 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: left;
+
 }
 ul {
   padding-left: 20px;
@@ -447,6 +449,14 @@ a {
   .overlaybutton {
     font-size: 14px;
     padding: 6px 12px;
+  }
+  .techpart-container h1{
+    width: 350px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .tp-head2 {
+    width: 300px;
   }
   .techpart-container img{
     width: 300px;
