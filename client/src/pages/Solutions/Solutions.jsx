@@ -32,10 +32,54 @@ const cards = [
       "S&OP demand supply analysis", 
     ]  },
     
-  { id: 2, text: "Card 2" },
-  { id: 3, text: "Card 3" },
-  { id: 4, text: "Card 4" },
-  { id: 5, text: "Card 5" },
+    { id: 2, 
+      title: "Healthcare Planning", 
+      items: [
+        "Patient forecast",
+        "Per patient cost",
+        "Doctor incentive", 
+      ]  },
+      
+      { id: 3, 
+        title: "E-Commerce Revenue Forecasting", 
+        items: [
+          "Retail & marketplace revenue",
+          "Identify visitor conversion & buying patterns",
+          "Manage shipping & logistics", 
+        ]  },
+        
+        { id: 4, 
+          title: "Open To Buy", 
+          items: [
+            "Predict sales demand",
+            "Open to buy planning",
+            "Seasonality trend", 
+          ]  },
+          
+          { id: 5, 
+            title: "Real Estate Planning", 
+            items: [
+              "Project feasibility analysis",
+              "Project spend",
+              "Asset management", 
+            ]  },
+            
+            { id: 6, 
+              title: "Workforce Optimization", 
+              items: [
+                "Align hiring strategy",
+                "Identify talent gaps",
+                "Optimize workforce", 
+              ]  },
+              
+              { id: 7, 
+                title: "Aviation Financial", 
+                items: [
+                  "Passenger & cargo revenue",
+                  "Direct operating cost optimization",
+                  "Aircraft lease & funding", 
+                ]  },
+                
 ];
 
 function Solutions() {
