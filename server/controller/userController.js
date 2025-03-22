@@ -4,6 +4,7 @@ import { JobOpening } from "../model/jobopeningSchema.js";
 import { Feedback } from "../model/feedbackSchema.js";
 import { JobApplication } from "../model/jobApplication.js";
 import { OnDemand } from "../model/onDemandSchema.js"
+import { Journey } from "../model/journeySchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -269,6 +270,30 @@ const demandDetails = async (req, res) => {
     }
 }
 
+const addJourney = async (req, res) => {
+    try {
+        const { year, title, description } = req.body;
+        const result = await Journey.create({
+            year, title, description
+        })
+        res.status(200).json({ message: "Journey Created", data: result })
+    } catch (error) {
+        res.status(200).json({ message: "Journey Created", error: error.message })
+    }
+}
+
+const journeyDetails = async (req, res) => {
+    try {
+        const result = await Journey.find();
+        res.status(200).json({ message: "Journeys Viewed", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
 
 
-export { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails }
+
+export {
+    registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
+    addJourney, journeyDetails
+}
