@@ -14,6 +14,7 @@ import Solutions from "./pages/Solutions/Solutions";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import SupplyChain from "./pages/SolutionComponent/SupplyChain";
 import WebinarData from "./pages/Admin/WebinarData";
+import Consultation from "./pages/Consultaion/Consultation";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/webinarData" element={<WebinarData />} />
 
 
+          <Route path="/consultation" element={<Consultation/>} />
         </Routes>
       </BrowserRouter>
     </div>
