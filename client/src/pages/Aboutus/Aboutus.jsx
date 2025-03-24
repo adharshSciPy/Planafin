@@ -24,6 +24,13 @@ function Aboutus() {
       Implemented for world's fourth largest tile manufacturing company`,
     },
     {
+      year: "2015",
+      title: "Founded & Established",
+      description: `Founded and launched operations in the United Arab Emirates and India
+      Established FP&A practice
+      Implemented for world's fourth largest tile manufacturing company`,
+    },
+    {
       year: "2017",
       title: "Leading EPM Partner of the Region",
       description: `Industry expertise in retail, manufacturing, logistics

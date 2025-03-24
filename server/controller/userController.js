@@ -155,7 +155,6 @@ const addFeedback = async (req, res) => {
         const { name, jobPosition, message } = req.body;
         let image = req.file ? req.file.path : null;
 
-        // Convert Windows-style paths to URL-friendly format
         if (image) {
             image = image.replace(/\\/g, "/");
         }
@@ -229,12 +228,15 @@ const onDemand = async (req, res) => {
     try {
         const { title, summary, pigment, speaker, attendSession } = req.body;
         let image = req.file ? req.file.path : null;
-        // Convert Windows-style paths to URL-friendly format
-        if (image) {
-            image = image.replace(/\\/g, "/");
+
+        if (req.file) {
+            image = req.file.path.replace(/\\/g, "/"); // Fix Windows backslashes
+        } else {
+            console.log("⚠️ No file uploaded!");
         }
-        console.log("image", image);
-        console.log("datadata", req.body);
+
+        console.log("📷 Uploaded Image Path:", image);
+        console.log("📦 Form Data:", req.body);
 
         const result = await OnDemand.create({
             title,
@@ -243,12 +245,15 @@ const onDemand = async (req, res) => {
             speaker,
             attendSession,
             image
-        })
-        res.status(200).json({ message: "On Demand Session Created", data: result })
+        });
+
+        res.status(200).json({ message: "On Demand Session Created", data: result });
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error", error: error.message })
+        console.error("🔥 Image Upload Error:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-}
+};
+
 
 const getOnDemandById = async (req, res) => {
     const { id } = req.params;
@@ -262,7 +267,7 @@ const getOnDemandById = async (req, res) => {
 
 const demandDetails = async (req, res) => {
     try {
-        const result = await OnDemand.find().select("image title summary");
+        const result = await OnDemand.find().select("image title summary id");
         res.status(200).json({ message: "On Demand Sessions Viewed", data: result })
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message })

@@ -1,21 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./webinar.module.css";
-import picture from "../../assets/webinarsub.jpg";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 import linkedin from "../../assets/MicrosoftTeams-image-7-150x150.jpg";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
+import baseUrl from "../../baseUrl";
+
 function Webinarsub() {
-  const arrayItem=
-    {
-      h1: "S&OP Series: Episode 4 – Marketing Campaigns & Promotions Planning",
-      Sessionsummary:
-        "This the fourth episode from our S&OP Series which demonstrates ‘Marketing Campaigns & Promotions Planning’ application built on Pigment. It showcases Marketing Expenditure, Campaigns Planning, Promotions Planning, Break-Even Analysis, Cost-Benefit Analysis, and Marketing ROI.",
-        AboutPigment:"Pigment is a flexible cloud EPM platform. It is highly collaborative and adaptive with a ‘low code-no code’ interface. Businesses can own their planning processes without any coding or programming skills and zero dependency on IT. Let your CXOs set organizational targets for long term with this intuitive and next generation platform",
-        Aboutthespeaker:"Kunal Jethwa is the Associate Director (SaaS EPM, Supply Chain Planning & Forecasting) of Planafin FZE. He is an experienced Demand & Supply Planning Professional with a demonstrated history of working with industries like Chemical, Medical Devices, Robotics & Health Nutrition, Nutraceuticals, SaaS Technology, and Business & IT Consulting Services.",
-        src:"https://planafin.com/wp-content/uploads/2024/03/4-Campaigns-Promos-Infographics-scaled.jpg"
-      }
-    
+  const [item, arrayItem] = useState({});
+  const { id } = useParams();
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/demandCardDetails/${id}`
+      );
+      console.log("Response:", response);
+      arrayItem(response.data.data || {});
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const [formdata, setFormdata] = useState({
+    fullname: "",
+    lastname: "",
+    workemail: "",
+    companyname: "",
+    designation: "",
+    countryname: "",
+    checkBox: false,
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormdata((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheck = (e) => {
+    setFormdata((prev) => ({ ...prev, checkBox: e.target.checked }));
+  };
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    if (!formdata.checkBox) {
+      alert("You must agree to the terms before submitting.");
+      return;
+    }
+    else{
+      const response= await axios.post(`${baseUrl}/api/v1/user/addWatchnow`,formdata)
+      console.log(response);
+      
+    }
+  };
+
   return (
     <>
       <Header />
@@ -29,21 +72,20 @@ function Webinarsub() {
                 </div>
                 <div className={styles.heading}>
                   <h2 className={styles.firstContentH}>
-                    {arrayItem.h1}
+                    {item.title || "Loading"}
                   </h2>
                 </div>
                 <div>
                   <button className={styles.buttonContainer}>
                     Watch Now
                     <i className={styles.buttonArrow}></i>
-
                   </button>
                 </div>
               </div>
             </div>
             <div className={styles.firstRight}>
               <div className={styles.rightMain}>
-                <img src={arrayItem.src} alt="" />
+                <img src={item.src || "Loading"} alt="Webinar" />
               </div>
             </div>
           </div>
@@ -57,65 +99,37 @@ function Webinarsub() {
                 <p>
                   <strong>Session summary:</strong>
                 </p>
-                <p>
-                  {arrayItem.Sessionsummary}
-                </p>
+                <p>{item.summary || "Loading"}</p>
                 <p>
                   <strong>About Pigment:</strong>
                 </p>
-                <p>
-                  {arrayItem.AboutPigment}
-                </p>
+                <p>{item.pigment || "Loading"}</p>
                 <p>
                   <strong>About the speaker</strong>
                 </p>
-                <p>
-                {arrayItem.Aboutthespeaker}
-                </p>
+                <p>{item.speaker || "Loading"}</p>
                 <p>
                   <strong>Who should attend this session</strong>
                 </p>
 
                 <ul>
-                  <li className={styles.containerTwoLi}>
-                    Marketing Managers / Marketing Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Demand Planners / Finance Controllers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Planning & Forecasting Managers / Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Business Planners / Business Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>Sales Managers</li>
-                  <li className={styles.containerTwoLi}>
-                    Product Managers / Brand Managers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Category Planners / Category Managers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Product Line Management
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Sales Channel Management
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Financial Planning & Analysis Managers / Financial Analysts
-                    Get in touch to collaborate with us for your planning,
-                    budgeting, and forecasting, use-cases
-                  </li>
+                  {(item.attendSession || []).map((content, index) => (
+                    <li key={index} className={styles.containerTwoLi}>
+                      {content}
+                    </li>
+                  ))}
                 </ul>
-                <p>Get in touch to collaborate with us for your planning, budgeting, and forecasting, use-cases.</p>
                 <p>
-                  Email:<Link to="/">connect@planafin.com</Link>
+                  Get in touch to collaborate with us for your planning,
+                  budgeting, and forecasting, use-cases.
+                </p>
+                <p>
+                  Email: <Link to="/">connect@planafin.com</Link>
                 </p>
                 <p>
                   LinkedIn:
                   <Link to="/">
-                    <img src={linkedin} className={styles.linkedIn} alt="" />
+                    <img src={linkedin} className={styles.linkedIn} alt="LinkedIn" />
                   </Link>
                 </p>
               </div>
@@ -123,74 +137,90 @@ function Webinarsub() {
             <div className={styles.mainFirstTwoSubRight}>
               <div className={styles.twoMainRight}>
                 <h3>Watch now</h3>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="First Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Last Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Work / business email*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Company Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Designation*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Select Country*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <ul className={styles.checkboxUl}>
-                    <li className={styles.checkboxUlLi}>
-                      <input type="checkbox" className={styles.inputStyle} />
-                      <label className={styles.formLabel}>
-                        {" "}
-                        By filling out this form, I consent to the collection
-                        and use of my personal data by Planafin for direct
-                        marketing and/or communication purposes.
-                        <span style={{ color: "red" }}>*</span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div className={styles.buttonTwo}>
-                    <button>
-                        Submit
-                        <i className={styles.buttonArrow}></i>
-                        </button>
-                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={formdata.fullname}
+                      className={styles.formStyle}
+                      placeholder="Full Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="lastname"
+                      value={formdata.lastname}
+                      className={styles.formStyle}
+                      placeholder="Last Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="email"
+                      name="workemail"
+                      value={formdata.workemail}
+                      className={styles.formStyle}
+                      placeholder="Work / business email*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="companyname"
+                      value={formdata.companyname}
+                      className={styles.formStyle}
+                      placeholder="Company Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="designation"
+                      value={formdata.designation}
+                      className={styles.formStyle}
+                      placeholder="Designation*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="countryname"
+                      value={formdata.countryname}
+                      className={styles.formStyle}
+                      placeholder="Select Country*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="checkbox"
+                      className={styles.inputStyle}
+                      checked={formdata.checkBox}
+                      onChange={handleCheck}
+                    />
+                    <label>
+                      By filling out this form, I consent to the collection and
+                      use of my personal data by Planafin for direct marketing
+                      and/or communication purposes.
+                    </label>
+                  </div>
+                  <div className={styles.buttonTwo}>
+                    <button type="submit">Submit</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
