@@ -1,40 +1,91 @@
-import React, { useState } from "react";
-import { Button, Flex, Form, Input, Upload } from "antd";
+import React, { useState, useRef, useEffect } from "react";
+import { Button, Flex, Form, Input } from "antd";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import {
-  MinusCircleOutlined,
-  InboxOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import baseurl from "../../baseUrl";
+import axios from "axios";
+import { MinusCircleOutlined } from "@ant-design/icons";
 
 function WebinarData() {
   const [form] = Form.useForm();
-  const handleSubmit = (values) => {
-    console.log("value", values);
-  };
+  const fileInputRef = useRef(null);
 
-  const [inputvalue, setinputvalue] = useState("");
-  const [section, setsection] = useState([]);
-  const [imageFile, selectedFile] = useState("");
+  const [inputValue, setInputValue] = useState(""); // Fixed initial state
+  const [sections, setSections] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+
+  // Sync sections with form field
+  useEffect(() => {
+    form.setFieldsValue({ attendSession: sections });
+  }, [sections, form]);
+
+  // Handle File Selection
   const handleFileChange = (e) => {
-    const selectFile = e.target.files[0];
+    const selectedFile = e.target.files[0];
+    if (selectedFile) setImageFile(selectedFile);
+  };
 
-    if (selectFile) {
-        selectedFile(selectFile.name); 
+  // Handle Form Submission
+  const handleSubmit = async (values) => {
+    try {
+      const formData = new FormData();
+      Object.keys(values).forEach((key) => {
+        if (key === "attendSession") {
+          sections.forEach((section) => {
+            formData.append(`${key}[]`, section.name); // Ensure correct format
+          });
+        } else {
+          formData.append(key, values[key]);
+        }
+      });
+
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
+
+      const response = await axios.post(`${baseurl}/api/v1/user/onDemand`, formData, {
+        headers: { "Content-Type": "multipart/form-data" }, // Ensures correct file handling
+      });
+
+      console.log("Response:", response);
+
+      if (response.status === 200) {
+        form.resetFields();
+        setSections([]);
+        setImageFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
-  console.log(imageFile);
 
+  // Add Section
   const addSection = () => {
-    if (inputvalue.trim() !== "") {
-      setsection([...section, inputvalue]);
-      setinputvalue("");
+    if (inputValue.trim() !== "") {
+      setSections((prevItems) => [
+        ...prevItems,
+        { id: Date.now(), name: inputValue }, // Use unique ID
+      ]);
+      setInputValue(""); // Reset input field
     }
   };
-  const remove = (index) => {
-    setsection(section.filter((_, i) => i !== index));
+
+  // Remove Section
+  const removeSection = (id) => {
+    setSections((prev) => prev.filter((item) => item.id !== id));
   };
+
+  // Reset Form
+  const handleReset = () => {
+    form.resetFields();
+    setSections([]);
+    setImageFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <>
       <Header />
@@ -44,137 +95,126 @@ function WebinarData() {
       <div style={{ padding: "10px", overflow: "hidden" }}>
         <Form
           form={form}
+          initialValues={{
+            title: "",
+            summary: "",
+            pigment: "",
+            speaker: "",
+            attendSession: [],
+          }}
           onFinish={handleSubmit}
-          scrollToFirstError={{
-            behavior: "instant",
-            block: "end",
-            focus: true,
-          }}
-          style={{
-            paddingBlock: 32,
-          }}
-          labelCol={{
-            span: 6,
-          }}
-          wrapperCol={{
-            span: 14,
-          }}
+          style={{ paddingBlock: 32 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 14 }}
         >
           <Form.Item
-            name="Heading"
+            name="title"
             label="Heading"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true, message: "Please enter a heading" }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            name="Sessionsummary"
-            label="Session summary"
+            name="summary"
+            label="Session Summary"
             rules={[
-              {
-                required: true,
-              },
+              { required: true, message: "Please enter a session summary" },
             ]}
           >
-            <Input.TextArea rows={8} />
+            <Input.TextArea rows={6} />
           </Form.Item>
 
           <Form.Item
-            name="Aboutpigment:"
-            label="About pigment:"
+            name="pigment"
+            label="About Pigment"
             rules={[
-              {
-                required: true,
-              },
+              { required: true, message: "Please enter details about pigment" },
             ]}
           >
-            <Input.TextArea rows={8} />
-          </Form.Item>
-          <Form.Item
-            name="Aboutthespeaker:"
-            label="About the speaker:"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <Input.TextArea rows={8} />
+            <Input.TextArea rows={6} />
           </Form.Item>
 
-          <Form.Item name="upload" label="Image Upload">
+          <Form.Item
+            name="speaker"
+            label="About the Speaker"
+            rules={[
+              {
+                required: true,
+                message: "Please enter details about the speaker",
+              },
+            ]}
+          >
+            <Input.TextArea rows={6} />
+          </Form.Item>
+
+          {/* Attended Sessions */}
+          <Form.Item name="attendSession" label="Attended Sessions">
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "50%",
+                  margin: "auto",
+                  gap: "10px",
+                }}
+              >
+                <Input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                <Button onClick={addSection}>Add</Button>
+              </div>
+            </div>
+
+            {/* List of sessions */}
+            {sections.map((item) => (
+              <div
+                key={item.id}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginTop: "15px",
+                  padding: "10px",
+                  border: "1px solid #ddd",
+                  borderRadius: "5px",
+                  width: "50%",
+                  marginInline: "auto",
+                }}
+              >
+                <span>{item.name}</span> {/* ✅ Render the name properly */}
+                <MinusCircleOutlined
+                  style={{ color: "red", cursor: "pointer" }}
+                  onClick={() => removeSection(item.id)}
+                />
+              </div>
+            ))}
+          </Form.Item>
+
+          {/* Image Upload */}
+          <Form.Item label="Image Upload">
             <input
               type="file"
-              required
               accept="image/*"
+              ref={fileInputRef}
               onChange={handleFileChange}
             />
           </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              offset: 6,
-            }}
-          >
+
+          {/* Submit & Reset Buttons */}
+          <Form.Item wrapperCol={{ offset: 6 }} style={{ marginTop: "30px" }}>
             <Flex gap="small">
               <Button type="primary" htmlType="submit">
                 Submit
               </Button>
-              <Button danger onClick={() => form.resetFields()}>
+              <Button danger onClick={handleReset}>
                 Reset
               </Button>
             </Flex>
           </Form.Item>
         </Form>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "50%",
-              margin: "auto",
-              gap: "10px",
-            }}
-          >
-            <Input
-              value={inputvalue}
-              onChange={(e) => setinputvalue(e.target.value)}
-            />
-            <Button
-              onClick={() => {
-                addSection();
-              }}
-            >
-              Add
-            </Button>
-          </div>
-          <ul
-            style={{
-              width: "50%",
-              margin: "auto",
-              marginTop: "50px",
-              listStyle: "none",
-            }}
-          >
-            {section.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "10px 0px",
-                }}
-              >
-                {item}
-                <MinusCircleOutlined onClick={() => remove(index)} />
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
       <Footer />
     </>

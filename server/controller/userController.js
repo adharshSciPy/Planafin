@@ -5,6 +5,7 @@ import { Feedback } from "../model/feedbackSchema.js";
 import { JobApplication } from "../model/jobApplication.js";
 import { OnDemand } from "../model/onDemandSchema.js"
 import { Journey } from "../model/journeySchema.js";
+import { WatchNow } from "../model/watchnowSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -156,7 +157,6 @@ const addFeedback = async (req, res) => {
         const { name, jobPosition, message } = req.body;
         let image = req.file ? req.file.path : null;
 
-        // Convert Windows-style paths to URL-friendly format
         if (image) {
             image = image.replace(/\\/g, "/");
         }
@@ -230,12 +230,15 @@ const onDemand = async (req, res) => {
     try {
         const { title, summary, pigment, speaker, attendSession } = req.body;
         let image = req.file ? req.file.path : null;
-        // Convert Windows-style paths to URL-friendly format
-        if (image) {
-            image = image.replace(/\\/g, "/");
+
+        if (req.file) {
+            image = req.file.path.replace(/\\/g, "/"); // Fix Windows backslashes
+        } else {
+            console.log("⚠️ No file uploaded!");
         }
-        console.log("image", image);
-        console.log("datadata", req.body);
+
+        console.log("📷 Uploaded Image Path:", image);
+        console.log("📦 Form Data:", req.body);
 
         const result = await OnDemand.create({
             title,
@@ -244,12 +247,15 @@ const onDemand = async (req, res) => {
             speaker,
             attendSession,
             image
-        })
-        res.status(200).json({ message: "On Demand Session Created", data: result })
+        });
+
+        res.status(200).json({ message: "On Demand Session Created", data: result });
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error", error: error.message })
+        console.error("🔥 Image Upload Error:", error);
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
     }
-}
+};
+
 
 const getOnDemandById = async (req, res) => {
     const { id } = req.params;
@@ -263,7 +269,7 @@ const getOnDemandById = async (req, res) => {
 
 const demandDetails = async (req, res) => {
     try {
-        const result = await OnDemand.find().select("image title summary");
+        const result = await OnDemand.find().select("image title summary id");
         res.status(200).json({ message: "On Demand Sessions Viewed", data: result })
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error", error: error.message })
@@ -292,8 +298,34 @@ const journeyDetails = async (req, res) => {
 }
 
 
+const addWatchnow = async (req, res) => {
+    try {
+        const { firstName, lastName, businessEmail, companyName, designation, selectCountry } = req.body;
+        const result = await WatchNow.create({
+            firstName,
+            lastName,
+            businessEmail,
+            companyName,
+            designation,
+            selectCountry
+        })
+        res.status(200).json({ message: "Watch Now Form Submitted", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
+
+const watchNowDetails = async (req, res) => {
+    try {
+        const result = await WatchNow.find();
+        res.status(200).json({ message: "Watch Now Details", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
+
 
 export {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-    addJourney, journeyDetails
+    addJourney, journeyDetails, addWatchnow, watchNowDetails
 }
