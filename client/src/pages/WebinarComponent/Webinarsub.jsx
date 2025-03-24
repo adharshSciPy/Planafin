@@ -16,7 +16,6 @@ function Webinarsub() {
       const response = await axios.get(
         `${baseUrl}/api/v1/user/demandCardDetails/${id}`
       );
-      console.log("Response:", response);
       arrayItem(response.data.data || {});
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -28,13 +27,12 @@ function Webinarsub() {
   }, []);
 
   const [formdata, setFormdata] = useState({
-    fullname: "",
-    lastname: "",
-    workemail: "",
-    companyname: "",
+    firstName: "",
+    lastName: "",
+    businessEmail: "",
+    companyName: "",
     designation: "",
-    countryname: "",
-    checkBox: false,
+    selectCountry: "",
   });
 
   const handleInput = (e) => {
@@ -42,20 +40,23 @@ function Webinarsub() {
     setFormdata((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCheck = (e) => {
-    setFormdata((prev) => ({ ...prev, checkBox: e.target.checked }));
-  };
+  // const handleCheck = (e) => {
+  //   setFormdata((prev) => ({ ...prev, checkBox: e.target.checked }));
+  // };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    if (!formdata.checkBox) {
-      alert("You must agree to the terms before submitting.");
-      return;
-    }
-    else{
-      const response= await axios.post(`${baseUrl}/api/v1/user/addWatchnow`,formdata)
-      console.log(response);
-      
+  const handleSubmitform = async (e) => {
+    e.preventDefault(); 
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/v1/user/addWatchnow`,
+        formdata
+      );
+      console.log("Form submitted successfully:", response.data);
+    } catch (error) {
+      console.error(
+        "Submission Error:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 
@@ -129,7 +130,11 @@ function Webinarsub() {
                 <p>
                   LinkedIn:
                   <Link to="/">
-                    <img src={linkedin} className={styles.linkedIn} alt="LinkedIn" />
+                    <img
+                      src={linkedin}
+                      className={styles.linkedIn}
+                      alt="LinkedIn"
+                    />
                   </Link>
                 </p>
               </div>
@@ -137,11 +142,12 @@ function Webinarsub() {
             <div className={styles.mainFirstTwoSubRight}>
               <div className={styles.twoMainRight}>
                 <h3>Watch now</h3>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitform}>
                   <div className={styles.formDiv}>
                     <input
                       type="text"
-                      name="fullname"
+                      name="firstName"
+                      required
                       value={formdata.fullname}
                       className={styles.formStyle}
                       placeholder="Full Name*"
@@ -151,7 +157,9 @@ function Webinarsub() {
                   <div className={styles.formDiv}>
                     <input
                       type="text"
-                      name="lastname"
+                      name="lastName"
+                      required
+
                       value={formdata.lastname}
                       className={styles.formStyle}
                       placeholder="Last Name*"
@@ -161,7 +169,9 @@ function Webinarsub() {
                   <div className={styles.formDiv}>
                     <input
                       type="email"
-                      name="workemail"
+                      name="businessEmail"
+                      required
+
                       value={formdata.workemail}
                       className={styles.formStyle}
                       placeholder="Work / business email*"
@@ -171,7 +181,9 @@ function Webinarsub() {
                   <div className={styles.formDiv}>
                     <input
                       type="text"
-                      name="companyname"
+                      name="companyName"
+                      required
+
                       value={formdata.companyname}
                       className={styles.formStyle}
                       placeholder="Company Name*"
@@ -182,6 +194,8 @@ function Webinarsub() {
                     <input
                       type="text"
                       name="designation"
+                      required
+
                       value={formdata.designation}
                       className={styles.formStyle}
                       placeholder="Designation*"
@@ -191,7 +205,8 @@ function Webinarsub() {
                   <div className={styles.formDiv}>
                     <input
                       type="text"
-                      name="countryname"
+                      required
+                      name="selectCountry"
                       value={formdata.countryname}
                       className={styles.formStyle}
                       placeholder="Select Country*"
@@ -200,10 +215,9 @@ function Webinarsub() {
                   </div>
                   <div className={styles.formDiv}>
                     <input
+                      required
                       type="checkbox"
                       className={styles.inputStyle}
-                      checked={formdata.checkBox}
-                      onChange={handleCheck}
                     />
                     <label>
                       By filling out this form, I consent to the collection and
@@ -212,7 +226,7 @@ function Webinarsub() {
                     </label>
                   </div>
                   <div className={styles.buttonTwo}>
-                    <button type="submit">Submit</button>
+                    <button type="submit" >Submit</button>
                   </div>
                 </form>
               </div>
