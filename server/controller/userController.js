@@ -229,10 +229,10 @@ const applicationDetails = async (req, res) => {
 const onDemand = async (req, res) => {
     try {
         const { title, summary, pigment, speaker, attendSession } = req.body;
-        let image = req.file ? req.file.path : null;
+        let image = ""
 
         if (req.file) {
-            image = req.file.path.replace(/\\/g, "/"); // Fix Windows backslashes
+            image = `/uploads/${req.file.filename}`;// Fix Windows backslashes
         } else {
             console.log("⚠️ No file uploaded!");
         }

@@ -86,7 +86,7 @@ function Webinarsub() {
             </div>
             <div className={styles.firstRight}>
               <div className={styles.rightMain}>
-                <img src={item.src || "Loading"} alt="Webinar" />
+                <img src={`${baseUrl}/${item.image}`|| "Loading"} alt="Webinar" />
               </div>
             </div>
           </div>
