@@ -1,0 +1,305 @@
+.topElementOuterDiv {
+  width: 100%;
+  max-width: 1140px;
+  display: flex;
+  margin: auto;
+}
+.topElementInnerDivFirst {
+  width: 48%;
+  padding: 4rem 1rem 0.5rem 3rem;
+}
+.topElementImage {
+  width: 80%;
+  margin-top: 2rem;
+}
+.topElementImage {
+  width: 90%;
+  height: 98px;
+}
+.topElementInnerDivSecond {
+  width: 50%;
+  margin: 3rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.topSecondDivHead {
+  margin-top: 1rem;
+  font-family: "Poppins", Sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 54px;
+  color: #152246;
+}
+.topSecondDivPara {
+  color: #404040;
+  font-family: "Poppins", Sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+.topSecondTalkBtnDiv {
+  width: 100%;
+}
+.topSecondTalkButton {
+  background-color: #f1ce3b;
+  font-family: "Poppins", Sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+  fill: #000000;
+  color: #000000;
+  border-radius: 3px;
+  border-style: none;
+  padding: 10px 30px;
+}
+.consultationOuterDiv {
+  max-width: 1140px;
+  width: 100%;
+  margin: 3rem auto;
+}
+.consultationInnerDiv {
+  width: 100%;
+  /* padding: 2rem ; */
+  margin: 3rem auto;
+}
+.consultaionMainHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 57px;
+  color: #152246;
+  text-align: center;
+}
+.consultationParagraph {
+  text-align: center;
+  color: #404040;
+  font-family: "Poppins", Sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.consultaionCardsOuter {
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.consultationSingleCard {
+  width: 25%;
+  background-color: #e8f2fc;
+  padding: 20px 0px 20px 20px;
+  border-radius: 5px;
+}
+.CsSingleCardHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 57px;
+  color: #000000;
+}
+.CsSingleCardPara {
+  color: #000000;
+  font-family: "Poppins", Sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 0 0 1rem;
+}
+.csPlanningOuterContainer {
+  max-width: 1300px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.csPlanningInnerFirst {
+  width: 60%;
+  margin: 2rem;
+  /* border: 2px solid red; */
+}
+.csPlanningImageDiv {
+  width: 100%;
+  object-fit: fill;
+}
+.csPlanningImg {
+  width: 100%;
+}
+.csPlanningInnerSecond {
+  width: 40%;
+  margin: 0 2rem;
+}
+.csPlanningSecondHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 51px;
+  color: #152246;
+}
+.csPlanningSecondPara {
+  margin-top: 10px;
+  color: #404040;
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  letter-spacing: 0.3px;
+}
+.csPlanningSecondUl {
+  padding: 2rem;
+}
+.csPlanningSecondLi {
+  padding: 5px;
+}
+.InsightsOuterDiv {
+  width: 100%;
+  margin: 3.5rem 0 0;
+  background-color: #fffcee;
+}
+.InsightInnerDiv {
+  max-width: 1200px;
+  width: 100%;
+  /* text-align: center; */
+  margin: auto;
+  padding: 2rem 0 8rem;
+}
+.InsightInnerHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 47px;
+  color: #152246;
+  padding: 3rem 0 1rem;
+  /* text-align: center; */
+}
+.InsightInnerPara {
+  color: #404040;
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+}
+.imgOverlayMainDiv {
+  margin-top: -50px;
+}
+.imgOverlaySecondary {
+  display: flex;
+  max-width: 1140px;
+  width: 100%;
+  margin: auto;
+  /* padding: 0 2rem; */
+}
+.ImgOvrContentDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ImgOvrContentUl {
+  padding: 1rem 0 0;
+  list-style: none;
+}
+.ImgOvrContentLi {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
+  padding-bottom: 2rem;
+}
+.ImgOvrContentSpan {
+  width: 30px;
+  height: 30px;
+}
+.bottomContentWrapper {
+  background-color: #e8f2fc;
+  width: 100%;
+}
+.bottomContentInner {
+  max-width: 1140px;
+  display: flex;
+
+  width: 100%;
+  margin: 100px auto;
+}
+.btmContentData {
+  width: 60%;
+  padding: 4rem 0;
+}
+.btmContentDataHead {
+  font-family: "Poppins", Sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 51px;
+  color: #152246;
+  margin: 0 0 1rem;
+}
+.btmContentDataFirstPara {
+  color: #222d4e;
+  font-family: "Poppins", Sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  margin-bottom: 1rem;
+}
+.btmContentDataSecondPara {
+  color: #404040;
+  font-family: "Poppins", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 30px;
+}
+/* .btmContentData{
+    padding: 0 70px;
+    margin: 100px 0;
+} */
+.btmToggleOuterDiv {
+  width: 40%;
+  margin: auto;
+}
+
+.singleToggleOuter {
+  background-color: #fff !important;
+  margin-bottom: 20px !important;
+  padding: 10px 20px;
+  /* transition: all ease 1s; */
+}
+.singleToggleContentHeading {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 15px;
+}
+.singleToggleContent {
+  font-family: "Poppins", Sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+.ToggleContentOuterMainHide {
+    max-height: 0;
+    overflow: hidden;
+  transition: all ease 1s;
+
+}
+
+.ToggleContentOuterMainDispaly {
+  /* display: block; */
+  max-height: 200px;
+  opacity: 1;
+  transition: all ease 1s;
+  padding: 0 15px;
+
+}
+.ToggleContentOuterPara {
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: start;
+  color: #7a7a7a;
+  /* padding-left: 2px; */
+}

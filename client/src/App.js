@@ -12,6 +12,7 @@ import Targetsetting from "./pages/WebinarComponent/Targetsetting";
 import Career from "./pages/Career/Career";
 import Solutions from "./pages/Solutions/Solutions";
 import ContactUs from "./pages/ContactUs/ContactUs";
+import Consultation from "./pages/Consultaion/Consultation";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
 
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
+          <Route path="/consultation" element={<Consultation/>} />
         </Routes>
       </BrowserRouter>
     </div>
