@@ -6,6 +6,16 @@ import { Link } from "react-router-dom";
 import linkedin from "../../assets/MicrosoftTeams-image-7-150x150.jpg";
 import Footer from "../../components/Footer/Footer"
 function Webinarsub() {
+  const arrayItem=
+    {
+      h1: "S&OP Series: Episode 4 – Marketing Campaigns & Promotions Planning",
+      Sessionsummary:
+        "This the fourth episode from our S&OP Series which demonstrates ‘Marketing Campaigns & Promotions Planning’ application built on Pigment. It showcases Marketing Expenditure, Campaigns Planning, Promotions Planning, Break-Even Analysis, Cost-Benefit Analysis, and Marketing ROI.",
+        AboutPigment:"Pigment is a flexible cloud EPM platform. It is highly collaborative and adaptive with a ‘low code-no code’ interface. Businesses can own their planning processes without any coding or programming skills and zero dependency on IT. Let your CXOs set organizational targets for long term with this intuitive and next generation platform",
+        Aboutthespeaker:"Kunal Jethwa is the Associate Director (SaaS EPM, Supply Chain Planning & Forecasting) of Planafin FZE. He is an experienced Demand & Supply Planning Professional with a demonstrated history of working with industries like Chemical, Medical Devices, Robotics & Health Nutrition, Nutraceuticals, SaaS Technology, and Business & IT Consulting Services.",
+        src:"https://planafin.com/wp-content/uploads/2024/03/4-Campaigns-Promos-Infographics-scaled.jpg"
+      }
+    
   return (
     <>
       <Header />
@@ -19,8 +29,7 @@ function Webinarsub() {
                 </div>
                 <div className={styles.heading}>
                   <h2 className={styles.firstContentH}>
-                    S&OP Series: Episode 4 – Marketing Campaigns & Promotions
-                    Planning
+                    {arrayItem.h1}
                   </h2>
                 </div>
                 <div>
@@ -34,7 +43,7 @@ function Webinarsub() {
             </div>
             <div className={styles.firstRight}>
               <div className={styles.rightMain}>
-                <img src={picture} alt="" />
+                <img src={arrayItem.src} alt="" />
               </div>
             </div>
           </div>
@@ -49,40 +58,19 @@ function Webinarsub() {
                   <strong>Session summary:</strong>
                 </p>
                 <p>
-                  This the fourth episode from our S&OP Series which
-                  demonstrates ‘Marketing Campaigns & Promotions Planning’
-                  application built on Pigment. It showcases Marketing
-                  Expenditure, Campaigns Planning, Promotions Planning,
-                  Break-Even Analysis, Cost-Benefit Analysis, and Marketing ROI.
-                  With every episode, we’ll continue to showcase important
-                  components of an end-to-end ‘Sales and Operations Planning’
-                  application built on Pigment. This video provides a detailed
-                  demonstration of step-by-step tasks for Campaigns and
-                  Promotions Planning and collaboration with cross-functional
-                  teams. The application is curated by Planafin’s experienced
-                  techno-functional consultants and domain experts.
+                  {arrayItem.Sessionsummary}
                 </p>
                 <p>
                   <strong>About Pigment:</strong>
                 </p>
                 <p>
-                  Pigment is a flexible cloud EPM platform. It is highly
-                  collaborative and adaptive with a ‘low code-no code’
-                  interface. Businesses can own their planning processes without
-                  any coding or programming skills and zero dependency on IT.
-                  Let your CXOs set organizational targets for long term with
-                  this intuitive and next generation platform
+                  {arrayItem.AboutPigment}
                 </p>
                 <p>
                   <strong>About the speaker</strong>
                 </p>
                 <p>
-                  Kunal Jethwa is the Associate Director (SaaS EPM, Supply Chain
-                  Planning & Forecasting) of Planafin FZE. He is an experienced
-                  Demand & Supply Planning Professional with a demonstrated
-                  history of working with industries like Chemical, Medical
-                  Devices, Robotics & Health Nutrition, Nutraceuticals, SaaS
-                  Technology, and Business & IT Consulting Services.
+                {arrayItem.Aboutthespeaker}
                 </p>
                 <p>
                   <strong>Who should attend this session</strong>

@@ -26,7 +26,15 @@ function Career() {
   const showJobDetails = () => {
     setShowDetails((prev) => !prev);
   };
-  
+
+  const scrollToApplicationForm = () => {
+    const element = document.querySelector(`.${styles.applicationFormOuter}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
   const settings = {
     dots: true,
     infinite: true,
@@ -34,12 +42,12 @@ function Career() {
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000, 
+    autoplaySpeed: 2000,
     pauseOnDotsHover: true,
     pauseOnFocus: true,
-    pauseOnHover: true, 
+    pauseOnHover: true,
     customPaging: (i) => (
-      <div className={styles.customDot}></div> 
+      <div className={styles.customDot}></div>
     ),
     responsive: [
       {
@@ -68,7 +76,7 @@ function Career() {
       }
     ]
   };
-  
+
   return (
     <div>
       <Header />
@@ -92,7 +100,7 @@ function Career() {
               </p>
             </div>
             <div className={styles.topContentButtonDiv}>
-              <button className={styles.topContentBtn}>
+              <button className={styles.topContentBtn} onClick={scrollToApplicationForm}>
                 Join Us{" "}
                 <span
                   className="fas fa-arrow-down"
@@ -135,7 +143,7 @@ function Career() {
                     </p>
                   </div>
                   <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn}>Apply</button>
+                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
                   </div>
                 </div>
                 <div className={styles.jobMoreDetailsOuter}>
@@ -196,7 +204,7 @@ function Career() {
                     </p>
                   </div>
                   <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn}>Apply</button>
+                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
                   </div>
                 </div>
                 <div className={styles.jobMoreDetailsOuter}>
@@ -256,7 +264,7 @@ function Career() {
                     </p>
                   </div>
                   <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn}>Apply</button>
+                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
                   </div>
                 </div>
                 <div className={styles.jobMoreDetailsOuter}>
@@ -383,46 +391,46 @@ function Career() {
         </div>
       </div>
       <div className={styles.carouselOuterDiv}>
-  <h2 className={styles.carouselHeading}>Employee Feedback</h2>
-  <div className={styles.sliderWrapper}>
-    <Slider {...settings}>
-      {[...Array(5)].map((_, index) => (
-        <div key={index} className={styles.carouselSingleCardOuter}>
-          <div className={styles.singleWrapper}>
-            <div className={styles.singleCardImageOuter}>
-              <div className={styles.singleCardPersonImage}>
-                <img
-                  src={SinglePerson}
-                  alt="single.person"
-                  className={styles.singlePersonImg}
-                />
+        <h2 className={styles.carouselHeading}>Employee Feedback</h2>
+        <div className={styles.sliderWrapper}>
+          <Slider {...settings}>
+            {[...Array(5)].map((_, index) => (
+              <div key={index} className={styles.carouselSingleCardOuter}>
+                <div className={styles.singleWrapper}>
+                  <div className={styles.singleCardImageOuter}>
+                    <div className={styles.singleCardPersonImage}>
+                      <img
+                        src={SinglePerson}
+                        alt="single.person"
+                        className={styles.singlePersonImg}
+                      />
+                    </div>
+                    <div className={styles.singleCardStaticImg}>
+                      <img
+                        src={quotes}
+                        alt="static"
+                        className={styles.singleStaticImg}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.singleCardContentDiv}>
+                    <p className={styles.feedbackPara}>
+                      “I have seen Planafin grow from the day-one. The experiences I
+                      have gained along the way are irreplaceable. Everyone at
+                      Planafin has a strong drive to get things done, regardless of
+                      the time of the day or day of the week.”
+                    </p>
+                    <h6 className={styles.singleCardName}>Biju Abraham</h6>
+                    <p className={styles.personPosition}>
+                      Senior Business Process Consultant - FP&A
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className={styles.singleCardStaticImg}>
-                <img
-                  src={quotes}
-                  alt="static"
-                  className={styles.singleStaticImg}
-                />
-              </div>
-            </div>
-            <div className={styles.singleCardContentDiv}>
-              <p className={styles.feedbackPara}>
-                “I have seen Planafin grow from the day-one. The experiences I
-                have gained along the way are irreplaceable. Everyone at
-                Planafin has a strong drive to get things done, regardless of
-                the time of the day or day of the week.”
-              </p>
-              <h6 className={styles.singleCardName}>Biju Abraham</h6>
-              <p className={styles.personPosition}>
-                Senior Business Process Consultant - FP&A
-              </p>
-            </div>
-          </div>
+            ))}
+          </Slider>
         </div>
-      ))}
-    </Slider>
-  </div>
-</div>
+      </div>
 
       <div className={styles.applicationFormOuter}>
         <div className={styles.applicationFormMain}>
@@ -517,7 +525,7 @@ function Career() {
       <div className={styles.locationOuterDiv}>
         <div className={styles.locationInnerDiv}>
           <h2 className={styles.locationHeading}>
-          Join one of our locations
+            Join one of our locations
           </h2>
           <div className={styles.locationImgOuter}>
             <div className={styles.locationImgSingle}>
@@ -530,7 +538,7 @@ function Career() {
             </div>
             <div className={styles.locationImgSingle}>
               <div className={styles.imageSingleCard}>
-                <img src={uaeOffice} alt="uaeOffice" className={styles.singleImageLoc}  />
+                <img src={uaeOffice} alt="uaeOffice" className={styles.singleImageLoc} />
               </div>
               <h5 className={styles.officeLocation}>
                 UAE Office

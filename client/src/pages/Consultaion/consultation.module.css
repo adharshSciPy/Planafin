@@ -1,3 +1,4 @@
+
 .topElementOuterDiv {
   width: 100%;
   max-width: 1140px;
@@ -60,7 +61,7 @@
 }
 .consultationInnerDiv {
   width: 100%;
-  /* padding: 2rem ; */
+  padding: 2rem ;
   margin: 3rem auto;
 }
 .consultaionMainHead {
@@ -70,6 +71,7 @@
   line-height: 57px;
   color: #152246;
   text-align: center;
+  margin-bottom: 1.5rem;
 }
 .consultationParagraph {
   text-align: center;
@@ -78,6 +80,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
+  margin-bottom: 1rem;
 }
 .consultaionCardsOuter {
   max-width: 1140px;
@@ -162,7 +165,7 @@
   width: 100%;
   /* text-align: center; */
   margin: auto;
-  padding: 2rem 0 8rem;
+  padding: 2rem 2rem 8rem;
 }
 .InsightInnerHead {
   font-family: "Poppins", Sans-serif;
@@ -188,7 +191,7 @@
   max-width: 1140px;
   width: 100%;
   margin: auto;
-  /* padding: 0 2rem; */
+  padding: 0 1.5rem;
 }
 .ImgOvrContentDiv {
   display: flex;
@@ -219,13 +222,13 @@
 .bottomContentInner {
   max-width: 1140px;
   display: flex;
-
+padding: 2rem;
   width: 100%;
   margin: 100px auto;
 }
 .btmContentData {
   width: 60%;
-  padding: 4rem 0;
+  padding: 4rem 1rem;
 }
 .btmContentDataHead {
   font-family: "Poppins", Sans-serif;
@@ -256,24 +259,29 @@
 } */
 .btmToggleOuterDiv {
   width: 40%;
-  margin: auto;
+  margin: 3rem auto;
 }
 
 .singleToggleOuter {
   background-color: #fff !important;
   margin-bottom: 20px !important;
   padding: 10px 20px;
-  /* transition: all ease 1s; */
+  transition: all ease 0.5s;
+  overflow: hidden;
 }
 .singleToggleContentHeading {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
-  font-weight: 700;
+  /* font-weight: 700; */
   line-height: 1;
   margin: 0;
   outline: none;
   padding: 15px;
+  font-family: "Poppins", Sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
 }
 .singleToggleContent {
   font-family: "Poppins", Sans-serif;
@@ -284,16 +292,19 @@
 .ToggleContentOuterMainHide {
     max-height: 0;
     overflow: hidden;
-  transition: all ease 1s;
+  transition: all ease 0.5s;
+  transform: scaleY(0);
 
 }
 
+
 .ToggleContentOuterMainDispaly {
   /* display: block; */
-  max-height: 200px;
+  max-height: 1000px;
   opacity: 1;
-  transition: all ease 1s;
-  padding: 0 15px;
+  transition: all ease 0.5s;
+  padding: 15px ;
+  transform: scaleY(1);
 
 }
 .ToggleContentOuterPara {
@@ -301,5 +312,74 @@
   font-weight: 400;
   text-align: start;
   color: #7a7a7a;
+  line-height: 1.5;
   /* padding-left: 2px; */
+}
+.finalInnerContainer{
+  max-width: 1140px;
+  text-align: center;
+  margin: auto ;
+  padding:0 1rem 4rem;
+}
+.finalPara{
+
+  text-align: center;
+  color: #222D4E;
+  font-family: "Poppins", Sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 42px;
+}
+@media (max-width:920px) {
+  .topElementOuterDiv{
+    flex-direction: column;
+  }
+  .topElementInnerDivFirst,.topElementInnerDivSecond{
+    width: 100%;
+    margin: auto;
+  }
+  .topElementInnerDivFirst{
+    padding: 0 5rem ;
+  }
+  .topElementImageDiv{
+    width: 100%;
+  }
+  .topElementImage{
+    width: 100%;
+  }
+  .topElementInnerDivSecond{
+    gap: 10px;
+    margin: auto;
+    padding: 0 5rem;
+    /* text-align: center; */
+  }
+  .consultaionCardsOuter{
+    flex-direction: column;
+    padding: 2rem;
+  }
+  .consultationSingleCard{
+    width: 100%;
+  }
+  .csPlanningOuterContainer{
+    flex-direction: column;
+    gap: 20px;
+
+  }
+  .csPlanningInnerFirst,.csPlanningInnerSecond{
+    width: 90%;
+    margin: auto;
+  }
+  .imgOverlaySecondary{
+    flex-direction: column;
+
+  }
+  .ImgOvrContentDiv{
+    padding: 3rem;
+  }
+  .ImgOvrContentUl{
+    padding: 2rem;
+  }
+  .ImgDivInnerimg{
+    width: 100%;
+  }
 }

@@ -1,0 +1,171 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Sans-serif;
+
+}
+.mainContainer{
+    width:100%;
+    overflow:hidden;
+}
+.subContainer{
+    margin: 60px 0px;
+}
+.firstContentMain{
+    max-width: 1200px;
+    margin: auto;
+    padding: 0px 20px ;
+}
+.firstContentHeading h2{
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 54px;
+    color: #152246;
+    text-align: center;
+}
+.firstContentpara{
+margin-top: 10px;
+}
+.firstContentpara p{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    color: #404040;
+    text-align: center;
+}
+ .firstContentButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    position: relative;
+ }
+ .firstButton{
+    background-color: #F1CE3B;
+    font-family: "Poppins", Sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    fill: #000000;
+    color: #000000;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 10px;
+    position: relative;
+    transition: all ease 0.5s;
+ }
+ .firstButton:hover{
+    background-color:#f7db6b 
+ }
+ .secondContentMain{
+    background-color: #E8F2FC;
+    
+    
+ }
+ .firstButton::after{
+    content: "";
+    background: url(../../assets/navarrow.png) 0 0 no-repeat;
+    background-size: 100%;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    right: 14px;
+    top: 17px;
+ }
+ .secondContentMainSub{
+    max-width: 1200px;
+    padding: 50px 0px;
+    display: flex;
+    margin: auto;
+ }
+ .secondLeftContainer{
+    width: 50%;
+ }
+ .secondRightContainer{
+    width: 50%;
+    margin-top: 30px;
+    padding:0px 20px;
+ }
+ .secondRightHeading h1{
+    font-size: 36px;
+    font-weight: 550;
+    color: #152246;
+ }
+ .secondLeftmain{
+    width: 100%;
+ }
+ .secondLeftmain img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+ }
+.secondRightpara{
+    padding-top: 20px;
+ }
+ .secondRightpara p{
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 27px;
+    color: #404040;
+ }
+
+ .secondRightUl{
+    padding: 0;
+    list-style: none;
+ }
+ .secondRightUl li{
+    display: flex;
+ }
+ .iconSecond{
+    display: block;
+    height: 10px;
+    width: 10px;
+    background-image: url(../../assets/point-tick.png);
+    background-position: center;
+ }
+ .secondContentTick{
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+ }
+ .secondContentTick img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+ }
+ .secondRightUlLi{
+    margin-top: 20px;
+    display: flex;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    color: #404040;
+    padding-right: 10px;
+ }
+ .thirdContentMain{
+    background-color: white;
+ }
+
+ @media (max-width:850px) {
+    .secondContentMainSub{
+        flex-direction: column;
+    }
+    .secondLeftContainer{
+        width: 100%;
+    }
+    .secondRightContainer{
+        width: 100%;
+        padding-left: 30px;
+    }
+ }
+
+ @media (max-width:650px) {
+.firstContentHeading h2{
+font-size: 30px;
+}
+.firstContentpara p{
+    font-size: 18px;
+}
+
+ }

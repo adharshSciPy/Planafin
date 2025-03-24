@@ -1,5 +1,6 @@
 import React from "react";
 import "./solutions.css";
+import { useState } from "react";
 import sol1 from "../../assets/sol1.png";
 import sol2 from "../../assets/sol2.png";
 import sol3 from "../../assets/sol3.png";
@@ -16,14 +17,89 @@ import icon5 from "../../assets/icon5.png";
 import icon6 from "../../assets/icon6.png";
 import icon7 from "../../assets/icon 7.png";
 import icon8 from "../../assets/icon8.png";
-import icon9 from "../../assets/icons9.png"
+import icon9 from "../../assets/icons9.png";
+import pad1 from "../../assets/light.png";
 
 import Nav from "../../components/Header/Header.jsx";
-import Footer from "../../components/Footer/Footer.jsx"
+import Footer from "../../components/Footer/Footer.jsx";
+
+const cards = [
+  { id: 1, 
+    title: "Manufacturing S&OP Planning", 
+    items: [
+      "Optimize inventory cost",
+      "Inbound & outbound logistics",
+      "S&OP demand supply analysis", 
+    ]  },
+    
+    { id: 2, 
+      title: "Healthcare Planning", 
+      items: [
+        "Patient forecast",
+        "Per patient cost",
+        "Doctor incentive", 
+      ]  },
+      
+      { id: 3, 
+        title: "E-Commerce Revenue Forecasting", 
+        items: [
+          "Retail & marketplace revenue",
+          "Identify visitor conversion & buying patterns",
+          "Manage shipping & logistics", 
+        ]  },
+        
+        { id: 4, 
+          title: "Open To Buy", 
+          items: [
+            "Predict sales demand",
+            "Open to buy planning",
+            "Seasonality trend", 
+          ]  },
+          
+          { id: 5, 
+            title: "Real Estate Planning", 
+            items: [
+              "Project feasibility analysis",
+              "Project spend",
+              "Asset management", 
+            ]  },
+            
+            { id: 6, 
+              title: "Workforce Optimization", 
+              items: [
+                "Align hiring strategy",
+                "Identify talent gaps",
+                "Optimize workforce", 
+              ]  },
+              
+              { id: 7, 
+                title: "Aviation Financial", 
+                items: [
+                  "Passenger & cargo revenue",
+                  "Direct operating cost optimization",
+                  "Aircraft lease & funding", 
+                ]  },
+                
+];
+
 function Solutions() {
+  const [startIndex, setStartIndex] = useState(0);
+
+  const handleNext = () => {
+    if (startIndex + 3 < cards.length) {
+      setStartIndex(startIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    }
+  };
+
   return (
     <div>
-      <Nav/>
+      <Nav />
       <div className="solution-container1">
         <h1 className="solution-head1">
           Transform your business planning journey
@@ -197,9 +273,58 @@ function Solutions() {
           <div className="wrapper">
             <img src={sol8} alt="" className="sol-sec3-img" />
             <p className="sol-secp">
-              Our solutions are delivered through Anaplan, the leading connected
-              planning platform in the market​
+              With office locations worldwide, our centralized team supports our
+              customer across the globe 24/7
             </p>
+          </div>
+        </div>
+      </div>
+      <div className="sec5">
+        <div className="sec5-left">
+          <div className="left-content">
+            <h1 className="sec5-head1">Our Solution Accelerators</h1>
+            <p className="sec5-para">
+              With more than 100+ industry leading EPM business process
+              deployment experience, Planafin provides a number of solution
+              accelerators that can fast track customer deployments and adoption
+            </p>
+            <img src={pad1} alt="" className="sec5-padam" />
+          </div>
+        </div>
+        <div className="sec5-right">
+          <div className="slider-container">
+          <div className="cards-wrapper">
+  {cards.slice(startIndex, startIndex + 3).map((card) => (
+    <div key={card.id} className="card">
+      {card.title ? <h1 className="card-title">{card.title}</h1> : null}
+      {card.items ? (
+        <ul className="card-list">
+          {card.items.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>{card.text}</p>
+      )}
+    </div>
+  ))}
+</div>
+            <div className="buttons-wrapper">
+              <button
+                onClick={handlePrev}
+                disabled={startIndex === 0}
+                className="nav-button"
+              >
+                ◀
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={startIndex + 3 >= cards.length}
+                className="nav-button"
+              >
+                ▶
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -213,68 +338,65 @@ function Solutions() {
         </h3>
       </div>
       <div className="sec4-icons">
-        <div className="sec4-1">
-      <div className="wrapper2">
-            <img src={icon1} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Mining and Metals
-            </h1>
-      </div>
-      <div className="wrapper2">
-            <img src={icon2} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Manufactuaring
-            </h1>
-      </div>
-      <div className="wrapper2">
-            <img src={icon3} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Aviation
-            </h1>
-      </div>
-      </div>
-      <div className="sec4-2">
-      <div className="wrapper2">
+        {/* <div className="sec4-1"> */}
+        <div className="wrapper2">
+          <img src={icon1} alt="" className="sec4-img" />
+          <h1 className="sec4-h1">Mining & Metals</h1>
+          {/* </div> */}
+          <div className="wrapper2">
             <img src={icon4} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Healthcare
-            </h1>
-      </div>
-      <div className="wrapper2">
-            <img src={icon5} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Technology
-            </h1>
-      </div>
-      <div className="wrapper2">
-            <img src={icon6} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Oil and Gas
-            </h1>
-      </div>
-      </div>
-      <div className="sec4-3">
-      <div className="wrapper2">
+            <h1 className="sec4-h1">Healthcare</h1>
+          </div>
+          <div className="wrapper2">
             <img src={icon7} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-              Real Estate
-            </h1>
-      </div>
-      <div className="wrapper2">
+            <h1 className="sec4-h1">Real Estate</h1>
+          </div>
+        </div>
+        {/* <div className="sec4-2"> */}
+        <div className="wrapper2">
+          <img src={icon2} alt="" className="sec4-img" />
+          <h1 className="sec4-h1">Manufactuaring</h1>
+          {/* </div> */}
+          <div className="wrapper2">
+            <img src={icon5} alt="" className="sec4-img" />
+            <h1 className="sec4-h1">Technology</h1>
+          </div>
+          <div className="wrapper2">
+            <img src={icon6} alt="" className="sec4-img" />
+            <h1 className="sec4-h1">Oil and Gas</h1>
+          </div>
+        </div>
+        {/* <div className="sec4-3"> */}
+        <div className="wrapper2">
+          <img src={icon3} alt="" className="sec4-img" />
+          <h1 className="sec4-h1">Aviation</h1>
+
+          {/* </div> */}
+          <div className="wrapper2">
             <img src={icon8} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-            Retail
-            </h1>
-      </div>
-      <div className="wrapper2">
+            <h1 className="sec4-h1">Retail</h1>
+          </div>
+          <div className="wrapper2">
             <img src={icon9} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">
-            E-Commerce
-            </h1>
+            <h1 className="sec4-h1">E-Commerce</h1>
+          </div>
+        </div>
       </div>
+      <div className="getinbtndiv">
+        <button className="getinbutton">
+          Know More
+          <span
+            className="fas fa-arrow-right"
+            style={{
+              fontFamily: "Font Awesome 5 Free",
+              fontWeight: 900,
+              fill: "#FFFFFF",
+              color: "black",
+            }}
+          ></span>
+        </button>
       </div>
-      </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

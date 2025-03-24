@@ -9,10 +9,44 @@ import cardImage2 from "../../assets/cardImage2.png";
 import cardImage3 from "../../assets/cardImage3.png";
 import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
-import teamImg from "../../assets/team1.png"
+import teamImg from "../../assets/team1.png";
 
 function Aboutus() {
   const OPTIONS = { loop: true };
+  const journeyData = [
+    
+    
+    {
+      year: "2015",
+      title: "Founded & Established",
+      description: `Founded and launched operations in the United Arab Emirates and India
+      Established FP&A practice
+      Implemented for world's fourth largest tile manufacturing company`,
+    },
+    {
+      year: "2017",
+      title: "Leading EPM Partner of the Region",
+      description: `Industry expertise in retail, manufacturing, logistics
+      Implemented for Middle East's largest retail conglomerate
+      Implemented for seventh largest aluminum producer in the world`,
+    },
+    {
+      year: "2020",
+      title: "Global Expansion",
+      description: `Expanded operations to Europe and North America
+      Partnered with Fortune 500 companies
+      Recog,
+      nized as a top EPM solutions provider`,
+    },
+    
+    {
+      year: "2020",
+      title: "Global Expansion",
+      description: `Expanded operations to Europe and North America
+      Partnered with Fortune 500 companies
+      Recognized as a top EPM solutions provider`,
+    }
+  ];
 
   return (
     <div>
@@ -158,127 +192,75 @@ function Aboutus() {
           <div className={styles.journeyHeading}>
             <h2>Our Journey</h2>
           </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}></div>
-            <div className={styles.rightContainer}>
-              <div className={styles.rightMain}>
-                <div className={styles.heading} style={{textAlign:"left"}}>2015</div>
-                <div className={styles.heading}  style={{textAlign:"left"}}>Founded & Established</div>
-                <div className={styles.journeyp}>
-                  <p>
-                    Founded and launched operations in the United Arab Emirates
-                    and India
-                    <br />
-                    Established FP&A practice
-                    <br />
-                    Implemented for world's fourth largest tile manufacturing
-                    company{" "}
-                  </p>
-                </div>
-              </div>
+          <div>
+          {journeyData.map((item, index) => (
+            <div key={index} className={styles.journeyDescriptionMain}>
+              {index % 2 === 0 ? (
+                <>
+                  <div className={`${styles.leftContainer} ${
+                  index === journeyData.length - 1 ? styles.lastRightContainer : ""
+                }`}>
+                    <div className={styles.leftMain}>
+                      <div
+                        className={styles.heading}
+                        style={{ textAlign: "left" }}
+                      >
+                        {item.year}
+                      </div>
+                      <div
+                        className={styles.heading}
+                        style={{ textAlign: "left" }}
+                      >
+                        {item.title}
+                      </div>
+                      <div className={styles.journeyp} style={{textAlign:"right"}}>
+                      {item.description.split("\n").map((line, i) => (
+                            <span key={i}>
+                              {line}
+                              <br />
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`${styles.rightContainer} $`}>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className={styles.leftContainer}></div>
+                  <div className={`${styles.rightContainer} ${
+                  index === journeyData.length - 1 ? styles.lastRightContainer : ""
+                }`}>
+                    <div className={styles.rightMain}>
+                      <div
+                        className={styles.heading}
+                        style={{ textAlign: "left" }}
+                      >
+                        {item.year}
+                      </div>
+                      <div
+                        className={styles.heading}
+                        style={{ textAlign: "left" }}
+                      >
+                        {item.title}
+                      </div>
+                      <div className={styles.journeyp}>
+                        <p>
+                          {item.description.split("\n").map((line, i) => (
+                            <span key={i}>
+                              {line}
+                              <br />
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}>
-              <div className={styles.leftMain}>
-                <div className={styles.heading}>2017</div>
-                <div className={styles.heading}>
-                  Leading EPM Partner of the Region
-                </div>
-                <div
-                  className={styles.journeyp}
-                  style={{ textAlign: "right " }}
-                >
-                  <p>
-                    Industry expertise in retail, manufacturing, logistics
-                    <br />
-                    Implemented for Middle East's largest retail conglomerate
-                    <br />
-                    Implemented for seventh largest aluminum producer in the
-                    world
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.rightContainer}>
-              <div className={styles.rightMain}></div>
-            </div>
-          </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}></div>
-            <div className={styles.rightContainer}>
-              <div className={styles.rightMain}>
-                <div className={styles.heading}  style={{textAlign:"left"}}>2019</div>
-                <div className={styles.heading}  style={{textAlign:"left"}}>Global Achievement</div>
-                <div className={styles.journeyp}>
-                  <p>
-                    Opened our office in United States
-                    <br /> Established supply chain practice
-                    <br /> Implemented S&OP solution for worlds largest solar
-                    tracker company
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}>
-              <div className={styles.leftMain}>
-                <div className={styles.heading}>2021</div>
-                <div className={styles.heading}>Recognized Industry Expert</div>
-                <div
-                  className={styles.journeyp}
-                  style={{ textAlign: "right " }}
-                >
-                  <p>
-                    Expanded our operations in UK
-                    <br />
-                    Industry expertise in aviation, oil & gas, metal & mining
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.rightContainer}>
-              <div className={styles.rightMain}></div>
-            </div>
-          </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}></div>
-            <div className={styles.rightContainer}>
-              <div className={styles.rightMain}>
-                <div className={styles.heading}  style={{textAlign:"left"}}>2023</div>
-                <div className={styles.heading}  style={{textAlign:"left"}}>
-                  Expanded EPM Platform Partnerships
-                </div>
-                <div className={styles.journeyp}>
-                  <p>
-                    Partnership with Pigment and JustPerform
-                    <br />
-                    Released Planafin's Supply Chain Planning Suite of
-                    Accelerators
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.journeyDescriptionMain}>
-            <div className={styles.leftContainer}>
-              <div className={styles.leftMain}>
-                <div className={styles.heading}>2024</div>
-                <div className={styles.heading}>
-                  Customer base in India Expanded
-                </div>
-                <div
-                  className={styles.journeyp}
-                  style={{ textAlign: "right " }}
-                >
-                  <p>Industry Expertise in Telco Segment</p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.lastrightContainer}>
-              <div className={styles.rightMain}></div>
-            </div>
+          ))}
           </div>
         </div>
       </div>

@@ -13,10 +13,22 @@ import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 // import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
 function Consultation() {
-    const[isOpen,setIsOpen]=useState(true)
+    const toggleData = [
+        { id: 1, title: "Process", content: "The wider business process that the Anaplan model supports." },
+        { id: 2, title: "Data", content: "All the data components needed for the model: master, meta and transactional data." },
+        { id: 3, title: "Model", content: "The design, build and testing of the Anaplan model" },
+        { id: 4, title: "Deployment", content: "Ensuring that the Anaplan model and the new business process are adapted in the organisation." }
+      ];
+      const [openIndex, setOpenIndex] = useState([]);
+      const handleToggle = (index) => {
+        setOpenIndex((prevOpenIndex)=>
+        prevOpenIndex.includes(index)?prevOpenIndex.filter((i) => i !== index) : [...prevOpenIndex, index] 
+        );
+      };
   return (
     <div>
       <Header />
+      
       <div className={styles.topElementOuterDiv}>
         <div className={styles.topElementInnerDivFirst}>
           <div className={styles.topElementImageDiv}>
@@ -195,13 +207,29 @@ function Consultation() {
             </div>
             <div className={styles.btmToggleOuterDiv}>
                 <div className={styles.btmToggleInnerDiv}>
-                    <div className={styles.singleToggleOuter}>
+                {toggleData.map((item, index) => (
+        <div key={item.id} className={styles.singleToggleOuter}>
+          <div className={styles.singleToggleContentHeading} onClick={() => handleToggle(index)}>
+            <h5 className={styles.singleToggleContent}>{item.title}</h5>
+            <span className={styles.plusIconSpan}>
+              <FontAwesomeIcon 
+                icon={openIndex.includes(index) ? faMinus : faPlus} 
+                style={{ fontSize: "24px", fontWeight: "900", color: "#222D4E" }} 
+              />
+            </span>
+          </div>
+          <div className={openIndex.includes(index) ? styles.ToggleContentOuterMainDispaly : styles.ToggleContentOuterMainHide}>
+            <p className={styles.ToggleContentOuterPara}>{item.content}</p>
+          </div>
+        </div>
+      ))}
+                    {/* <div className={styles.singleToggleOuter}>
                         <div className={styles.singleToggleContentHeading}
                         onClick={()=>setIsOpen(!isOpen)}>
                             <h5 className={styles.singleToggleContent}>Process</h5>
                             <span className={styles.plusIconSpan}>
                             <FontAwesomeIcon icon={isOpen?faPlus:faMinus} style={{ fontSize: "24px", fontWeight: "900", color: "#222D4E" }} />
-                            {/* <FontAwesomeIcon icon={faMinus} style={{ fontSize: "24px", fontWeight: "900", color: "#222D4E" }} /> */}
+
                             </span>
                           
                         </div>
@@ -212,11 +240,55 @@ function Consultation() {
                             </p>
                                 </div>
                     </div>
+                    <div className={styles.singleToggleOuter}>
+                        <div className={styles.singleToggleContentHeading}
+                        onClick={()=>setIsOpen(!isOpen)}>
+                            <h5 className={styles.singleToggleContent}>Process</h5>
+                            <span className={styles.plusIconSpan}>
+                            <FontAwesomeIcon icon={isOpen?faPlus:faMinus} style={{ fontSize: "24px", fontWeight: "900", color: "#222D4E" }} />
+
+                            </span>
+                          
+                        </div>
+                        <div className={isOpen?styles.ToggleContentOuterMainHide:styles.ToggleContentOuterMainDispaly}>
+                            <p className={styles.ToggleContentOuterPara}>
+
+                        The wider business process that the Anaplan model supports.
+                            </p>
+                                </div>
+                    </div>
+                    <div className={styles.singleToggleOuter}>
+                        <div className={styles.singleToggleContentHeading}
+                        onClick={()=>setIsOpen(!isOpen)}>
+                            <h5 className={styles.singleToggleContent}>Process</h5>
+                            <span className={styles.plusIconSpan}>
+                            <FontAwesomeIcon icon={isOpen?faPlus:faMinus} style={{ fontSize: "24px", fontWeight: "900", color: "#222D4E" }} />
+
+                            </span>
+                          
+                        </div>
+                        <div className={isOpen?styles.ToggleContentOuterMainHide:styles.ToggleContentOuterMainDispaly}>
+                            <p className={styles.ToggleContentOuterPara}>
+
+                        The wider business process that the Anaplan model supports.
+                            </p>
+                                </div>
+                    </div> */}
                 </div>
             </div>
 
         </div>
       </div>
+      <div className={styles.finalContainer}>
+        <div className={styles.finalInnerContainer}>
+            <p className={styles.finalPara}>
+                <span style={{color: "#2d9bff"}}>The Anaplan journey</span> is exciting and using <span style={{color: "#f1ce3b"}}>
+                Anaplan Way
+                </span> defines <span style={{color: "#ffaa4c"}}>a effective and qualitative</span> approach focused on <span style={{color: "#16608e"}}> customer success</span> and <span style={{color: "#5ac2a5"}}>time to value with rapid delivery.</span>
+            </p>
+        </div>
+      </div>
+      <Footer/>
     </div>
   );
 }

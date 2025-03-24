@@ -1,13 +1,82 @@
 import React from "react";
+import { useState } from "react";
 import "./services.css";
-import Nav from "../../components/Header/Header.jsx"
+import Nav from "../../components/Header/Header.jsx";
 import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
 import padam2 from "../../assets/Anaplan.jpg";
-import Footer from "../../components/Footer/Footer.jsx"
+import Footer from "../../components/Footer/Footer.jsx";
+import padam3 from "../.././assets/dice.jpg";
+
 function Services() {
+  const [activeTab, setActiveTab] = useState("Business Consulting");
+
+  const tabContent = {
+    "Business Consulting": {
+      title: "Business Consulting Services",
+      description: [
+        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey.",
+      ],
+      points: [
+        "Roadmap definition services",
+        "Business use case and user story development",
+        "Platform evaluation services",
+        "Proof of concept & personalized demonstrations",
+        "Program management & change management strategy",
+      ],
+      image: { padam3 }, // Change with actual image path
+
+      description: [
+        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
+        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
+        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
+        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
+      ],
+    },
+    "Solution Deployment": {
+      title: "Solution Deployment Services",
+      description: [
+        "We provide the following solution deployment services, helping you implement EPM solutions",
+      ],
+      points: [
+        "Model architecture & design",
+        "Project execution including project management",
+        "Agile implementation methodology",
+        "Data integration",
+        "Quality assurance",
+      ],
+      image: { padam3 },
+    },
+    "Managed Support Services": {
+      title: "Managed Support Services",
+      description: [
+        "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
+      ],
+      points: [
+        "24/7 technical support",
+        "Regular system updates",
+        "Performance monitoring",
+        "Issue resolution",
+      ],
+      image: { padam3 },
+    },
+    "Training & Enablement": {
+      title: "Training & Enablement",
+      description: [
+        "Our training programs help teams gain expertise in modern technologies and business methodologies.",
+      ],
+      points: [
+        "Hands-on workshops",
+        "Online training modules",
+        "Expert-led sessions",
+        "Certification programs",
+      ],
+      image: { padam3 },
+    },
+  };
+
   return (
     <div>
-      <Nav/>
+      <Nav />
       <div className="service-container">
         <h2 className="service-container2">
           <span style={{ color: "#f1ce3b" }}>
@@ -23,7 +92,7 @@ function Services() {
         experience
       </div>
       <div className="service-image">
-        <img src={padam} alt="t" className="image-tag" />
+        <img src={padam} alt="" className="image-tag" />
       </div>
       <div className="increment-content">
         <div className="increment-section">
@@ -54,6 +123,46 @@ function Services() {
             </span>
             <span className="span-contents">%</span>
             <p>CSAT Score</p>
+          </div>
+        </div>
+      </div>
+      <div className="serv_sec2">
+        <h1 className="sec2-hd1">Our Services</h1>
+        <h3 className="sec2-hd2">
+          Planafin delivers a wide range of integrated services to maximize
+          benefits and returns on your investment.
+        </h3>
+      </div>
+      <div className="tab-container">
+        {/* Tabs */}
+        <div className="tab-boxes">
+          {Object.keys(tabContent).map((tab, index) => (
+            <div
+              key={index}
+              className={`tab-box ${activeTab === tab ? "active" : ""}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              <h2>{tab}</h2>
+            </div>
+          ))}
+        </div>
+
+        {/* Content Section */}
+        <div className="tab-content">
+          <div className="text-section">
+            <h1>{tabContent[activeTab].title}</h1>
+            {tabContent[activeTab].description.map((desc, index) => (
+              <p key={index}>{desc}</p>
+            ))}
+            <ul>
+              {tabContent[activeTab].points.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+            <a href="#">Know More &gt;&gt;</a>
+          </div>
+          <div className="image-section">
+            <img src={tabContent[activeTab].image} alt={activeTab} />
           </div>
         </div>
       </div>
@@ -118,35 +227,35 @@ function Services() {
         <img src={padam2} alt="anaplan" />
       </div>
 
-        <div className="overlaymaindiv">
-                <div className="elementoroverlaymainbox">
-                  <h2 className="overlaymainheading">
-                  Let's talk about your next project
-                  </h2>
-                  <div className="overlaymainparadiv">
-                    <p className="overlaymainpara">
-                      Get connected to experience the connected planning and business
-                      transformation journey
-                    </p>
-                  </div>
-                  <div className="overlaymainbtndiv">
-                    <button className="overlaybutton">
-                      Contact Us
-                      <span
-                        className="fas fa-arrow-right"
-                        style={{
-                          fontFamily: "Font Awesome 5 Free",
-                          fontWeight: 900,
-                          fill: "#FFFFFF",
-                          color: "black",
-                        }}
-                      ></span>
-                    </button>
-                  </div>
-                </div>
-                <div className="overlayimagemaindiv"></div>
-              </div>
-              <Footer/>
+      <div className="overlaymaindiv">
+        <div className="elementoroverlaymainbox">
+          <h2 className="overlaymainheading">
+            Let's talk about your next project
+          </h2>
+          <div className="overlaymainparadiv">
+            <p className="overlaymainpara">
+              Get connected to experience the connected planning and business
+              transformation journey
+            </p>
+          </div>
+          <div className="overlaymainbtndiv">
+            <button className="overlaybutton">
+              Contact Us
+              <span
+                className="fas fa-arrow-right"
+                style={{
+                  fontFamily: "Font Awesome 5 Free",
+                  fontWeight: 900,
+                  fill: "#FFFFFF",
+                  color: "black",
+                }}
+              ></span>
+            </button>
+          </div>
+        </div>
+        <div className="overlayimagemaindiv"></div>
+      </div>
+      <Footer />
     </div>
   );
 }
