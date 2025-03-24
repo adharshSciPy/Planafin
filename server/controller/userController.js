@@ -5,6 +5,7 @@ import { Feedback } from "../model/feedbackSchema.js";
 import { JobApplication } from "../model/jobApplication.js";
 import { OnDemand } from "../model/onDemandSchema.js"
 import { Journey } from "../model/journeySchema.js";
+import { WatchNow } from "../model/watchnowSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
@@ -292,8 +293,34 @@ const journeyDetails = async (req, res) => {
 }
 
 
+const addWatchnow = async (req, res) => {
+    try {
+        const { firstName, lastName, businessEmail, companyName, designation, selectCountry } = req.body;
+        const result = await WatchNow.create({
+            firstName,
+            lastName,
+            businessEmail,
+            companyName,
+            designation,
+            selectCountry
+        })
+        res.status(200).json({ message: "Watch Now Form Submitted", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
+
+const watchNowDetails = async (req, res) => {
+    try {
+        const result = await WatchNow.find();
+        res.status(200).json({ message: "Watch Now Details", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
+
 
 export {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-    addJourney, journeyDetails
+    addJourney, journeyDetails, addWatchnow, watchNowDetails
 }
