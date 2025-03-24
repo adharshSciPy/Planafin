@@ -382,4 +382,38 @@ padding: 2rem;
   .ImgDivInnerimg{
     width: 100%;
   }
+  .bottomContentInner{
+    flex-direction: column;
+  }
+  .btmContentData,.btmToggleOuterDiv{
+    width: 100%;
+    padding:0 4rem;
+  }
+  .csPlanningSecondUl,.csPlanningSecondPara,.consultationParagraph,.InsightInnerPara,.ToggleContentOuterPara{
+    font-size: 20px;
+  }
+}
+@media (max-width:530px) {
+  .topElementInnerDivFirst,.topElementInnerDivSecond{
+    padding: 0 1.5rem;
+    gap: 20px;
+  }
+  .topSecondTalkButton{
+    font-size: 14px;
+  }
+  .consultationInnerDiv{
+    padding: 1rem;
+  }
+  .consultaionCardsOuter{
+    padding: 1rem;
+  }
+  .ImgOvrContentDiv{
+    padding: 3rem 0rem;
+  }
+  .ImgOvrContentUl{
+    padding: 1.5rem 0;
+  }
+  .btmContentData,.btmToggleOuterDiv{
+    padding: 0;
+  }
 }
