@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import style from "./OurJourney.module.css"; // Fixed CSS import
+import styles from "./OurJourney.module.css"; // Fixed CSS import
 import { Button, Flex, Form, Input } from "antd";
 import { MinusCircleOutlined } from "@ant-design/icons";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function OurJourney() {
   const [form] = Form.useForm();
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    form.setFieldsValue({ description: sections.map((section) => section.name) });
+    form.setFieldsValue({
+      description: sections.map((section) => section.name),
+    });
   }, [sections, form]);
 
   const addSection = () => {
     if (inputValue.trim() !== "") {
       setSections((prev) => [...prev, { id: Date.now(), name: inputValue }]);
-      setInputValue(""); 
+      setInputValue("");
     }
   };
 
@@ -32,24 +37,30 @@ function OurJourney() {
       const payload = {
         year: values.year,
         title: values.title,
-        description: sections.map((section) => section.name), 
+        description: sections.map((section) => section.name),
       };
-
-      console.log("📤 Sending JSON Payload:", payload);
 
       const response = await axios.post(
         `${baseUrl}/api/v1/user/addjourney`,
-        payload, 
+        payload,
         {
-          headers: { "Content-Type": "application/json" }, 
+          headers: { "Content-Type": "application/json" },
         }
       );
 
-      console.log("Form submitted successfully:", response.data);
+      if (response.status === 200) {
+        toast.success("Form submitted successfully!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
       form.resetFields();
-      setSections([]); 
+      setSections([]);
     } catch (error) {
-      console.error(" Error submitting form:", error.response?.data?.message || error.message);
+      toast.error("Failed to submit form!", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -58,12 +69,19 @@ function OurJourney() {
     form.resetFields();
     setSections([]);
   };
-
+  const showOurJourney = () => {
+    navigate("/getOurJourney");
+  };
   return (
     <>
       <Header />
-      <div className={style.formMain}>
-        <div className={style.subMain}>
+      <div className={styles.formMain}>
+        <div className={styles.subMain}>
+          <div className={styles.buttonContainer}>
+            <button className={styles.buttonStyle} onClick={showOurJourney}>
+              View All
+            </button>
+          </div>
           <Form
             form={form}
             initialValues={{
@@ -151,6 +169,7 @@ function OurJourney() {
         </div>
       </div>
       <Footer />
+      <ToastContainer/>
     </>
   );
 }

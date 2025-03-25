@@ -17,6 +17,8 @@ import WebinarData from "./pages/Admin/WebinarData";
 import Consultation from "./pages/Consultaion/Consultation";
 import Ourjourneyadmin from "./pages/Admin/OurJourney"
 import GetAllJourney from "./pages/Admin/OurJourneyAll"
+import GetWebinarData from "./pages/Admin/WebinarFullDetails"
+
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Route path="/consultation" element={<Consultation/>} />
           <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin/>} />
           <Route path="/getOurJourney" element={<GetAllJourney/>} />
+          <Route path="/getWebinarData" element={<GetWebinarData/>} />
+
 
 
         </Routes>

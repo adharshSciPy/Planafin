@@ -232,7 +232,7 @@ const onDemand = async (req, res) => {
         let image = ""
 
         if (req.file) {
-            image = `/uploads/${req.file.filename}`;// Fix Windows backslashes
+            image = `uploads/${req.file.filename}`;// Fix Windows backslashes
         } else {
             console.log("⚠️ No file uploaded!");
         }
