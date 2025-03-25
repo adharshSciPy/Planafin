@@ -14,7 +14,10 @@ function Services() {
     "Business Consulting": {
       title: "Business Consulting Services",
       description: [
-        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey.",
+        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
+        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
+        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
+        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
       ],
       points: [
         "Roadmap definition services",
@@ -23,19 +26,16 @@ function Services() {
         "Proof of concept & personalized demonstrations",
         "Program management & change management strategy",
       ],
-      image: { padam3 }, // Change with actual image path
+      image: padam3, // Change with actual image path
 
-      description: [
-        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
-        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
-        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
-        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
-      ],
+      
     },
     "Solution Deployment": {
       title: "Solution Deployment Services",
       description: [
         "We provide the following solution deployment services, helping you implement EPM solutions",
+        "Planafin has adopted an agile project approach, focused towards successful implementation, including scoping, sprint reviews and implementation, quality assurance and go-live with managed services.",
+        "Our expert team comprising of business experts, solution architect, model builder, quality assurance analyst, project manager and change management professional work together throughout the project to not just deploy the solution but also to enable faster user adoption and prepare self sustainable internal CoE to maintain the solution in future"
       ],
       points: [
         "Model architecture & design",
@@ -44,25 +44,30 @@ function Services() {
         "Data integration",
         "Quality assurance",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
     "Managed Support Services": {
       title: "Managed Support Services",
       description: [
         "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
-      ],
+        "Planafin offers a range of managed services that empowers your solution, reduces risk with proactive monitoring from certified technology and functional experts that get you to benefit from all the capabilities of the platform and maximize ROI.",
+        "While traditional reactive SLA based approach may still exist, it is no more meeting the expectation of current technology demands.  Avoiding delayed responses keeps you ahead while accelerating performance, bringing faster end-user adoption, and facilitating expansion to higher value-add use cases.",
+        "Take advantage of our managed services, make a wise decision, and help your organization effectively maintain and enrich the planning solution in a cost-effective manner."],
       points: [
         "24/7 technical support",
         "Regular system updates",
         "Performance monitoring",
         "Issue resolution",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
     "Training & Enablement": {
       title: "Training & Enablement",
       description: [
         "Our training programs help teams gain expertise in modern technologies and business methodologies.",
+        "As an official training partner, our training team consists of best in class expertise. We improve user enablement from project initiation throughout the implementation for faster adoption through our customized range of training programs",
+        "Our wide range of training programs include workshops for every level of skillset from beginners to advanced to enhance model building knowledge.",
+        "Get trained by our experienced team of certified experts to enable faster adoption."
       ],
       points: [
         "Hands-on workshops",
@@ -70,7 +75,7 @@ function Services() {
         "Expert-led sessions",
         "Certification programs",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
   };
 
@@ -139,6 +144,7 @@ function Services() {
           {Object.keys(tabContent).map((tab, index) => (
             <div
               key={index}
+              id={`tab-${tab}`} 
               className={`tab-box ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
@@ -149,7 +155,7 @@ function Services() {
 
         {/* Content Section */}
         <div className="tab-content">
-          <div className="text-section">
+          <div className="text-section"  id={`content-${activeTab}`}>
             <h1>{tabContent[activeTab].title}</h1>
             {tabContent[activeTab].description.map((desc, index) => (
               <p key={index}>{desc}</p>
@@ -161,7 +167,7 @@ function Services() {
             </ul>
             <a href="#">Know More &gt;&gt;</a>
           </div>
-          <div className="image-section">
+          <div className="image-section"  id={`content-${activeTab}`}>
             <img src={tabContent[activeTab].image} alt={activeTab} />
           </div>
         </div>
