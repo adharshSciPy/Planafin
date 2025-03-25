@@ -16,10 +16,20 @@ import frame from "../../assets/Frame.png";
 import frame1 from "../../assets/Frame-1.png";
 import flickeringImg from "../../assets/flickeringImg.png";
 import Carousel from "../../components/Carousel/EmblaCarousel";
+import { useNavigate } from "react-router-dom";
 
 
 
 function Home() {
+  const navigate=useNavigate();
+  const readMoreNavigation=()=>{
+    navigate('/Services')
+  }
+  // ?contact us 
+  const ContactUs=()=>{
+    navigate('/lets-talk')
+    window.scrollTo(0, 0);
+  }
   const OPTIONS = { loop: true };
   return (
     <div>
@@ -106,7 +116,7 @@ function Home() {
             <div className={styles.serviceCardReadMoreDiv}>
             <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore}>
+              <h6 className={styles.readMore} onClick={()=>readMoreNavigation()}>
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
@@ -198,7 +208,7 @@ function Home() {
             </p>
           </div>
           <div className={styles.overlayMainBtnDiv}>
-            <button className={styles.overlayButton}>
+            <button className={styles.overlayButton} onClick={()=>ContactUs()}>
               Contact us
               <span
                 className="fas fa-arrow-right"
