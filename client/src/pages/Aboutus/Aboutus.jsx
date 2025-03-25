@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import Header from "../../components/Header/Header";
 import bgPic from "../../assets/Frame-2-1.png";
@@ -10,50 +10,70 @@ import cardImage3 from "../../assets/cardImage3.png";
 import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
 import teamImg from "../../assets/team1.png";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 function Aboutus() {
+  const[journeyData,setJourneyData]=useState([])
   const OPTIONS = { loop: true };
-  const journeyData = [
-    
-    
-    {
-      year: "2015",
-      title: "Founded & Established",
-      description: `Founded and launched operations in the United Arab Emirates and India
-      Established FP&A practice
-      Implemented for world's fourth largest tile manufacturing company`,
-    },
-    {
-      year: "2015",
-      title: "Founded & Established",
-      description: `Founded and launched operations in the United Arab Emirates and India
-      Established FP&A practice
-      Implemented for world's fourth largest tile manufacturing company`,
-    },
-    {
-      year: "2017",
-      title: "Leading EPM Partner of the Region",
-      description: `Industry expertise in retail, manufacturing, logistics
-      Implemented for Middle East's largest retail conglomerate
-      Implemented for seventh largest aluminum producer in the world`,
-    },
-    {
-      year: "2020",
-      title: "Global Expansion",
-      description: `Expanded operations to Europe and North America
-      Partnered with Fortune 500 companies
-      Recog,
-      nized as a top EPM solutions provider`,
-    },
-    
-    {
-      year: "2020",
-      title: "Global Expansion",
-      description: `Expanded operations to Europe and North America
-      Partnered with Fortune 500 companies
-      Recognized as a top EPM solutions provider`,
+  useEffect(()=>{
+    journeyDatasAll()
+  },[])
+  const journeyDatasAll=async()=>{
+    try {
+      const response= await axios.get(`${baseUrl}/api/v1/user/journeyDetails`)
+      if(response){
+        setJourneyData(response.data.data || [])
+        console.log(journeyData,"ithaanu");
+        
+      }
+      
+    } catch (error) {
+      console.log(error);
+      
     }
-  ];
+  }
+  // const journeyData = [
+    
+    
+  //   {
+  //     year: "2015",
+  //     title: "Founded & Established",
+  //     description: `Founded and launched operations in the United Arab Emirates and India
+  //     Established FP&A practice
+  //     Implemented for world's fourth largest tile manufacturing company`,
+  //   },
+  //   {
+  //     year: "2015",
+  //     title: "Founded & Established",
+  //     description: `Founded and launched operations in the United Arab Emirates and India
+  //     Established FP&A practice
+  //     Implemented for world's fourth largest tile manufacturing company`,
+  //   },
+  //   {
+  //     year: "2017",
+  //     title: "Leading EPM Partner of the Region",
+  //     description: `Industry expertise in retail, manufacturing, logistics
+  //     Implemented for Middle East's largest retail conglomerate
+  //     Implemented for seventh largest aluminum producer in the world`,
+  //   },
+  //   {
+  //     year: "2020",
+  //     title: "Global Expansion",
+  //     description: `Expanded operations to Europe and North America
+  //     Partnered with Fortune 500 companies
+  //     Recog,
+  //     nized as a top EPM solutions provider`,
+  //   },
+    
+  //   {
+  //     year: "2020",
+  //     title: "Global Expansion",
+  //     description: `Expanded operations to Europe and North America
+  //     Partnered with Fortune 500 companies
+  //     Recognized as a top EPM solutions provider`,
+  //   }
+  // ];
 
   return (
     <div>
@@ -220,8 +240,8 @@ function Aboutus() {
                       >
                         {item.title}
                       </div>
-                      <div className={styles.journeyp} style={{textAlign:"right"}}>
-                      {item.description.split("\n").map((line, i) => (
+                      <div className={styles.journeyp} style={{textAlign:"right",fontSize:"14px",lineHeight:"21px",fontWeight:"400"}}>
+                      {item.description.map((line, i) => (
                             <span key={i}>
                               {line}
                               <br />
@@ -252,9 +272,9 @@ function Aboutus() {
                       >
                         {item.title}
                       </div>
-                      <div className={styles.journeyp}>
+                      <div className={styles.journeyp} style={{fontSize:"14px",lineHeight:"21px",fontWeight:"400"}}>
                         <p>
-                          {item.description.split("\n").map((line, i) => (
+                          {item.description.map((line, i) => (
                             <span key={i}>
                               {line}
                               <br />
