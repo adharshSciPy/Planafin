@@ -65,15 +65,16 @@
     padding: 20px;
     width: 100%;
     text-align: center;
+    margin-top: 250px;
 }
 
 .consulting-container h2 {
   font-size: 32px;
   font-weight: bold;
   color: #1a1a1a;
-  
   text-align: left;
   margin-left: 100px;
+  margin-top: 100px;
 }
 
 .consulting-content {
@@ -277,9 +278,9 @@ font-size: 18px;
   background: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
+  height: 800px;
 }
 .text-section {
-  flex: 5;
   padding-right: 20px;
 }
 .text-section h1{
@@ -291,6 +292,7 @@ font-size: 18px;
   font-size: 20px;
   width: 50%;
 }
+
 .text-section p{
   margin-top: 20px;
   font-size: 18px;
@@ -304,15 +306,14 @@ font-size: 18px;
 .image-section {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   width: 550px;
-  height: 250px;
+  margin-top: 50px;
 }
 .image-section img {
   width: 100%;
-  max-width: 400px;
-  height: 400px;
-  border-radius: 10px;
+  max-width: 300px;
+  height: 200px;
 }
 .image-section h1 {
   font-size: 25px;
@@ -398,7 +399,9 @@ a {
   .service-content1 {
     text-align: center;
   }
-
+  .tab-content{
+    height: auto;
+  }
   .consulting-column {
     width: 90%;
   }
@@ -411,9 +414,9 @@ a {
     width: 100%;
   }
 
-  .image-section {
-    width: 100%;
-  }
+  /* .image-section {
+    display: none;
+  } */
 
   .overlaymainheading {
     font-size: 30px;

@@ -26,7 +26,7 @@ function Services() {
         "Proof of concept & personalized demonstrations",
         "Program management & change management strategy",
       ],
-      image: { padam3 }, // Change with actual image path
+      image: padam3, // Change with actual image path
 
       
     },
@@ -34,6 +34,8 @@ function Services() {
       title: "Solution Deployment Services",
       description: [
         "We provide the following solution deployment services, helping you implement EPM solutions",
+        "Planafin has adopted an agile project approach, focused towards successful implementation, including scoping, sprint reviews and implementation, quality assurance and go-live with managed services.",
+        "Our expert team comprising of business experts, solution architect, model builder, quality assurance analyst, project manager and change management professional work together throughout the project to not just deploy the solution but also to enable faster user adoption and prepare self sustainable internal CoE to maintain the solution in future"
       ],
       points: [
         "Model architecture & design",
@@ -42,25 +44,30 @@ function Services() {
         "Data integration",
         "Quality assurance",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
     "Managed Support Services": {
       title: "Managed Support Services",
       description: [
         "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
-      ],
+        "Planafin offers a range of managed services that empowers your solution, reduces risk with proactive monitoring from certified technology and functional experts that get you to benefit from all the capabilities of the platform and maximize ROI.",
+        "While traditional reactive SLA based approach may still exist, it is no more meeting the expectation of current technology demands.  Avoiding delayed responses keeps you ahead while accelerating performance, bringing faster end-user adoption, and facilitating expansion to higher value-add use cases.",
+        "Take advantage of our managed services, make a wise decision, and help your organization effectively maintain and enrich the planning solution in a cost-effective manner."],
       points: [
         "24/7 technical support",
         "Regular system updates",
         "Performance monitoring",
         "Issue resolution",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
     "Training & Enablement": {
       title: "Training & Enablement",
       description: [
         "Our training programs help teams gain expertise in modern technologies and business methodologies.",
+        "As an official training partner, our training team consists of best in class expertise. We improve user enablement from project initiation throughout the implementation for faster adoption through our customized range of training programs",
+        "Our wide range of training programs include workshops for every level of skillset from beginners to advanced to enhance model building knowledge.",
+        "Get trained by our experienced team of certified experts to enable faster adoption."
       ],
       points: [
         "Hands-on workshops",
@@ -68,7 +75,7 @@ function Services() {
         "Expert-led sessions",
         "Certification programs",
       ],
-      image: { padam3 },
+      image:  padam3 ,
     },
   };
 
