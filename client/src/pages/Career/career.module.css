@@ -641,12 +641,7 @@
     flex-direction: column;
     gap: 20px;
   }
-  .carouselSingleCardOuter{
-    /* justify-content: center; */
-    /* margin: auto; */
-    /* margin:0; */
 
-  }
   .carouselHeading{
     text-align: center;
   }

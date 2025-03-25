@@ -13,6 +13,8 @@ import Career from "./pages/Career/Career";
 import Solutions from "./pages/Solutions/Solutions";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import SupplyChain from "./pages/SolutionComponent/SupplyChain";
+import WebinarData from "./pages/Admin/WebinarData";
+import Consultation from "./pages/Consultaion/Consultation";
 
 function App() {
   return (
@@ -23,7 +25,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/aboutus" element={<Aboutus />} />
-          <Route path="/webinar" element={<Webinar />} />
+          <Route path="/webinar/:id" element={<Webinar />} />
           <Route path="/webinar-2" element={<Demandforecasting />} />
           <Route path="/webinar-3" element={<Budgeting />} />
           <Route path="/webinar-4" element={<Targetsetting />} />
@@ -31,7 +33,10 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
+          <Route path="/webinarData" element={<WebinarData />} />
 
+
+          <Route path="/consultation" element={<Consultation/>} />
         </Routes>
       </BrowserRouter>
     </div>

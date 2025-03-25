@@ -1,11 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./webinar.module.css";
-import picture from "../../assets/webinarsub.jpg";
 import Header from "../../components/Header/Header";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 import linkedin from "../../assets/MicrosoftTeams-image-7-150x150.jpg";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
+import baseUrl from "../../baseUrl";
+
 function Webinarsub() {
+  const [item, arrayItem] = useState({});
+  const { id } = useParams();
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/demandCardDetails/${id}`
+      );
+      arrayItem(response.data.data || {});
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const [formdata, setFormdata] = useState({
+    firstName: "",
+    lastName: "",
+    businessEmail: "",
+    companyName: "",
+    designation: "",
+    selectCountry: "",
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormdata((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // const handleCheck = (e) => {
+  //   setFormdata((prev) => ({ ...prev, checkBox: e.target.checked }));
+  // };
+
+  const handleSubmitform = async (e) => {
+    e.preventDefault(); 
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/v1/user/addWatchnow`,
+        formdata
+      );
+      console.log("Form submitted successfully:", response.data);
+    } catch (error) {
+      console.error(
+        "Submission Error:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+  
+
   return (
     <>
       <Header />
@@ -19,22 +74,20 @@ function Webinarsub() {
                 </div>
                 <div className={styles.heading}>
                   <h2 className={styles.firstContentH}>
-                    S&OP Series: Episode 4 – Marketing Campaigns & Promotions
-                    Planning
+                    {item.title || "Loading"}
                   </h2>
                 </div>
                 <div>
                   <button className={styles.buttonContainer}>
                     Watch Now
                     <i className={styles.buttonArrow}></i>
-
                   </button>
                 </div>
               </div>
             </div>
             <div className={styles.firstRight}>
               <div className={styles.rightMain}>
-                <img src={picture} alt="" />
+                <img src={`${baseUrl}/${item.image}`|| "Loading"} alt="Webinar" />
               </div>
             </div>
           </div>
@@ -48,86 +101,41 @@ function Webinarsub() {
                 <p>
                   <strong>Session summary:</strong>
                 </p>
-                <p>
-                  This the fourth episode from our S&OP Series which
-                  demonstrates ‘Marketing Campaigns & Promotions Planning’
-                  application built on Pigment. It showcases Marketing
-                  Expenditure, Campaigns Planning, Promotions Planning,
-                  Break-Even Analysis, Cost-Benefit Analysis, and Marketing ROI.
-                  With every episode, we’ll continue to showcase important
-                  components of an end-to-end ‘Sales and Operations Planning’
-                  application built on Pigment. This video provides a detailed
-                  demonstration of step-by-step tasks for Campaigns and
-                  Promotions Planning and collaboration with cross-functional
-                  teams. The application is curated by Planafin’s experienced
-                  techno-functional consultants and domain experts.
-                </p>
+                <p>{item.summary || "Loading"}</p>
                 <p>
                   <strong>About Pigment:</strong>
                 </p>
-                <p>
-                  Pigment is a flexible cloud EPM platform. It is highly
-                  collaborative and adaptive with a ‘low code-no code’
-                  interface. Businesses can own their planning processes without
-                  any coding or programming skills and zero dependency on IT.
-                  Let your CXOs set organizational targets for long term with
-                  this intuitive and next generation platform
-                </p>
+                <p>{item.pigment || "Loading"}</p>
                 <p>
                   <strong>About the speaker</strong>
                 </p>
-                <p>
-                  Kunal Jethwa is the Associate Director (SaaS EPM, Supply Chain
-                  Planning & Forecasting) of Planafin FZE. He is an experienced
-                  Demand & Supply Planning Professional with a demonstrated
-                  history of working with industries like Chemical, Medical
-                  Devices, Robotics & Health Nutrition, Nutraceuticals, SaaS
-                  Technology, and Business & IT Consulting Services.
-                </p>
+                <p>{item.speaker || "Loading"}</p>
                 <p>
                   <strong>Who should attend this session</strong>
                 </p>
 
                 <ul>
-                  <li className={styles.containerTwoLi}>
-                    Marketing Managers / Marketing Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Demand Planners / Finance Controllers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Planning & Forecasting Managers / Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Business Planners / Business Analysts
-                  </li>
-                  <li className={styles.containerTwoLi}>Sales Managers</li>
-                  <li className={styles.containerTwoLi}>
-                    Product Managers / Brand Managers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Category Planners / Category Managers
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Product Line Management
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Sales Channel Management
-                  </li>
-                  <li className={styles.containerTwoLi}>
-                    Financial Planning & Analysis Managers / Financial Analysts
-                    Get in touch to collaborate with us for your planning,
-                    budgeting, and forecasting, use-cases
-                  </li>
+                  {(item.attendSession || []).map((content, index) => (
+                    <li key={index} className={styles.containerTwoLi}>
+                      {content}
+                    </li>
+                  ))}
                 </ul>
-                <p>Get in touch to collaborate with us for your planning, budgeting, and forecasting, use-cases.</p>
                 <p>
-                  Email:<Link to="/">connect@planafin.com</Link>
+                  Get in touch to collaborate with us for your planning,
+                  budgeting, and forecasting, use-cases.
+                </p>
+                <p>
+                  Email: <Link to="/">connect@planafin.com</Link>
                 </p>
                 <p>
                   LinkedIn:
                   <Link to="/">
-                    <img src={linkedin} className={styles.linkedIn} alt="" />
+                    <img
+                      src={linkedin}
+                      className={styles.linkedIn}
+                      alt="LinkedIn"
+                    />
                   </Link>
                 </p>
               </div>
@@ -135,74 +143,99 @@ function Webinarsub() {
             <div className={styles.mainFirstTwoSubRight}>
               <div className={styles.twoMainRight}>
                 <h3>Watch now</h3>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="First Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Last Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Work / business email*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Company Name*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Designation*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <input
-                    type="text"
-                    className={styles.formStyle}
-                    placeholder="Select Country*"
-                  />
-                </div>
-                <div className={styles.formDiv}>
-                  <ul className={styles.checkboxUl}>
-                    <li className={styles.checkboxUlLi}>
-                      <input type="checkbox" className={styles.inputStyle} />
-                      <label className={styles.formLabel}>
-                        {" "}
-                        By filling out this form, I consent to the collection
-                        and use of my personal data by Planafin for direct
-                        marketing and/or communication purposes.
-                        <span style={{ color: "red" }}>*</span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div className={styles.buttonTwo}>
-                    <button>
-                        Submit
-                        <i className={styles.buttonArrow}></i>
-                        </button>
-                </div>
+                <form onSubmit={handleSubmitform}>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="firstName"
+                      required
+                      value={formdata.fullname}
+                      className={styles.formStyle}
+                      placeholder="Full Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="lastName"
+                      required
+
+                      value={formdata.lastname}
+                      className={styles.formStyle}
+                      placeholder="Last Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="email"
+                      name="businessEmail"
+                      required
+
+                      value={formdata.workemail}
+                      className={styles.formStyle}
+                      placeholder="Work / business email*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="companyName"
+                      required
+
+                      value={formdata.companyname}
+                      className={styles.formStyle}
+                      placeholder="Company Name*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      name="designation"
+                      required
+
+                      value={formdata.designation}
+                      className={styles.formStyle}
+                      placeholder="Designation*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      type="text"
+                      required
+                      name="selectCountry"
+                      value={formdata.countryname}
+                      className={styles.formStyle}
+                      placeholder="Select Country*"
+                      onChange={handleInput}
+                    />
+                  </div>
+                  <div className={styles.formDiv}>
+                    <input
+                      required
+                      type="checkbox"
+                      className={styles.inputStyle}
+                    />
+                    <label>
+                      By filling out this form, I consent to the collection and
+                      use of my personal data by Planafin for direct marketing
+                      and/or communication purposes.
+                    </label>
+                  </div>
+                  <div className={styles.buttonTwo}>
+                    <button type="submit" >Submit</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

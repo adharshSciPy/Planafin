@@ -408,7 +408,9 @@ padding: 50px 50px 100px 50px;
   color: #404040; 
   text-align: right;
 }
-
+.lastRightContainer::after{
+display: none;
+}
 
 @media (max-width: 1100px) {
   .card {
