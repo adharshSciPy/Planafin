@@ -24,62 +24,71 @@ import Nav from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
 const cards = [
-  { id: 1, 
-    title: "Manufacturing S&OP Planning", 
+  {
+    id: 1,
+    title: "Manufacturing S&OP Planning",
     items: [
       "Optimize inventory cost",
       "Inbound & outbound logistics",
-      "S&OP demand supply analysis", 
-    ]  },
-    
-    { id: 2, 
-      title: "Healthcare Planning", 
-      items: [
-        "Patient forecast",
-        "Per patient cost",
-        "Doctor incentive", 
-      ]  },
-      
-      { id: 3, 
-        title: "E-Commerce Revenue Forecasting", 
-        items: [
-          "Retail & marketplace revenue",
-          "Identify visitor conversion & buying patterns",
-          "Manage shipping & logistics", 
-        ]  },
-        
-        { id: 4, 
-          title: "Open To Buy", 
-          items: [
-            "Predict sales demand",
-            "Open to buy planning",
-            "Seasonality trend", 
-          ]  },
-          
-          { id: 5, 
-            title: "Real Estate Planning", 
-            items: [
-              "Project feasibility analysis",
-              "Project spend",
-              "Asset management", 
-            ]  },
-            
-            { id: 6, 
-              title: "Workforce Optimization", 
-              items: [
-                "Align hiring strategy",
-                "Identify talent gaps",
-                "Optimize workforce", 
-              ]  },
-              
-              { id: 7, 
-                title: "Aviation Financial", 
-                items: [
-                  "Passenger & cargo revenue",
-                  "Direct operating cost optimization",
-                  "Aircraft lease & funding", 
-                ]  },
-                
+      "S&OP demand supply analysis",
+    ],
+  },
+
+  {
+    id: 2,
+    title: "Healthcare Planning",
+    items: ["Patient forecast", "Per patient cost", "Doctor incentive"],
+  },
+
+  {
+    id: 3,
+    title: "E-Commerce Revenue Forecasting",
+    items: [
+      "Retail & marketplace revenue",
+      "Identify visitor conversion & buying patterns",
+      "Manage shipping & logistics",
+    ],
+  },
+
+  {
+    id: 4,
+    title: "Open To Buy",
+    items: [
+      "Predict sales demand",
+      "Open to buy planning",
+      "Seasonality trend",
+    ],
+  },
+
+  {
+    id: 5,
+    title: "Real Estate Planning",
+    items: [
+      "Project feasibility analysis",
+      "Project spend",
+      "Asset management",
+    ],
+  },
+
+  {
+    id: 6,
+    title: "Workforce Optimization",
+    items: [
+      "Align hiring strategy",
+      "Identify talent gaps",
+      "Optimize workforce",
+    ],
+  },
+
+  {
+    id: 7,
+    title: "Aviation Financial",
+    items: [
+      "Passenger & cargo revenue",
+      "Direct operating cost optimization",
+      "Aircraft lease & funding",
+    ],
+  },
 ];
 
 function Solutions() {
@@ -293,22 +302,24 @@ function Solutions() {
         </div>
         <div className="sec5-right">
           <div className="slider-container">
-          <div className="cards-wrapper">
-  {cards.slice(startIndex, startIndex + 3).map((card) => (
-    <div key={card.id} className="card">
-      {card.title ? <h1 className="card-title">{card.title}</h1> : null}
-      {card.items ? (
-        <ul className="card-list">
-          {card.items.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>{card.text}</p>
-      )}
-    </div>
-  ))}
-</div>
+            <div className="cards-wrapper">
+              {cards.slice(startIndex, startIndex + 3).map((card) => (
+                <div key={card.id} className="card">
+                  {card.title ? (
+                    <h2 className="card-title">{card.title}</h2>
+                  ) : null}
+                  {card.items ? (
+                    <ul className="card-list">
+                      {card.items.map((item, index) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>{card.text}</p>
+                  )}
+                </div>
+              ))}
+            </div>
             <div className="buttons-wrapper">
               <button
                 onClick={handlePrev}

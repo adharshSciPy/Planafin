@@ -14,7 +14,10 @@ function Services() {
     "Business Consulting": {
       title: "Business Consulting Services",
       description: [
-        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey.",
+        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
+        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
+        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
+        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
       ],
       points: [
         "Roadmap definition services",
@@ -25,12 +28,7 @@ function Services() {
       ],
       image: { padam3 }, // Change with actual image path
 
-      description: [
-        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
-        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
-        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
-        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
-      ],
+      
     },
     "Solution Deployment": {
       title: "Solution Deployment Services",
@@ -139,6 +137,7 @@ function Services() {
           {Object.keys(tabContent).map((tab, index) => (
             <div
               key={index}
+              id={`tab-${tab}`} 
               className={`tab-box ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
@@ -149,7 +148,7 @@ function Services() {
 
         {/* Content Section */}
         <div className="tab-content">
-          <div className="text-section">
+          <div className="text-section"  id={`content-${activeTab}`}>
             <h1>{tabContent[activeTab].title}</h1>
             {tabContent[activeTab].description.map((desc, index) => (
               <p key={index}>{desc}</p>
@@ -161,7 +160,7 @@ function Services() {
             </ul>
             <a href="#">Know More &gt;&gt;</a>
           </div>
-          <div className="image-section">
+          <div className="image-section"  id={`content-${activeTab}`}>
             <img src={tabContent[activeTab].image} alt={activeTab} />
           </div>
         </div>
