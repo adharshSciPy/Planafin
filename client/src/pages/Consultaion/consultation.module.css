@@ -54,6 +54,11 @@
   border-style: none;
   padding: 10px 30px;
 }
+.topSecondTalkButton:hover{
+    transition: opacity 1s ease ;
+    opacity: 0.6; 
+  
+}
 .consultationOuterDiv {
   max-width: 1140px;
   width: 100%;
