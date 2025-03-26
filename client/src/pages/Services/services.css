@@ -118,7 +118,7 @@ strong{
   background-color: #4caf50;
   color: #fff;
   border: none;
-  padding: 12px 20px;
+  padding: 15px 25px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
@@ -278,13 +278,16 @@ font-size: 18px;
 .tab-content {
   /* display: flex; */
   margin-top: 20px;
-  background: #f4f4f4;
+  background: #fffcee;
   padding: 20px;
   border-radius: 10px;
   height: auto;
 }
 .text-section {
   padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 .text-section h1{
   margin-top: 20px;
@@ -331,8 +334,10 @@ li {
   margin-bottom: 5px;
 }
 a {
+  font-size: 19px;
   font-weight: bold;
-  color: #0056b3;
+  color: #001e6c;
+  text-decoration: none;
 }
 /* For tablets (max-width: 1024px) */
 /* Responsive Styles */
