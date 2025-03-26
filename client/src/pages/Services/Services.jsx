@@ -6,6 +6,7 @@ import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
 import padam2 from "../../assets/Anaplan.jpg";
 import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
+import s2 from "../.././assets/s2.png";
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
@@ -27,15 +28,13 @@ function Services() {
         "Program management & change management strategy",
       ],
       image: padam3, // Change with actual image path
-
-      
     },
     "Solution Deployment": {
       title: "Solution Deployment Services",
       description: [
         "We provide the following solution deployment services, helping you implement EPM solutions",
         "Planafin has adopted an agile project approach, focused towards successful implementation, including scoping, sprint reviews and implementation, quality assurance and go-live with managed services.",
-        "Our expert team comprising of business experts, solution architect, model builder, quality assurance analyst, project manager and change management professional work together throughout the project to not just deploy the solution but also to enable faster user adoption and prepare self sustainable internal CoE to maintain the solution in future"
+        "Our expert team comprising of business experts, solution architect, model builder, quality assurance analyst, project manager and change management professional work together throughout the project to not just deploy the solution but also to enable faster user adoption and prepare self sustainable internal CoE to maintain the solution in future",
       ],
       points: [
         "Model architecture & design",
@@ -44,7 +43,7 @@ function Services() {
         "Data integration",
         "Quality assurance",
       ],
-      image:  padam3 ,
+      image: s2,
     },
     "Managed Support Services": {
       title: "Managed Support Services",
@@ -52,14 +51,15 @@ function Services() {
         "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
         "Planafin offers a range of managed services that empowers your solution, reduces risk with proactive monitoring from certified technology and functional experts that get you to benefit from all the capabilities of the platform and maximize ROI.",
         "While traditional reactive SLA based approach may still exist, it is no more meeting the expectation of current technology demands.  Avoiding delayed responses keeps you ahead while accelerating performance, bringing faster end-user adoption, and facilitating expansion to higher value-add use cases.",
-        "Take advantage of our managed services, make a wise decision, and help your organization effectively maintain and enrich the planning solution in a cost-effective manner."],
+        "Take advantage of our managed services, make a wise decision, and help your organization effectively maintain and enrich the planning solution in a cost-effective manner.",
+      ],
       points: [
         "24/7 technical support",
         "Regular system updates",
         "Performance monitoring",
         "Issue resolution",
       ],
-      image:  padam3 ,
+      image: s2,
     },
     "Training & Enablement": {
       title: "Training & Enablement",
@@ -67,7 +67,7 @@ function Services() {
         "Our training programs help teams gain expertise in modern technologies and business methodologies.",
         "As an official training partner, our training team consists of best in class expertise. We improve user enablement from project initiation throughout the implementation for faster adoption through our customized range of training programs",
         "Our wide range of training programs include workshops for every level of skillset from beginners to advanced to enhance model building knowledge.",
-        "Get trained by our experienced team of certified experts to enable faster adoption."
+        "Get trained by our experienced team of certified experts to enable faster adoption.",
       ],
       points: [
         "Hands-on workshops",
@@ -75,7 +75,7 @@ function Services() {
         "Expert-led sessions",
         "Certification programs",
       ],
-      image:  padam3 ,
+      image: s2,
     },
   };
 
@@ -84,9 +84,8 @@ function Services() {
       <Nav />
       <div className="service-container">
         <h2 className="service-container2">
-          <span style={{ color: "#f1ce3b" }}>
-            Leading your enterprise planning{" "}
-          </span>
+          Leading your{" "}
+          <span style={{ color: "#f1ce3b" }}>enterprise planning </span>
           & performance <br />
           <span style={{ color: "#2d9bff" }}> management </span>
           journey
@@ -144,7 +143,7 @@ function Services() {
           {Object.keys(tabContent).map((tab, index) => (
             <div
               key={index}
-              id={`tab-${tab}`} 
+              id={`tab-${tab}`}
               className={`tab-box ${activeTab === tab ? "active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
@@ -155,7 +154,7 @@ function Services() {
 
         {/* Content Section */}
         <div className="tab-content">
-          <div className="text-section"  id={`content-${activeTab}`}>
+          <div className="text-section" id={`content-${activeTab}`}>
             <h1>{tabContent[activeTab].title}</h1>
             {tabContent[activeTab].description.map((desc, index) => (
               <p key={index}>{desc}</p>
@@ -167,7 +166,7 @@ function Services() {
             </ul>
             <a href="#">Know More &gt;&gt;</a>
           </div>
-          <div className="image-section"  id={`content-${activeTab}`}>
+          <div className="image-section" id={`content-${activeTab}`}>
             <img src={tabContent[activeTab].image} alt={activeTab} />
           </div>
         </div>
@@ -179,21 +178,52 @@ function Services() {
           <div className="consulting-column">
             <ul>
               <li>
-                <span>&#10004;</span> <strong>Customer centric</strong>, we
-                understand every customer is unique and henceforth our services
-                and solutions are catered to each customer based on their
-                specific needs.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Customer centric</strong>, we understand every customer
+                is unique and henceforth our services and solutions are catered
+                to each customer based on their specific needs.
               </li>
               <li>
-                <span>&#10004;</span>{" "}
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
                 <strong>Immense industry experience</strong>, with the number of
                 years of experience across various industries, our planning
                 accelerators are tailored to each domain and business sector.
               </li>
               <li>
-                <span>&#10004;</span> <strong>Unparalleled excellence</strong> –
-                our excellence and quality of delivery is unparalleled with
-                quality assurance, sustainable and future-proof solutions.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Unparalleled excellence</strong> – our excellence and
+                quality of delivery is unparalleled with quality assurance,
+                sustainable and future-proof solutions.
               </li>
             </ul>
             <button className="consulting-btn">Click here</button>
@@ -201,24 +231,67 @@ function Services() {
           <div className="consulting-column">
             <ul>
               <li>
-                <span>&#10004;</span> <strong>Integrated services</strong> – we
-                provide a range of integrated services with a holistic approach
-                to maximize your ROI and improve the benefits.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Integrated services</strong> – we provide a range of
+                integrated services with a holistic approach to maximize your
+                ROI and improve the benefits.
               </li>
               <li>
-                <span>&#10004;</span> <strong>Strategy to action</strong> – our
-                solutions are aligned to your overall business strategies and
-                objectives, addressing the challenges and risk in executing it.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Strategy to action</strong> – our solutions are aligned
+                to your overall business strategies and objectives, addressing
+                the challenges and risk in executing it.
               </li>
               <li>
-                <span>&#10004;</span> <strong>Global support</strong> –
-                strengthened with our diverse portfolio, we provide services and
-                support across multiple geographical locations.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Global support</strong> – strengthened with our diverse
+                portfolio, we provide services and support across multiple
+                geographical locations.
               </li>
               <li>
-                <span>&#10004;</span> <strong>Proactive Approach</strong> – we
-                take a proactive approach in supporting our clients helping them
-                stay ahead.
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -1180 960 1060"
+                    width="24px"
+                    fill="#5ac2a5"
+                  >
+                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+                  </svg>
+                </span>{" "}
+                <strong>Proactive Approach</strong> – we take a proactive
+                approach in supporting our clients helping them stay ahead.
               </li>
             </ul>
             <button className="consulting-btn">Read more</button>
@@ -262,6 +335,10 @@ function Services() {
         <div className="overlayimagemaindiv"></div>
       </div>
       <Footer />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check_circle"
+      />
     </div>
   );
 }
