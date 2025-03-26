@@ -60,20 +60,21 @@
 
   
 .consulting-container {
-  background-color: #fdfcf4;
+  background-color: #fffcee;
     margin: 40px auto;
     padding: 20px;
     width: 100%;
     text-align: center;
+    margin-top: 100px;
 }
 
 .consulting-container h2 {
   font-size: 32px;
   font-weight: bold;
   color: #1a1a1a;
-  
   text-align: left;
   margin-left: 100px;
+  margin-top: 50px;
 }
 
 .consulting-content {
@@ -102,7 +103,9 @@
   color: #4caf50;
   font-size: 15px;
   margin-right: 10px;
+  
 }
+
 strong{
   color: #000;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -134,6 +137,7 @@ strong{
   line-height: 60px;
   margin-top: 70px;
 }
+
 .techpart-container h1{
   font-size: 40px;
   color: #244bb7;
@@ -277,9 +281,9 @@ font-size: 18px;
   background: #f4f4f4;
   padding: 20px;
   border-radius: 10px;
+  height: auto;
 }
 .text-section {
-  flex: 5;
   padding-right: 20px;
 }
 .text-section h1{
@@ -291,6 +295,7 @@ font-size: 18px;
   font-size: 20px;
   width: 50%;
 }
+
 .text-section p{
   margin-top: 20px;
   font-size: 18px;
@@ -304,15 +309,14 @@ font-size: 18px;
 .image-section {
   flex: 1;
   display: flex;
-  justify-content: center;
-  width: 550px;
-  height: 250px;
+  justify-content: start;
+  width: 40%;
+  margin-top: 50px;
 }
 .image-section img {
   width: 100%;
-  max-width: 400px;
-  height: 400px;
-  border-radius: 10px;
+  max-width: auto;
+  height: 200px;
 }
 .image-section h1 {
   font-size: 25px;
@@ -354,12 +358,12 @@ a {
   }
   
   .image-section {
-    width: 100%;
+    width: auto;
     height: auto;
   }
   
   .image-section img {
-    max-width: 100%;
+    max-width: auto;
     height: auto;
   }
 }
@@ -398,7 +402,9 @@ a {
   .service-content1 {
     text-align: center;
   }
-
+  .tab-content{
+    height: auto;
+  }
   .consulting-column {
     width: 90%;
   }
@@ -411,9 +417,9 @@ a {
     width: 100%;
   }
 
-  .image-section {
-    width: 100%;
-  }
+  /* .image-section {
+    display: none;
+  } */
 
   .overlaymainheading {
     font-size: 30px;
@@ -460,5 +466,8 @@ a {
   }
   .techpart-container img{
     width: 300px;
+  }
+  .overlaymaindiv {
+    background-image: none;
   }
 }

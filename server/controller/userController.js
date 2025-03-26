@@ -6,9 +6,11 @@ import { JobApplication } from "../model/jobApplication.js";
 import { OnDemand } from "../model/onDemandSchema.js";
 import { Journey } from "../model/journeySchema.js";
 import { WatchNow } from "../model/watchnowSchema.js";
+import { Employee } from "../model/employeeSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { v4 as uuidv4 } from 'uuid';
 
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -275,7 +277,7 @@ const onDemand = async (req, res) => {
         let image = ""
 
         if (req.file) {
-            image = `/uploads/${req.file.filename}`;// Fix Windows backslashes
+            image = `uploads/${req.file.filename}`;// Fix Windows backslashes
         } else {
             console.log("⚠️ No file uploaded!");
         }
@@ -382,6 +384,7 @@ const addWatchnow = async (req, res) => {
 };
 
 const watchNowDetails = async (req, res) => {
+<<<<<<< HEAD
   try {
     const result = await WatchNow.find();
     res.status(200).json({ message: "Watch Now Details", data: result });
@@ -411,3 +414,60 @@ export {
   addWatchnow,
   watchNowDetails,
 };
+=======
+    try {
+        const result = await WatchNow.find();
+        res.status(200).json({ message: "Watch Now Details", data: result })
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message })
+    }
+}
+
+const profileImage = async (req, res) => {
+    try {
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ message: "No files uploaded" });
+        }
+
+        const filePaths = req.files.map(file => ({
+            id: uuidv4(), // Generate a unique ID for each image
+            path: `/uploads/${file.filename}`
+        }));
+
+        // Assuming the employee is authenticated and their information is in req.user
+        const employeeId = req.body._id; // Assuming req.user contains the authenticated employee's info
+
+        if (!employeeId) {
+            return res.status(400).json({ message: "Employee not authenticated" });
+        }
+
+        // Check if the employee exists
+        let employee = await Employee.findById(employeeId);
+
+        if (employee) {
+            // If the employee exists, push the new image paths to the existing array
+            employee.profileImg = [...employee.profileImg, ...filePaths]; // Add new images to the existing array
+            await employee.save(); // Save the updated employee data
+            return res.status(200).json({ message: "Profile Images Updated", data: employee });
+        } else {
+            // If the employee does not exist, create a new employee
+            const newEmployee = new Employee({
+                _id: employeeId, // Create a new ID or use the authenticated user's ID
+                profileImg: filePaths
+            });
+
+            const savedEmployee = await newEmployee.save();
+            return res.status(200).json({ message: "New Employee Created and Images Uploaded", data: savedEmployee });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error", error: error.message });
+    }
+};
+
+
+
+export {
+    registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
+    addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage
+}
+>>>>>>> 81cebdcfbff2748bb5c3c03fe6e3ddb1e4af3e96

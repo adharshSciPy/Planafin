@@ -1,0 +1,28 @@
+.mainContainer{
+    width: 100%;
+
+}
+.subContainer{
+    width: 90%;
+    margin: auto;
+    padding: 100px 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.ourjourh3{
+    padding: 5px 0px;
+}
+.ourjourp{
+    padding: 10px 0px;
+    font-size: 15px;
+    font-weight: 700;
+}
+.cardButton{
+    width: max-content;
+    padding: 5px ;
+    margin: 10px 0px;
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+    }
