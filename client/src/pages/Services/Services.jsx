@@ -1,20 +1,24 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect,useRef } from "react";
 import "./services.css";
 import Nav from "../../components/Header/Header.jsx";
 import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
 import padam2 from "../../assets/Anaplan.jpg";
 import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
+import {useLocation} from "react-router-dom"
 
 function Services() {
-  const [activeTab, setActiveTab] = useState("Business Consulting");
+  const [activeTab, setActiveTab] = useState("Business-Consulting");
 
   const tabContent = {
-    "Business Consulting": {
+    "Business-Consulting": {
       title: "Business Consulting Services",
       description: [
-        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey.",
+        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
+        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
+        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
+        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
       ],
       points: [
         "Roadmap definition services",
@@ -25,14 +29,9 @@ function Services() {
       ],
       image: { padam3 }, // Change with actual image path
 
-      description: [
-        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
-        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
-        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
-        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
-      ],
+      
     },
-    "Solution Deployment": {
+    "Solution-Deployment": {
       title: "Solution Deployment Services",
       description: [
         "We provide the following solution deployment services, helping you implement EPM solutions",
@@ -46,7 +45,7 @@ function Services() {
       ],
       image: { padam3 },
     },
-    "Managed Support Services": {
+    "Managed-Support-Services": {
       title: "Managed Support Services",
       description: [
         "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
@@ -60,7 +59,7 @@ function Services() {
       image: { padam3 },
     },
     "Training & Enablement": {
-      title: "Training & Enablement",
+      title: "Training & Enablement Services",
       description: [
         "Our training programs help teams gain expertise in modern technologies and business methodologies.",
       ],
@@ -73,6 +72,32 @@ function Services() {
       image: { padam3 },
     },
   };
+  const location=useLocation()
+  const tabContainerRef = useRef(null);
+  useEffect(() => {
+    if (location.state && location.state.activeTab) {
+      const tab = location.state.activeTab;
+      if (tabContent[tab]) {
+        setActiveTab(tab);
+      }
+    }
+  }, [location.state]);
+  useEffect(()=>{
+    if (location.state && location.state.scrollToTabs) {
+      tabContainerRef.current?.scrollIntoView({ behavior: "smooth" ,block:"start"});
+      
+      setTimeout(() => {
+        window.scrollBy({
+          top: -700, 
+          behavior: "smooth",
+        });
+      }, 300);
+    }
+  },[location.state])
+  // useEffect(() => {
+  //   console.log("Current activeTab:", activeTab);
+  // }, [activeTab]);
+  
 
   return (
     <div>
@@ -134,38 +159,43 @@ function Services() {
         </h3>
       </div>
       <div className="tab-container">
-        {/* Tabs */}
-        <div className="tab-boxes">
-          {Object.keys(tabContent).map((tab, index) => (
-            <div
-              key={index}
-              className={`tab-box ${activeTab === tab ? "active" : ""}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              <h2>{tab}</h2>
-            </div>
-          ))}
-        </div>
-
-        {/* Content Section */}
-        <div className="tab-content">
-          <div className="text-section">
-            <h1>{tabContent[activeTab].title}</h1>
-            {tabContent[activeTab].description.map((desc, index) => (
-              <p key={index}>{desc}</p>
-            ))}
-            <ul>
-              {tabContent[activeTab].points.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
-            <a href="#">Know More &gt;&gt;</a>
-          </div>
-          <div className="image-section">
-            <img src={tabContent[activeTab].image} alt={activeTab} />
-          </div>
-        </div>
+  {/* Tabs */}
+  <div className="tab-boxes">
+    {Object.keys(tabContent).map((tab, index) => (
+      <div
+        key={index}
+        id={`tab-${tab}`}
+        className={`tab-box ${activeTab === tab ? "active" : ""}`} // Apply active class
+        onClick={() => setActiveTab(tab)} // Set active tab when clicked
+      >
+        <h2>{tab.replace(/-/g, ' ')}</h2>
       </div>
+    ))}
+  </div>
+
+  {/* Content Section */}
+  <div className="tab-content">
+    <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
+   <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
+
+
+      {tabContent[activeTab].description.map((desc, index) => (
+        <p key={index}>{desc}</p>
+      ))}
+      <ul>
+        {tabContent[activeTab].points.map((point, index) => (
+          <li key={index}>{point}</li>
+        ))}
+      </ul>
+      <a href="#">Know More &gt;&gt;</a>
+    </div>
+    <div className="image-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
+      <img src={tabContent[activeTab].image} alt={activeTab} />
+    </div>
+  </div>
+</div>
+
+
 
       <section className="consulting-container">
         <h2>Why Planafin Consulting?</h2>

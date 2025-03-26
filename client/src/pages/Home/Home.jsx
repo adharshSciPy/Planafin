@@ -22,13 +22,21 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate=useNavigate();
-  const readMoreNavigation=()=>{
-    navigate('/Services')
+  const readMoreNavigation=(id)=>{
+    navigate('/Services', { state: { activeTab: id ,scrollToTabs:true} }); 
+    // window.scrollTo(0, 0);
+
   }
-  // ?contact us 
+  // contact us 
   const ContactUs=()=>{
     navigate('/lets-talk')
     window.scrollTo(0, 0);
+  }
+  // solution readmore
+  const solutionReadMore=()=>{
+    navigate('/solutions')
+    window.scrollTo(0, 0);
+
   }
   const OPTIONS = { loop: true };
   return (
@@ -116,7 +124,7 @@ function Home() {
             <div className={styles.serviceCardReadMoreDiv}>
             <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore} onClick={()=>readMoreNavigation()}>
+              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Business-Consulting')}>
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
@@ -138,7 +146,7 @@ function Home() {
             <div className={styles.serviceCardReadMoreDiv}>
             <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore}>
+              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Solution-Deployment')}>
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
@@ -156,7 +164,7 @@ function Home() {
             <div className={styles.serviceCardReadMoreDiv}>
             <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore}>
+              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Managed-Support-Services')} >
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
@@ -300,7 +308,7 @@ function Home() {
               accelerators.
             </p>
             <div className={styles.overlayMainBtnDiv2}>
-              <button className={styles.overlayButton2}>
+              <button className={styles.overlayButton2} onClick={()=>solutionReadMore()}>
                 Read More
                 <span
                   className="fas fa-arrow-right"
@@ -338,7 +346,7 @@ function Home() {
             Enable faster and better decision making
           </h2>
           <div className={styles.overlayMainBtnDiv}>
-            <button className={styles.overlayButton3}>
+            <button className={styles.overlayButton3} onClick={()=>ContactUs()}>
               Request a Call Back
             
             </button>

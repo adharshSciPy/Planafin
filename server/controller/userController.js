@@ -270,15 +270,15 @@ const applicationDetails = async (req, res) => {
 };
 
 const onDemand = async (req, res) => {
-  try {
-    const { title, summary, pigment, speaker, attendSession } = req.body;
-    let image = req.file ? req.file.path : null;
+    try {
+        const { title, summary, pigment, speaker, attendSession } = req.body;
+        let image = ""
 
-    if (req.file) {
-      image = req.file.path.replace(/\\/g, "/"); // Fix Windows backslashes
-    } else {
-      console.log("⚠️ No file uploaded!");
-    }
+        if (req.file) {
+            image = `/uploads/${req.file.filename}`;// Fix Windows backslashes
+        } else {
+            console.log("⚠️ No file uploaded!");
+        }
 
     console.log("📷 Uploaded Image Path:", image);
     console.log("📦 Form Data:", req.body);

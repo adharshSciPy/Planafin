@@ -79,7 +79,7 @@ function Resources() {
                       height="213px"
                       width="355px"
                       alt="example"
-                      src={`${baseUrl}/${item.src}`}
+                      src={`${baseUrl}/${item.image}`}
                     />
                   }
                 >
