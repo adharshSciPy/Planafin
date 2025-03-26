@@ -333,7 +333,7 @@ ul {
 li {
   margin-bottom: 5px;
 }
-a {
+.services-link {
   font-size: 19px;
   font-weight: bold;
   color: #001e6c;

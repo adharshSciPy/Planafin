@@ -7,7 +7,7 @@ import padam2 from "../../assets/Anaplan.jpg";
 import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
 import s2 from "../.././assets/s2.png";
-import { useLocation } from "react-router-dom";
+import { useLocation,Link } from "react-router-dom";
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business-Consulting");
@@ -193,7 +193,7 @@ function Services() {
           <li key={index}>{point}</li>
         ))}
       </ul>
-      <a href="#">Know More &gt;&gt;</a>
+      <Link  to="mailto:example@example.com" className="services-link">Know More &gt;&gt;</Link>
     </div>
     <div className="image-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
       <img src={tabContent[activeTab].image} alt={activeTab} />
@@ -325,7 +325,9 @@ function Services() {
                 approach in supporting our clients helping them stay ahead.
               </li>
             </ul>
+            <Link to={'/'}>
             <button className="consulting-btn">Read more</button>
+            </Link>
           </div>
         </div>
       </section>
@@ -349,6 +351,7 @@ function Services() {
             </p>
           </div>
           <div className="overlaymainbtndiv">
+            <Link to={'/lets-talk'}>
             <button className="overlaybutton">
               Contact Us
               <span
@@ -359,8 +362,9 @@ function Services() {
                   fill: "#FFFFFF",
                   color: "black",
                 }}
-              ></span>
+                ></span>
             </button>
+                </Link>
           </div>
         </div>
         <div className="overlayimagemaindiv"></div>
