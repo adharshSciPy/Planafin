@@ -5,15 +5,18 @@ import Footer from "../../components/Footer/Footer";
 import baseurl from "../../baseUrl";
 import axios from "axios";
 import { MinusCircleOutlined } from "@ant-design/icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./OurJourney.module.css";
+import { useNavigate } from "react-router-dom";
 
 function WebinarData() {
   const [form] = Form.useForm();
   const fileInputRef = useRef(null);
-
-  const [inputValue, setInputValue] = useState(""); // Fixed initial state
+  const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-
+  const navigate=useNavigate()
   // Sync sections with form field
   useEffect(() => {
     form.setFieldsValue({ attendSession: sections });
@@ -32,7 +35,7 @@ function WebinarData() {
       Object.keys(values).forEach((key) => {
         if (key === "attendSession") {
           sections.forEach((section) => {
-            formData.append(`${key}[]`, section.name); // Ensure correct format
+            formData.append(`${key}[]`, section.name);
           });
         } else {
           formData.append(key, values[key]);
@@ -43,13 +46,20 @@ function WebinarData() {
         formData.append("image", imageFile);
       }
 
-      const response = await axios.post(`${baseurl}/api/v1/user/onDemand`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }, // Ensures correct file handling
-      });
-
-      console.log("Response:", response);
+      const response = await axios.post(
+        `${baseurl}/api/v1/user/onDemand`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (response.status === 200) {
+        toast.success("Webinar submitted successfully!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+
         form.resetFields();
         setSections([]);
         setImageFile(null);
@@ -57,6 +67,10 @@ function WebinarData() {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("Failed to submit Webinar!", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -65,9 +79,9 @@ function WebinarData() {
     if (inputValue.trim() !== "") {
       setSections((prevItems) => [
         ...prevItems,
-        { id: Date.now(), name: inputValue }, // Use unique ID
+        { id: Date.now(), name: inputValue },
       ]);
-      setInputValue(""); // Reset input field
+      setInputValue("");
     }
   };
 
@@ -85,10 +99,17 @@ function WebinarData() {
       fileInputRef.current.value = "";
     }
   };
-
+  const showOurWebinar=()=>{
+    navigate("/getWebinarData")
+  }
   return (
     <>
       <Header />
+      <div className={styles.buttonContainer}>
+        <button className={styles.buttonStyle} onClick={showOurWebinar}>
+          View All
+        </button>
+      </div>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
         <h1 style={{ fontSize: "36px" }}>Webinar Data</h1>
       </div>
@@ -184,7 +205,7 @@ function WebinarData() {
                   marginInline: "auto",
                 }}
               >
-                <span>{item.name}</span> {/* ✅ Render the name properly */}
+                <span>{item.name}</span>
                 <MinusCircleOutlined
                   style={{ color: "red", cursor: "pointer" }}
                   onClick={() => removeSection(item.id)}
@@ -216,6 +237,7 @@ function WebinarData() {
           </Form.Item>
         </Form>
       </div>
+      <ToastContainer />
       <Footer />
     </>
   );
