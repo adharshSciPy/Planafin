@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
     if (!email?.trim() || !password?.trim()) {
       return res.status(400).json({ message: "All fields are required" });
     }
-/*  */
+    /*  */
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
@@ -272,15 +272,15 @@ const applicationDetails = async (req, res) => {
 };
 
 const onDemand = async (req, res) => {
-    try {
-        const { title, summary, pigment, speaker, attendSession } = req.body;
-        let image = ""
+  try {
+    const { title, summary, pigment, speaker, attendSession } = req.body;
+    let image = ""
 
-        if (req.file) {
-            image = `uploads/${req.file.filename}`;// Fix Windows backslashes
-        } else {
-            console.log("⚠️ No file uploaded!");
-        }
+    if (req.file) {
+      image = `uploads/${req.file.filename}`;// Fix Windows backslashes
+    } else {
+      console.log("⚠️ No file uploaded!");
+    }
 
     console.log("📷 Uploaded Image Path:", image);
     console.log("📦 Form Data:", req.body);
@@ -332,6 +332,16 @@ const demandDetails = async (req, res) => {
   }
 };
 
+const deleteDemand = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await OnDemand.findByIdAndDelete(id);
+    res.status(200).json({ message: "Delete Ondemand Successfully", data: result });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
 const addJourney = async (req, res) => {
   try {
     const { year, title, description } = req.body;
@@ -356,6 +366,17 @@ const journeyDetails = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+const deleteJourney = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Journey.findByIdAndDelete(id);
+    res.status(200).json({ message: "Delete Journey Successfully", data: result });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+}
+
 
 const addWatchnow = async (req, res) => {
   try {
@@ -395,49 +416,49 @@ const watchNowDetails = async (req, res) => {
 };
 
 const profileImage = async (req, res) => {
-    try {
-        if (!req.files || req.files.length === 0) {
-            return res.status(400).json({ message: "No files uploaded" });
-        }
-
-        const filePaths = req.files.map(file => ({
-            id: uuidv4(), // Generate a unique ID for each image
-            path: `/uploads/${file.filename}`
-        }));
-
-        // Assuming the employee is authenticated and their information is in req.user
-        const employeeId = req.body._id; // Assuming req.user contains the authenticated employee's info
-
-        if (!employeeId) {
-            return res.status(400).json({ message: "Employee not authenticated" });
-        }
-
-        // Check if the employee exists
-        let employee = await Employee.findById(employeeId);
-
-        if (employee) {
-            // If the employee exists, push the new image paths to the existing array
-            employee.profileImg = [...employee.profileImg, ...filePaths]; // Add new images to the existing array
-            await employee.save(); // Save the updated employee data
-            return res.status(200).json({ message: "Profile Images Updated", data: employee });
-        } else {
-            // If the employee does not exist, create a new employee
-            const newEmployee = new Employee({
-                _id: employeeId, // Create a new ID or use the authenticated user's ID
-                profileImg: filePaths
-            });
-
-            const savedEmployee = await newEmployee.save();
-            return res.status(200).json({ message: "New Employee Created and Images Uploaded", data: savedEmployee });
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Internal Server Error", error: error.message });
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
     }
+
+    const filePaths = req.files.map(file => ({
+      id: uuidv4(), // Generate a unique ID for each image
+      path: `/uploads/${file.filename}`
+    }));
+
+    // Assuming the employee is authenticated and their information is in req.user
+    const employeeId = req.body._id; // Assuming req.user contains the authenticated employee's info
+
+    if (!employeeId) {
+      return res.status(400).json({ message: "Employee not authenticated" });
+    }
+
+    // Check if the employee exists
+    let employee = await Employee.findById(employeeId);
+
+    if (employee) {
+      // If the employee exists, push the new image paths to the existing array
+      employee.profileImg = [...employee.profileImg, ...filePaths]; // Add new images to the existing array
+      await employee.save(); // Save the updated employee data
+      return res.status(200).json({ message: "Profile Images Updated", data: employee });
+    } else {
+      // If the employee does not exist, create a new employee
+      const newEmployee = new Employee({
+        _id: employeeId, // Create a new ID or use the authenticated user's ID
+        profileImg: filePaths
+      });
+
+      const savedEmployee = await newEmployee.save();
+      return res.status(200).json({ message: "New Employee Created and Images Uploaded", data: savedEmployee });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
 };
 
 
 
 export {
-    registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-    addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage
+  registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
+  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney
 }
