@@ -384,7 +384,6 @@ const addWatchnow = async (req, res) => {
 };
 
 const watchNowDetails = async (req, res) => {
-<<<<<<< HEAD
   try {
     const result = await WatchNow.find();
     res.status(200).json({ message: "Watch Now Details", data: result });
@@ -394,34 +393,6 @@ const watchNowDetails = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
-
-export {
-  registerUser,
-  loginUser,
-  ContactUs,
-  ContactDetails,
-  jobOpenings,
-  jobListing,
-  addFeedback,
-  viewFeedback,
-  jobApplication,
-  applicationDetails,
-  onDemand,
-  getOnDemandById,
-  demandDetails,
-  addJourney,
-  journeyDetails,
-  addWatchnow,
-  watchNowDetails,
-};
-=======
-    try {
-        const result = await WatchNow.find();
-        res.status(200).json({ message: "Watch Now Details", data: result })
-    } catch (error) {
-        res.status(500).json({ message: "Internal Server Error", error: error.message })
-    }
-}
 
 const profileImage = async (req, res) => {
     try {
@@ -470,4 +441,3 @@ export {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
     addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage
 }
->>>>>>> 81cebdcfbff2748bb5c3c03fe6e3ddb1e4af3e96
