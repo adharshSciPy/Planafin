@@ -210,6 +210,16 @@ const viewFeedback = async (req, res) => {
   }
 };
 
+const deleteFeedback = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Feedback.findByIdAndDelete(id);
+    res.status(200).json({ message: "Feedback deleted successfully", data: result });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", data: error })
+  }
+}
+
 const jobApplication = async (req, res) => {
   try {
     const {
@@ -456,9 +466,17 @@ const profileImage = async (req, res) => {
   }
 };
 
+const deleteProfileImage = async (request, res) => {
+  try {
+    
+  } catch (error) {
+
+  }
+}
+
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney
+  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage
 }
