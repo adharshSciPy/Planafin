@@ -258,7 +258,7 @@ function Home() {
               transformation journey
             </p>
           </div>
-          <div className={styles.overlayMainBtnDiv}>
+          <div className={styles.overlayMainBtnDiv} ref={(el) => setElementRef(-1)(el)}>
             <button className={styles.overlayButton} onClick={()=>ContactUs()}>
               Contact us
               <span

@@ -7,7 +7,7 @@ import padam2 from "../../assets/Anaplan.jpg";
 import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
 import s2 from "../.././assets/s2.png";
-import { useLocation,Link } from "react-router-dom";
+import { useLocation,Link,useNavigate } from "react-router-dom";
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business-Consulting");
@@ -104,8 +104,46 @@ function Services() {
   // useEffect(() => {
   //   console.log("Current activeTab:", activeTab);
   // }, [activeTab]);
-  
+  const navigate=useNavigate();
+  const consultationBtn=()=>{
+    navigate('/')
+    window.scrollTo(0,0)
+  }
+   const myRef = useRef([]);
+    const observerRef = useRef(null); 
+ useEffect(()=>{
+    if(!observerRef.current){
+      observerRef.current=new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add("animateIn");
 
+          }
+        })
+      })
+    }
+   
+    myRef.current.forEach((el) => {
+      if (el && observerRef.current) observerRef.current.observe(el);
+    });
+    
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+    
+  },[]);
+  const setElementRef = (index) => (el) => {
+    if (el) {
+      myRef.current[index] = el;
+      if (observerRef.current) observerRef.current.observe(el);
+    }
+  };
+  const consultationNav=()=>{
+    navigate('/consultation');
+    window.scrollTo(0,0)
+  }
   return (
     <div>
       <Nav />
@@ -122,7 +160,7 @@ function Services() {
         More than 100+ industry leading EPM business planning deployment
         experience
       </div>
-      <div className="service-image">
+      <div className="service-image" ref={(el) => setElementRef(-1)(el)}>
         <img src={padam} alt="" className="image-tag" />
       </div>
       <div className="increment-content">
@@ -157,7 +195,7 @@ function Services() {
           </div>
         </div>
       </div>
-      <div className="serv_sec2">
+      <div className="serv_sec2" >
         <h1 className="sec2-hd1">Our Services</h1>
         <h3 className="sec2-hd2">
           Planafin delivers a wide range of integrated services to maximize
@@ -257,7 +295,7 @@ function Services() {
                 sustainable and future-proof solutions.
               </li>
             </ul>
-            <button className="consulting-btn">Click here</button>
+            <button className="consulting-btn" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>Click here</button>
           </div>
           <div className="consulting-column">
             <ul>
@@ -325,9 +363,9 @@ function Services() {
                 approach in supporting our clients helping them stay ahead.
               </li>
             </ul>
-            <Link to={'/'}>
-            <button className="consulting-btn">Read more</button>
-            </Link>
+            {/* <Link to={'/'}> */}
+            <button className="consulting-btn" onClick={()=>consultationBtn()}>Read more</button>
+            {/* </Link> */}
           </div>
         </div>
       </section>
@@ -336,10 +374,10 @@ function Services() {
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
         </h3>
-        <img src={padam2} alt="anaplan" />
+        <img src={padam2} alt="anaplan" style={{cursor:"pointer"}} onClick={()=>consultationNav()} />
       </div>
 
-      <div className="overlaymaindiv">
+      <div className="overlaymaindiv"ref={(el) => setElementRef(-1)(el)} >
         <div className="elementoroverlaymainbox">
           <h2 className="overlaymainheading">
             Let's talk about your next project
@@ -351,7 +389,9 @@ function Services() {
             </p>
           </div>
           <div className="overlaymainbtndiv">
-            <Link to={'/lets-talk'}>
+            <Link to={'/lets-talk'}  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            
+            style={{textDecoration:"none"}}>
             <button className="overlaybutton">
               Contact Us
               <span
