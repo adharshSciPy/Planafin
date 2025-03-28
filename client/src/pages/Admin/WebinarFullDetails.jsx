@@ -12,11 +12,18 @@ function WebinarFullDetails() {
     const [journeyData, setjourneyData] = useState([]);
     const [open, setOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
-    const showModal = () => {
+    const [selectId,setSelectedId]=useState(null)
+    const showModal = (id) => {
+      setSelectedId(id)
       setOpen(true);
     };
-    const handleOk = () => {
+    const handleOk = async() => {
       setConfirmLoading(true);
+      try {
+        await axios.delete()
+      } catch (error) {
+        
+      }
       setTimeout(() => {
         setOpen(false);
         setConfirmLoading(false);
@@ -52,8 +59,8 @@ function WebinarFullDetails() {
                 title="Details"
                 style={{ width: 300 }}
                 extra={
-                  <button className={styles.cardButton} onClick={showModal}>
-                    <DeleteTwoTone />
+                  <button className={styles.cardButton} onClick={()=>showModal(item.id)}>
+                    <DeleteTwoTone /> 
                   </button>
                 }
               >
@@ -66,17 +73,17 @@ function WebinarFullDetails() {
               </Card>
               
             ))}
-            
-          </div>
-          <Modal
+            <Modal
               title="Title"
               open={open}
-              onOk={handleOk}
+              onOk={handleOk ()}
               confirmLoading={confirmLoading}
               onCancel={handleCancel}
             >
               <p>Are you sure want to delete the data</p>
             </Modal>
+          </div>
+          
         </div>
         <Footer />
       </>

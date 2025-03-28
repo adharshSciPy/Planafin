@@ -10,7 +10,7 @@ import { Employee } from "../model/employeeSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -284,10 +284,10 @@ const applicationDetails = async (req, res) => {
 const onDemand = async (req, res) => {
   try {
     const { title, summary, pigment, speaker, attendSession } = req.body;
-    let image = ""
+    let image = "";
 
     if (req.file) {
-      image = `uploads/${req.file.filename}`;// Fix Windows backslashes
+      image = `uploads/${req.file.filename}`; // Fix Windows backslashes
     } else {
       console.log("⚠️ No file uploaded!");
     }
@@ -346,11 +346,15 @@ const deleteDemand = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await OnDemand.findByIdAndDelete(id);
-    res.status(200).json({ message: "Delete Ondemand Successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Delete Ondemand Successfully", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const addJourney = async (req, res) => {
   try {
@@ -381,12 +385,15 @@ const deleteJourney = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await Journey.findByIdAndDelete(id);
-    res.status(200).json({ message: "Delete Journey Successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Delete Journey Successfully", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
-
+};
 
 const addWatchnow = async (req, res) => {
   try {
@@ -431,9 +438,9 @@ const profileImage = async (req, res) => {
       return res.status(400).json({ message: "No files uploaded" });
     }
 
-    const filePaths = req.files.map(file => ({
+    const filePaths = req.files.map((file) => ({
       id: uuidv4(), // Generate a unique ID for each image
-      path: `/uploads/${file.filename}`
+      path: `/uploads/${file.filename}`,
     }));
 
     // Assuming the employee is authenticated and their information is in req.user
@@ -450,19 +457,23 @@ const profileImage = async (req, res) => {
       // If the employee exists, push the new image paths to the existing array
       employee.profileImg = [...employee.profileImg, ...filePaths]; // Add new images to the existing array
       await employee.save(); // Save the updated employee data
-      return res.status(200).json({ message: "Profile Images Updated", data: employee });
+      return res
+        .status(200)
+        .json({ message: "Profile Images Updated", data: employee });
     } else {
       // If the employee does not exist, create a new employee
       const newEmployee = new Employee({
         _id: employeeId, // Create a new ID or use the authenticated user's ID
-        profileImg: filePaths
+        profileImg: filePaths,
       });
-
-      const savedEmployee = await newEmployee.save();
-      return res.status(200).json({ message: "New Employee Created and Images Uploaded", data: savedEmployee });
+      
+      const  savedEmployee=await newEmployee.save()
+      return res.status(200).json({ message:"New Employee Created and Images Uploaded",data:savedEmployee })
     }
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
 };
 
@@ -473,8 +484,6 @@ const deleteProfileImage = async (request, res) => {
 
   }
 }
-
-
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,

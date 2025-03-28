@@ -12,30 +12,49 @@ import Footer from "../../components/Footer/Footer";
 import teamImg from "../../assets/team1.png";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-
+import slider1 from "../../assets/Aarti-Ramachandran.jpg"
+import slider2 from "../../assets/Aniket.jpg"
+import slider3 from "../../assets/Deepak-Kumar-Mohanty.png"
+import slider4 from "../../assets/Deepanshu-Srivastava.jpg"
+import slider5 from "../../assets/Gargi-Gehlot.jpg"
+import slider6 from "../../assets/Gayathri.jpg"
+import slider7 from "../../assets/Priya-Ranjan.jpeg"
+import slider8 from "../../assets/Shashank-Shekhar.jpg"
+import slider9 from "../../assets/Shawn-3.jpg"
+import slider10 from "../../assets/Sooraj-GK-1593x2048.jpg"
+import slider11 from "../../assets/Susmita-Srivastava.jpeg"
+import slider12 from "../../assets/Swathi-Yelugoti.png"
+import slider13 from "../../assets/Yash-Viroja.png"
 function Aboutus() {
-  const[journeyData,setJourneyData]=useState([])
+  const slides=[
+      slider1,slider2,
+      slider3,slider4,
+      slider5,slider6,
+      slider7,slider8,
+      slider9,slider10,
+      slider11,slider12,
+      slider13
+  
+  
+  ]
+  const [journeyData, setJourneyData] = useState([]);
   const OPTIONS = { loop: true };
-  useEffect(()=>{
-    journeyDatasAll()
-  },[])
-  const journeyDatasAll=async()=>{
+  useEffect(() => {
+    journeyDatasAll();
+  }, []);
+  const journeyDatasAll = async () => {
     try {
-      const response= await axios.get(`${baseUrl}/api/v1/user/journeyDetails`)
-      if(response){
-        setJourneyData(response.data.data || [])
-        console.log(journeyData,"ithaanu");
-        
+      const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
+      if (response) {
+        setJourneyData(response.data.data || []);
+        console.log(journeyData, "ithaanu");
       }
-      
     } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
   // const journeyData = [
-    
-    
+
   //   {
   //     year: "2015",
   //     title: "Founded & Established",
@@ -65,7 +84,7 @@ function Aboutus() {
   //     Recog,
   //     nized as a top EPM solutions provider`,
   //   },
-    
+
   //   {
   //     year: "2020",
   //     title: "Global Expansion",
@@ -220,74 +239,96 @@ function Aboutus() {
             <h2>Our Journey</h2>
           </div>
           <div>
-          {journeyData.map((item, index) => (
-            <div key={index} className={styles.journeyDescriptionMain}>
-              {index % 2 === 0 ? (
-                <>
-                  <div className={`${styles.leftContainer} ${
-                  index === journeyData.length - 1 ? styles.lastRightContainer : ""
-                }`}>
-                    <div className={styles.leftMain}>
-                      <div
-                        className={styles.heading}
-                        style={{ textAlign: "left" }}
-                      >
-                        {item.year}
-                      </div>
-                      <div
-                        className={styles.heading}
-                        style={{ textAlign: "left" }}
-                      >
-                        {item.title}
-                      </div>
-                      <div className={styles.journeyp} style={{textAlign:"right",fontSize:"14px",lineHeight:"21px",fontWeight:"400"}}>
-                      {item.description.map((line, i) => (
-                            <span key={i}>
-                              {line}
-                              <br />
-                            </span>
-                          ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={`${styles.rightContainer} $`}>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className={styles.leftContainer}></div>
-                  <div className={`${styles.rightContainer} ${
-                  index === journeyData.length - 1 ? styles.lastRightContainer : ""
-                }`}>
-                    <div className={styles.rightMain}>
-                      <div
-                        className={styles.heading}
-                        style={{ textAlign: "left" }}
-                      >
-                        {item.year}
-                      </div>
-                      <div
-                        className={styles.heading}
-                        style={{ textAlign: "left" }}
-                      >
-                        {item.title}
-                      </div>
-                      <div className={styles.journeyp} style={{fontSize:"14px",lineHeight:"21px",fontWeight:"400"}}>
-                        <p>
+            {journeyData.map((item, index) => (
+              <div key={index} className={styles.journeyDescriptionMain}>
+                {index % 2 === 0 ? (
+                  <>
+                    <div
+                      className={`${styles.leftContainer} ${
+                        index === journeyData.length - 1
+                          ? styles.lastRightContainer
+                          : ""
+                      }`}
+                    >
+                      <div className={styles.leftMain}>
+                        <div
+                          className={styles.heading}
+                          style={{ textAlign: "left" }}
+                        >
+                          {item.year}
+                        </div>
+                        <div
+                          className={styles.heading}
+                          style={{ textAlign: "left" }}
+                        >
+                          {item.title}
+                        </div>
+                        <div
+                          className={styles.journeyp}
+                          style={{
+                            textAlign: "right",
+                            fontSize: "14px",
+                            lineHeight: "21px",
+                            fontWeight: "400",
+                          }}
+                        >
                           {item.description.map((line, i) => (
                             <span key={i}>
                               {line}
                               <br />
                             </span>
                           ))}
-                        </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
+                    <div className={`${styles.rightContainer} $`}></div>
+                  </>
+                ) : (
+                  <>
+                    <div className={styles.leftContainer}></div>
+                    <div
+                      className={`${styles.rightContainer} ${
+                        index === journeyData.length - 1
+                          ? styles.lastRightContainer
+                          : ""
+                      }`}
+                    >
+                      <div className={styles.rightMain}>
+                        <div
+                          className={styles.heading}
+                          style={{ textAlign: "left" }}
+                        >
+                          {item.year}
+                        </div>
+                        <div
+                          className={styles.heading}
+                          style={{ textAlign: "left" }}
+                        >
+                          {item.title}
+                        </div>
+                        <div
+                          className={styles.journeyp}
+                          style={{
+                            fontSize: "14px",
+                            lineHeight: "21px",
+                            fontWeight: "400",
+                          }}
+                        >
+                          <p>
+                            {item.description.map((line, i) => (
+                              <span key={i}>
+                                {line}
+                                <br />
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -360,7 +401,14 @@ function Aboutus() {
           <div className={styles.teamWrapper}>
             <div className={styles.teamLeft}>
               <div className={styles.teamWidgetImg}>
-                <img src={teamImg} alt="" />
+                {slides.map((item,index)=>(
+                  <div style={{display:"flex"}}>
+                    <div className={styles.imageContainer} key={index}>
+                    <img src={item} alt="" className={styles.imageContainerImg}/>
+                  </div>
+                  </div>
+
+                ))}
               </div>
             </div>
             <div className={styles.teamRight}>

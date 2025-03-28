@@ -365,26 +365,45 @@ padding: 50px 50px 100px 50px;
   width: 100%;
   overflow: hidden;
   display: flex;
+  flex-direction: column-reverse;
 }
 .teamRight{
-  width: 50%;
+  width: 100%;
   padding-top: 60px;
   padding-left: 30px;
 }
 .teamLeft{
-  width: 45%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .teamWidgetImg{
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px 50px;
+  justify-content: space-evenly ;
+  background-color:#D7F0FD ;
+  gap: 50px;
 }
-.teamWidgetImg img{
-  width: 100%;
+.imageContainer{
+  height: 100px;
+  width: 100px;
+  background: linear-gradient(to right, #D7F0FD, white);
+  /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
+  border-radius: 100px;
+  
+}
+.imageContainerImg{
   height: 100%;
+  width: 100%;
   object-fit: cover;
-}
+  object-position: top;
+  border-radius: 100px;
+
+} 
+
 .teamText{
   width: 100%;
 }
@@ -396,7 +415,7 @@ padding: 50px 50px 100px 50px;
     font-weight: 700;
     line-height: 57px;
     color: #152246;
-    text-align: right;
+    text-align: center;
 }
 .teamText{
   padding-bottom: 20px;
@@ -406,12 +425,18 @@ padding: 50px 50px 100px 50px;
   font-weight: 400;
   line-height: 27px;
   color: #404040; 
-  text-align: right;
+  text-align: center;
 }
 .lastRightContainer::after{
 display: none;
 }
-
+.contentStyle{
+  height: '160px';
+  color: '#fff';
+  line-height: '160px';
+  text-align: 'center';
+  background: '#364d79';
+}
 @media (max-width: 1100px) {
   .card {
     flex: 1 1 45%;
