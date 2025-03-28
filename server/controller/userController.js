@@ -486,7 +486,7 @@ const deleteProfileImage = async (req, res) => {
   try {
     const result = await Employee.findByIdAndUpdate(employeeId, {
       $pull: { profileImg: { id } }
-    },{ new: true } )
+    }, { new: true })
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
@@ -540,9 +540,21 @@ const customerImage = async (req, res) => {
   }
 };
 
+const deleteCustomerImage = async (req, res) => {
+  const { customerId, id } = req.params;
+  try {
+    const result = await Customer.findByIdAndUpdate(customerId, {
+      $pull: { imageCustomer: { id } }
+    }, { new: true })
+    res.status(200).json({ message: "Image Removed", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+  }
+}
+
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage
+  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage
 }
