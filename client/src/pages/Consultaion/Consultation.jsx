@@ -9,6 +9,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import imgoverlay from "../../assets/imgoverlay.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 // import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
@@ -45,6 +46,7 @@ function Consultation() {
         : [...prevOpenIndex, index]
     );
   };
+  const navigate=useNavigate();
   return (
     <div>
       <Header />
@@ -68,7 +70,10 @@ function Consultation() {
             trusted system of record built for agility.
           </p>
           <div className={styles.topSecondTalkBtnDiv}>
-            <button className={styles.topSecondTalkButton}>
+            <button className={styles.topSecondTalkButton} onClick={()=>{
+              navigate('/lets-talk');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}>
               Talk to an Anaplan Expert
               <span
                 className="fas fa-arrow-right"

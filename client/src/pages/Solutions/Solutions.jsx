@@ -1,6 +1,6 @@
 import React from "react";
 import "./solutions.css";
-import { useState } from "react";
+import { useState,useRef,useEffect } from "react";
 import sol1 from "../../assets/sol1.png";
 import sol2 from "../../assets/sol2.png";
 import sol3 from "../../assets/sol3.png";
@@ -22,7 +22,7 @@ import pad1 from "../../assets/light.png";
 
 import Nav from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-
+import {useNavigate} from "react-router-dom"
 const cards = [
   {
     id: 1,
@@ -105,7 +105,48 @@ function Solutions() {
       setStartIndex(startIndex - 1);
     }
   };
+   const myRef = useRef([]);
+    const observerRef = useRef(null); 
+     useEffect(()=>{
+        if(!observerRef.current){
+          observerRef.current=new IntersectionObserver((entries)=>{
+            entries.forEach((entry)=>{
+              if(entry.isIntersecting){
+                entry.target.classList.add("animateIn");
+    
+              }
+            })
+          })
+        }
+      
+        myRef.current.forEach((el) => {
+          if (el && observerRef.current) observerRef.current.observe(el);
+        });
+        
+        return () => {
+          if (observerRef.current) {
+            observerRef.current.disconnect();
+          }
+        };
+        
+      },[]);
+      const setElementRef = (index) => (el) => {
+        if (el) {
+          myRef.current[index] = el;
+          if (observerRef.current) observerRef.current.observe(el);
+        }
+      };
+    const navigate=useNavigate();
+    const solNav=()=>{
+      navigate('/lets-talk');
+      window.scrollTo(0,0)
+    }
+const solNav2=()=>{
+  navigate('/supply-chain');
+  window.scrollTo(0,0)
 
+
+}
   return (
     <div>
       <Nav />
@@ -118,8 +159,8 @@ function Solutions() {
           planning solutions, in-depth insights and plans to drive decisions and
           results.
         </h3>
-        <div className="getinbtndiv">
-          <button className="getinbutton">
+        <div className="getinbtndiv"ref={(el) => setElementRef(-1)(el)}>
+          <button className="getinbutton"onClick={()=>solNav()}>
             Get in touch
             <span
               className="fas fa-arrow-right"
@@ -144,7 +185,7 @@ function Solutions() {
               real-time insights, identify patterns, streamline demand and
               supply, leverage AI capabilities and cost optimization techniques.
             </p>
-            <h2 className="sqrh2">
+            <h2 className="sqrh2" onClick={()=>solNav2()}>
               Read More
               <span
                 style={{
@@ -153,6 +194,7 @@ function Solutions() {
                   color: "#001e6c",
                   fontSize: 12,
                 }}
+                
               >
                 {" "}
                 &gt;&gt;
@@ -170,7 +212,7 @@ function Solutions() {
               strategic and quick scenario modelling, improve decision making
               and exercise better control of funds.
             </p>
-            <h2 className="sqrh2">
+            <h2 className="sqrh2" onClick={()=>solNav2()}>
               Read More
               <span
                 style={{
@@ -198,7 +240,7 @@ function Solutions() {
               plans, succession planning, monitor hiring and framework
               recruitment strategies.
             </p>
-            <h2 className="sqrh2">
+            <h2 className="sqrh2"  onClick={()=>solNav2()}>
               Read More
               <span
                 style={{
@@ -224,7 +266,7 @@ function Solutions() {
               account segmentation, manage incentive plans and gain a
               competitive advantage.
             </p>
-            <h2 className="sqrh2">
+            <h2 className="sqrh2" onClick={()=>solNav2()}>
               Read More
               <span
                 style={{
@@ -241,8 +283,8 @@ function Solutions() {
           </div>
         </div>
       </div>
-      <div className="getinbtndiv">
-        <button className="getinbutton">
+      <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
+        <button className="getinbutton" onClick={()=>solNav()}>
           Read More
           <span
             className="fas fa-arrow-right"
@@ -393,8 +435,8 @@ function Solutions() {
           </div>
         </div>
       </div>
-      <div className="getinbtndiv">
-        <button className="getinbutton">
+      <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
+        <button className="getinbutton" onClick={()=>solNav()}>
           Know More
           <span
             className="fas fa-arrow-right"
