@@ -333,27 +333,23 @@ const profileImage = async (req, res) => {
         }
 
         const filePaths = req.files.map(file => ({
-            id: uuidv4(), // Generate a unique ID for each image
+            id: uuidv4(),
             path: `/uploads/${file.filename}`
         }));
 
-        // Assuming the employee is authenticated and their information is in req.user
-        const employeeId = req.body._id; // Assuming req.user contains the authenticated employee's info
+        const employeeId = req.body._id;
 
         if (!employeeId) {
             return res.status(400).json({ message: "Employee not authenticated" });
         }
 
-        // Check if the employee exists
         let employee = await Employee.findById(employeeId);
 
         if (employee) {
-            // If the employee exists, push the new image paths to the existing array
             employee.profileImg = [...employee.profileImg, ...filePaths]; // Add new images to the existing array
             await employee.save(); // Save the updated employee data
             return res.status(200).json({ message: "Profile Images Updated", data: employee });
         } else {
-            // If the employee does not exist, create a new employee
             const newEmployee = new Employee({
                 _id: employeeId, // Create a new ID or use the authenticated user's ID
                 profileImg: filePaths
