@@ -1,6 +1,9 @@
 import { Router } from 'express'
 import upload from '../utils/uploads.js'
-import { registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage } from "../controller/userController.js"
+import {
+    registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
+    deleteDemand, deleteJourney, deleteFeedback
+} from "../controller/userController.js"
 const userRoute = Router()
 
 
@@ -22,6 +25,9 @@ userRoute.route('/journeyDetails').get(journeyDetails)
 userRoute.route('/addWatchnow').post(addWatchnow)
 userRoute.route('/watchnowDetails').get(watchNowDetails)
 userRoute.route('/employeeImage').post(upload.array('profileImg'), profileImage)
+userRoute.route('/deleteDemand/:id').delete(deleteDemand)
+userRoute.route('/deleteJourney/:id').delete(deleteJourney)
+userRoute.route('/deleteFeedback/:id').delete(deleteFeedback)
 
 
 
