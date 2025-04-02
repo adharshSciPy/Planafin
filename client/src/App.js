@@ -18,6 +18,8 @@ import Consultation from "./pages/Consultaion/Consultation";
 import Ourjourneyadmin from "./pages/Admin/OurJourney"
 import GetAllJourney from "./pages/Admin/OurJourneyAll"
 import GetWebinarData from "./pages/Admin/WebinarFullDetails"
+import FeedBack from "./pages/Admin/FeedBack";
+import JobOpening from "./pages/Admin/JobOpening";
 
 
 function App() {
@@ -42,6 +44,10 @@ function App() {
           <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin/>} />
           <Route path="/getOurJourney" element={<GetAllJourney/>} />
           <Route path="/getWebinarData" element={<GetWebinarData/>} />
+          <Route path="/feedbackdata" element={<FeedBack/>} />
+          <Route path="/jobopenings" element={<JobOpening/>} />
+
+
 
 
 
