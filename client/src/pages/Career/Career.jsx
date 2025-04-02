@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./career.module.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -18,22 +18,40 @@ import IndianOffice from "../../assets/IndianOffice.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-
-
+import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 function Career() {
   const [showDetails, setShowDetails] = useState(false);
-  const showJobDetails = () => {
-    setShowDetails((prev) => !prev);
-  };
+  const [carouselData, setCarouselData] = useState([]);
+  const [jobDetails, setJobDetails] = useState([]);
+  const [jobDetailsDescription, setJobDetailsDescription] = useState([]);
+  const [selectedJobId, setSelectedJobId] = useState(null);
+  const [form, setForm] = useState({
+    firstName:"",
+      lastName:"",
+      email:"",
+      phone:"",
+      jobTitle:"",
+      company:"",
+      currentCompany:"",
+      linkedIn:"",
+      xUrl:"",
+      github:"",
+      portfolio:"",
+      information:""
+  });
 
-  const scrollToApplicationForm = () => {
+  const showJobDetails = (id) => {
+    setSelectedJobId((prevId) => (prevId === id ? null : id));
+  };
+  const scrollToApplicationForm = (titile) => {
+    console.log(titile);
     const element = document.querySelector(`.${styles.applicationFormOuter}`);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
-
 
   const settings = {
     dots: true,
@@ -46,9 +64,7 @@ function Career() {
     pauseOnDotsHover: true,
     pauseOnFocus: true,
     pauseOnHover: true,
-    customPaging: (i) => (
-      <div className={styles.customDot}></div>
-    ),
+    customPaging: (i) => <div className={styles.customDot}></div>,
     responsive: [
       {
         breakpoint: 1200,
@@ -56,27 +72,116 @@ function Career() {
           slidesToShow: 2,
           slidesToScroll: 2,
           infinite: true,
-          dots: true
-        }
+          dots: true,
+        },
       },
       {
         breakpoint: 900,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1
-        }
+          initialSlide: 1,
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  const fetchCarouselData = async (req, res) => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/user/viewFeedback`);
+      console.log("Response fetched succesfully", response.data.data);
+      setCarouselData(response.data.data);
+    } catch (error) {
+      console.log("Error fetching data", error);
+    }
   };
 
+  const fetchJobDetails = async (req, res) => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/user/joblisting`);
+      console.log("Job Details", response.data.data);
+      setJobDetails(response.data.data);
+      setJobDetailsDescription(response.data.data.requiredSkills);
+    } catch (error) {
+      console.log("Error fetching Data", error);
+    }
+  };
+  useEffect(() => {
+    fetchCarouselData();
+    fetchJobDetails();
+  }, []);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+  
+    Object.keys(form).forEach((key) => {
+      if (key !== "resume") {
+        formData.append(key, form[key]);
+      }
+    });
+  
+    if (form.resume) {
+      formData.append("resume", form.resume);
+    } else {
+      console.log("No valid file selected");
+      return;
+    }
+  
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/v1/user/jobApplication`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+  
+      console.log("Form data submitted", response);
+  
+      // Reset the form after successful submission
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        jobTitle: "",
+        company: "",
+        currentCompany: "",
+        linkedIn: "",
+        xUrl: "",
+        github: "",
+        portfolio: "",
+        information: "",
+        resume: null, // Reset resume as well
+      });
+  
+      // Optional: Reset file input field (if using a file input)
+      const fileInput = document.querySelector('input[type="file"]');
+      if (fileInput) fileInput.value = "";
+      
+    } catch (error) {
+      console.log("Error submitting formData", error.response?.data || error);
+    }
+  };
+  
+  
+  
+  
   return (
     <div>
       <Header />
@@ -100,7 +205,10 @@ function Career() {
               </p>
             </div>
             <div className={styles.topContentButtonDiv}>
-              <button className={styles.topContentBtn} onClick={scrollToApplicationForm}>
+              <button
+                className={styles.topContentBtn}
+                onClick={scrollToApplicationForm}
+              >
                 Join Us{" "}
                 <span
                   className="fas fa-arrow-down"
@@ -129,188 +237,66 @@ function Career() {
         <div className={styles.openingsDisplayInnerDiv}>
           <h2 className={styles.openingsHeading}>Open Positions</h2>
           <div className={styles.openingsContentOuterDiv}>
-            <div className={styles.singleOpeningContent}>
-              <h2 className={styles.jobTitleContent}>Anaplan Consultant</h2>
-              <div className={styles.jobDetailsOuterDiv}>
-                <div className={styles.companyLocation}>
-                  <div className={styles.companyCountryFlag}>
-                    <img src={Flag} className={styles.companyFlag} alt="" />
-                    <p className={styles.jobType}>Remote | India</p>
+            {jobDetails.map((item, index) => (
+              <div className={styles.singleOpeningContent} key={index}>
+                <h2 className={styles.jobTitleContent}>{item.title}</h2>
+                <div className={styles.jobDetailsOuterDiv}>
+                  <div className={styles.companyLocation}>
+                    <div className={styles.companyCountryFlag}>
+                      {/* <img src={Flag} className={styles.companyFlag} alt="" /> */}
+                      <p className={styles.jobType}>
+                        {item.jobType} | {item.location}
+                      </p>
+                    </div>
+                    <div className={styles.workingHours}>
+                      <p className={styles.workingHoursContent}>
+                        Full Time | 5 Working Days
+                      </p>
+                    </div>
+                    <div className={styles.jobApplyDiv}>
+                      <button
+                        className={styles.jobApplyBtn}
+                        onClick={() => scrollToApplicationForm(item.title)}
+                      >
+                        Apply
+                      </button>
+                    </div>
                   </div>
-                  <div className={styles.workingHours}>
-                    <p className={styles.workingHoursContent}>
-                      Full Time | 5 Working Days
-                    </p>
-                  </div>
-                  <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
-                  </div>
-                </div>
-                <div className={styles.jobMoreDetailsOuter}>
-                  <div className={styles.jobMoreDetails}>
-                    <button
-                      className={styles.moreDetails}
-                      onClick={showJobDetails}
+                  <div className={styles.jobMoreDetailsOuter}>
+                    <div className={styles.jobMoreDetails}>
+                      <button
+                        className={styles.moreDetails}
+                        onClick={() => showJobDetails(item._id)}
+                      >
+                        More Details
+                        <span className={styles.arrowIcon}>
+                          {selectedJobId === item._id ? (
+                            <FaChevronUp />
+                          ) : (
+                            <FaChevronDown />
+                          )}
+                        </span>
+                      </button>
+                    </div>
+                    <div
+                      className={styles.jobDetailsListingDiv}
+                      style={{
+                        display: selectedJobId === item._id ? "block" : "none",
+                      }}
                     >
-                      More Details
-                      <span className={styles.arrowIcon}>
-                        {showDetails ? <FaChevronUp /> : <FaChevronDown />}
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    className={styles.jobDetailsListingDiv}
-                    style={{ display: showDetails ? "block" : "none" }}
-                  >
-                    <ul className={styles.jobDetailsList}>
-                      <li className={styles.jobDetails}>
-                        Minimum 2+ successful Anaplan project experience.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        2+years of Anaplan direct customer implementation
-                        experience is a required
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Know how of Microsoft Office Software, MS Project, MS
-                        Excel, MS Visio is mandatory
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Anaplan solution architect, Master Anaplanner
-                        certification would be good to have.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Shift: US Shift - 9PM to 5 AM IST
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Location: Permanent Remote
-                      </li>
-                    </ul>
+                      <ul className={styles.jobDetailsList}>
+                        {item.requiredSkills &&
+                          item.requiredSkills.map((skill, skillIndex) => (
+                            <li className={styles.jobDetails} key={skillIndex}>
+                              {skill}
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* cms content changing...dummy data */}
-            <div className={styles.singleOpeningContent}>
-              <h2 className={styles.jobTitleContent}>Anaplan Consultant</h2>
-              <div className={styles.jobDetailsOuterDiv}>
-                <div className={styles.companyLocation}>
-                  <div className={styles.companyCountryFlag}>
-                    <img src={Flag} className={styles.companyFlag} alt="" />
-                    <p className={styles.jobType}>Remote | India</p>
-                  </div>
-                  <div className={styles.workingHours}>
-                    <p className={styles.workingHoursContent}>
-                      Full Time | 5 Working Days
-                    </p>
-                  </div>
-                  <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
-                  </div>
-                </div>
-                <div className={styles.jobMoreDetailsOuter}>
-                  <div className={styles.jobMoreDetails}>
-                    <button
-                      className={styles.moreDetails}
-                      onClick={showJobDetails}
-                    >
-                      More Details
-                      <span className={styles.arrowIcon}>
-                        {showDetails ? <FaChevronUp /> : <FaChevronDown />}
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    className={styles.jobDetailsListingDiv}
-                    style={{ display: showDetails ? "block" : "none" }}
-                  >
-                    <ul className={styles.jobDetailsList}>
-                      <li className={styles.jobDetails}>
-                        Minimum 2+ successful Anaplan project experience.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        2+years of Anaplan direct customer implementation
-                        experience is a required
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Know how of Microsoft Office Software, MS Project, MS
-                        Excel, MS Visio is mandatory
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Anaplan solution architect, Master Anaplanner
-                        certification would be good to have.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Shift: US Shift - 9PM to 5 AM IST
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Location: Permanent Remote
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.singleOpeningContent}>
-              <h2 className={styles.jobTitleContent}>Anaplan Consultant</h2>
-              <div className={styles.jobDetailsOuterDiv}>
-                <div className={styles.companyLocation}>
-                  <div className={styles.companyCountryFlag}>
-                    <img src={Flag} className={styles.companyFlag} alt="" />
-                    <p className={styles.jobType}>Remote | India</p>
-                  </div>
-                  <div className={styles.workingHours}>
-                    <p className={styles.workingHoursContent}>
-                      Full Time | 5 Working Days
-                    </p>
-                  </div>
-                  <div className={styles.jobApplyDiv}>
-                    <button className={styles.jobApplyBtn} onClick={scrollToApplicationForm}>Apply</button>
-                  </div>
-                </div>
-                <div className={styles.jobMoreDetailsOuter}>
-                  <div className={styles.jobMoreDetails}>
-                    <button
-                      className={styles.moreDetails}
-                      onClick={showJobDetails}
-                    >
-                      More Details
-                      <span className={styles.arrowIcon}>
-                        {showDetails ? <FaChevronUp /> : <FaChevronDown />}
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    className={styles.jobDetailsListingDiv}
-                    style={{ display: showDetails ? "block" : "none" }}
-                  >
-                    <ul className={styles.jobDetailsList}>
-                      <li className={styles.jobDetails}>
-                        Minimum 2+ successful Anaplan project experience.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        2+years of Anaplan direct customer implementation
-                        experience is a required
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Know how of Microsoft Office Software, MS Project, MS
-                        Excel, MS Visio is mandatory
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Anaplan solution architect, Master Anaplanner
-                        certification would be good to have.
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Shift: US Shift - 9PM to 5 AM IST
-                      </li>
-                      <li className={styles.jobDetails}>
-                        Location: Permanent Remote
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* dummy data end */}
+            ))}
           </div>
         </div>
       </div>
@@ -394,13 +380,13 @@ function Career() {
         <h2 className={styles.carouselHeading}>Employee Feedback</h2>
         <div className={styles.sliderWrapper}>
           <Slider {...settings}>
-            {[...Array(5)].map((_, index) => (
+            {carouselData.map((item, index) => (
               <div key={index} className={styles.carouselSingleCardOuter}>
                 <div className={styles.singleWrapper}>
                   <div className={styles.singleCardImageOuter}>
                     <div className={styles.singleCardPersonImage}>
                       <img
-                        src={SinglePerson}
+                        src={`${baseUrl}/${item.image}`}
                         alt="single.person"
                         className={styles.singlePersonImg}
                       />
@@ -414,16 +400,9 @@ function Career() {
                     </div>
                   </div>
                   <div className={styles.singleCardContentDiv}>
-                    <p className={styles.feedbackPara}>
-                      “I have seen Planafin grow from the day-one. The experiences I
-                      have gained along the way are irreplaceable. Everyone at
-                      Planafin has a strong drive to get things done, regardless of
-                      the time of the day or day of the week.”
-                    </p>
-                    <h6 className={styles.singleCardName}>Biju Abraham</h6>
-                    <p className={styles.personPosition}>
-                      Senior Business Process Consultant - FP&A
-                    </p>
+                    <p className={styles.feedbackPara}>{item.message}</p>
+                    <h6 className={styles.singleCardName}>{item.name}</h6>
+                    <p className={styles.personPosition}>{item.jobPosition}</p>
                   </div>
                 </div>
               </div>
@@ -433,7 +412,8 @@ function Career() {
       </div>
 
       <div className={styles.applicationFormOuter}>
-        <div className={styles.applicationFormMain}>
+        <form className={styles.applicationFormMain} onSubmit={handleSubmit}>
+          {" "}
           <h2 className={styles.formTitle}>Submit your application</h2>
           <div className={styles.formContainer}>
             <div className={styles.formRow}>
@@ -441,11 +421,19 @@ function Career() {
                 type="text"
                 placeholder="First Name*"
                 className={styles.formInput}
+                name="firstName"
+                value={form.firstName}
+                onChange={handleChange} 
+                required
               />
               <input
                 type="text"
                 placeholder="Last Name*"
                 className={styles.formInput}
+                name="lastName"
+                value={form.lastName}
+                onChange={handleChange} 
+                required
               />
             </div>
             <div className={styles.formRow}>
@@ -453,11 +441,19 @@ function Career() {
                 type="email"
                 placeholder="Email*"
                 className={styles.formInput}
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
               />
               <input
                 type="tel"
                 placeholder="Phone*"
                 className={styles.formInput}
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className={styles.formRow}>
@@ -465,36 +461,84 @@ function Career() {
                 type="text"
                 placeholder="Job Title*"
                 className={styles.formInput}
+                name="jobTitle"
+                value={form.jobTitle}
+                onChange={handleChange} 
+                required
               />
               <input
                 type="text"
                 placeholder="Company*"
                 className={styles.formInput}
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Attach Your Resume</label>
-              <input type="file" className={styles.fileInput} />
+              <input
+  type="file"
+  className={styles.fileInput}
+  name="resume"
+  onChange={(e) => setForm({ ...form, resume: e.target.files[0] })}
+/>
+
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Current Company</label>
-              <input type="text" className={styles.fullWidthInput} />
+              <input
+                type="text"
+                className={styles.fullWidthInput}
+                name="currentCompany"
+                value={form.currentCompany}
+                onChange={handleChange} 
+              />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Linkedin URL</label>
-              <input type="text" className={styles.fullWidthInput} />
+              <input
+                type="text"
+                className={styles.fullWidthInput}
+                name="linkedIn"
+                value={form.linkedIn}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Twitter URL</label>
-              <input type="text" className={styles.fullWidthInput} />
+              <input
+                type="text"
+                className={styles.fullWidthInput}
+                name="xUrl"
+                value={form.xUrl}
+                onChange={handleChange} 
+                required
+              />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>GitHub URL</label>
-              <input type="text" className={styles.fullWidthInput} />
+              <input
+                type="text"
+                className={styles.fullWidthInput}
+                name="github"
+                value={form.github}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Portfolio URL</label>
-              <input type="text" className={styles.fullWidthInput} />
+              <input
+                type="text"
+                className={styles.fullWidthInput}
+                name="portfolio"
+                value={form.portfolio}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className={styles.formLabelWraper}>
               <label className={styles.fileLabel}>Additional Information</label>
@@ -502,61 +546,72 @@ function Career() {
                 rows={6}
                 placeholder="Add a cover letter or anything else you want to share."
                 className={styles.fullWidthInput}
+                name="information"
+                value={form.information}
+                onChange={handleChange}
+                required
               />
             </div>
           </div>
           <span className={styles.formCheckboxOuter}>
-            <input type="checkbox" className={styles.formCheckbox} />
+            <input type="checkbox" className={styles.formCheckbox} required />{" "}
+
             <label className={styles.checkboxLabel}>
               Yes, Planafin can contact me about future job opportunities for up
               to 2 years
             </label>
           </span>
           <div className={styles.subimtButtonDiv}>
-            <button className={styles.subimtButton}>
+            <button className={styles.subimtButton} type="submit">
+              {" "}
               <span className={styles.subimtButtonSpan}>
                 SUBMIT APPLICATION
               </span>
             </button>
           </div>
-        </div>
+        </form>
+
         {/* <Carousel options={OPTIONS} /> */}
       </div>
       <div className={styles.locationOuterDiv}>
         <div className={styles.locationInnerDiv}>
-          <h2 className={styles.locationHeading}>
-            Join one of our locations
-          </h2>
+          <h2 className={styles.locationHeading}>Join one of our locations</h2>
           <div className={styles.locationImgOuter}>
             <div className={styles.locationImgSingle}>
               <div className={styles.imageSingleCard}>
-                <img src={usaOffice} alt="usaOffice" className={styles.singleImageLoc} />
+                <img
+                  src={usaOffice}
+                  alt="usaOffice"
+                  className={styles.singleImageLoc}
+                />
               </div>
-              <h5 className={styles.officeLocation}>
-                USA Office
-              </h5>
+              <h5 className={styles.officeLocation}>USA Office</h5>
             </div>
             <div className={styles.locationImgSingle}>
               <div className={styles.imageSingleCard}>
-                <img src={uaeOffice} alt="uaeOffice" className={styles.singleImageLoc} />
+                <img
+                  src={uaeOffice}
+                  alt="uaeOffice"
+                  className={styles.singleImageLoc}
+                />
               </div>
-              <h5 className={styles.officeLocation}>
-                UAE Office
-              </h5>
+              <h5 className={styles.officeLocation}>UAE Office</h5>
             </div>
             <div className={styles.locationImgSingle}>
               <div className={styles.imageSingleCard}>
-                <img src={IndianOffice} alt="IndianOffice" className={styles.singleImageLoc} />
+                <img
+                  src={IndianOffice}
+                  alt="IndianOffice"
+                  className={styles.singleImageLoc}
+                />
               </div>
-              <h5 className={styles.officeLocation}>
-                India Office
-              </h5>
+              <h5 className={styles.officeLocation}>India Office</h5>
             </div>
           </div>
         </div>
       </div>
       {/* </div> */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
