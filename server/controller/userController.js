@@ -7,6 +7,7 @@ import { OnDemand } from "../model/onDemandSchema.js";
 import { Journey } from "../model/journeySchema.js";
 import { WatchNow } from "../model/watchnowSchema.js";
 import { Employee } from "../model/employeeSchema.js";
+import { Customer } from "../model/customerSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -443,11 +444,20 @@ const profileImage = async (req, res) => {
       path: `/uploads/${file.filename}`,
     }));
 
-    // Assuming the employee is authenticated and their information is in req.user
-    const employeeId = req.body._id; // Assuming req.user contains the authenticated employee's info
+    // Assuming the employee is authenticated, otherwise you could fetch the employee info another way
+    const employeeId = req.body._id; // Assuming req.body contains the employee's ID
 
     if (!employeeId) {
-      return res.status(400).json({ message: "Employee not authenticated" });
+      // If no employeeId is provided, you are creating a new employee
+      const newEmployee = new Employee({
+        profileImg: filePaths, // Set the uploaded images as profile images
+      });
+
+      const savedEmployee = await newEmployee.save();
+      return res.status(200).json({
+        message: "New Employee Created and Images Uploaded",
+        data: savedEmployee,
+      });
     }
 
     // Check if the employee exists
@@ -461,14 +471,7 @@ const profileImage = async (req, res) => {
         .status(200)
         .json({ message: "Profile Images Updated", data: employee });
     } else {
-      // If the employee does not exist, create a new employee
-      const newEmployee = new Employee({
-        _id: employeeId, // Create a new ID or use the authenticated user's ID
-        profileImg: filePaths,
-      });
-      
-      const  savedEmployee=await newEmployee.save()
-      return res.status(200).json({ message:"New Employee Created and Images Uploaded",data:savedEmployee })
+      return res.status(400).json({ message: "Employee not found" });
     }
   } catch (error) {
     res
@@ -477,15 +480,81 @@ const profileImage = async (req, res) => {
   }
 };
 
-const deleteProfileImage = async (request, res) => {
-  try {
-    
-  } catch (error) {
 
+const deleteProfileImage = async (req, res) => {
+  const { employeeId, id } = req.params;
+  try {
+    const result = await Employee.findByIdAndUpdate(employeeId, {
+      $pull: { profileImg: { id } }
+    }, { new: true })
+    res.status(200).json({ message: "Image Removed", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Intenal Server Error", error: error.message })
   }
 }
 
+const customerImage = async (req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
+
+    const filePaths = req.files.map((file) => ({
+      id: uuidv4(), // Generate a unique ID for each image
+      path: `/uploads/${file.filename}`,
+    }));
+
+    // Assuming the customer is authenticated, otherwise you could fetch the customer info another way
+    const customerId = req.body._id; // Assuming req.body contains the customer's ID
+
+    if (!customerId) {
+      // If no customerId is provided, you are creating a new customer
+      const newCustomer = new Customer({
+        imageCustomer: filePaths, // Set the uploaded images as profile images
+      });
+
+      const savedCustomer = await newCustomer.save();
+      return res.status(200).json({
+        message: "New Customer Created and Images Uploaded",
+        data: savedCustomer,
+      });
+    }
+
+    // Check if the customer exists
+    let customer = await Customer.findById(customerId);
+
+    if (customer) {
+      // If the customer exists, push the new image paths to the existing array
+      customer.imageCustomer = [...customer.imageCustomer, ...filePaths]; // Add new images to the existing array
+      await customer.save(); // Save the updated customer data
+      return res
+        .status(200)
+        .json({ message: "Customer Images Updated", data: customer });
+    } else {
+      return res.status(400).json({ message: "Customer not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+const deleteCustomerImage = async (req, res) => {
+  const { customerId, id } = req.params;
+  try {
+    const result = await Customer.findByIdAndUpdate(customerId, {
+      $pull: { imageCustomer: { id } }
+    }, { new: true })
+    res.status(200).json({ message: "Image Removed", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+  }
+}
+
+
+
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage
+  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage
 }
