@@ -385,7 +385,7 @@
   border-radius: 15px;
   max-width: 450px;  /* Keep it smaller */
   text-align: center;
-
+height: 300px;
   margin: auto;  /* Ensures cards are centered */
 }
 
@@ -412,6 +412,7 @@
   color: #20303d;
   font-weight: 500;
   line-height: 24px;
+  
 }
 
 .singleCardName {
