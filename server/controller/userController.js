@@ -144,12 +144,13 @@ const ContactDetails = async (req, res) => {
 };
 
 const jobOpenings = async (req, res) => {
-  const { title, location, jobDescription, requiredSkills, jobType } = req.body;
+  const { title, location, workSchedule, workTime, requiredSkills, jobType } = req.body;
   try {
     const result = await JobOpening.create({
       title,
       location,
-      jobDescription,
+      workSchedule,
+      workTime,
       requiredSkills,
       jobType,
     });
