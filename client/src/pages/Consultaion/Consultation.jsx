@@ -200,8 +200,9 @@ function Consultation() {
                     aria-hidden="true"
                     style={{
                       color: "#5AC2A5",
-                      fontSize: "24px",
+                      fontSize: "18px",
                       width: "100%",
+                   
                     }}
                   ></i>
                 </span>
@@ -218,7 +219,7 @@ function Consultation() {
                     aria-hidden="true"
                     style={{
                       color: "#5AC2A5",
-                      fontSize: "24px",
+                      fontSize: "18px",
                       width: "100%",
                     }}
                   ></i>
@@ -236,7 +237,7 @@ function Consultation() {
                     aria-hidden="true"
                     style={{
                       color: "#5AC2A5",
-                      fontSize: "24px",
+                      fontSize: "18px",
                       width: "100%",
                     }}
                   ></i>
