@@ -92,46 +92,7 @@ function FeedBack() {
                      required
                    />
                  </div>
-                 {/* <div className={styles.formRow}>
-                   <input
-                     type="email"
-                     placeholder="Email*"
-                     className={styles.formInput}
-                     name="email"
-                     value={form.email}
-                     onChange={handleChange}
-                     required
-                   />
-                   <input
-                     type="tel"
-                     placeholder="Phone*"
-                     className={styles.formInput}
-                     name="phone"
-                     value={form.phone}
-                     onChange={handleChange}
-                     required
-                   />
-                 </div>
-                 <div className={styles.formRow}>
-                   <input
-                     type="text"
-                     placeholder="Job Title*"
-                     className={styles.formInput}
-                     name="jobTitle"
-                     value={form.jobTitle}
-                     onChange={handleChange} 
-                     required
-                   />
-                   <input
-                     type="text"
-                     placeholder="Company*"
-                     className={styles.formInput}
-                     name="company"
-                     value={form.company}
-                     onChange={handleChange}
-                     required
-                   />
-                 </div> */}
+               
                  <div className={styles.formLabelWraper}>
                    <label className={styles.fileLabel}>Employee Image</label>
                    <input
@@ -143,61 +104,7 @@ function FeedBack() {
 
 
      
-                 </div>
-                 {/* <div className={styles.formLabelWraper}>
-                   <label className={styles.fileLabel}>Current Company</label>
-                   <input
-                     type="text"
-                     className={styles.fullWidthInput}
-                     name="currentCompany"
-                     value={form.currentCompany}
-                     onChange={handleChange} 
-                   />
-                 </div>
-                 <div className={styles.formLabelWraper}>
-                   <label className={styles.fileLabel}>Linkedin URL</label>
-                   <input
-                     type="text"
-                     className={styles.fullWidthInput}
-                     name="linkedIn"
-                     value={form.linkedIn}
-                     onChange={handleChange}
-                     required
-                   />
-                 </div>
-                 <div className={styles.formLabelWraper}>
-                   <label className={styles.fileLabel}>Twitter URL</label>
-                   <input
-                     type="text"
-                     className={styles.fullWidthInput}
-                     name="xUrl"
-                     value={form.xUrl}
-                     onChange={handleChange} 
-                     required
-                   />
-                 </div>
-                 <div className={styles.formLabelWraper}>
-                   <label className={styles.fileLabel}>GitHub URL</label>
-                   <input
-                     type="text"
-                     className={styles.fullWidthInput}
-                     name="github"
-                     value={form.github}
-                     onChange={handleChange}
-                     required
-                   />
-                 </div>
-                 <div className={styles.formLabelWraper}>
-                   <label className={styles.fileLabel}>Portfolio URL</label>
-                   <input
-                     type="text"
-                     className={styles.fullWidthInput}
-                     name="portfolio"
-                     value={form.portfolio}
-                     onChange={handleChange}
-                     required
-                   />
-                 </div> */}
+                 </div>              
                  <div className={styles.formLabelWraper}>
                    <label className={styles.fileLabel}>Additional Information</label>
                    <textarea
@@ -211,14 +118,6 @@ function FeedBack() {
                    />
                  </div>
                </div>
-               {/* <span className={styles.formCheckboxOuter}>
-                 <input type="checkbox" className={styles.formCheckbox} required />{" "}
-     
-                 <label className={styles.checkboxLabel}>
-                   Yes, Planafin can contact me about future job opportunities for up
-                   to 2 years
-                 </label>
-               </span> */}
                <div className={styles.subimtButtonDiv}>
                  <button className={styles.subimtButton} type="submit">
                    {" "}
@@ -229,7 +128,7 @@ function FeedBack() {
                </div>
              </form>
      
-             {/* <Carousel options={OPTIONS} /> */}
+           
            </div>
 
   )
