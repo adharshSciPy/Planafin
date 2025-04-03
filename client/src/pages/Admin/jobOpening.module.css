@@ -1,0 +1,211 @@
+.applicationFormOuter {
+    height: 100vh;
+    width: 100%;
+    margin: auto;
+   display: flex;
+    padding: 4rem 0;
+    
+   
+    
+   
+  }
+  .applicationFormMain {
+    width: 710px;
+    /* width: 50%; */
+    background-color: #f0f7ff;
+    padding:  5rem 2rem;
+    border-radius: 10px;
+    margin:  auto;
+    /* border: 2px solid ; */
+    
+
+  }
+  
+  .formTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 1rem;
+  }
+  
+  .formContainer {
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .formRow {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .formInput {
+    width: 50%;
+    font-size: 1rem;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  .formInput::placeholder {
+    color: #bdc1c9;
+  }
+  
+  .fileLabel {
+    font-family: "Poppins", Sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    color: #222d4e;
+    margin: 10px 0;
+  }
+  
+  .fileInput {
+    width: 100%;
+    float: left;
+    height: 108px;
+    background-color: #fff;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    color: #bdc1c9;
+    display: flex;
+    padding: 35px;
+    text-align-last: center;
+    margin-bottom: 15px;
+  }
+  
+  .fullWidthInput {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  .fullWidthInput::placeholder {
+    color: #bdc1c9;
+  }
+  .formCheckboxOuter {
+    width: 100%;
+    margin: auto;
+    /* border: 2px solid; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+  .formCheckbox {
+    margin-right: 5px;
+  }
+  .checkboxLabel {
+    color: #222d4e;
+    font-size: 10px;
+    font-weight: 300;
+    line-height: 15px;
+    font-style: italic;
+  }
+  .subimtButtonDiv {
+    display: flex;
+    justify-content: center;
+  }
+  .subimtButton {
+    background-color: #f1ce3b;
+    color: #000000;
+  }
+  .subimtButton {
+    padding: 10px 25px;
+    margin: 15px 0;
+    font-family: "Poppins", Sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 27px;
+    border-style: none;
+    border-radius: 5px;
+  }
+  .subimtButton:hover{
+      transition: opacity 1s ease ;
+      opacity: 0.6; 
+    
+  }
+  .skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .skillTag {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .deleteSkillBtn {
+    background: none;
+    border: none;
+    color: red;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  .deleteSkillBtn:hover {
+    color: darkred;
+  }
+  .skillInputWrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .fullWidthInput {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* Make space for the icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .addSkillBtn {
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+    padding: 5px;
+  }
+  
+  .addSkillBtn:hover {
+    color: #0056b3;
+  }
+  
+  @media (max-width:786px) {
+  
+    .formRow{
+      flex-direction: column;
+      width: 100%;
+    }
+    .formInput{
+      width: 100%;
+    }
+ 
+  
+}
+  @media (max-width:486px) {
+  
+    .subimtButton{
+    padding: 8px 25px;
+    font-size: 20px;
+    }
+    
+  
+  }
