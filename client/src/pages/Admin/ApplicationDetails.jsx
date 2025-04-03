@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Button, message } from 'antd';
-import { Eye } from 'lucide-react';
+import { Eye, Trash } from 'lucide-react';
 import baseUrl from '../../baseUrl';
 import './JobDetails.css';
 
@@ -24,6 +24,17 @@ function ApplicationDetails() {
         };
         fetchDetails();
     }, []);
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`${baseUrl}/api/v1/user/deleteJobapplication/${id}`);
+            message.success('Job deleted successfully');
+            setDetails(details.filter(detail => detail._id !== id));
+        } catch (error) {
+            console.error('Error deleting job:', error);
+            message.error('Failed to delete job');
+        }
+    };
 
     const columns = [
         {
@@ -48,6 +59,15 @@ function ApplicationDetails() {
             render: (text, record) => (
                 <Button type="text">
                     <Eye size={25} />
+                </Button>
+            ),
+        },
+        {
+            title: 'Delete',
+            key: 'action',
+            render: (text, record) => (
+                <Button type="text" danger onClick={() => handleDelete(record._id)}>
+                    <Trash size={25} color='red' />
                 </Button>
             ),
         },
