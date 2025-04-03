@@ -87,7 +87,9 @@ function Resources() {
                     <div className={styles.webinar}>WEBINAR</div>
                     <div className={styles.webinardata}>
                       <h3>{item.title}</h3>
+                      <div className={styles.webinardataPara}>
                       <p>{item.summary}</p>
+                      </div>
                       <button
                         className={styles.button}
                         onClick={() =>{

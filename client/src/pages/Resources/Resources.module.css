@@ -95,9 +95,13 @@
 }
 
 .webinardata {
-  padding: 10px;
+  overflow: hidden;
 }
-
+.webinardataPara{
+  height: 100px;
+  overflow: hidden;
+  padding: 10px 0px;
+}
 .button {
   display: flex;
   align-items: center;
