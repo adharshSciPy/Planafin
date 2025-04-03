@@ -283,6 +283,16 @@ const applicationDetails = async (req, res) => {
   }
 };
 
+const deleteApplication = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await JobApplication.findByIdAndDelete(id);
+    res.status(200).json({ message: "Application deleted successfully", data: result });
+  } catch (error) {
+    res.status(200).json({ message: "Internal server error", error: error.message })
+  }
+}
+
 const onDemand = async (req, res) => {
   try {
     const { title, summary, pigment, speaker, attendSession } = req.body;
@@ -553,9 +563,20 @@ const deleteCustomerImage = async (req, res) => {
   }
 }
 
+const deleteJobopenings = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await JobOpening.findByIdAndDelete(id);
+    res.status(200).json({ message: "Openings deleted successfully", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+  }
+}
+
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage
+  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
+  deleteJobopenings, deleteApplication
 }

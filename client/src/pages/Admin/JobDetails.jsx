@@ -28,9 +28,9 @@ function JobDetails() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${baseUrl}/api/v1/user/joblisting/${id}`);
+      await axios.delete(`${baseUrl}/api/v1/user/deleteJobopening/${id}`);
       message.success('Job deleted successfully');
-      setDetails(details.filter(detail => detail.id !== id));
+      setDetails(details.filter(detail => detail._id !== id));
     } catch (error) {
       console.error('Error deleting job:', error);
       message.error('Failed to delete job');
@@ -57,7 +57,7 @@ function JobDetails() {
       title: 'Action',
       key: 'action',
       render: (text, record) => (
-        <Button type="text" danger onClick={() => handleDelete(record.id)}>
+        <Button type="text" danger onClick={() => handleDelete(record._id)}>
           <Trash size={20} color='red' />
         </Button>
       ),
