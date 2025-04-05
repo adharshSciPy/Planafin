@@ -2,7 +2,8 @@ import { Router } from 'express'
 import upload from '../utils/uploads.js'
 import {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
-    deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage
+    deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
+    deleteApplication
 } from "../controller/userController.js"
 const userRoute = Router()
 
@@ -31,6 +32,10 @@ userRoute.route('/deleteFeedback/:id').delete(deleteFeedback)
 userRoute.route('/deleteProfileImage/:employeeId/:id').delete(deleteProfileImage)
 userRoute.route('/customerImage').post(upload.array('imageCustomer'), customerImage)
 userRoute.route('/deleteCustomerImage/:customerId/:id').delete(deleteCustomerImage)
+userRoute.route('/deleteJobopening/:id').delete(deleteJobopenings)
+userRoute.route('/deleteJobapplication/:id').delete(deleteApplication)
+
+
 
 
 

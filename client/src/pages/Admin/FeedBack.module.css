@@ -1,9 +1,7 @@
 .applicationFormOuter {
     background-color: #f1f9ff;
     min-height: max-content;
-    /* margin-top: 2rem; */
-    /* display: flex;
-    justify-content: center; */
+   
   }
   .applicationFormMain {
     max-width: 710px;

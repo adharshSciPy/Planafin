@@ -22,6 +22,7 @@ import FeedBack from "./pages/Admin/FeedBack";
 import JobOpening from "./pages/Admin/JobOpening";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import JobDetails from "./pages/Admin/JobDetails";
+import ApplicationDetails from "./pages/Admin/ApplicationDetails";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
           <Route path="/jobopenings" element={<JobOpening/>} />
           <Route path="/admindash" element={<AdminDashboard/>} />
           <Route path="/jobdetails" element={<JobDetails/>} />
+          <Route path="/applicationDetails" element={<ApplicationDetails/>} />
 
 
 
