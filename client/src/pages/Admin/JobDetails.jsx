@@ -44,9 +44,9 @@ function JobDetails() {
       render: (text, record, index) => index + 1,
     },
     {
-      title: 'Job Type',
-      dataIndex: 'jobType',
-      key: 'jobType',
+      title: 'Job Title',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
       title: 'Location',
