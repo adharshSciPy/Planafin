@@ -12,3 +12,6 @@
     border-radius: 10px;
     border:none;
 }
+.subMain{
+    overflow: hidden;
+}
