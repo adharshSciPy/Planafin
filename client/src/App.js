@@ -23,6 +23,7 @@ import JobOpening from "./pages/Admin/JobOpening";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import JobDetails from "./pages/Admin/JobDetails";
 import ApplicationDetails from "./pages/Admin/ApplicationDetails";
+import EmployeeImage from "./pages/Admin/Employee Image/EmployeeImage";
 import EmployeeData from "./pages/Admin/EmployeeData"
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
           <Route path="/admindash" element={<AdminDashboard/>} />
           <Route path="/jobdetails" element={<JobDetails/>} />
           <Route path="/applicationDetails" element={<ApplicationDetails/>} />
+          <Route path="/employeeimage" element={<EmployeeImage/>} />
+
           <Route path="/employeeData/:id" element={<EmployeeData/>} />
 
 
