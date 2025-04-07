@@ -23,14 +23,14 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="thirdcard">
-              <h3>Webinar Details</h3>
-              <Link>
+              <h3>Webinar Details</h3> 
+              <Link to="/webinarData">
               <button className="thirdcard-btn1">View</button>
               </Link>
             </div>
             <div className="forthcard">
-              <h3>Ad feedback</h3>
-              <Link>
+              <h3>Feedback application</h3>
+              <Link to="/feedbackdata">
               <button className="fourthcard-btn1">View</button>
               </Link>
             </div>
@@ -38,7 +38,7 @@ function AdminDashboard() {
           <div className="secondrow">
             <div className="fstcard">
               <h3>Our Journey</h3>
-              <Link to="/">
+              <Link to="/ourJourneyAdmin">
                 <button className="firstcard-btn2">View</button>
               </Link>
             </div>

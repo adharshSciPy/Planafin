@@ -1,23 +1,29 @@
 
 .dashboard-container {
-    min-height: 100vh;
-    background: linear-gradient(to right, #7b2ff7, #3c8ce7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #00c6ff, #0072ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
   
 
   .dashboard-navbar {
-    background: linear-gradient(to right, #333, #555);
+  /* background: black */
+    background-color: black;
     color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 15px 30px;
-    font-size: 34px;
-    font-weight: bold;
+    font-size: 37px;
+    font-weight: 800;
     text-align: center;
+    letter-spacing: 15px;
     width: 100%;
-    /* border-radius: 10px; */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* -webkit-text-stroke: 0.5px brown;  */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); 
+    border-radius: 10px;
+    box-shadow:  rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
   }
   .firstcard:hover {
     transform: translateY(-5px);
@@ -341,3 +347,144 @@
     background: #0056b3;
   }
   
+/* Tablet View */
+@media (max-width: 1224px) {
+  .firstrow,
+  .secondrow,
+  .thirdrow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+  }
+
+  .firstcard,
+  .secondcard,
+  .thirdcard,
+  .forthcard,
+  .fstcard,
+  .sndcard,
+  .trdcard,
+  .frthcard,
+  .firstcard3,
+  .secondcard3 {
+    width: 45%;
+    min-height: 250px;
+    gap: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .firstrow,
+  .secondrow,
+  .thirdrow {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+  }
+
+  .firstcard,
+  .secondcard,
+  .thirdcard,
+  .forthcard,
+  .fstcard,
+  .sndcard,
+  .trdcard,
+  .frthcard,
+  .firstcard3,
+  .secondcard3 {
+    width: 100% !important;
+    max-width: 95%;
+    min-height: 270px;
+    gap: 55px;
+    box-sizing: border-box;
+  }
+  .firstcard-btn1,
+.secondcard-btn1,
+.thirdcard-btn1,
+.fourthcard-btn1,
+.firstcard-btn2,
+.secondcard-btn2,
+.thirdcard-btn2,
+.forthcard-btn2 {
+  padding: 12px 40px;
+  font-size: 15px;
+  width: 100%; /* Makes buttons visually wider */
+  /* max-width: 550px; */
+}
+
+  .dashboard-cards-container {
+    width: 80%;
+    padding: 0 25px;
+    box-sizing: border-box;
+    margin-top: 50px;
+    gap: 40px;
+    font-size: 23px;
+  }
+
+  .firstcard-btn1,
+  .secondcard-btn1,
+  .thirdcard-btn1,
+  .fourthcard-btn1,
+  .firstcard-btn2,
+  .secondcard-btn2,
+  .thirdcard-btn2,
+  .forthcard-btn2 {
+    padding: 10px 30px;
+    font-size: 14px;
+  }
+
+  .dashboard-navbar {
+    font-size: 22px;
+    padding: 12px 20px;
+  }
+}
+/* Responsive adjustments for very small mobile screens */
+@media (max-width: 400px) {
+  .firstrow,
+  .secondrow,
+  .thirdrow {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .firstcard,
+  .secondcard,
+  .thirdcard,
+  .forthcard,
+  .fstcard,
+  .sndcard,
+  .trdcard,
+  .frthcard,
+  .firstcard3,
+  .secondcard3 {
+    width: 95%;
+    height: auto;
+    gap: 20px;
+  }
+
+  .firstcard-btn1,
+  .secondcard-btn1,
+  .thirdcard-btn1,
+  .fourthcard-btn1,
+  .firstcard-btn2,
+  .secondcard-btn2,
+  .thirdcard-btn2,
+  .forthcard-btn2 {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .dashboard-navbar {
+    font-size: 20px;
+    padding: 8px 16px;
+    text-align: center;
+  }
+
+  .dashboard-cards-container {
+    gap: 40px;
+    margin-top: 40px;
+  }
+}
