@@ -29,7 +29,7 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="forthcard">
-              <h3>Ad feedback</h3>
+              <h3>Feedback application</h3>
               <Link to="/feedbackdata">
               <button className="fourthcard-btn1">View</button>
               </Link>
