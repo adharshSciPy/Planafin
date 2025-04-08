@@ -1,17 +1,50 @@
 import React, { useState } from "react";
 import "./adminreg.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import baseUrl from "../../baseUrl";
 
 function AdminReg() {
+   const navigate=useNavigate();
+  
+  let field = {
+    userName:"",
+    email: "",
+    password: "",
+  };
+    const [form,setForm]=useState(field);
+    const handleChange = (e) => {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
+    };
+     const handleSubmit=async(e)=>{
+        e.preventDefault();
+        try {
+          const response=await axios.post(`${baseUrl}/api/v1/user/register`,form);
+          if(response){
+            localStorage.setItem('token', response.data.token);
+    localStorage.setItem('role', response.data.role);
+    navigate('/adminlogin')
+    
+          }
+        } catch (error) {
+          console.log("Error Loging In",error);
+          
+        }
+      }
        return (
         <div className="register-container">
           <h2> Admin Register</h2>
-          <form >
+          <form onSubmit={handleSubmit} >
             <div className="input-group">
-              <label>Name</label>
+              <label>User Name</label>
               <input
                 type="text"
-                name="name"
+                name="userName"
+                value={form.userName}
+                onChange={handleChange}
                 placeholder="Enter your name"
               />
             </div>
@@ -21,6 +54,10 @@ function AdminReg() {
               <input
                 type="email"
                 name="email"
+                onChange={handleChange}
+
+                value={form.email}
+
                 placeholder="Enter your email"
               
               />
@@ -31,6 +68,10 @@ function AdminReg() {
               <input
                 type="password"
                 name="password"
+                onChange={handleChange}
+
+                value={form.password}
+
                 placeholder="Enter your password"
               />
             </div>
