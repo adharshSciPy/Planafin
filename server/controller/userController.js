@@ -530,7 +530,7 @@ const employeeDetails = async (req, res) => {
 }
 
 const deleteProfileImage = async (req, res) => {
-  const {  id } = req.query;
+  const { id } = req.query;
   try {
     const result = await Employee.findByIdAndDelete(id )
     res.status(200).json({ message: "Image Removed", data: result })
