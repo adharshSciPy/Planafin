@@ -31,7 +31,7 @@ import AdminReg from "./pages/Admin/AdminReg";
 import Adminlogin from "./pages/Admin/Adminlogin";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.js";
 import WatchNowDetails from "./pages/Admin/WatchNowDetails"
-
+import ProjectDetails from "./pages/Admin/Project.jsx";
 function App() {
   return (
     <div className="App">
@@ -75,6 +75,8 @@ function App() {
 
           <Route path="/admincontactus" element={<AdContact  />} />
           <Route path="/WatchNowDetails" element={<WatchNowDetails />} />
+          <Route path="/projectDetails" element={<ProjectDetails />} />
+
         </Routes>
       </BrowserRouter>
     </div>
