@@ -3,7 +3,7 @@ import React, { useState, } from "react";
 import baseUrl from "../../baseUrl";
 import { useNavigate } from "react-router-dom";
 
-// import "./adminlogin.css";
+import "./adminlogin.css";
 
 function Adminlogin() {
   let field = {
@@ -42,10 +42,10 @@ navigate('/admindashboard')
 
   return (
     <div>
-       <div className="login-container">
+       <div className="admlogin-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <div className="input-group">
+        <div className="adminput-group">
           <label>Email</label>
           <input
             type="email"
@@ -56,7 +56,7 @@ navigate('/admindashboard')
           />
         </div>
 
-        <div className="input-group">
+        <div className="adminput-group">
           <label>Password</label>
           <input
             type="password"
@@ -67,8 +67,8 @@ navigate('/admindashboard')
           />
         </div>
 
-        <button type="submit">Login</button>
-        <p className="signup-link">
+        <button className="admbtn" type="submit">Login</button>
+        <p className="admsignup-link">
           Don't have an account? <a href="#">Sign up</a>
         </p>
       </form>
