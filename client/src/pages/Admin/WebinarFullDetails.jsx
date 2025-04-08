@@ -19,7 +19,6 @@ function WebinarFullDetails() {
     setSelectedId(itemid);
     setOpen(true);
   };
-  console.log(selectId,"ahi");
 
   const handleOk = async () => {
     setConfirmLoading(true);
@@ -56,7 +55,6 @@ function WebinarFullDetails() {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/demandDetails`);
       setjourneyData(response.data.data || []);
-      console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
