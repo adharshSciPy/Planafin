@@ -6,10 +6,10 @@ body {
   }
   
   .register-container {
-    background: radial-gradient(circle at top left, #0072ff,#00c6ff );
+    background-color: white;
     padding: 30px;
     margin:  50px auto;
-    border-radius: 60px;
+    border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 400px;
@@ -41,7 +41,7 @@ body {
   .last-button {
     width: 100%;
     padding: 12px;
-    background-color: black;
+    background-color: blue;
     color:white;
     border: none;
     border-radius: 6px;
@@ -51,8 +51,8 @@ body {
   }
   
   .last-button:hover {
-    background-color:white;
-    color: black;
+    background-color:black;
+    color: white;
   }
   
   .login-link {
