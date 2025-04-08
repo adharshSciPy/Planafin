@@ -30,49 +30,47 @@ function EmployeeImage() {
   //   }
   // ]
   const [selectedFiles, setSelectedFiles] = useState([]);
-  // const [employeeImages, setEmployeeImages] = useState([]);
+  const [employeeImages, setEmployeeImages] = useState([]);
   const[viewImage,setViewImage]=useState([]);
   const fileInput=useRef();
   const [previewImages, setPreviewImages] = useState([]);
-  const handleChange = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles(files);
-  
-    if (files.length > 0) {
-      // Upload immediately
-      handleUpload(files);
+  const handleChange=(e)=>{
+    setSelectedFiles(Array.from(e.target.files));
+
+  }
+  const handleUpload = async () => {
+    if (!selectedFiles.length) {
+      alert("Please select at least one file.");
+      return;
     }
-  };
-  const handleUpload = async (files) => {
+
     const formData = new FormData();
-    files.forEach((file) => {
+
+    // Important: must match `upload.array('profileImg')`
+    selectedFiles.forEach((file) => {
       formData.append("profileImg", file);
     });
-  
+
     try {
       const response = await fetch(`${baseUrl}/api/v1/user/employeeImage`, {
         method: "POST",
         body: formData,
       });
-  
+
       const result = await response.json();
-  
-      if (response.status === 200) {
+
+      if (response.status===200) {
         console.log("Upload success:", result);
-        setSelectedFiles([]);
-        setPreviewImages([]);
-        if (fileInput.current) {
-          fileInput.current.value = null;
-        }
+        setEmployeeImages(result.data.profileImg); 
+        setEmployeeImages([]);
+        if (fileInput.current) fileInput.current.value = null;
         getEmployeeImage();
       } else {
         console.error("Upload failed:", result.message);
       }
     } catch (err) {
       console.error("Upload error:", err.message);
-    }
-  };
-  
+    }}
   const getEmployeeImage=async ()=>{
     try {
      const response=await axios.get(`${baseUrl}/api/v1/user/employeeDetails`) ;
@@ -103,18 +101,9 @@ function EmployeeImage() {
           EMPLOYEE IMAGE UPLOAD
         </h2>
         <div className={styles.employeeUploadDiv}>
-        <input
-  type="file"
-  multiple
-  onChange={handleChange}
-  ref={fileInput}
-  style={{ display: "none" }} // Hides the input
-/>
+        <input type="file" multiple onChange={handleChange} />
 
-<button
-  className={styles.EmpUploadBtn}
-  onClick={() => fileInput.current.click()} // Triggers file input
->
+<button className={styles.EmpUploadBtn} onClick={handleUpload}>
   Upload Image
 </button>
 
