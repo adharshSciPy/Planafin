@@ -56,7 +56,9 @@ function App() {
           <Route path="/admin" element={<AdminDashboard/>} />
           <Route path="/jobdetails" element={<JobDetails/>} />
           <Route path="/applicationDetails" element={<ApplicationDetails/>} />
+          <ProtectedRoute roleRequired="400">
           <Route path="/employeeimage" element={<EmployeeImage/>} />
+          </ProtectedRoute>
           <Route path="/employeeList" element={<EmployeeList/>} />
 
           <Route path="/employeeData/:id" element={<EmployeeData/>} />
