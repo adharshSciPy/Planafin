@@ -9,91 +9,59 @@ import cardImage2 from "../../assets/cardImage2.png";
 import cardImage3 from "../../assets/cardImage3.png";
 import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
-import teamImg from "../../assets/team1.png";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-import slider1 from "../../assets/Aarti-Ramachandran.jpg"
-import slider2 from "../../assets/Aniket.jpg"
-import slider3 from "../../assets/Deepak-Kumar-Mohanty.png"
-import slider4 from "../../assets/Deepanshu-Srivastava.jpg"
-import slider5 from "../../assets/Gargi-Gehlot.jpg"
-import slider6 from "../../assets/Gayathri.jpg"
-import slider7 from "../../assets/Priya-Ranjan.jpeg"
-import slider8 from "../../assets/Shashank-Shekhar.jpg"
-import slider9 from "../../assets/Shawn-3.jpg"
-import slider10 from "../../assets/Sooraj-GK-1593x2048.jpg"
-import slider11 from "../../assets/Susmita-Srivastava.jpeg"
-import slider12 from "../../assets/Swathi-Yelugoti.png"
-import slider13 from "../../assets/Yash-Viroja.png"
 function Aboutus() {
-  const slides=[
-      slider1,slider2,
-      slider3,slider4,
-      slider5,slider6,
-      slider7,slider8,
-      slider9,slider10,
-      slider11,slider12,
-      slider13
   
-  
-  ]
+
+
   const [journeyData, setJourneyData] = useState([]);
   const OPTIONS = { loop: true };
-  useEffect(() => {
-    journeyDatasAll();
-  }, []);
+  const [clientImage,setClientImage]=useState([])
+  const [dataImage,setdataImage]=useState()
+  const [slides,setSlides]=useState([])
   const journeyDatasAll = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
       if (response) {
         setJourneyData(response.data.data || []);
-        console.log(journeyData, "ithaanu");
+
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // const journeyData = [
-
-  //   {
-  //     year: "2015",
-  //     title: "Founded & Established",
-  //     description: `Founded and launched operations in the United Arab Emirates and India
-  //     Established FP&A practice
-  //     Implemented for world's fourth largest tile manufacturing company`,
-  //   },
-  //   {
-  //     year: "2015",
-  //     title: "Founded & Established",
-  //     description: `Founded and launched operations in the United Arab Emirates and India
-  //     Established FP&A practice
-  //     Implemented for world's fourth largest tile manufacturing company`,
-  //   },
-  //   {
-  //     year: "2017",
-  //     title: "Leading EPM Partner of the Region",
-  //     description: `Industry expertise in retail, manufacturing, logistics
-  //     Implemented for Middle East's largest retail conglomerate
-  //     Implemented for seventh largest aluminum producer in the world`,
-  //   },
-  //   {
-  //     year: "2020",
-  //     title: "Global Expansion",
-  //     description: `Expanded operations to Europe and North America
-  //     Partnered with Fortune 500 companies
-  //     Recog,
-  //     nized as a top EPM solutions provider`,
-  //   },
-
-  //   {
-  //     year: "2020",
-  //     title: "Global Expansion",
-  //     description: `Expanded operations to Europe and North America
-  //     Partnered with Fortune 500 companies
-  //     Recognized as a top EPM solutions provider`,
-  //   }
-  // ];
-
+  const getClientData=async()=>{
+    try {
+      const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
+      setClientImage(response.data.data[0].imageCustomer)
+      console.log(response);
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  const getEmployeeImage=async ()=>{
+    try {
+     const response=await axios.get(`${baseUrl}/api/v1/user/employeeDetails`) ;
+     console.log("employee image",response.data.data);
+     setSlides(response.data.data)
+    } catch (error) {
+      console.log("Error fetching the data",error);
+      
+    }
+  }
+  useEffect(() => {
+    journeyDatasAll();
+    getClientData()
+    getEmployeeImage()
+  },[]);
+  
+  
+  console.log(clientImage);
+  
+  
   return (
     <div>
       <Header />
@@ -129,7 +97,7 @@ function Aboutus() {
         </div>
       </div>
       <div className={styles.section}>
-        <Carousel options={OPTIONS} />
+        <Carousel prop1={OPTIONS} />
       </div>
       <div className={styles.section}>
         <div className={styles.wrapperContainer}>
@@ -404,7 +372,7 @@ function Aboutus() {
                 {slides.map((item,index)=>(
                   <div style={{display:"flex"}}>
                     <div className={styles.imageContainer} key={index}>
-                    <img src={item} alt="" className={styles.imageContainerImg}/>
+                    <img src={`${baseUrl}${item.profileImg[0].path}`} alt="" className={styles.imageContainerImg}/>
                   </div>
                   </div>
 
