@@ -50,7 +50,7 @@ function AdminDashboard() {
             </div>
             <div className="sndcard">
               <h3>Employee Image Upload</h3>
-              <Link>
+              <Link to="/employeeimage">
               <button className="secondcard-btn2">View</button>
               </Link>
             </div>
@@ -62,7 +62,7 @@ function AdminDashboard() {
             </div>
             <div className="frthcard">
               <h3>Contact Us</h3>
-              <Link>
+              <Link to="/admincontactus">
               <button className="forthcard-btn2">View</button>
               </Link>
             </div>

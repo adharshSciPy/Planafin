@@ -4,12 +4,13 @@ import { Table, Button, message } from 'antd';
 import { Eye, Trash } from 'lucide-react';
 import baseUrl from '../../baseUrl';
 import './JobDetails.css';
+import { useNavigate } from "react-router-dom";
 
 function ApplicationDetails() {
     const [details, setDetails] = useState([]);
     const [loading, setLoading] = useState(false);
 
-
+    const navigate=useNavigate()
     useEffect(() => {
         const fetchDetails = async () => {
             setLoading(true);
@@ -35,7 +36,10 @@ function ApplicationDetails() {
             message.error('Failed to delete job');
         }
     };
-
+    const handleGetData=(id)=>{
+        navigate(`/employeeData/${id}`)
+        
+    }
     const columns = [
         {
             title: 'Sl.No',
@@ -57,7 +61,7 @@ function ApplicationDetails() {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-                <Button type="text">
+                <Button type="text" onClick={()=>handleGetData(record._id)}>
                     <Eye size={25} />
                 </Button>
             ),
