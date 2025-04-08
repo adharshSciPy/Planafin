@@ -67,7 +67,7 @@ function App() {
               </ProtectedRoute>
             }
           /> */}
-          <Route path="/employeeList" element={<EmployeeList  />} />
+          <Route path="/clientList" element={<EmployeeList  />} />
           <Route path="/adminreg" element={<AdminReg />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
 
