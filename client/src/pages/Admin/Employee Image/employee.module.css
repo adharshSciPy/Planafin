@@ -1,15 +1,20 @@
 .mainOuterDiv {
     background-color: #f0f7ff;
+    padding: 2rem ;
   }
   
   .mainHead {
     text-align: center;
-    padding: 3rem 0;
+    padding: 2rem 0;
+    background-color: #2626a7;
+    color: #ccc;
+
   }
   .employeeUploadDiv{
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 2rem 0;
   }
   .EmpUploadBtn{
     padding: 1rem 2rem;
@@ -22,7 +27,7 @@
   }
   .cardContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 1rem;
     padding: 2rem;
   }
@@ -39,11 +44,19 @@
   
   .ImgSingleCard {
     width: 200px;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
   }
   
   .cardImg {
     width: 100%;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
   }
   
   .btnContainer {
@@ -66,4 +79,7 @@
   .deleteBtn:hover {
     background-color: #d9363e;
   }
-  
+  @media (max-width:486px) {
+
+    
+  }
