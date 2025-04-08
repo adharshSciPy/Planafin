@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+const ADMIN_ROLE =( process.env.ADMIN_ROLE)
 
 const userSchema = new Schema({
     userName: {
@@ -9,6 +10,10 @@ const userSchema = new Schema({
     },
     password: {
         type: String
+    }
+    ,role:{
+        type:Number,
+        default:ADMIN_ROLE
     }
 
 })
