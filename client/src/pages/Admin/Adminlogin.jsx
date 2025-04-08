@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, } from "react";
 import baseUrl from "../../baseUrl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 import "./adminlogin.css";
 
@@ -19,11 +19,6 @@ function Adminlogin() {
     });
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Email:", email);
-  //   console.log("Password:", password);
-  // };
   const handleSubmit=async(e)=>{
     e.preventDefault();
     try {
@@ -68,9 +63,9 @@ navigate('/admindashboard')
         </div>
 
         <button className="admbtn" type="submit">Login</button>
-        <p className="admsignup-link">
-          Don't have an account? <a href="#">Sign up</a>
-        </p>
+        {/* <p className="admsignup-link">
+          Don't have an account? <Link to={'/adminReg'}>Sign up</Link>
+        </p> */}
       </form>
         </div>
     </div>

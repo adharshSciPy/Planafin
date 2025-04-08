@@ -80,7 +80,7 @@ function AdminReg() {
             <p className="login-link">
               Already have an account?
             </p>
-            <Link to="adminlogin" className="link-dec">
+            <Link to="/adminlogin" className="link-dec">
             <h5 className="loginchey">Login</h5>
             </Link>
           </form>
