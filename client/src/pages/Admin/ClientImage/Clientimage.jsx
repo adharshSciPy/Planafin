@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 function Clientimage() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [viewImage, setViewImage] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
   const fileInput = useRef();
 
   const handleChange = (e) => {
@@ -119,8 +121,11 @@ function Clientimage() {
             </div>
             <div className={styles.btnContainer}>
               <button
-                className={styles.deleteBtn}
-                onClick={() => deleteEmployeeImage(item._id)}
+               className={styles.deleteBtn}
+                               onClick={() => {
+                                 setDeleteId(item._id);
+                                 setShowModal(true);
+                               }}
               >
                 Delete
               </button>
@@ -128,6 +133,30 @@ function Clientimage() {
           </div>
         ))}
       </div>
+       {showModal && (
+              <div className={styles.modalOverlay}>
+                <div className={styles.modalContent}>
+                  <h3>Confirm Deletion</h3>
+                  <p>Are you sure you want to delete this image?</p>
+                  <div className={styles.modalActions}>
+                  <button
+        className={styles.confirmBtn}
+        onClick={() => {
+          deleteEmployeeImage(deleteId);
+          setShowModal(false);
+          setDeleteId(null); 
+        }}
+      >
+        OK
+      </button>
+      
+                    <button className={styles.cancelBtn} onClick={() => setShowModal(false)}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
     </div>
   );
 }
