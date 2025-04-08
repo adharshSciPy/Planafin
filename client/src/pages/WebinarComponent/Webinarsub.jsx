@@ -25,7 +25,7 @@ function Webinarsub() {
 
   useEffect(() => {
     getData();
-  });
+  },[]);
 
   const [formdata, setFormdata] = useState({
     firstName: "",
