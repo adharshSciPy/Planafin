@@ -34,6 +34,12 @@ function AdminDashboard() {
               <button className="fourthcard-btn1">View</button>
               </Link>
             </div>
+            <div className="fifthcard">
+              <h3>Application Details</h3>
+              <Link to="/applicationDetails">
+              <button className="fourthcard-btn1">View</button>
+              </Link>
+            </div>
           </div>
           <div className="secondrow">
             <div className="fstcard">
@@ -43,8 +49,8 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="sndcard">
-              <h3>Employ Image Upload</h3>
-              <Link>
+              <h3>Employee Image Upload</h3>
+              <Link to="/employeeimage">
               <button className="secondcard-btn2">View</button>
               </Link>
             </div>
@@ -56,7 +62,7 @@ function AdminDashboard() {
             </div>
             <div className="frthcard">
               <h3>Contact Us</h3>
-              <Link>
+              <Link to="/admincontactus">
               <button className="forthcard-btn2">View</button>
               </Link>
             </div>
