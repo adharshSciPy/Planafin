@@ -350,12 +350,12 @@ const getOnDemandById = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
-const getemployeeData=async(req,res)=>{
-  const {id}=req.params;
-  try{
-    const result=await JobApplication.findById(id);
-    res.status(200).json({message:"employee Data",data:result})
-  }catch (error) {
+const getemployeeData = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await JobApplication.findById(id);
+    res.status(200).json({ message: "employee Data", data: result })
+  } catch (error) {
     res
       .status(500)
       .json({ message: "Internal Server Error", error: error.message });
@@ -512,6 +512,15 @@ const profileImage = async (req, res) => {
 };
 
 
+const employeeDetails = async (req, res) => {
+  try {
+    const employeedata = await Employee.find()
+    res.status(200).json({ message: "Employee Data Fetched", data: employeedata })
+  } catch (error) {
+    res.status(500).json({ message: "INternal Server Error", error: error.message })
+  }
+}
+
 const deleteProfileImage = async (req, res) => {
   const { employeeId, id } = req.params;
   try {
@@ -571,6 +580,15 @@ const customerImage = async (req, res) => {
   }
 };
 
+const customerDetails = async (req, res) => {
+  try {
+    const customerdata = await Customer.find()
+    res.status(200).json({ message: "Customer Fetched Successfully", data: customerdata })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
 const deleteCustomerImage = async (req, res) => {
   const { customerId, id } = req.params;
   try {
@@ -598,5 +616,5 @@ const deleteJobopenings = async (req, res) => {
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication, ContactById,getemployeeData
+  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails
 }
