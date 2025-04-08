@@ -12,7 +12,7 @@ function AdContact() {
   useEffect(() => {
     axios.get(`${baseUrl}/api/v1/user/contactdetails`)
       .then((res) => {
-        setContactList(res.data.data); 
+        setContactList(res.data.data);
         console.log(res.data.data, "eda");
       })
       .catch((err) => {
@@ -48,33 +48,33 @@ function AdContact() {
           </tr>
         </thead>
         <tbody>
-  {contactList.length > 0 ? (
-    contactList.map((item, index) => (
-      <tr key={item._id || index}>
-        <td data-label="Sl No">{index + 1}</td>
-        <td data-label="First">{item.firstName}</td>
-        <td data-label="Last">{item.lastName}</td>
-        <td data-label="Email">{item.email}</td>
-        <td data-label="Country">{item.country}</td>
-        <td data-label="Phone">{item.phone}</td>
-        <td data-label="Job Title">{item.jobTitle}</td>
-        <td data-label="Company">{item.company}</td>
-        <td data-label="Message">
-          <button onClick={() => handleViewMessage(item.message)} className="view-btn">
-            <FaEye />
-          </button>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="9" className="no-data">No contact data available</td>
-    </tr>
-  )}
-</tbody>
+          {contactList.length > 0 ? (
+            contactList.map((item, index) => (
+              <tr key={item._id || index}>
+                <td data-label="Sl No">{index + 1}</td>
+                <td data-label="First">{item.firstName}</td>
+                <td data-label="Last">{item.lastName}</td>
+                <td data-label="Email">{item.email}</td>
+                <td data-label="Country">{item.country}</td>
+                <td data-label="Phone">{item.phone}</td>
+                <td data-label="Job Title">{item.jobTitle}</td>
+                <td data-label="Company">{item.company}</td>
+                <td data-label="Message">
+                  <button onClick={() => handleViewMessage(item.message)} className="view-btn">
+                    <FaEye />
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="9" className="no-data">No contact data available</td>
+            </tr>
+          )}
+        </tbody>
       </table>
 
-  
+
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
