@@ -8,6 +8,8 @@ function EmployeeImage() {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [employeeImages, setEmployeeImages] = useState([]);
   const [viewImage, setViewImage] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
   const fileInput = useRef();
 
   const handleChange = (e) => {
@@ -140,7 +142,11 @@ function EmployeeImage() {
               <div className={styles.btnContainer}>
                 <button
                   className={styles.deleteBtn}
-                  onClick={() => deleteEmployeeImage(item._id)}
+                  onClick={() => {
+                    setDeleteId(item._id);
+                    setShowModal(true);
+                  }}
+                  
                 >
                   Delete
                 </button>
@@ -149,6 +155,30 @@ function EmployeeImage() {
           ))}
         </div>
       </div>
+      {showModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this image?</p>
+            <div className={styles.modalActions}>
+            <button
+  className={styles.confirmBtn}
+  onClick={() => {
+    deleteEmployeeImage(deleteId);
+    setShowModal(false);
+    setDeleteId(null); 
+  }}
+>
+  OK
+</button>
+
+              <button className={styles.cancelBtn} onClick={() => setShowModal(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
