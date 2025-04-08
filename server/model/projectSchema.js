@@ -13,4 +13,4 @@ const projectSchema=new Schema({
     }
 })
 
-export const project = new mongoose.model("OnDemand", projectSchema)
+export const Project = new mongoose.model("Project", projectSchema)

@@ -8,6 +8,7 @@ import { Journey } from "../model/journeySchema.js";
 import { WatchNow } from "../model/watchnowSchema.js";
 import { Employee } from "../model/employeeSchema.js";
 import { Customer } from "../model/customerSchema.js";
+import { Project } from "../model/projectSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -42,7 +43,7 @@ const registerUser = async (req, res) => {
     }
     const saltRounds = 10; // Higher rounds mean stronger but slower hashing
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const role=process.env.ADMIN_ROLE;
+    const role = process.env.ADMIN_ROLE;
     //user creation
     const user = await User.create({
       userName,
@@ -56,7 +57,7 @@ const registerUser = async (req, res) => {
       message: "User Registration Successful",
       user: createdUser,
     });
-    
+
 
     // if (!createdUser) {
     //   return res.status(500).json({ message: "User registration failed" });
@@ -101,7 +102,7 @@ const loginUser = async (req, res) => {
     return res.status(200).json({
       message: "Login Successful",
       token,
-      role:process.env.ADMIN_ROLE
+      role: process.env.ADMIN_ROLE
     });
   } catch (err) {
     return res
@@ -606,9 +607,9 @@ const customerDetails = async (req, res) => {
 }
 
 const deleteCustomerImage = async (req, res) => {
-  const {  id } = req.query;
+  const { id } = req.query;
   try {
-    const result = await Customer.findByIdAndDelete(id )
+    const result = await Customer.findByIdAndDelete(id)
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
@@ -625,10 +626,30 @@ const deleteJobopenings = async (req, res) => {
   }
 }
 
+const projectUpdate = async (req, res) => {
+  const { consultants, projects, cases } = req.body;
+  try {
+    const result = await Project.findOneAndUpdate(
+      {}, // Match condition — empty means it'll match the first document
+      {
+        $set: { consultants, projects, cases },
+      },
+      {
+        new: true,     // Return the updated document
+        upsert: true,  // Create it if it doesn't exist
+      }
+    );
+    res.status(200).json({ message: "Count Updated", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+
+  }
+}
+
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete
+  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate
 }
