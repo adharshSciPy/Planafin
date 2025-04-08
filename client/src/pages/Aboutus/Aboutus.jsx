@@ -11,19 +11,6 @@ import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-import slider1 from "../../assets/Aarti-Ramachandran.jpg"
-import slider2 from "../../assets/Aniket.jpg"
-import slider3 from "../../assets/Deepak-Kumar-Mohanty.png"
-import slider4 from "../../assets/Deepanshu-Srivastava.jpg"
-import slider5 from "../../assets/Gargi-Gehlot.jpg"
-import slider6 from "../../assets/Gayathri.jpg"
-import slider7 from "../../assets/Priya-Ranjan.jpeg"
-import slider8 from "../../assets/Shashank-Shekhar.jpg"
-import slider9 from "../../assets/Shawn-3.jpg"
-import slider10 from "../../assets/Sooraj-GK-1593x2048.jpg"
-import slider11 from "../../assets/Susmita-Srivastava.jpeg"
-import slider12 from "../../assets/Swathi-Yelugoti.png"
-import slider13 from "../../assets/Yash-Viroja.png"
 function Aboutus() {
   
 
@@ -48,6 +35,8 @@ function Aboutus() {
     try {
       const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
       setClientImage(response.data.data[0].imageCustomer)
+      console.log(response);
+      
     } catch (error) {
       console.log(error);
       
