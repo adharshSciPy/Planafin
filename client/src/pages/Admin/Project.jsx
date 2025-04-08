@@ -17,20 +17,20 @@ function Project() {
         cases:values.cases
       };
 
-    //   const response = await axios.post(
-    //     `${baseUrl}/api/v1/user/addjourney`,
-    //     payload,
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //     }
-    //   );
+      const response = await axios.post(
+        `${baseUrl}/api/v1/user/projectUpdate`,
+        payload,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    //   if (response.status === 200) {
-    //     toast.success("Form submitted successfully!", {
-    //       position: "bottom-right",
-    //       autoClose: 3000,
-    //     });
-    //   }
+      if (response.status === 200) {
+        toast.success("Form submitted successfully!", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
       form.resetFields();
       console.log(payload);
       
@@ -44,6 +44,7 @@ function Project() {
 
   return (
     <div>
+        <ToastContainer/>
       <div className={styles.mainContainer}>
         <div className={styles.subContainer}>
           <h1>About Us</h1>

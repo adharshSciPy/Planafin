@@ -52,6 +52,13 @@ function Aboutus() {
       
     }
   }
+  const getProject=async()=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
   useEffect(() => {
     journeyDatasAll();
     getClientData()
