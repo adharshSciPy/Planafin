@@ -1,15 +1,20 @@
 .mainOuterDiv {
     background-color: #f0f7ff;
+    padding: 2rem ;
   }
   
   .mainHead {
     text-align: center;
-    padding: 3rem 0;
+    padding: 2rem 0;
+    background-color: #2626a7;
+    color: #ccc;
+
   }
   .employeeUploadDiv{
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 2rem 0;
   }
   .EmpUploadBtn{
     padding: 1rem 2rem;
@@ -66,4 +71,7 @@
   .deleteBtn:hover {
     background-color: #d9363e;
   }
-  
+  @media (max-width:486px) {
+
+    
+  }
