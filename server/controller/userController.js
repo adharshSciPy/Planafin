@@ -464,6 +464,16 @@ const watchNowDetails = async (req, res) => {
   }
 };
 
+const watchnowDelete = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteddata = await WatchNow.findByIdAndDelete(id)
+    res.status(200).json({ message: "Deleted Successfully", data: deleteddata });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
 const profileImage = async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
@@ -522,9 +532,9 @@ const employeeDetails = async (req, res) => {
 }
 
 const deleteProfileImage = async (req, res) => {
-  const {  id } = req.query;
+  const { id } = req.query;
   try {
-    const result = await Employee.findByIdAndDelete(id )
+    const result = await Employee.findByIdAndDelete(id)
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
@@ -614,5 +624,5 @@ const deleteJobopenings = async (req, res) => {
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails
+  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete
 }

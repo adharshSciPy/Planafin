@@ -26,8 +26,8 @@ import ApplicationDetails from "./pages/Admin/ApplicationDetails";
 import EmployeeImage from "./pages/Admin/Employee Image/EmployeeImage";
 import EmployeeData from "./pages/Admin/EmployeeData"
 import AdContact from "./pages/Admin/AdContact";
-
 import EmployeeList from "./pages/Admin/ClientImage/Clientimage";
+import WatchNowDetails from "./pages/Admin/WatchNowDetails"
 
 function App() {
   return (
@@ -42,25 +42,26 @@ function App() {
           <Route path="/webinar-2" element={<Demandforecasting />} />
           <Route path="/webinar-3" element={<Budgeting />} />
           <Route path="/webinar-4" element={<Targetsetting />} />
-          <Route path="solutions" element={<Solutions/>} />
+          <Route path="solutions" element={<Solutions />} />
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/webinarData" element={<WebinarData />} />
-          <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin/>} />
-          <Route path="/getOurJourney" element={<GetAllJourney/>} />
-          <Route path="/getWebinarData" element={<GetWebinarData/>} />
-          <Route path="/feedbackdata" element={<FeedBack/>} />
-          <Route path="/jobopenings" element={<JobOpening/>} />
-          <Route path="/admin" element={<AdminDashboard/>} />
-          <Route path="/jobdetails" element={<JobDetails/>} />
-          <Route path="/applicationDetails" element={<ApplicationDetails/>} />
-          <Route path="/employeeimage" element={<EmployeeImage/>} />
-          <Route path="/employeeList" element={<EmployeeList/>} />
+          <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin />} />
+          <Route path="/getOurJourney" element={<GetAllJourney />} />
+          <Route path="/getWebinarData" element={<GetWebinarData />} />
+          <Route path="/feedbackdata" element={<FeedBack />} />
+          <Route path="/jobopenings" element={<JobOpening />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/jobdetails" element={<JobDetails />} />
+          <Route path="/applicationDetails" element={<ApplicationDetails />} />
+          <Route path="/employeeimage" element={<EmployeeImage />} />
+          <Route path="/employeeList" element={<EmployeeList />} />
 
-          <Route path="/employeeData/:id" element={<EmployeeData/>} />
+          <Route path="/employeeData/:id" element={<EmployeeData />} />
 
-          <Route path="/admincontactus" element={<AdContact/>} />
+          <Route path="/admincontactus" element={<AdContact />} />
+          {/* <Route path="/WatchNowDetails" element={<WatchNowDetails />} /> */}
 
 
         </Routes>
