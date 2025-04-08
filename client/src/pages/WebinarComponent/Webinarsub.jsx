@@ -6,6 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import linkedin from "../../assets/MicrosoftTeams-image-7-150x150.jpg";
 import Footer from "../../components/Footer/Footer";
 import baseUrl from "../../baseUrl";
+import { ToastContainer, toast } from "react-toastify";
 
 function Webinarsub() {
   const [item, arrayItem] = useState({});
@@ -24,7 +25,7 @@ function Webinarsub() {
 
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const [formdata, setFormdata] = useState({
     firstName: "",
@@ -45,29 +46,46 @@ function Webinarsub() {
   // };
 
   const handleSubmitform = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       const response = await axios.post(
         `${baseUrl}/api/v1/user/addWatchnow`,
         formdata
       );
-      console.log("Form submitted successfully:", response.data);
+      if (response.status === 200) {
+        toast.success("successfully submitted form data", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+        setFormdata({
+          firstName: "",
+          lastName: "",
+          businessEmail: "",
+          companyName: "",
+          designation: "",
+          selectCountry: "",})
+      } else {
+      }
     } catch (error) {
+      toast.error("Error while submitting data", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
       console.error(
         "Submission Error:",
         error.response ? error.response.data : error.message
       );
     }
   };
-  
 
   return (
     <>
+      <ToastContainer />
       <Header />
       <div className={styles.mainContainer}>
         <div className={styles.mainFirstLeft}>
           <div className={styles.firstContent}>
-            <div className={styles.firstLeft}>
+            <div className={styles.firstLeft}>  
               <div className={styles.leftMain}>
                 <div className={styles.onDemand}>
                   <p className={styles.firstContentP}>ON-DEMAND EVENT</p>
@@ -87,7 +105,10 @@ function Webinarsub() {
             </div>
             <div className={styles.firstRight}>
               <div className={styles.rightMain}>
-                <img src={`${baseUrl}/${item.image}`|| "Loading"} alt="Webinar" />
+                <img
+                  src={`${baseUrl}/${item.image}` || "Loading"}
+                  alt="Webinar"
+                />
               </div>
             </div>
           </div>
@@ -149,7 +170,7 @@ function Webinarsub() {
                       type="text"
                       name="firstName"
                       required
-                      value={formdata.fullname}
+                      value={formdata.firstName}
                       className={styles.formStyle}
                       placeholder="Full Name*"
                       onChange={handleInput}
@@ -160,8 +181,7 @@ function Webinarsub() {
                       type="text"
                       name="lastName"
                       required
-
-                      value={formdata.lastname}
+                      value={formdata.lastName}
                       className={styles.formStyle}
                       placeholder="Last Name*"
                       onChange={handleInput}
@@ -172,8 +192,7 @@ function Webinarsub() {
                       type="email"
                       name="businessEmail"
                       required
-
-                      value={formdata.workemail}
+                      value={formdata.businessEmail}
                       className={styles.formStyle}
                       placeholder="Work / business email*"
                       onChange={handleInput}
@@ -184,8 +203,7 @@ function Webinarsub() {
                       type="text"
                       name="companyName"
                       required
-
-                      value={formdata.companyname}
+                      value={formdata.companyName}
                       className={styles.formStyle}
                       placeholder="Company Name*"
                       onChange={handleInput}
@@ -196,7 +214,6 @@ function Webinarsub() {
                       type="text"
                       name="designation"
                       required
-
                       value={formdata.designation}
                       className={styles.formStyle}
                       placeholder="Designation*"
@@ -208,7 +225,7 @@ function Webinarsub() {
                       type="text"
                       required
                       name="selectCountry"
-                      value={formdata.countryname}
+                      value={formdata.selectCountry}
                       className={styles.formStyle}
                       placeholder="Select Country*"
                       onChange={handleInput}
@@ -227,7 +244,7 @@ function Webinarsub() {
                     </label>
                   </div>
                   <div className={styles.buttonTwo}>
-                    <button type="submit" >Submit</button>
+                    <button type="submit">Submit</button>
                   </div>
                 </form>
               </div>
