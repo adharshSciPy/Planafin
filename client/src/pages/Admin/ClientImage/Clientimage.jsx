@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import styles from "./client.module.css";
 import baseUrl from "../../../baseUrl.js";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Clientimage() {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -28,20 +29,31 @@ function Clientimage() {
       const result = await response.json();
 
       if (response.status === 200) {
+        toast.success("Image uploaded sucessfully", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
         setSelectedFiles([]);
         fileInput.current.value = null;
         getEmployeeImage();
       } else {
+        
         console.error("Upload failed:", result.message);
       }
     } catch (err) {
+      toast.error("Uploading failed", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
       console.error("Upload error:", err.message);
     }
   };
 
   const getEmployeeImage = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/v1/user/customerDetails`);
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/customerDetails`
+      );
       const images = response?.data?.data || [];
       setViewImage(images);
     } catch (error) {
@@ -51,8 +63,20 @@ function Clientimage() {
 
   const deleteEmployeeImage = async (id) => {
     try {
-      const response = await axios.delete(`${baseUrl}/api/v1/user/deleteCustomerImage?id=${id}`);
-      console.log("Image Deleted Successfully", response);
+      const response = await axios.delete(
+        `${baseUrl}/api/v1/user/deleteCustomerImage?id=${id}`
+      );
+      if(response.status===200){
+        toast.success("Image deleted sucessfully", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }else{
+        toast.error("Error while deleting", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
       getEmployeeImage();
     } catch (error) {
       console.error("Error deleting image", error);
@@ -64,7 +88,9 @@ function Clientimage() {
   }, []);
 
   return (
+
     <div className={styles.mainOuterDiv}>
+      <ToastContainer/>
       <h2 className={styles.mainHead}>EMPLOYEE IMAGE UPLOAD</h2>
 
       <div className={styles.employeeUploadDiv}>
