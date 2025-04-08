@@ -91,7 +91,7 @@ function Clientimage() {
 
     <div className={styles.mainOuterDiv}>
       <ToastContainer/>
-      <h2 className={styles.mainHead}>EMPLOYEE IMAGE UPLOAD</h2>
+      <h2 className={styles.mainHead}>CLIENT IMAGE UPLOAD</h2>
 
       <div className={styles.employeeUploadDiv}>
         <input type="file" multiple ref={fileInput} onChange={handleChange} />

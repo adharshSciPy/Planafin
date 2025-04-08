@@ -56,7 +56,7 @@ function AdminDashboard() {
             </div>
             <div className="trdcard">
               <h3>Client Image Upload</h3>
-              <Link to="/employeeList">
+              <Link to="/clientList">
               <button className="thirdcard-btn2">View</button>
               </Link>
             </div>
