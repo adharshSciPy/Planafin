@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { useAutoplay } from './EmblaCarouselAutoplay'
-
+import axios from 'axios'
 
 
 import {
@@ -12,10 +12,11 @@ import {
 } from './EmblaCarouselArrowButtons'
 import baseUrl from '../../baseUrl'
 
-const EmblaCarousel = ({prop1,prop2}) => {
+const EmblaCarousel = ({prop1}) => {
   
-    const{options}=prop1
-    const slides=prop2.map((item,index)=>{return item.path })
+    const{options}= prop1 || {}
+    const [getSlide,setgetSlide]=useState([])
+    const slides=getSlide.map((item,index)=>{return item.path })
   const progressNode = useRef(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({ playOnInit: true, delay: 3000 })
@@ -31,7 +32,20 @@ const EmblaCarousel = ({prop1,prop2}) => {
   const { autoplayIsPlaying, toggleAutoplay, onAutoplayButtonClick } =
     useAutoplay(emblaApi)
 
-
+    const getClientData=async()=>{
+      try {
+        const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
+        setgetSlide(response.data.data[0].imageCustomer)
+        console.log(response);
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+    useEffect(()=>{
+      getClientData()
+    },[])
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
