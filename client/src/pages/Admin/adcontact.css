@@ -1,6 +1,48 @@
-.jobdetails{
-    display: flex;
-    flex-wrap: wrap;
-    width: auto;
-    justify-content: center;
-}
+.table-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .contact-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .contact-table th,
+  .contact-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .contact-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .contact-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .contact-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    padding: 20px;
+  }
+  
