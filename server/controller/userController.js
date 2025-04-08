@@ -596,11 +596,9 @@ const customerDetails = async (req, res) => {
 }
 
 const deleteCustomerImage = async (req, res) => {
-  const { customerId, id } = req.params;
+  const {  id } = req.query;
   try {
-    const result = await Customer.findByIdAndUpdate(customerId, {
-      $pull: { imageCustomer: { id } }
-    }, { new: true })
+    const result = await Customer.findByIdAndDelete(id )
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
