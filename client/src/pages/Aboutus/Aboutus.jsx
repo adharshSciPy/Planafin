@@ -97,7 +97,7 @@ function Aboutus() {
         </div>
       </div>
       <div className={styles.section}>
-        <Carousel prop1={OPTIONS} prop2={clientImage}/>
+        <Carousel prop1={OPTIONS} />
       </div>
       <div className={styles.section}>
         <div className={styles.wrapperContainer}>
