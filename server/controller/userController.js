@@ -522,11 +522,9 @@ const employeeDetails = async (req, res) => {
 }
 
 const deleteProfileImage = async (req, res) => {
-  const { employeeId, id } = req.params;
+  const {  id } = req.query;
   try {
-    const result = await Employee.findByIdAndUpdate(employeeId, {
-      $pull: { profileImg: { id } }
-    }, { new: true })
+    const result = await Employee.findByIdAndDelete(id )
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
