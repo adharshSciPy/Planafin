@@ -1,57 +1,135 @@
-// import React, { useEffect, useState, useRef } from "react";
-// import styles from "./employee.module.css";
-// import baseUrl from "../../../baseUrl.js";
-// import axios from "axios";
+import React, { useEffect, useState, useRef } from "react";
+import styles from "./client.module.css";
+import baseUrl from "../../../baseUrl.js";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
-// function Clientimage() {
-//   return (
-//     <div>
-//       <div className={styles.mainOuterDiv}>
-//         <h2 className={styles.mainHead}>EMPLOYEE IMAGE UPLOAD</h2>
-//         <div className={styles.employeeUploadDiv}>
-//           <input type="file" multiple onChange={handleChange} />
+function Clientimage() {
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [viewImage, setViewImage] = useState([]);
+  const fileInput = useRef();
 
-//           <button className={styles.EmpUploadBtn} onClick={handleUpload}>
-//             Upload Image
-//           </button>
-//         </div>
-//         <div className={styles.cardContainer}>
-//           {viewImage.map((item, index) => (
-//             <div className={styles.singleCard} key={index}>
-//               <div className={styles.ImgSingleCard}>
-//                 {item.profileImg && item.profileImg.length > 0 && (
-//                   <img
-//                     src={`${baseUrl}${item.profileImg[0].path}`}
-//                     alt="Profile"
-//                     className={styles.cardImg}
-//                   />
-//                 )}
-//               </div>
-//               <div className={styles.btnContainer}>
-//                 <button
-//                   className={styles.deleteBtn}
-//                   onClick={() => deleteEmployeeImage(item._id)}
-//                 >
-//                   Delete
-//                 </button>
-//               </div>
-//             </div>
-//           ))}
+  const handleChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+  };
 
-//           {/* <div className={styles.singleCard}>
-//             <div className={styles.ImgSingleCard}>
-//               <img src={padam} alt="" className={styles.cardImg} />
-//             </div>
-//             <div className={styles.btnContainer}>
-//               <button className={styles.deleteBtn}>
-//                 Delete
-//               </button>
-//             </div>
-//           </div> */}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
+  const handleUpload = async (files) => {
+    if (files.length === 0) return;
 
-// export default Clientimage;
+    const formData = new FormData();
+    files.forEach((file) => formData.append("imageCustomer", file));
+
+    try {
+      const response = await fetch(`${baseUrl}/api/v1/user/customerImage`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.status === 200) {
+        toast.success("Image uploaded sucessfully", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+        setSelectedFiles([]);
+        fileInput.current.value = null;
+        getEmployeeImage();
+      } else {
+        
+        console.error("Upload failed:", result.message);
+      }
+    } catch (err) {
+      toast.error("Uploading failed", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      console.error("Upload error:", err.message);
+    }
+  };
+
+  const getEmployeeImage = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/customerDetails`
+      );
+      const images = response?.data?.data || [];
+      setViewImage(images);
+    } catch (error) {
+      console.error("Error fetching the data", error);
+    }
+  };
+
+  const deleteEmployeeImage = async (id) => {
+    try {
+      const response = await axios.delete(
+        `${baseUrl}/api/v1/user/deleteCustomerImage?id=${id}`
+      );
+      if(response.status===200){
+        toast.success("Image deleted sucessfully", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }else{
+        toast.error("Error while deleting", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
+      getEmployeeImage();
+    } catch (error) {
+      console.error("Error deleting image", error);
+    }
+  };
+
+  useEffect(() => {
+    getEmployeeImage();
+  }, []);
+
+  return (
+
+    <div className={styles.mainOuterDiv}>
+      <ToastContainer/>
+      <h2 className={styles.mainHead}>EMPLOYEE IMAGE UPLOAD</h2>
+
+      <div className={styles.employeeUploadDiv}>
+        <input type="file" multiple ref={fileInput} onChange={handleChange} />
+        {selectedFiles.length > 0 && (
+          <button
+            className={styles.EmpUploadBtn}
+            onClick={() => handleUpload(selectedFiles)}
+          >
+            Upload Image
+          </button>
+        )}
+      </div>
+
+      <div className={styles.cardContainer}>
+        {viewImage.map((item, index) => (
+          <div className={styles.singleCard} key={index}>
+            <div className={styles.ImgSingleCard}>
+              {item?.imageCustomer && (
+                <img
+                  src={`${baseUrl}${item.imageCustomer[0].path}`}
+                  alt="Profile"
+                  className={styles.cardImg}
+                />
+              )}
+            </div>
+            <div className={styles.btnContainer}>
+              <button
+                className={styles.deleteBtn}
+                onClick={() => deleteEmployeeImage(item._id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Clientimage;

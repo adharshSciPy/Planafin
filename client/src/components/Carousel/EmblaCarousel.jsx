@@ -35,8 +35,7 @@ const EmblaCarousel = ({prop1}) => {
     const getClientData=async()=>{
       try {
         const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
-        setgetSlide(response.data.data[0].imageCustomer)
-        console.log(response);
+        setgetSlide(response.data.data)
         
       } catch (error) {
         console.log(error);
@@ -46,15 +45,18 @@ const EmblaCarousel = ({prop1}) => {
     useEffect(()=>{
       getClientData()
     },[])
+    console.log(getSlide);
+    
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((src,index) => (
+          {getSlide.map((item,index) => (
             <div className="embla__slide" key={index}>
-              
-              <img className="embla__slide__img" src={`${baseUrl}${src}`} alt={`Slide ${index + 1}`} />
-              
+              {item?.imageCustomer&&(
+              <img className="embla__slide__img" src={`${baseUrl}${item.imageCustomer[0].path}`} alt={`Slide ${index + 1}`} />
+
+              )}              
             </div>
           ))}
         </div>
