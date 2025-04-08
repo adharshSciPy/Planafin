@@ -28,6 +28,8 @@ import EmployeeData from "./pages/Admin/EmployeeData"
 import AdContact from "./pages/Admin/AdContact";
 
 import EmployeeList from "./pages/Admin/ClientImage/Clientimage";
+import AdminReg from "./pages/Admin/AdminReg";
+import Adminlogin from "./pages/Admin/Adminlogin";
 
 function App() {
   return (
@@ -52,11 +54,16 @@ function App() {
           <Route path="/getWebinarData" element={<GetWebinarData/>} />
           <Route path="/feedbackdata" element={<FeedBack/>} />
           <Route path="/jobopenings" element={<JobOpening/>} />
-          <Route path="/admin" element={<AdminDashboard/>} />
+          <Route path="/admindashboard" element={<AdminDashboard/>} />
           <Route path="/jobdetails" element={<JobDetails/>} />
           <Route path="/applicationDetails" element={<ApplicationDetails/>} />
           <Route path="/employeeimage" element={<EmployeeImage/>} />
           <Route path="/employeeList" element={<EmployeeList/>} />
+          <Route path="/adminreg" element={<AdminReg/>} />
+          <Route path="/adminlogin" element={<Adminlogin/>} />
+
+          
+
 
           <Route path="/employeeData/:id" element={<EmployeeData/>} />
 
