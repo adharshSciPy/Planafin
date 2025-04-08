@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styles from "./employee.module.css";
 import padam from "../../../assets/Aarti-Ramachandran.jpg"
 
@@ -28,6 +28,43 @@ function EmployeeImage() {
       img:padam
     }
   ]
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [employeeImages, setEmployeeImages] = useState([]);
+  const handleChange=(e)=>{
+    setSelectedFiles(Array.from(e.target.files));
+
+  }
+  const handleUpload = async () => {
+    if (!selectedFiles.length) {
+      alert("Please select at least one file.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    // Important: must match `upload.array('profileImg')`
+    selectedFiles.forEach((file) => {
+      formData.append("profileImg", file);
+    });
+
+    try {
+      const response = await fetch("http://localhost:8000/api/v1/user/employeeImage", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.status===200) {
+        console.log("Upload success:", result);
+        setEmployeeImages(result.data.profileImg); 
+      } else {
+        console.error("Upload failed:", result.message);
+      }
+    } catch (err) {
+      console.error("Upload error:", err.message);
+    }}
+  
   return (
     <div>
       <div className={styles.mainOuterDiv}>
@@ -35,9 +72,12 @@ function EmployeeImage() {
           EMPLOYEE IMAGE UPLOAD
         </h2>
         <div className={styles.employeeUploadDiv}>
-          <button className={styles.EmpUploadBtn}>
-            Upload Image
-          </button>
+        <input type="file" multiple onChange={handleChange} />
+
+<button className={styles.EmpUploadBtn} onClick={handleUpload}>
+  Upload Image
+</button>
+
         </div>
         <div className={styles.cardContainer}>
           {employee.map((item,index)=>(
