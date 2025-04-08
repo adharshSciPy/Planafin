@@ -1,0 +1,72 @@
+/* RegistrationForm.css */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+  }
+  
+  .register-container {
+    background-color: white;
+    padding: 30px;
+    margin:  50px auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+  }
+  
+  .last-button {
+    width: 100%;
+    padding: 12px;
+    background-color: blue;
+    color:white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .last-button:hover {
+    background-color:black;
+    color: white;
+  }
+  
+  .login-link {
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+  }
+  .loginchey{
+    text-align: center;
+    font-size: large;
+    margin-top: 10px;
+    font-weight: 800;
+  }
+  .link-dec{
+    text-decoration: none;
+  }
+  
