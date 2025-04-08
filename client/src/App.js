@@ -74,7 +74,7 @@ function App() {
           <Route path="/employeeData/:id" element={<EmployeeData  />} />
 
           <Route path="/admincontactus" element={<AdContact  />} />
-          {/* <Route path="/WatchNowDetails" element={<WatchNowDetails />} /> */}
+          <Route path="/WatchNowDetails" element={<WatchNowDetails />} />
         </Routes>
       </BrowserRouter>
     </div>
