@@ -69,7 +69,7 @@ function App() {
           /> */}
           <Route path="/employeeList" element={<EmployeeList />} />
           <Route path="/adminreg" element={<AdminReg />} />
-          <Route path="/login" element={<Adminlogin />} />
+          <Route path="/adminlogin" element={<Adminlogin />} />
 
           <Route path="/employeeData/:id" element={<EmployeeData />} />
 
