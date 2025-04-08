@@ -13,6 +13,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 
+
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
 
@@ -41,21 +42,27 @@ const registerUser = async (req, res) => {
     }
     const saltRounds = 10; // Higher rounds mean stronger but slower hashing
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const role=process.env.ADMIN_ROLE;
     //user creation
     const user = await User.create({
       userName,
       email,
       password: hashedPassword,
+      role
     });
-    const createdUser = await User.findOne({ _id: user._id }).select(
-      "-password"
-    );
+    const createdUser = await User.findOne({ _id: user._id }).select("-password");
 
-    if (!createdUser) {
-      return res.status(500).json({ message: "User registration failed" });
-    }
+    return res.status(200).json({
+      message: "User Registration Successful",
+      user: createdUser,
+    });
+    
 
-    return res.status(201).json({ message: "User Registration Successful" });
+    // if (!createdUser) {
+    //   return res.status(500).json({ message: "User registration failed" });
+    // }
+
+    // return res.status(201).json({ message: "User Registration Successful" ,user});
   } catch (err) {
     return res
       .status(500)
@@ -94,6 +101,7 @@ const loginUser = async (req, res) => {
     return res.status(200).json({
       message: "Login Successful",
       token,
+      role:process.env.ADMIN_ROLE
     });
   } catch (err) {
     return res
@@ -522,7 +530,7 @@ const employeeDetails = async (req, res) => {
 }
 
 const deleteProfileImage = async (req, res) => {
-  const {  id } = req.query;
+  const { id } = req.query;
   try {
     const result = await Employee.findByIdAndDelete(id )
     res.status(200).json({ message: "Image Removed", data: result })
@@ -588,11 +596,9 @@ const customerDetails = async (req, res) => {
 }
 
 const deleteCustomerImage = async (req, res) => {
-  const { customerId, id } = req.params;
+  const {  id } = req.query;
   try {
-    const result = await Customer.findByIdAndUpdate(customerId, {
-      $pull: { imageCustomer: { id } }
-    }, { new: true })
+    const result = await Customer.findByIdAndDelete(id )
     res.status(200).json({ message: "Image Removed", data: result })
   } catch (error) {
     res.status(500).json({ message: "Intenal Server Error", error: error.message })
