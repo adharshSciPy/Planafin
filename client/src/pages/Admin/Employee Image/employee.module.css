@@ -27,7 +27,7 @@
   }
   .cardContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     gap: 1rem;
     padding: 2rem;
   }
@@ -44,11 +44,19 @@
   
   .ImgSingleCard {
     width: 200px;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
   }
   
   .cardImg {
     width: 100%;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
   }
   
   .btnContainer {
