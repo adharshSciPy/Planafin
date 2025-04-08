@@ -25,6 +25,7 @@ import JobDetails from "./pages/Admin/JobDetails";
 import ApplicationDetails from "./pages/Admin/ApplicationDetails";
 import EmployeeImage from "./pages/Admin/Employee Image/EmployeeImage";
 import EmployeeData from "./pages/Admin/EmployeeData"
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.js"
 
 function App() {
   return (
