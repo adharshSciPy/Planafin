@@ -143,6 +143,16 @@ const ContactDetails = async (req, res) => {
   }
 };
 
+const ContactById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await Contact.findById(id);
+    res.status(200).json({ message: "Successfully Fetched", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
 const jobOpenings = async (req, res) => {
   const { title, location, workSchedule, workTime, requiredSkills, jobType } = req.body;
   try {
@@ -340,7 +350,17 @@ const getOnDemandById = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
-
+const getemployeeData=async(req,res)=>{
+  const {id}=req.params;
+  try{
+    const result=await JobApplication.findById(id);
+    res.status(200).json({message:"employee Data",data:result})
+  }catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+}
 const demandDetails = async (req, res) => {
   try {
     const result = await OnDemand.find().select("image title summary id");
@@ -578,5 +598,5 @@ const deleteJobopenings = async (req, res) => {
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication
+  deleteJobopenings, deleteApplication, ContactById,getemployeeData
 }

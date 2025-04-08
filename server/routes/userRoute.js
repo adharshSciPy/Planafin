@@ -3,7 +3,7 @@ import upload from '../utils/uploads.js'
 import {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
-    deleteApplication
+    deleteApplication, ContactById,getemployeeData
 } from "../controller/userController.js"
 const userRoute = Router()
 
@@ -34,8 +34,8 @@ userRoute.route('/customerImage').post(upload.array('imageCustomer'), customerIm
 userRoute.route('/deleteCustomerImage/:customerId/:id').delete(deleteCustomerImage)
 userRoute.route('/deleteJobopening/:id').delete(deleteJobopenings)
 userRoute.route('/deleteJobapplication/:id').delete(deleteApplication)
-
-
+userRoute.route('/contactIndetail/:id').get(ContactById)
+userRoute.route('/getemployeeData/:id').get(getemployeeData)
 
 
 
