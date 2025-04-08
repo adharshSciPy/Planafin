@@ -42,12 +42,24 @@ function Aboutus() {
       
     }
   }
+  const getEmployeeImage=async ()=>{
+    try {
+     const response=await axios.get(`${baseUrl}/api/v1/user/employeeDetails`) ;
+     console.log("employee image",response.data.data);
+     setSlides(response.data.data)
+    } catch (error) {
+      console.log("Error fetching the data",error);
+      
+    }
+  }
   useEffect(() => {
     journeyDatasAll();
     getClientData()
+    getEmployeeImage()
   },[]);
   
   
+  console.log(clientImage);
   
   
   return (
@@ -360,7 +372,7 @@ function Aboutus() {
                 {slides.map((item,index)=>(
                   <div style={{display:"flex"}}>
                     <div className={styles.imageContainer} key={index}>
-                    <img src={item} alt="" className={styles.imageContainerImg}/>
+                    <img src={`${baseUrl}${item.profileImg[0].path}`} alt="" className={styles.imageContainerImg}/>
                   </div>
                   </div>
 

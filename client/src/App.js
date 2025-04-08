@@ -25,6 +25,7 @@ import JobDetails from "./pages/Admin/JobDetails";
 import ApplicationDetails from "./pages/Admin/ApplicationDetails";
 import EmployeeImage from "./pages/Admin/Employee Image/EmployeeImage";
 import EmployeeData from "./pages/Admin/EmployeeData"
+import EmployeeList from "./pages/Admin/ClientImage/Clientimage";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/jobdetails" element={<JobDetails/>} />
           <Route path="/applicationDetails" element={<ApplicationDetails/>} />
           <Route path="/employeeimage" element={<EmployeeImage/>} />
+          <Route path="/employeeList" element={<EmployeeList/>} />
 
           <Route path="/employeeData/:id" element={<EmployeeData/>} />
 
