@@ -9,7 +9,6 @@ import cardImage2 from "../../assets/cardImage2.png";
 import cardImage3 from "../../assets/cardImage3.png";
 import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
-import teamImg from "../../assets/team1.png";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
 import slider1 from "../../assets/Aarti-Ramachandran.jpg"
@@ -26,74 +25,42 @@ import slider11 from "../../assets/Susmita-Srivastava.jpeg"
 import slider12 from "../../assets/Swathi-Yelugoti.png"
 import slider13 from "../../assets/Yash-Viroja.png"
 function Aboutus() {
-  const slides=[
-      slider1,slider2,
-      slider3,slider4,
-      slider5,slider6,
-      slider7,slider8,
-      slider9,slider10,
-      slider11,slider12,
-      slider13
   
-  
-  ]
+
+
   const [journeyData, setJourneyData] = useState([]);
   const OPTIONS = { loop: true };
-  useEffect(() => {
-    journeyDatasAll();
-  }, []);
+  const [clientImage,setClientImage]=useState([])
+  const [dataImage,setdataImage]=useState()
+  const [slides,setSlides]=useState([])
   const journeyDatasAll = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
       if (response) {
         setJourneyData(response.data.data || []);
-        console.log(journeyData, "ithaanu");
+
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // const journeyData = [
-
-  //   {
-  //     year: "2015",
-  //     title: "Founded & Established",
-  //     description: `Founded and launched operations in the United Arab Emirates and India
-  //     Established FP&A practice
-  //     Implemented for world's fourth largest tile manufacturing company`,
-  //   },
-  //   {
-  //     year: "2015",
-  //     title: "Founded & Established",
-  //     description: `Founded and launched operations in the United Arab Emirates and India
-  //     Established FP&A practice
-  //     Implemented for world's fourth largest tile manufacturing company`,
-  //   },
-  //   {
-  //     year: "2017",
-  //     title: "Leading EPM Partner of the Region",
-  //     description: `Industry expertise in retail, manufacturing, logistics
-  //     Implemented for Middle East's largest retail conglomerate
-  //     Implemented for seventh largest aluminum producer in the world`,
-  //   },
-  //   {
-  //     year: "2020",
-  //     title: "Global Expansion",
-  //     description: `Expanded operations to Europe and North America
-  //     Partnered with Fortune 500 companies
-  //     Recog,
-  //     nized as a top EPM solutions provider`,
-  //   },
-
-  //   {
-  //     year: "2020",
-  //     title: "Global Expansion",
-  //     description: `Expanded operations to Europe and North America
-  //     Partnered with Fortune 500 companies
-  //     Recognized as a top EPM solutions provider`,
-  //   }
-  // ];
-
+  const getClientData=async()=>{
+    try {
+      const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
+      setClientImage(response.data.data[0].imageCustomer)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  useEffect(() => {
+    journeyDatasAll();
+    getClientData()
+  },[]);
+  
+  
+  
+  
   return (
     <div>
       <Header />
@@ -129,7 +96,7 @@ function Aboutus() {
         </div>
       </div>
       <div className={styles.section}>
-        <Carousel options={OPTIONS} />
+        <Carousel prop1={OPTIONS} prop2={clientImage}/>
       </div>
       <div className={styles.section}>
         <div className={styles.wrapperContainer}>

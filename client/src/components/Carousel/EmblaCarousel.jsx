@@ -2,21 +2,6 @@ import React, { useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { useAutoplay } from './EmblaCarouselAutoplay'
-import slider1 from "../../assets/slider1.png"
-import slider2 from "../../assets/slider2.png"
-import slider3 from "../../assets/slider3.png"
-import slider4 from "../../assets/slider4.jpg"
-import slider5 from "../../assets/slider5.jpg"
-import slider6 from "../../assets/slider6.png"
-import slider7 from "../../assets/slider7.png"
-import slider8 from "../../assets/slider8.png"
-import slider9 from "../../assets/slider9.png"
-import slider10 from "../../assets/slider10.png"
-import slider11 from "../../assets/slider11.png"
-import slider12 from "../../assets/slider12.png"
-import slider13 from "../../assets/slider13.png"
-import slider14 from "../../assets/slider14.png"
-import slider15 from "../../assets/slider15.png"
 
 
 
@@ -25,21 +10,12 @@ import {
   PrevButton,
   usePrevNextButtons
 } from './EmblaCarouselArrowButtons'
+import baseUrl from '../../baseUrl'
 
-const EmblaCarousel = (props) => {
-    const{options}=props
-  const slides=[
-    slider1,slider2,
-    slider3,slider4,
-    slider5,slider6,
-    slider7,slider8,
-    slider9,slider10,
-    slider11,slider12,
-    slider13,slider14,
-    slider15
-
-
-  ]
+const EmblaCarousel = ({prop1,prop2}) => {
+  
+    const{options}=prop1
+    const slides=prop2.map((item,index)=>{return item.path })
   const progressNode = useRef(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({ playOnInit: true, delay: 3000 })
@@ -63,7 +39,7 @@ const EmblaCarousel = (props) => {
           {slides.map((src,index) => (
             <div className="embla__slide" key={index}>
               
-              <img className="embla__slide__img" src={src} alt={`Slide ${index + 1}`} />
+              <img className="embla__slide__img" src={`${baseUrl}${src}`} alt={`Slide ${index + 1}`} />
               
             </div>
           ))}
