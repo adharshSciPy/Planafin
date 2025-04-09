@@ -40,6 +40,12 @@ function AdminDashboard() {
               <button className="fourthcard-btn1">View</button>
               </Link>
             </div>
+            <div className="sixthcard">
+              <h3>Watch Now</h3>
+              <Link to="/WatchNowDetails">
+              <button className="fourthcard-btn1">View</button>
+              </Link>
+            </div>
           </div>
           <div className="secondrow">
             <div className="fstcard">
@@ -62,6 +68,12 @@ function AdminDashboard() {
             </div>
             <div className="frthcard">
               <h3>Contact Us</h3>
+              <Link to="/admincontactus">
+              <button className="forthcard-btn2">View</button>
+              </Link>
+            </div>
+            <div className="ffthcard">
+              <h3>About Us</h3>
               <Link to="/admincontactus">
               <button className="forthcard-btn2">View</button>
               </Link>
