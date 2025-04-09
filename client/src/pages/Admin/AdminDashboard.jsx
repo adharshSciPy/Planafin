@@ -74,13 +74,15 @@ function AdminDashboard() {
             </div>
             <div className="ffthcard">
               <h3>About Us</h3>
-              <Link to="/admincontactus">
+              <Link to="/projectDetails">
               <button className="forthcard-btn2">View</button>
               </Link>
             </div>
           </div>
         </div>
+        <button className="dashbtn">LOG OUT</button>
       </div>
+      
     </div>
   );
 }
