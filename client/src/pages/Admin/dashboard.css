@@ -1,4 +1,3 @@
-
 .dashboard-container {
   min-height: 100vh;
   background: radial-gradient(circle at top left, #00c6ff, #0072ff);
@@ -7,411 +6,410 @@
   align-items: center;
 }
 
-  
-
-  .dashboard-navbar {
+.dashboard-navbar {
   /* background: black */
-    background-color: black;
-    color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    padding: 15px 30px;
-    font-size: 37px;
-    font-weight: 800;
-    text-align: center;
-    letter-spacing: 15px;
-    width: 100%;
-    /* -webkit-text-stroke: 0.5px brown;  */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); 
-    border-radius: 10px;
-    box-shadow:  rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-  }
-  h3{
-    font-size: 1.10em;
-  }
-  .firstcard:hover {
-    transform: translateY(-5px);
-  }
-  .secondcard:hover {
-    transform: translateY(-5px);
-  }
-  .thirdcard:hover {
-    transform: translateY(-5px);
-  }
-  .forthcard:hover{
-    transform: translateY(-5px);
-  }
-  .fifthcard:hover{
-    transform: translateY(-5px);
-  }
-  .sixthcard:hover{
-    transform: translateY(-5px);
-  }
-  .fstcard:hover {
-    transform: translateY(-5px);
-  }
-  .sndcard:hover {
-    transform: translateY(-5px);
-  }
-  .trdcard:hover {
-    transform: translateY(-5px);
-  }
-  .frthcard:hover{
-    transform: translateY(-5px);
-  }
-  .ffthcard:hover{
-    transform: translateY(-5px);
-  }
-  .firstcard-btn1:hover{
-    background-color: black;
-    color: white;
-  }
-  .secondcard-btn1:hover{
-    background-color: black;
-    color: white;
-  }
-  .thirdcard-btn1:hover{
-    background-color: black;
-    color: white;
-  }
-  .fourthcard-btn1:hover{
-    background-color: black;
-    color: white;
-  }
-  .firstcard-btn2:hover{
-    background-color: black;
-    color: white;
-  }
-  .secondcard-btn2:hover{
-    background-color: black;
-    color: white;
-  }
-  .thirdcard-btn2:hover{
-    background-color: black;
-    color: white;
-  }
-  .forthcard-btn2:hover{
-    background-color: black;
-    color: white;
-  }
+  background-color: black;
+  color: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding: 15px 30px;
+  font-size: 37px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 15px;
+  width: 100%;
+  /* -webkit-text-stroke: 0.5px brown;  */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+h3 {
+  font-size: 1.1em;
+}
+.firstcard:hover {
+  transform: translateY(-5px);
+}
+.secondcard:hover {
+  transform: translateY(-5px);
+}
+.thirdcard:hover {
+  transform: translateY(-5px);
+}
+.forthcard:hover {
+  transform: translateY(-5px);
+}
+.fifthcard:hover {
+  transform: translateY(-5px);
+}
+.sixthcard:hover {
+  transform: translateY(-5px);
+}
+.fstcard:hover {
+  transform: translateY(-5px);
+}
+.sndcard:hover {
+  transform: translateY(-5px);
+}
+.trdcard:hover {
+  transform: translateY(-5px);
+}
+.frthcard:hover {
+  transform: translateY(-5px);
+}
+.ffthcard:hover {
+  transform: translateY(-5px);
+}
+.firstcard-btn1:hover {
+  background-color: black;
+  color: white;
+}
+.secondcard-btn1:hover {
+  background-color: black;
+  color: white;
+}
+.thirdcard-btn1:hover {
+  background-color: black;
+  color: white;
+}
+.fourthcard-btn1:hover {
+  background-color: black;
+  color: white;
+}
+.firstcard-btn2:hover {
+  background-color: black;
+  color: white;
+}
+.secondcard-btn2:hover {
+  background-color: black;
+  color: white;
+}
+.thirdcard-btn2:hover {
+  background-color: black;
+  color: white;
+}
+.forthcard-btn2:hover {
+  background-color: black;
+  color: white;
+}
 
-  .dashboard-cards-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 100px;
-    margin-top: 100px;
-    width: 100%;
-    margin-bottom: 50px;
-  }
-  
-  .firstrow{
-    display: flex;
-    gap: 20px;
-  }
-  .firstcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .secondcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .thirdcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .forthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .fifthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .sixthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .secondrow{
-    display: flex;
-    gap: 20px;
-  }
-  .fstcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .sndcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .trdcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .frthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .ffthcard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .thirdrow{
-    display: flex;
-    gap: 200px;
-    justify-content: space-between;
-  }
-  .firstcard3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  .secondcard3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 220px;
-    height: 200px;
-    text-align: center;
-    border-radius: 20px;
-    background-color: white ;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
+.dashboard-cards-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 100px;
+  margin-top: 100px;
+  width: 100%;
+  margin-bottom: 50px;
+}
 
-  .dashboard-card {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: white;
-    padding: 20px;
-    /* height: 300px; */
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-  }
-  
-  .dashboard-card:hover {
-    transform: translateY(-5px);
-  }
-  
+.firstrow {
+  display: flex;
+  gap: 20px;
+}
+.firstcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.secondcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.thirdcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.forthcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.fifthcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.sixthcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.secondrow {
+  display: flex;
+  gap: 20px;
+}
+.fstcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.sndcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.trdcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.frthcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.ffthcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.thirdrow {
+  display: flex;
+  gap: 200px;
+  justify-content: space-between;
+}
+.firstcard3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.secondcard3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: 220px;
+  height: 200px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-  .firstcard-btn1 {
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .secondcard-btn1 {
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .thirdcard-btn1 {
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .fourthcard-btn1{
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .firstcard-btn2{
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .secondcard-btn2{
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .thirdcard-btn2{
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .forthcard-btn2{
-    background: #007bff;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  
-  .dashboard-view-button:hover {
-    background: #0056b3;
-  }
-  .dashbtn{
-    background: red;
-    color: white;
-    padding: 10px 55px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    /* margin-top: 90px; */
-    transition: background 0.3s ease;
-  }
-  .dashbtn:hover{
-    background: #0056b3;
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: white;
+  padding: 20px;
+  /* height: 300px; */
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
 
-  }
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+.firstcard-btn1 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.secondcard-btn1 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.thirdcard-btn1 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.fourthcard-btn1 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.firstcard-btn2 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.secondcard-btn2 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.thirdcard-btn2 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.forthcard-btn2 {
+  background: #007bff;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+
+.dashboard-view-button:hover {
+  background: #0056b3;
+}
+.dashbtn {
+  background: red;
+  color: white;
+  padding: 10px 55px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  /* margin-top: 90px; */
+  transition: background 0.3s ease;
+}
+.dashbtn:hover {
+  background: #0056b3;
+}
 /* Tablet View */
 @media (max-width: 1424px) {
   .firstrow,
@@ -466,7 +464,7 @@
   }
 
   .fifthcard,
-  .fstcard{
+  .fstcard {
     width: 100% !important;
     max-width: 95%;
     min-height: 270px;
@@ -474,18 +472,18 @@
     box-sizing: border-box;
   }
   .firstcard-btn1,
-.secondcard-btn1,
-.thirdcard-btn1,
-.fourthcard-btn1,
-.firstcard-btn2,
-.secondcard-btn2,
-.thirdcard-btn2,
-.forthcard-btn2 {
-  padding: 12px 40px;
-  font-size: 15px;
-  width: 100%; /* Makes buttons visually wider */
-  /* max-width: 550px; */
-}
+  .secondcard-btn1,
+  .thirdcard-btn1,
+  .fourthcard-btn1,
+  .firstcard-btn2,
+  .secondcard-btn2,
+  .thirdcard-btn2,
+  .forthcard-btn2 {
+    padding: 12px 40px;
+    font-size: 15px;
+    width: 100%; /* Makes buttons visually wider */
+    /* max-width: 550px; */
+  }
 
   .dashboard-cards-container {
     width: 80%;

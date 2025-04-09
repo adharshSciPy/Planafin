@@ -516,3 +516,8 @@
     text-align: center;
   }
 }
+@media (max-width: 379px) {
+  .sec5-padam {
+    display: none;
+  }
+}
