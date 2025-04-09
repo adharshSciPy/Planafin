@@ -32,7 +32,7 @@ function AdContact() {
 
   return (
     <div className="table-container">
-      <h2>Submitted Contact Details</h2>
+      <h2>Contact Details</h2>
       <table className="contact-table">
         <thead>
           <tr>
