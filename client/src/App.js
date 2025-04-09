@@ -49,6 +49,9 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
+          <Route path="/consultation" element={<Consultation />} />
+
+
           <Route path="/webinarData" element={<ProtectedRoute roleRequired="400"><WebinarData /></ProtectedRoute>} />
           <Route path="/ourJourneyAdmin" element={<ProtectedRoute roleRequired="400"><Ourjourneyadmin  /></ProtectedRoute>} />
           <Route path="/getOurJourney" element={<GetAllJourney  />} />

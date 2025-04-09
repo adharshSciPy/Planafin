@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, } from "react";
 import baseUrl from "../../baseUrl";
 import { useNavigate} from "react-router-dom";
+import { Eye, Trash } from 'lucide-react';
+
 
 import "./adminlogin.css";
 
@@ -39,6 +41,8 @@ navigate('/admindashboard')
     <div>
        <div className="admlogin-container">
       <h2>Login</h2>
+      <Eye size={25} /> 
+
       <form onSubmit={handleSubmit}>
         <div className="adminput-group">
           <label>Email</label>
@@ -58,7 +62,8 @@ navigate('/admindashboard')
             name="password"
             placeholder="Enter your password"
             value={form.password}
-            onChange={handleChange} 
+            onChange={handleChange}
+            
           />
         </div>
 
