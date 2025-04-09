@@ -94,132 +94,96 @@
 .valueHeading {
   width: 100%;
   text-align: center;
-  
 }
-.valueHeading h2{
-    font-weight: 600;
-    line-height: 27px;
-    color: #404040;
-    font-size: 36px;
+.valueHeading h2 {
+  font-weight: 600;
+  line-height: 27px;
+  color: #404040;
+  font-size: 36px;
 }
-.cardWrapper{
-    width: 90%;
-    overflow: hidden;
-    margin: auto;
-    margin-top: 30px;
+.cardWrapper {
+  width: 90%;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 30px;
 }
-.cardMain{
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-.card{
-    flex:1 1 20%;
-    max-width: 20%;
-}
-
-.imgContainer{
-    width: 100%;
-
-}
-.imgContainer img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.cardHeading h2{
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 27px;
-    color: #222D4E;
-    padding: 10px 0px;
-
-}
-.cardDescription p{
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    color: #404040;
-}
-.journeyContents{
-width: 100%;
-overflow: hidden;
-margin: auto;
-padding: 50px 50px 100px 50px;
-
-}
-.journeyHeading{
-    width: 100%;
-    text-align: center;
-}
-.journeyHeading h2{
-    font-size: 38px;
-    font-weight: 700;
-    line-height: 57px;
-    color: #152246;
-    padding-bottom: 30px;
-}
-.journeyDescriptionMain{
-    width: 100%;
-    display: flex;
-}
-.leftContainer{
-    width: 50%;
-}
-.rightContainer{
-    width: 50%;
-    position: relative;
-    padding-left: 20px;
-}
-.heading{
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 27px;
-    color: #222D4E;
-    text-align: right;
-
-}
-.journeyp p{
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    color: #404040;
-}
-.rightContainer::before{
-    content: ' ';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 8px solid #d7f0fd;
-    left: -20px;
-}
-.rightContainer::after{
-    
-    content: ' ';
-    position: absolute;
-    width: 3px;
-    height: 100%;
-    background-color: #D7F0FD;
-    top: 25px;
-    left: -8px;
-}
-.leftMain{
+.cardMain {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: end;
-  padding-right : 30px;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-.lastrightContainer{
+.card {
+  flex: 1 1 20%;
+  max-width: 20%;
+}
+
+.imgContainer {
+  width: 100%;
+}
+.imgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cardHeading h2 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  color: #222d4e;
+  padding: 10px 0px;
+}
+.cardDescription p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #404040;
+}
+.journeyContents {
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+  padding: 50px 50px 100px 50px;
+}
+.journeyHeading {
+  width: 100%;
+  text-align: center;
+}
+.journeyHeading h2 {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 57px;
+  color: #152246;
+  padding-bottom: 30px;
+}
+.journeyDescriptionMain {
+  width: 100%;
+  display: flex;
+}
+.leftContainer {
   width: 50%;
-    position: relative;
-    padding-left: 20px;
 }
-.lastrightContainer::before{
-  content: ' ';
+.rightContainer {
+  width: 50%;
+  position: relative;
+  padding-left: 20px;
+}
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  color: #222d4e;
+  text-align: right;
+}
+.journeyp p {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #404040;
+}
+.rightContainer::before {
+  content: " ";
   position: absolute;
   width: 10px;
   height: 10px;
@@ -228,41 +192,72 @@ padding: 50px 50px 100px 50px;
   border: 8px solid #d7f0fd;
   left: -20px;
 }
-.wrapper{
+.rightContainer::after {
+  content: " ";
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: #d7f0fd;
+  top: 25px;
+  left: -8px;
+}
+.leftMain {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding-right: 30px;
+}
+.lastrightContainer {
+  width: 50%;
+  position: relative;
+  padding-left: 20px;
+}
+.lastrightContainer::before {
+  content: " ";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 8px solid #d7f0fd;
+  left: -20px;
+}
+.wrapper {
   max-width: 1140px;
-  margin:auto;
+  margin: auto;
   display: flex;
   margin-bottom: -160px;
 }
-.wrapperOne{
+.wrapperOne {
   width: 20%;
 }
-.wrapperTwo{
+.wrapperTwo {
   width: 25%;
 }
-.wrapperThree{
+.wrapperThree {
   width: 18%;
-  padding:90px 10px 10px 30px;
-  background-color: #2D9BFF;
+  padding: 90px 10px 10px 30px;
+  background-color: #2d9bff;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
   border-radius: 10px;
   margin-right: 10px;
   position: relative;
+  overflow: hidden;
 }
-.wrapperHeading{
+.wrapperHeading {
   font-size: 54px;
   font-weight: 800;
   line-height: 66px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.wrapperText{
+.wrapperText {
   font-size: 16px;
   font-weight: 600;
   line-height: 26px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
-.wrapperThree::before{
-  content: ' ';
+.wrapperThree::before {
+  content: " ";
   position: absolute;
   width: 150px;
   height: 150px;
@@ -274,19 +269,18 @@ padding: 50px 50px 100px 50px;
   right: 20px;
 }
 
-.wrapperFour{
+.wrapperFour {
   width: 18%;
-  padding:90px 10px 10px 30px;
-  background-color: #5AC2A5;
+  padding: 90px 10px 10px 30px;
+  background-color: #5ac2a5;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
   border-radius: 10px;
   margin-right: 10px;
   position: relative;
-
-
+  overflow: hidden;
 }
-.wrapperFour::before{
-  content: ' ';
+.wrapperFour::before {
+  content: " ";
   position: absolute;
   width: 150px;
   height: 150px;
@@ -297,19 +291,18 @@ padding: 50px 50px 100px 50px;
   border-radius: 50%;
   right: 20px;
 }
-.wrapperFive{
+.wrapperFive {
   width: 18%;
-  padding:90px 10px 10px 30px;
-  background-color: #F1CE3B;
+  padding: 90px 10px 10px 30px;
+  background-color: #f1ce3b;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
   border-radius: 10px;
   margin-right: 10px;
   position: relative;
-
-
+  overflow: hidden;
 }
-.wrapperFive::before{
-  content: ' ';
+.wrapperFive::before {
+  content: " ";
   position: absolute;
   width: 150px;
   height: 150px;
@@ -320,159 +313,219 @@ padding: 50px 50px 100px 50px;
   border-radius: 50%;
   right: 20px;
 }
-.planafinWrapper{
+.planafinWrapper {
   width: 100%;
-  background-color: #D7F0FD;
+  background-color: #d7f0fd;
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
   padding: 60px 20px 60px 20px;
 }
-.wrapperMain{
+.wrapperMain {
   max-width: 1140px;
   margin: auto;
 }
-.headerTextWrapper h2{
+.headerTextWrapper h2 {
   font-size: 38px;
-    font-weight: 700;
-    line-height: 57px;
-    color: #152246;
-    padding-bottom: 10px;
+  font-weight: 700;
+  line-height: 57px;
+  color: #152246;
+  padding-bottom: 10px;
 }
-.textWrapper p{
+.textWrapper p {
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
   text-align: justify;
-    color: #404040;
+  color: #404040;
 }
-.textWrapperTwo{
-  padding-top:30px ;
+.textWrapperTwo {
+  padding-top: 30px;
 }
-.textWrapperTwo p{
+.textWrapperTwo p {
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
   text-align: justify;
-    color: #404040;
-  
+  color: #404040;
 }
-.teamContainer{
+.teamContainer {
   width: 100%;
   padding: 10px;
-  max-width: 9  0%;
+  max-width: 9 0%;
   margin: auto;
 }
-.teamWrapper{
+.teamWrapper {
   width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column-reverse;
 }
-.teamRight{
+.teamRight {
   width: 100%;
   padding-top: 60px;
   padding-left: 30px;
 }
-.teamLeft{
+.teamLeft {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.teamWidgetImg{
+.teamWidgetImg {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   padding: 50px 50px;
-  justify-content: space-evenly ;
-  background-color:#D7F0FD ;
+  justify-content: space-evenly;
+  /* background-color: rgb(233, 226, 181); */
   gap: 50px;
 }
-.imageContainer{
+.imageContainer {
   height: 100px;
   width: 100px;
-  background: linear-gradient(to right, #D7F0FD, white);
+  background: linear-gradient(to right, #d7f0fd, white);
   /* clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); */
   border-radius: 100px;
-  
 }
-.imageContainerImg{
+.imageContainerImg {
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: top;
   border-radius: 100px;
+}
 
-} 
-
-.teamText{
+.teamText {
   width: 100%;
 }
 .teamHeading {
   padding: 20px 40px;
 }
-.teamHeading h2{
+.teamHeading h2 {
   font-size: 38px;
-    font-weight: 700;
-    line-height: 57px;
-    color: #152246;
-    text-align: center;
+  font-weight: 700;
+  line-height: 57px;
+  color: #152246;
+  text-align: center;
 }
-.teamText{
+.teamText {
   padding-bottom: 20px;
 }
-.teamText p{
+.teamText p {
   font-size: 18px;
   font-weight: 400;
   line-height: 27px;
-  color: #404040; 
+  color: #404040;
   text-align: center;
 }
-.lastRightContainer::after{
-display: none;
+.lastRightContainer::after {
+  display: none;
 }
-.contentStyle{
-  height: '160px';
-  color: '#fff';
-  line-height: '160px';
-  text-align: 'center';
-  background: '#364d79';
+.contentStyle {
+  height: "160px";
+  color: "#fff";
+  line-height: "160px";
+  text-align: "center";
+  background: "#364d79";
 }
+
+.profileWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 15px;
+}
+
+.profileImageContainer {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  border: 4px solid white;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-position: top;
+}
+
+/* Orange Background Semicircle */
+.backgroundShape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #d7f0fd;
+  border-radius: 50%;
+  z-index: 1;
+  transform: translate(15px, 15px);
+  clip-path: ellipse(75% 50% at 50% 50%);
+}
+
+/* Optional: teal dots grid */
+.decorativeDots {
+  position: absolute;
+  right: -30px;
+  top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 8px);
+  gap: 6px;
+}
+
+.decorativeDots::before,
+.decorativeDots::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #00c9c8;
+  border-radius: 50%;
+  display: block;
+}
+
+.decorativeDots::after {
+  margin-top: 8px;
+}
+
+
+
 @media (max-width: 1100px) {
   .card {
     flex: 1 1 45%;
     max-width: 45%;
   }
-.wrapper{
-  margin-bottom: -100px;
-}
+  .wrapper {
+    margin-bottom: -100px;
+  }
 }
 
-
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .paraOne {
     width: 80%;
   }
-.wrapper{
-  display: none;
+  .wrapper {
+    display: none;
+  }
+  .teamWrapper {
+    flex-direction: column;
+  }
+  .teamLeft {
+    width: 100%;
+  }
+  .teamRight {
+    width: 100%;
+    padding-left: 10px;
+  }
+  .teamText p {
+    text-align: left;
+  }
+  .teamHeading h2 {
+    text-align: center;
+  }
 }
-.teamWrapper{
-  flex-direction: column;
-}
-.teamLeft{
-  width: 100%;
-}
-.teamRight{
-  width: 100%;
-  padding-left: 10px;
-}
-.teamText p{
-  text-align: left;
-}
-.teamHeading h2{
-  text-align: center;
-}
-}
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .paraOne {
     width: 90%;
   }
@@ -482,26 +535,25 @@ display: none;
   .headingPara {
     font-size: 15px;
   }
-.contentsContainer {
-  width: 85%;
+  .contentsContainer {
+    width: 85%;
+  }
+  .firstContent {
+    padding-top: 10px;
+  }
 }
-.firstContent {
-  padding-top: 10px;
-}
-
-}
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .card {
     flex: 1 1 100%;
     max-width: 100%;
   }
-  .journeyContents{
+  .journeyContents {
     padding: 30px 10px 50px 20px;
   }
-.textWrapper p{
-  text-align: left;
-}
-.textWrapperTwo p{
-  text-align: left;
-}
+  .textWrapper p {
+    text-align: left;
+  }
+  .textWrapperTwo p {
+    text-align: left;
+  }
 }

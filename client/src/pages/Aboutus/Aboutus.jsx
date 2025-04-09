@@ -11,69 +11,62 @@ import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
+import demoImg from "../../assets/Swathi-Yelugoti.png";
 function Aboutus() {
-  
-
-
   const [journeyData, setJourneyData] = useState([]);
   const OPTIONS = { loop: true };
-  const [clientImage,setClientImage]=useState([])
-  const [dataImage,setdataImage]=useState()
-  const [slides,setSlides]=useState([])
-  const [projectData,setProjectdata]=useState()
+  const [clientImage, setClientImage] = useState([]);
+  const [dataImage, setdataImage] = useState();
+  const [slides, setSlides] = useState([]);
+  const [projectData, setProjectdata] = useState();
   const journeyDatasAll = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
       if (response) {
         setJourneyData(response.data.data || []);
-
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const getClientData=async()=>{
+  const getClientData = async () => {
     try {
-      const response=await axios.get(`${baseUrl}/api/v1/user/customerDetails`)
-      setClientImage(response.data.data[0].imageCustomer)
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/customerDetails`
+      );
+      setClientImage(response.data.data[0].imageCustomer);
       console.log(response);
-      
     } catch (error) {
       console.log(error);
-      
     }
-  }
-  const getEmployeeImage=async ()=>{
+  };
+  const getEmployeeImage = async () => {
     try {
-     const response=await axios.get(`${baseUrl}/api/v1/user/employeeDetails`) ;
-     console.log("employee image",response.data.data);
-     setSlides(response.data.data)
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/employeeDetails`
+      );
+      console.log("employee image", response.data.data);
+      setSlides(response.data.data);
     } catch (error) {
-      console.log("Error fetching the data",error);
-      
+      console.log("Error fetching the data", error);
     }
-  }
-  const getProject=async()=>{
+  };
+  const getProject = async () => {
     try {
-     const response=await axios.get(`${baseUrl}/api/v1/user/viewProject`) ;
-     console.log("pro",response.data.data);
-     setProjectdata(response.data.data)
-      
-    } catch (error) {
-      
-    }
-  }
+      const response = await axios.get(`${baseUrl}/api/v1/user/viewProject`);
+      console.log("pro", response.data.data);
+      setProjectdata(response.data.data);
+    } catch (error) {}
+  };
   useEffect(() => {
     journeyDatasAll();
-    getClientData()
-    getEmployeeImage()
-    getProject()
-  },[]);
-  
-  
+    getClientData();
+    getEmployeeImage();
+    getProject();
+  }, []);
+
   console.log(clientImage);
-  
-  
+
   return (
     <div>
       <Header />
@@ -318,8 +311,11 @@ function Aboutus() {
           <div className={styles.wrapperTwo}></div>
           <div className={styles.wrapperThree}>
             <div className={styles.certify}>
-            {projectData &&(
-              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.consultants  ?? ""}${'+'}`}</h2>)}
+              {projectData && (
+                <h2 className={styles.wrapperHeading}>{`${
+                  projectData[0]?.consultants ?? ""
+                }${"+"}`}</h2>
+              )}
               <h2 className={styles.wrapperText}>
                 Certified EPM <br />
                 Consultants
@@ -328,8 +324,11 @@ function Aboutus() {
           </div>
           <div className={styles.wrapperFour}>
             <div className={styles.sucess}>
-              {projectData &&(
-              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.projects  ?? ""}${'+'}`}</h2>)}
+              {projectData && (
+                <h2 className={styles.wrapperHeading}>{`${
+                  projectData[0]?.projects ?? ""
+                }${"+"}`}</h2>
+              )}
               <h2 className={styles.wrapperText}>
                 Sucessfull <br />
                 Projects
@@ -338,8 +337,11 @@ function Aboutus() {
           </div>
           <div className={styles.wrapperFive}>
             <div className={styles.business}>
-            {projectData &&(
-              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.cases  ?? ""}${'+'}`}</h2>)}
+              {projectData && (
+                <h2 className={styles.wrapperHeading}>{`${
+                  projectData[0]?.cases ?? ""
+                }${"+"}`}</h2>
+              )}
               <h2 className={styles.wrapperText}>
                 Business Use <br />
                 Cases
@@ -384,13 +386,23 @@ function Aboutus() {
           <div className={styles.teamWrapper}>
             <div className={styles.teamLeft}>
               <div className={styles.teamWidgetImg}>
-                {slides.map((item,index)=>(
-                  <div style={{display:"flex"}}>
-                    <div className={styles.imageContainer} key={index}>
-                    <img src={`${baseUrl}${item.profileImg[0].path}`} alt="" className={styles.imageContainerImg}/>
-                  </div>
-                  </div>
+                {slides.map((item, index) => (
+                  <div key={index} className={styles.profileWrapper}>
+                    {/* Orange semicircle background */}
+                    <div className={styles.backgroundShape}></div>
 
+                    {/* Profile image container */}
+                    <div className={styles.profileImageContainer}>
+                      <img
+                        src={`${baseUrl}${item.profileImg[0].path}`}
+                        alt=""
+                        className={styles.profileImage}
+                      />
+                    </div>
+
+                    {/* Optional: teal dots or connector lines */}
+                    <div className={styles.decorativeDots}></div>
+                  </div>
                 ))}
               </div>
             </div>
