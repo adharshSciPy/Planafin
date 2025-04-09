@@ -1,8 +1,14 @@
 import React from "react";
 import "./dashboard.css";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 function AdminDashboard() {
+  const navigate=useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    navigate('/adminlogin'); 
+  };
   return (
     <div>
       <div className="dashboard-container">
@@ -80,7 +86,7 @@ function AdminDashboard() {
             </div>
           </div>
         </div>
-        <button className="dashbtn">LOG OUT</button>
+        <button className="dashbtn" onClick={handleLogout}>LOG OUT</button>
       </div>
       
     </div>

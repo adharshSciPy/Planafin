@@ -15,6 +15,9 @@ function Services() {
   const tabContent = {
     "Business-Consulting": {
       title: "Business Consulting Services",
+      heading:
+        "Guuhh uuhb  uhhhhhhhhh hhhhhhh"
+      ,
       description: [
         "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
         "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
@@ -219,20 +222,30 @@ function Services() {
 
   {/* Content Section */}
   <div className="tab-content">
-    <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
-   <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
+  <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
+  <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
+  {tabContent[activeTab].heading && <h6>{tabContent[activeTab].heading}</h6>}
+  {/* ithanu mone sanam ivide keri kali ennittu mukalil poyittu tabcontent il poyi oru heading ondakkanam content idanam */}
 
+  <div className="content-flex">
+    <ul>
+      {tabContent[activeTab].points.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
 
+    <div className="paragraphs">
       {tabContent[activeTab].description.map((desc, index) => (
         <p key={index}>{desc}</p>
       ))}
-      <ul>
-        {tabContent[activeTab].points.map((point, index) => (
-          <li key={index}>{point}</li>
-        ))}
-      </ul>
-      <Link  to="mailto:example@example.com" className="services-link">Know More &gt;&gt;</Link>
     </div>
+  </div>
+
+  <Link to="mailto:example@example.com" className="services-link">
+    Know More &gt;&gt;
+  </Link>
+</div>
+
     <div className="image-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
       <img src={tabContent[activeTab].image} alt={activeTab} />
     </div>

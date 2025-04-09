@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, } from "react";
 import baseUrl from "../../baseUrl";
 import { useNavigate} from "react-router-dom";
+import { Eye, EyeOff } from 'lucide-react';
+
 
 import "./adminlogin.css";
 
@@ -12,6 +14,8 @@ function Adminlogin() {
   };
  const navigate=useNavigate();
   const [form,setForm]=useState(field);
+  const [showPassword,setShowPassword]=useState(false);
+  
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -34,11 +38,16 @@ navigate('/admindashboard')
       
     }
   }
+  const passwordToggle=()=>{
+    setShowPassword(prev => !prev);
+  }
 
   return (
     <div>
        <div className="admlogin-container">
       <h2>Login</h2>
+     
+
       <form onSubmit={handleSubmit}>
         <div className="adminput-group">
           <label>Email</label>
@@ -53,13 +62,18 @@ navigate('/admindashboard')
 
         <div className="adminput-group">
           <label>Password</label>
+          <div className="input-span-btn23">
           <input
-            type="password"
+           type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="Enter your password"
             value={form.password}
-            onChange={handleChange} 
+            onChange={handleChange}
+            
           />
+          <span onClick={passwordToggle} className="eyebtn"> {showPassword?<Eye size={25} />:<EyeOff size={25}/>} </span>
+          </div>
+
         </div>
 
         <button className="admbtn" type="submit">Login</button>
