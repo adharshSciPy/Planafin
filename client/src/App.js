@@ -53,12 +53,18 @@ function App() {
           <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin  />} />
           <Route path="/getOurJourney" element={<GetAllJourney  />} />
           <Route path="/getWebinarData" element={<GetWebinarData  />} />
-          <Route path="/feedbackdata" element={<FeedBack  />} />
-          <Route path="/jobopenings" element={<JobOpening  />} />
+          <Route path="/feedbackdata" element={<ProtectedRoute roleRequired="400">
+            <FeedBack/>
+          </ProtectedRoute>}/>
+          <Route path="/jobopenings"element={<ProtectedRoute roleRequired="400">
+            <JobOpening/>
+          </ProtectedRoute>} />
           <Route path="/admindashboard" element={<AdminDashboard  />} />
           <Route path="/jobdetails" element={<JobDetails  />} />
           <Route path="/applicationDetails" element={<ApplicationDetails  />} />
-          <Route path="/employeeimage" element={<EmployeeImage />}/>
+          <Route path="/employeeimage" element={<ProtectedRoute roleRequired="400">
+            <EmployeeImage/>
+          </ProtectedRoute>}/>
           {/* <Route
             path="/employeeimage"
             element={
@@ -70,9 +76,7 @@ function App() {
           <Route path="/clientList" element={<EmployeeList  />} />
           <Route path="/adminreg" element={<AdminReg />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
-
           <Route path="/employeeData/:id" element={<EmployeeData  />} />
-
           <Route path="/admincontactus" element={<AdContact  />} />
           <Route path="/WatchNowDetails" element={<WatchNowDetails />} />
           <Route path="/projectDetails" element={<ProjectDetails />} />
