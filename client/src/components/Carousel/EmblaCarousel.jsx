@@ -45,7 +45,6 @@ const EmblaCarousel = ({prop1}) => {
     useEffect(()=>{
       getClientData()
     },[])
-    console.log(getSlide);
     
   return (
     <div className="embla">

@@ -20,6 +20,7 @@ function Aboutus() {
   const [clientImage,setClientImage]=useState([])
   const [dataImage,setdataImage]=useState()
   const [slides,setSlides]=useState([])
+  const [projectData,setProjectdata]=useState()
   const journeyDatasAll = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
@@ -54,6 +55,9 @@ function Aboutus() {
   }
   const getProject=async()=>{
     try {
+     const response=await axios.get(`${baseUrl}/api/v1/user/viewProject`) ;
+     console.log("pro",response.data.data);
+     setProjectdata(response.data.data)
       
     } catch (error) {
       
@@ -63,6 +67,7 @@ function Aboutus() {
     journeyDatasAll();
     getClientData()
     getEmployeeImage()
+    getProject()
   },[]);
   
   
@@ -313,7 +318,8 @@ function Aboutus() {
           <div className={styles.wrapperTwo}></div>
           <div className={styles.wrapperThree}>
             <div className={styles.certify}>
-              <h2 className={styles.wrapperHeading}>45+</h2>
+            {projectData &&(
+              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.consultants  ?? ""}${'+'}`}</h2>)}
               <h2 className={styles.wrapperText}>
                 Certified EPM <br />
                 Consultants
@@ -322,7 +328,8 @@ function Aboutus() {
           </div>
           <div className={styles.wrapperFour}>
             <div className={styles.sucess}>
-              <h2 className={styles.wrapperHeading}>110+</h2>
+              {projectData &&(
+              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.projects  ?? ""}${'+'}`}</h2>)}
               <h2 className={styles.wrapperText}>
                 Sucessfull <br />
                 Projects
@@ -331,7 +338,8 @@ function Aboutus() {
           </div>
           <div className={styles.wrapperFive}>
             <div className={styles.business}>
-              <h2 className={styles.wrapperHeading}>100+</h2>
+            {projectData &&(
+              <h2 className={styles.wrapperHeading}>{`${projectData[0]?.cases  ?? ""}${'+'}`}</h2>)}
               <h2 className={styles.wrapperText}>
                 Business Use <br />
                 Cases
