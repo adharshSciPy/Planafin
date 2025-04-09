@@ -49,8 +49,8 @@ function App() {
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
-          <Route path="/webinarData" element={<WebinarData />} />
-          <Route path="/ourJourneyAdmin" element={<Ourjourneyadmin  />} />
+          <Route path="/webinarData" element={<ProtectedRoute roleRequired="400"><WebinarData /></ProtectedRoute>} />
+          <Route path="/ourJourneyAdmin" element={<ProtectedRoute roleRequired="400"><Ourjourneyadmin  /></ProtectedRoute>} />
           <Route path="/getOurJourney" element={<GetAllJourney  />} />
           <Route path="/getWebinarData" element={<GetWebinarData  />} />
           <Route path="/feedbackdata" element={<ProtectedRoute roleRequired="400">
@@ -59,8 +59,8 @@ function App() {
           <Route path="/jobopenings"element={<ProtectedRoute roleRequired="400">
             <JobOpening/>
           </ProtectedRoute>} />
-          <Route path="/admindashboard" element={<AdminDashboard  />} />
-          <Route path="/jobdetails" element={<JobDetails  />} />
+          <Route path="/admindashboard" element={<ProtectedRoute roleRequired="400"> <AdminDashboard  /> </ProtectedRoute>} />
+          <Route path="/jobdetails" element={<ProtectedRoute roleRequired="400"><JobDetails  /></ProtectedRoute>} />
           <Route path="/applicationDetails" element={<ProtectedRoute roleRequired="400"><ApplicationDetails  /></ProtectedRoute> } />
           <Route path="/employeeimage" element={<ProtectedRoute roleRequired="400">
             <EmployeeImage/>
@@ -73,13 +73,13 @@ function App() {
               </ProtectedRoute>
             }
           /> */}
-          <Route path="/clientList" element={<EmployeeList  />} />
+          <Route path="/clientList" element={<ProtectedRoute roleRequired="400"><EmployeeList  /></ProtectedRoute>} />
           <Route path="/adminreg" element={<AdminReg />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
           <Route path="/employeeData/:id" element={<EmployeeData  />} />
-          <Route path="/admincontactus" element={<AdContact  />} />
-          <Route path="/WatchNowDetails" element={<WatchNowDetails />} />
-          <Route path="/projectDetails" element={<ProjectDetails />} />
+          <Route path="/admincontactus" element={<ProtectedRoute roleRequired="400"><AdContact  /></ProtectedRoute>} />
+          <Route path="/WatchNowDetails" element={<ProtectedRoute roleRequired="400"><WatchNowDetails /></ProtectedRoute>} />
+          <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
 
         </Routes>
       </BrowserRouter>
