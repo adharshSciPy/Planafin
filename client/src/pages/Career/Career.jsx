@@ -314,7 +314,7 @@ function Career() {
             as a team, let’s chat!
           </h2>
           <div className={styles.aboutBtnDiv}>
-            <button className={styles.aboutContentBtn}>
+            <button className={styles.aboutContentBtn} onClick={() => scrollToApplicationForm()}>
               Join Us{" "}
               <span
                 style={{
