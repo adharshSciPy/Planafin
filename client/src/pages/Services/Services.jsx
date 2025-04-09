@@ -219,20 +219,28 @@ function Services() {
 
   {/* Content Section */}
   <div className="tab-content">
-    <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
-   <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
+  <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
+  <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
 
+  <div className="content-flex">
+    <ul>
+      {tabContent[activeTab].points.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
 
+    <div className="paragraphs">
       {tabContent[activeTab].description.map((desc, index) => (
         <p key={index}>{desc}</p>
       ))}
-      <ul>
-        {tabContent[activeTab].points.map((point, index) => (
-          <li key={index}>{point}</li>
-        ))}
-      </ul>
-      <Link  to="mailto:example@example.com" className="services-link">Know More &gt;&gt;</Link>
     </div>
+  </div>
+
+  <Link to="mailto:example@example.com" className="services-link">
+    Know More &gt;&gt;
+  </Link>
+</div>
+
     <div className="image-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
       <img src={tabContent[activeTab].image} alt={activeTab} />
     </div>
