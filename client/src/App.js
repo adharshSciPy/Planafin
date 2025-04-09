@@ -61,7 +61,7 @@ function App() {
           </ProtectedRoute>} />
           <Route path="/admindashboard" element={<AdminDashboard  />} />
           <Route path="/jobdetails" element={<JobDetails  />} />
-          <Route path="/applicationDetails" element={<ApplicationDetails  />} />
+          <Route path="/applicationDetails" element={<ProtectedRoute roleRequired="400"><ApplicationDetails  /></ProtectedRoute> } />
           <Route path="/employeeimage" element={<ProtectedRoute roleRequired="400">
             <EmployeeImage/>
           </ProtectedRoute>}/>
