@@ -657,9 +657,9 @@ const viewProject = async (req, res) => {
 }
 
 const solution = async (req, res) => {
-  const { heading, description } = req.body
+  const { heading, description, descriptionPoints } = req.body
   try {
-    const result = await Solution.create({ heading, description });
+    const result = await Solution.create({ heading, description, descriptionPoints });
     res.status(200).json({ message: "Solution Created Successfully", data: result })
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error", error: error.message })
