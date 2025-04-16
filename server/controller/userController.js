@@ -9,6 +9,7 @@ import { WatchNow } from "../model/watchnowSchema.js";
 import { Employee } from "../model/employeeSchema.js";
 import { Customer } from "../model/customerSchema.js";
 import { Project } from "../model/projectSchema.js";
+import { Solution } from "../model/solutionSchema.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -655,10 +656,49 @@ const viewProject = async (req, res) => {
   }
 }
 
+const solution = async (req, res) => {
+  const { heading, description } = req.body
+  try {
+    const result = await Solution.create({ heading, description });
+    res.status(200).json({ message: "Solution Created Successfully", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const solutionDetails = async (req, res) => {
+  try {
+    const solutiondeatils = await Solution.find()
+    res.status(200).json({ message: "Solution Details Fetched", data: solutiondeatils })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const solutionById = async (req, res) => {
+  const { id } = req.params
+  try {
+    const solutionresult = await Solution.findById(id)
+    res.status(200).json({ message: "Solution Fetched", data: solutionresult })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const deleteSolution = async (req, res) => {
+  const { id } = req.params
+  try {
+    const solutionresult = await Solution.findByIdAndDelete(id)
+    res.status(200).json({ message: "Solution Deleted", data: solutionresult })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject
+  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
+  solutionById, deleteSolution
 }
