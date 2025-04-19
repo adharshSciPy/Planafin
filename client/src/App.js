@@ -32,6 +32,8 @@ import Adminlogin from "./pages/Admin/Adminlogin";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.js";
 import WatchNowDetails from "./pages/Admin/WatchNowDetails"
 import ProjectDetails from "./pages/Admin/Project.jsx";
+import OurJourneyAccelarators from "./pages/Admin/OurJourneyAccelarators.jsx"
+
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 function App() {
   return (
@@ -84,6 +86,7 @@ function App() {
           <Route path="/admincontactus" element={<ProtectedRoute roleRequired="400"><AdContact  /></ProtectedRoute>} />
           <Route path="/WatchNowDetails" element={<ProtectedRoute roleRequired="400"><WatchNowDetails /></ProtectedRoute>} />
           <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
+          <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
           <Route path="/industryimages" element={<IndustryImages/>} />
         </Routes>
       </BrowserRouter>

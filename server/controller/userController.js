@@ -10,6 +10,8 @@ import { Employee } from "../model/employeeSchema.js";
 import { Customer } from "../model/customerSchema.js";
 import { Project } from "../model/projectSchema.js";
 import { Solution } from "../model/solutionSchema.js";
+import { Industry } from "../model/industrySchema.js";
+import SolutionAccelerators from "../model/solutionAccelerators.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -695,10 +697,141 @@ const deleteSolution = async (req, res) => {
   }
 }
 
+const industryImage = async (req, res) => {
+  try {
+    const { heading } = req.body;
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
+
+    const filePaths = req.files.map((file) => ({
+      id: uuidv4(), // Generate a unique ID for each image
+      path: `/uploads/${file.filename}`,
+    }));
+
+    // Assuming the industry is authenticated, otherwise you could fetch the industry info another way
+    const industryId = req.body._id; // Assuming req.body contains the industry's ID
+
+    if (!industryId) {
+      // If no industryId is provided, you are creating a new industry
+      const newIndustry = new Industry({
+        heading,
+        industryImage: filePaths, // Set the uploaded images as profile images
+      });
+
+      const savedIndustry = await newIndustry.save();
+      return res.status(200).json({
+        message: "New Industry Created and Images Uploaded",
+        data: savedIndustry,
+      });
+    }
+
+    // Check if the industry exists
+    let industry = await Industry.findById(industryId);
+
+    if (industry) {
+      // If the industry exists, push the new image paths to the existing array
+      industry.industryImage = [...industry.industryImage, ...filePaths]; // Add new images to the existing array
+      await industry.save(); // Save the updated industry data
+      return res
+        .status(200)
+        .json({ message: "Industry Images Updated", data: industry });
+    } else {
+      return res.status(400).json({ message: "Industry not found" });
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+};
+
+const industryDetails = async (req, res) => {
+  try {
+    const industrydata = await Industry.find()
+    res.status(200).json({ message: "Industry Fetched Successfully", data: industrydata })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const deleteIndustry = async (req, res) => {
+  const { id } = req.query;
+  try {
+    const result = await Industry.findByIdAndDelete(id)
+    res.status(200).json({ message: "Image Removed", data: result })
+  } catch (error) {
+    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+  }
+}
+
+const addAccelerationSolutions = async (req, res) => {
+  try {
+    const { title, features } = req.body;
+    if (!title || !features || !Array.isArray(features)) {
+      return res.status(400).json({ message: "Title and features array are required." });
+    }
+    const formattedFeatures = features.map(feature => ({ features: feature }));
+    const newSolution = new SolutionAccelerators({
+      title,
+      features: formattedFeatures
+    });
+    await newSolution.save();
+    res.status(201).json({
+      message: "Solution Accelerator created successfully!",
+      data: newSolution
+    });
+  } catch (error) {
+    console.error("Error adding solution accelerator:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+
+}
+const getAccelerationSolutions = async (req, res) => {
+  try {
+    const allAccelerationSolutions = await SolutionAccelerators.find();
+
+    res.status(200).json({
+      message: "Fetched all Solution Accelerators successfully",
+      data: allAccelerationSolutions
+    });
+  } catch (error) {
+    console.error("Error fetching solution accelerators:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+const deleteAccelerationSolutions = async (req, res) => {
+  try {
+    const { id } = req.query;
+
+
+    if (!id) {
+      return res.status(400).json({ message: "ID is required" });
+    }
+
+
+    const deletedData = await SolutionAccelerators.findByIdAndDelete(id);
+
+    if (!deletedData) {
+      return res.status(404).json({ message: "Solution Accelerator not found" });
+    }
+
+    res.status(200).json({
+      message: "Solution Accelerator deleted successfully",
+      data: deletedData
+    });
+
+  } catch (error) {
+    console.error("Error deleting solution accelerator:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions
 }

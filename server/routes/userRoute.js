@@ -4,7 +4,8 @@ import {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
-    solution, solutionDetails, solutionById, deleteSolution
+    solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions,
+
 } from "../controller/userController.js"
 const userRoute = Router()
 
@@ -46,6 +47,13 @@ userRoute.route("/solution").post(solution)
 userRoute.route("/solutionDetails").get(solutionDetails)
 userRoute.route("/solutions/:id").get(solutionById)
 userRoute.route("/deleteSolution/:id").delete(deleteSolution)
+userRoute.route('/industryImage').post(upload.array('industryImage'), industryImage)
+userRoute.route('/industryDetails').get(industryDetails)
+userRoute.route('/deleteIndustry').delete(deleteIndustry)
+userRoute.route("/addSolutionAccelerators").post(addAccelerationSolutions)
+userRoute.route("/getSolutionAccelerators").get(getAccelerationSolutions);
+userRoute.route("/deleteSolutionAccelerators").delete(deleteAccelerationSolutions)
+
 
 
 

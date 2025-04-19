@@ -10,7 +10,7 @@ function IndustryImages() {
             <div className="Indform-group">
               <label htmlFor="title">Title</label>
               <input
-                type="text"
+                type="text" 
                 id="title"
                 name="title"
                 placeholder="Enter title"
