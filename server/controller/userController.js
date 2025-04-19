@@ -803,7 +803,7 @@ const getAccelerationSolutions = async (req, res) => {
 
 const deleteAccelerationSolutions = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
 
 
     if (!id) {

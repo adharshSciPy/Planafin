@@ -33,7 +33,7 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.js";
 import WatchNowDetails from "./pages/Admin/WatchNowDetails"
 import ProjectDetails from "./pages/Admin/Project.jsx";
 import OurJourneyAccelarators from "./pages/Admin/OurJourneyAccelarators.jsx"
-
+import OurJourneyAccelaratorsAll from "./pages/Admin/OurJourneyAccelaratorsAll.jsx"
 function App() {
   return (
     <div className="App">
@@ -86,6 +86,8 @@ function App() {
           <Route path="/WatchNowDetails" element={<ProtectedRoute roleRequired="400"><WatchNowDetails /></ProtectedRoute>} />
           <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
           <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
+          <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
+
 
         </Routes>
       </BrowserRouter>
