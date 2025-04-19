@@ -3,7 +3,8 @@ import upload from '../utils/uploads.js'
 import {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
-    deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject
+    deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
+    solution, solutionDetails, solutionById, deleteSolution
 } from "../controller/userController.js"
 const userRoute = Router()
 
@@ -41,8 +42,10 @@ userRoute.route('/customerDetails').get(customerDetails)
 userRoute.route("/deleteWatchnow/:id").delete(watchnowDelete)
 userRoute.route("/projectUpdate").post(projectUpdate)
 userRoute.route("/viewProject").get(viewProject)
-
-
+userRoute.route("/solution").post(solution)
+userRoute.route("/solutionDetails").get(solutionDetails)
+userRoute.route("/solutions/:id").get(solutionById)
+userRoute.route("/deleteSolution/:id").delete(deleteSolution)
 
 
 
