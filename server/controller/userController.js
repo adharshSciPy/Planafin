@@ -610,7 +610,7 @@ const customerDetails = async (req, res) => {
 }
 
 const deleteCustomerImage = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   try {
     const result = await Customer.findByIdAndDelete(id)
     res.status(200).json({ message: "Image Removed", data: result })
@@ -756,7 +756,7 @@ const industryDetails = async (req, res) => {
 }
 
 const deleteIndustry = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.query;
   try {
     const result = await Industry.findByIdAndDelete(id)
     res.status(200).json({ message: "Image Removed", data: result })
