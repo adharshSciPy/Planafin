@@ -52,7 +52,7 @@ userRoute.route('/industryDetails').get(industryDetails)
 userRoute.route('/deleteIndustry').delete(deleteIndustry)
 userRoute.route("/addSolutionAccelerators").post(addAccelerationSolutions)
 userRoute.route("/getSolutionAccelerators").get(getAccelerationSolutions);
-userRoute.route("/deleteSolutionAccelerators").delete(deleteAccelerationSolutions)
+userRoute.route("/deleteSolutionAccelerators/:id").delete(deleteAccelerationSolutions)
 
 
 
