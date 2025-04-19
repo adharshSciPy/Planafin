@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function OurJourney() {
+function OurJourneyAccelarators() {
   const [form] = Form.useForm();
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
@@ -36,18 +36,18 @@ function OurJourney() {
     try {
       const payload = {
         title: values.title,
-        description: sections.map((section) => section.name),
+        features: sections.map((section) => section.name),
       };
 
       const response = await axios.post(
-        `${baseUrl}/api/v1/user/addjourney`,
+        `${baseUrl}/api/v1/user/addSolutionAccelerators`,
         payload,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-
-      if (response.status === 200) {
+      
+      if (response.status === 201) {
         toast.success("Form submitted successfully!", {
           position: "bottom-right",
           autoClose: 3000,
@@ -69,11 +69,12 @@ function OurJourney() {
     setSections([]);
   };
   const showOurJourney = () => {
-    navigate("/getOurJourney");
+    navigate("/acceleratorsAll");
   };
   return (
     <>
       <Header />
+
       <div className={styles.formMain}>
         <div className={styles.subMain}>
           <div className={styles.buttonContainer}>
@@ -103,7 +104,7 @@ function OurJourney() {
             </Form.Item>
 
             {/* Description Section */}
-            <Form.Item name="description" label="Description">
+            <Form.Item name="features" label="features">
               <div style={{ textAlign: "center" }}>
                 <div
                   style={{
@@ -166,4 +167,4 @@ function OurJourney() {
   );
 }
 
-export default OurJourney;
+export default OurJourneyAccelarators;

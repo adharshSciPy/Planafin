@@ -19,81 +19,28 @@ import icon7 from "../../assets/icon 7.png";
 import icon8 from "../../assets/icon8.png";
 import icon9 from "../../assets/icons9.png";
 import pad1 from "../../assets/light.png";
-
+import baseUrl from "../../baseUrl.js";
 import Nav from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import {useNavigate} from "react-router-dom"
-const cards = [
-  {
-    id: 1,
-    title: "Manufacturing S&OP Planning",
-    items: [
-      "Optimize inventory cost",
-      "Inbound & outbound logistics",
-      "S&OP demand supply analysis",
-    ],
-  },
+import axios from "axios";
 
-  {
-    id: 2,
-    title: "Healthcare Planning",
-    items: ["Patient forecast", "Per patient cost", "Doctor incentive"],
-  },
-
-  {
-    id: 3,
-    title: "E-Commerce Revenue Forecasting",
-    items: [
-      "Retail & marketplace revenue",
-      "Identify visitor conversion & buying patterns",
-      "Manage shipping & logistics",
-    ],
-  },
-
-  {
-    id: 4,
-    title: "Open To Buy",
-    items: [
-      "Predict sales demand",
-      "Open to buy planning",
-      "Seasonality trend",
-    ],
-  },
-
-  {
-    id: 5,
-    title: "Real Estate Planning",
-    items: [
-      "Project feasibility analysis",
-      "Project spend",
-      "Asset management",
-    ],
-  },
-
-  {
-    id: 6,
-    title: "Workforce Optimization",
-    items: [
-      "Align hiring strategy",
-      "Identify talent gaps",
-      "Optimize workforce",
-    ],
-  },
-
-  {
-    id: 7,
-    title: "Aviation Financial",
-    items: [
-      "Passenger & cargo revenue",
-      "Direct operating cost optimization",
-      "Aircraft lease & funding",
-    ],
-  },
-];
 
 function Solutions() {
   const [startIndex, setStartIndex] = useState(0);
-
+  const[cards,setCardData]=useState([]) 
+  const getCardData=async() => {
+    try {
+      
+    const response=await axios.get(`${baseUrl}/api/v1/user/getSolutionAccelerators`)
+    setCardData(response.data.data)
+    console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  
   const handleNext = () => {
     if (startIndex + 3 < cards.length) {
       setStartIndex(startIndex + 1);
@@ -147,6 +94,9 @@ const solNav2=()=>{
 
 
 }
+useEffect(()=>{
+  getCardData()
+},[])
   return (
     <div>
       <Nav />
@@ -350,10 +300,10 @@ const solNav2=()=>{
                   {card.title ? (
                     <h2 className="card-title">{card.title}</h2>
                   ) : null}
-                  {card.items ? (
+                  {card.features ? (
                     <ul className="card-list">
-                      {card.items.map((item, index) => (
-                        <li key={index}>{item}</li>
+                      {card.features.map((item, index) => (
+                        <li key={index}>{item.features}</li>
                       ))}
                     </ul>
                   ) : (
