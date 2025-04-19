@@ -92,6 +92,11 @@
   text-align: left;
   
 }
+.gokuls{
+  width: 50%;
+font-size: larger;
+font-weight: 400;
+}
 .consulting-column ul {
   list-style: none;
     padding: 0;
@@ -335,7 +340,7 @@ font-size: 18px;
   margin-top: 20px;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .content-flex {
     flex-direction: column;
@@ -393,6 +398,7 @@ li {
   animation: flicker 1s ; 
 
 }
+
 
 /* For tablets (max-width: 1024px) */
 /* Responsive Styles */
@@ -488,6 +494,9 @@ li {
   
   .overlaymainpara {
     font-size: 16px;
+  }
+  .gokuls{
+    width: 75%;
   }
 }
 
