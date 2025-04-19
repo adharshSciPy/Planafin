@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./services.css";
 import Nav from "../../components/Header/Header.jsx";
 import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
@@ -7,7 +7,7 @@ import padam2 from "../../assets/Anaplan.jpg";
 import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
 import s2 from "../.././assets/s2.png";
-import { useLocation,Link,useNavigate } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business-Consulting");
@@ -16,8 +16,7 @@ function Services() {
     "Business-Consulting": {
       title: "Business Consulting Services",
       heading:
-        "Guuhh uuhb  uhhhhhhhhh hhhhhhh"
-      ,
+        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey,",
       description: [
         "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
         "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
@@ -35,6 +34,8 @@ function Services() {
     },
     "Solution-Deployment": {
       title: "Solution Deployment Services",
+      heading:
+        "We provide the following training programs, to enable faster adoption and onboarding,",
       description: [
         "We provide the following solution deployment services, helping you implement EPM solutions",
         "Planafin has adopted an agile project approach, focused towards successful implementation, including scoping, sprint reviews and implementation, quality assurance and go-live with managed services.",
@@ -51,6 +52,8 @@ function Services() {
     },
     "Managed-Support-Services": {
       title: "Managed Support Services",
+      heading:
+        "We provide the following managed support services, as you continue to benefit from EPM solution,",
       description: [
         "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
         "Planafin offers a range of managed services that empowers your solution, reduces risk with proactive monitoring from certified technology and functional experts that get you to benefit from all the capabilities of the platform and maximize ROI.",
@@ -67,6 +70,8 @@ function Services() {
     },
     "Training & Enablement": {
       title: "Training & Enablement Services",
+      heading:
+        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey",
       description: [
         "Our training programs help teams gain expertise in modern technologies and business methodologies.",
         "As an official training partner, our training team consists of best in class expertise. We improve user enablement from project initiation throughout the implementation for faster adoption through our customized range of training programs",
@@ -82,7 +87,7 @@ function Services() {
       image: s2,
     },
   };
-  const location=useLocation()
+  const location = useLocation();
   const tabContainerRef = useRef(null);
   useEffect(() => {
     if (location.state && location.state.activeTab) {
@@ -92,61 +97,62 @@ function Services() {
       }
     }
   }, [location.state]);
-  useEffect(()=>{
+  useEffect(() => {
     if (location.state && location.state.scrollToTabs) {
-      tabContainerRef.current?.scrollIntoView({ behavior: "smooth" ,block:"start"});
-      
+      tabContainerRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
       setTimeout(() => {
         window.scrollBy({
-          top: -700, 
+          top: -700,
           behavior: "smooth",
         });
       }, 300);
     }
-  },[location.state])
+  }, [location.state]);
   // useEffect(() => {
   //   console.log("Current activeTab:", activeTab);
   // }, [activeTab]);
-  const navigate=useNavigate();
-  const consultationBtn=()=>{
-    navigate('/')
-    window.scrollTo(0,0)
-  }
-   const myRef = useRef([]);
-    const observerRef = useRef(null); 
- useEffect(()=>{
-    if(!observerRef.current){
-      observerRef.current=new IntersectionObserver((entries)=>{
-        entries.forEach((entry)=>{
-          if(entry.isIntersecting){
+  const navigate = useNavigate();
+  const consultationBtn = () => {
+    navigate("/");
+    window.scrollTo(0, 0);
+  };
+  const myRef = useRef([]);
+  const observerRef = useRef(null);
+  useEffect(() => {
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             entry.target.classList.add("animateIn");
-
           }
-        })
-      })
+        });
+      });
     }
-   
+
     myRef.current.forEach((el) => {
       if (el && observerRef.current) observerRef.current.observe(el);
     });
-    
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
     };
-    
-  },[]);
+  }, []);
   const setElementRef = (index) => (el) => {
     if (el) {
       myRef.current[index] = el;
       if (observerRef.current) observerRef.current.observe(el);
     }
   };
-  const consultationNav=()=>{
-    navigate('/consultation');
-    window.scrollTo(0,0)
-  }
+  const consultationNav = () => {
+    navigate("/consultation");
+    window.scrollTo(0, 0);
+  };
   return (
     <div>
       <Nav />
@@ -198,7 +204,7 @@ function Services() {
           </div>
         </div>
       </div>
-      <div className="serv_sec2" >
+      <div className="serv_sec2">
         <h1 className="sec2-hd1">Our Services</h1>
         <h3 className="sec2-hd2">
           Planafin delivers a wide range of integrated services to maximize
@@ -206,53 +212,59 @@ function Services() {
         </h3>
       </div>
       <div className="tab-container">
-  {/* Tabs */}
-  <div className="tab-boxes">
-    {Object.keys(tabContent).map((tab, index) => (
-      <div
-        key={index}
-        id={`tab-${tab}`}
-        className={`tab-box ${activeTab === tab ? "active" : ""}`} // Apply active class
-        onClick={() => setActiveTab(tab)} // Set active tab when clicked
-      >
-        <h2>{tab.replace(/-/g, ' ')}</h2>
+        {/* Tabs */}
+        <div className="tab-boxes">
+          {Object.keys(tabContent).map((tab, index) => (
+            <div
+              key={index}
+              id={`tab-${tab}`}
+              className={`tab-box ${activeTab === tab ? "active" : ""}`} 
+              onClick={() => setActiveTab(tab)} 
+            >
+              <h2>{tab.replace(/-/g, " ")}</h2>
+            </div>
+          ))}
+        </div>
+
+        {/* Content Section */}
+        <div className="tab-content">
+          <div
+            className="text-section"
+            id={`content-${activeTab.replace(/\s/g, "-")}`}
+          >
+            <h1>{tabContent[activeTab].title.replace(/-/g, " ")}</h1>
+            {tabContent[activeTab].heading && (
+              <h6 className="gokuls">{tabContent[activeTab].heading}</h6>
+            )}
+            {/* ithanu mone sanam ivide keri kali ennittu mukalil poyittu tabcontent il poyi oru heading ondakkanam content idanam */}
+
+            <div className="content-flex">
+              <ul>
+                {tabContent[activeTab].points.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+
+              <div className="paragraphs">
+                {tabContent[activeTab].description.map((desc, index) => (
+                  <p key={index}>{desc}</p>
+                ))}
+              </div>
+            </div>
+
+            <Link to="mailto:example@example.com" className="services-link">
+              Know More &gt;&gt;
+            </Link>
+          </div>
+
+          <div
+            className="image-section"
+            id={`content-${activeTab.replace(/\s/g, "-")}`}
+          >
+            <img src={tabContent[activeTab].image} alt={activeTab} />
+          </div>
+        </div>
       </div>
-    ))}
-  </div>
-
-  {/* Content Section */}
-  <div className="tab-content">
-  <div className="text-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
-  <h1>{tabContent[activeTab].title.replace(/-/g, ' ')}</h1>
-  {tabContent[activeTab].heading && <h6>{tabContent[activeTab].heading}</h6>}
-  {/* ithanu mone sanam ivide keri kali ennittu mukalil poyittu tabcontent il poyi oru heading ondakkanam content idanam */}
-
-  <div className="content-flex">
-    <ul>
-      {tabContent[activeTab].points.map((point, index) => (
-        <li key={index}>{point}</li>
-      ))}
-    </ul>
-
-    <div className="paragraphs">
-      {tabContent[activeTab].description.map((desc, index) => (
-        <p key={index}>{desc}</p>
-      ))}
-    </div>
-  </div>
-
-  <Link to="mailto:example@example.com" className="services-link">
-    Know More &gt;&gt;
-  </Link>
-</div>
-
-    <div className="image-section" id={`content-${activeTab.replace(/\s/g, '-')}`}>
-      <img src={tabContent[activeTab].image} alt={activeTab} />
-    </div>
-  </div>
-</div>
-
-
 
       <section className="consulting-container">
         <h2>Why Planafin Consulting?</h2>
@@ -308,7 +320,12 @@ function Services() {
                 sustainable and future-proof solutions.
               </li>
             </ul>
-            <button className="consulting-btn" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})}>Click here</button>
+            <button
+              className="consulting-btn"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              Click here
+            </button>
           </div>
           <div className="consulting-column">
             <ul>
@@ -377,7 +394,12 @@ function Services() {
               </li>
             </ul>
             {/* <Link to={'/'}> */}
-            <button className="consulting-btn" onClick={()=>consultationBtn()}>Read more</button>
+            <button
+              className="consulting-btn"
+              onClick={() => consultationBtn()}
+            >
+              Read more
+            </button>
             {/* </Link> */}
           </div>
         </div>
@@ -387,10 +409,15 @@ function Services() {
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
         </h3>
-        <img src={padam2} alt="anaplan" style={{cursor:"pointer"}} onClick={()=>consultationNav()} />
+        <img
+          src={padam2}
+          alt="anaplan"
+          style={{ cursor: "pointer" }}
+          onClick={() => consultationNav()}
+        />
       </div>
 
-      <div className="overlaymaindiv"ref={(el) => setElementRef(-1)(el)} >
+      <div className="overlaymaindiv" ref={(el) => setElementRef(-1)(el)}>
         <div className="elementoroverlaymainbox">
           <h2 className="overlaymainheading">
             Let's talk about your next project
@@ -402,22 +429,24 @@ function Services() {
             </p>
           </div>
           <div className="overlaymainbtndiv">
-            <Link to={'/lets-talk'}  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            
-            style={{textDecoration:"none"}}>
-            <button className="overlaybutton">
-              Contact Us
-              <span
-                className="fas fa-arrow-right"
-                style={{
-                  fontFamily: "Font Awesome 5 Free",
-                  fontWeight: 900,
-                  fill: "#FFFFFF",
-                  color: "black",
-                }}
+            <Link
+              to={"/lets-talk"}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              style={{ textDecoration: "none" }}
+            >
+              <button className="overlaybutton">
+                Contact Us
+                <span
+                  className="fas fa-arrow-right"
+                  style={{
+                    fontFamily: "Font Awesome 5 Free",
+                    fontWeight: 900,
+                    fill: "#FFFFFF",
+                    color: "black",
+                  }}
                 ></span>
-            </button>
-                </Link>
+              </button>
+            </Link>
           </div>
         </div>
         <div className="overlayimagemaindiv"></div>
