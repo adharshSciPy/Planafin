@@ -291,22 +291,15 @@ function Solutions() {
       </div>
       <div className="sec4-icons">
         {industries.length > 0 ? (
-          <div className="industry-grid">
-            {industries.map((industry, index) => (
+         
+            industries.map((industry, index) => (
               <div key={index} className="wrapper2">
-                <img
-                  src={`${baseUrl}${industry.industryImage[0].path}`}
-                  alt={industry.heading}
-                  className="sec4-image"
-                />
+                <img src={`${baseUrl}${`industry.industryImage[0].path`}`} alt={industry.heading} className="sec4-image" />
                 <h1 className="sec4-h1">{industry.heading}</h1>
               </div>
-            ))}
-          </div>
+            ))
         ) : (
-          <p style={{ textAlign: "center", color: "gray" }}>
-            Loading industries...
-          </p>
+          <p style={{ textAlign: "center", color: "gray" }}>Loading industries...</p>
         )}
       </div>
       <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>

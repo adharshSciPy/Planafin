@@ -16,6 +16,7 @@ import businessPlanning from "../model/businessPlanning.js";
 import { OurService } from "../model/ourServiceSchema.js";
 import serviceCounter from "../model/serviceCounter.js";
 import planafinConsulting from "../model/planafinConsulting.js";
+import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -1123,11 +1124,167 @@ const deleteOurService = async (req, res) => {
   }
 };
 
+const addAnaplanCounters = async (req, res) => {
+  const { counter, title } = req.body;
+
+  try {
+    if (!counter || !title) {
+      return res.status(400).json({ message: "Counter and title are required." });
+    }
+
+    const response = await serviceCounter.create({
+      counter,
+      title
+    });
+
+    res.status(201).json({
+      message: "Service Counter created successfully!",
+      data: response
+    });
+
+  } catch (error) {
+    console.error("Error adding service counter:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+const getAnaplanCounters = async (req, res) => {
+  try {
+    const allSolutions = await serviceCounter.find();
+
+    res.status(200).json({
+      success: true,
+      data: allSolutions,
+    });
+  } catch (error) {
+    console.error("Error fetching solution counters:", error.message);
+
+  }
+};
+const updateAnaplanCounters = async (req, res) => {
+  const { id } = req.params;
+  const { title, counter } = req.body;
+  try {
+    const response = await serviceCounter.findByIdAndUpdate(
+      id,
+      { title, counter },
+      { new: true }
+    );
+
+    if (!response) {
+      return res.status(404).json({
+        success: false,
+        message: "Solution counter not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter updated successfully",
+      data: response,
+    });
+  }
+  catch (error) {
+    console.error("Error updating solution counter:", error.message);
+  }
+}
+const deleteAnaplanCounters = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await serviceCounter.findByIdAndDelete(id);
+
+    if (!response) {
+      return res.status(404).json({ success: false, message: "Counter not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter deleted successfully",
+      data: response
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+  }
+};
+const addTechPartners=async(req,res)=>{
+  try {
+    let techPartnersImg=req.file?req.file.path:null;
+    if(techPartnersImg){
+      techPartnersImg=techPartnersImg.replace(/\\/g, "/");
+    }
+    const result=await technologyPartners.create({
+      techPartnersImg
+    })
+    return res.status(201).json({
+      message: "Technology partner added successfully",
+      data: result
+    });
+  } catch (error) {
+    console.error("Error adding tech partner:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
+ 
+}
+const getTechPartners=async(req,res)=>{
+  try {
+    const result=await technologyPartners.find();
+    res.status(200).json({message:"Data fetch succesfully",
+      data:result
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+}
+const getTechPartnersById=async(req,res)=>{
+  const {id}=req.params;
+  try {
+    if(!id){
+      return res.status(400).json({message:"Invalid Id"})
+    }
+    const result=await technologyPartners.findById(id);
+    res.status(200).json({message:"Data fetch succesfully",
+      data:result
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+
+}
+const deleteTechPartners=async(req,res)=>{
+  const{id}=req.params;
+  try {
+    if(!id){
+      return res.status(400).json({message:"Invalid Id"})
+    }
+    const deletedData=await technologyPartners.findByIdAndDelete(id);
+    if (!deletedData) {
+      return res.status(404).json({ message: "No data found with the given ID." });
+    }
+
+    return res.status(200).json({
+      message: "Technology partner deleted successfully.",
+      data: deletedData,
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+}
+
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters,addTechPartners,getTechPartners,getTechPartnersById,deleteTechPartners
 
 }
