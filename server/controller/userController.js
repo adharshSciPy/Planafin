@@ -12,6 +12,7 @@ import { Project } from "../model/projectSchema.js";
 import { Solution } from "../model/solutionSchema.js";
 import { Industry } from "../model/industrySchema.js";
 import SolutionAccelerators from "../model/solutionAccelerators.js";
+import businessPlanning from "../model/businessPlanning.js";
 // import { OurService } from "../model/ourServiceSchema.js";
 import serviceCounter from "../model/serviceCounter.js"
 import { passwordValidator } from "../utils/passwordValidator.js";
@@ -936,11 +937,84 @@ const deleteSolutionCounters = async (req, res) => {
   }
 };
 
+const addBusinessPlanning=async(req,res)=>{
+  try {
+    const {title,description,contentHeading, contentDescription, contentPoints}=req.body;
+    let businessPlanningImage=req.file?req.file.path:null;
+    if(businessPlanningImage){
+      businessPlanningImage=businessPlanningImage.replace(/\\/g, "/");
+    }
+    if(!title||!description || !contentHeading || !contentPoints){
+      return res.status(400).json({ message: "All fields are required!" });
+    }
+    let parsedContentPoints;
+    try {
+      parsedContentPoints = typeof contentPoints === 'string' ? JSON.parse(contentPoints) : contentPoints;
+    } catch (err) {
+      return res.status(400).json({ message: "Invalid format for contentPoints" });
+    }
+
+    const formattedPoints = parsedContentPoints.map((point) => ({ contentPoints: point }));
+    const result=await businessPlanning.create({
+      businessPlanningImage,
+      title,
+      description,  
+      contentHeading,
+      contentDescription,
+      contentPoints: formattedPoints,
+    });
+    res.status(200).json({ message: "Business Planing Created", data: result });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal server error", data: error.message });
+  }
+}
+const getBusinessPlanning = async (req, res) => {
+  try {
+    const response = await businessPlanning.find();
+
+    if (!response || response.length === 0) {
+      return res.status(404).json({ message: "No business planning data found" });
+    }
+
+    res.status(200).json({
+      message: "Business Planning data fetched successfully",
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+const deleteBusinessPlanning = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedData = await businessPlanning.findByIdAndDelete(id);
+
+    if (!deletedData) {
+      return res.status(404).json({ message: "Business Planning data not found" });
+    }
+
+    res.status(200).json({
+      message: "Business Planning data deleted successfully",
+      data: deletedData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions,addSolutionCounters ,getSolutionCounters,updateSolutionCounters,deleteSolutionCounters
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions,addSolutionCounters ,getSolutionCounters,updateSolutionCounters,deleteSolutionCounters,addBusinessPlanning,getBusinessPlanning,deleteBusinessPlanning
 
 }

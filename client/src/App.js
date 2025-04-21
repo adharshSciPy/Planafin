@@ -34,6 +34,8 @@ import WatchNowDetails from "./pages/Admin/WatchNowDetails"
 import ProjectDetails from "./pages/Admin/Project.jsx";
 import OurJourneyAccelarators from "./pages/Admin/OurJourneyAccelarators.jsx"
 import OurJourneyAccelaratorsAll from "./pages/Admin/OurJourneyAccelaratorsAll.jsx"
+import OurSolution from "./pages/Admin/OurSolution.jsx";  
+
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 function App() {
   return (
@@ -89,7 +91,7 @@ function App() {
           <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
           <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
 
-          <Route path="/industryimages" element={<IndustryImages/>} />
+
         </Routes>
       </BrowserRouter>
     </div>
