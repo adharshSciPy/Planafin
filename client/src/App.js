@@ -35,7 +35,7 @@ import ProjectDetails from "./pages/Admin/Project.jsx";
 import OurJourneyAccelarators from "./pages/Admin/OurJourneyAccelarators.jsx"
 import OurJourneyAccelaratorsAll from "./pages/Admin/OurJourneyAccelaratorsAll.jsx"
 import OurSolution from "./pages/Admin/OurSolution.jsx";  
-
+import SolutionDataFull from "./pages/Admin/SolutionDataFull.jsx";
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 function App() {
   return (
@@ -92,6 +92,8 @@ function App() {
           <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
           <Route path="/ourSolution" element= {<OurSolution/>}/>
           <Route path="/industryimages" element={<IndustryImages/>} />
+          <Route path="/viewAllSolution" element={<SolutionDataFull/>} />
+
 
         </Routes>
       </BrowserRouter>

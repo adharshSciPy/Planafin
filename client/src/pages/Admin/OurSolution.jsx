@@ -99,7 +99,7 @@ function OurSolution() {
     }
   };
   const showOurWebinar = () => {
-    navigate("/getWebinarData");
+    navigate("/viewAllSolution");
   };
   return (
     <>
