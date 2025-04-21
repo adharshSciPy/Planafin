@@ -82,7 +82,7 @@ function AdminDashboard() {
           <div className="thirdrow">
             <div className="tfirstcard">
               <h3>Solution Accelerator</h3>
-              <Link to="/WatchNowDetails">
+              <Link to="/accelerators">
                 <button className="firstcard-btn3">View</button>
               </Link>
             </div>
