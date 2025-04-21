@@ -1,6 +1,6 @@
 import React from "react";
 import "./solutions.css";
-import { useState,useRef,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import sol1 from "../../assets/sol1.png";
 import sol2 from "../../assets/sol2.png";
 import sol3 from "../../assets/sol3.png";
@@ -22,25 +22,53 @@ import pad1 from "../../assets/light.png";
 import baseUrl from "../../baseUrl.js";
 import Nav from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 
 function Solutions() {
   const [startIndex, setStartIndex] = useState(0);
-  const[cards,setCardData]=useState([]) 
-  const getCardData=async() => {
+  const [cards, setCardData] = useState([]);
+  const [industries, setIndustries] = useState([]);
+  const [solutionData, setSolutionData] = useState([]);
+  const getCardData = async () => {
     try {
-      
-    const response=await axios.get(`${baseUrl}/api/v1/user/getSolutionAccelerators`)
-    setCardData(response.data.data)
-    console.log(response.data.data);
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/getSolutionAccelerators`
+      );
+      setCardData(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       console.log(error);
-      
     }
-  }
-  
+  };
+  const getIndustryData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/industryDetails`
+      );
+      setIndustries(response.data.data);
+    } catch (error) {
+      console.error("Error fetching industries:", error);
+    }
+  };
+  const getSolutionData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/getBusinessPlanning`
+      );
+      console.log("ssokjxois",response.data.data);
+      setSolutionData(response.data.data);
+      
+    } catch (error) {
+      console.error("Error fetching industries:", error);
+    }
+  };
+  useEffect(() => {
+    getCardData();
+    getIndustryData();
+    getSolutionData();
+  }, []);
+
   const handleNext = () => {
     if (startIndex + 3 < cards.length) {
       setStartIndex(startIndex + 1);
@@ -52,51 +80,48 @@ function Solutions() {
       setStartIndex(startIndex - 1);
     }
   };
-   const myRef = useRef([]);
-    const observerRef = useRef(null); 
-     useEffect(()=>{
-        if(!observerRef.current){
-          observerRef.current=new IntersectionObserver((entries)=>{
-            entries.forEach((entry)=>{
-              if(entry.isIntersecting){
-                entry.target.classList.add("animateIn");
-    
-              }
-            })
-          })
-        }
-      
-        myRef.current.forEach((el) => {
-          if (el && observerRef.current) observerRef.current.observe(el);
-        });
-        
-        return () => {
-          if (observerRef.current) {
-            observerRef.current.disconnect();
+  const myRef = useRef([]);
+  const observerRef = useRef(null);
+  useEffect(() => {
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animateIn");
           }
-        };
-        
-      },[]);
-      const setElementRef = (index) => (el) => {
-        if (el) {
-          myRef.current[index] = el;
-          if (observerRef.current) observerRef.current.observe(el);
-        }
-      };
-    const navigate=useNavigate();
-    const solNav=()=>{
-      navigate('/lets-talk');
-      window.scrollTo(0,0)
+        });
+      });
     }
-const solNav2=()=>{
-  navigate('/supply-chain');
-  window.scrollTo(0,0)
 
+    myRef.current.forEach((el) => {
+      if (el && observerRef.current) observerRef.current.observe(el);
+    });
 
-}
-useEffect(()=>{
-  getCardData()
-},[])
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+  const setElementRef = (index) => (el) => {
+    if (el) {
+      myRef.current[index] = el;
+      if (observerRef.current) observerRef.current.observe(el);
+    }
+  };
+  const navigate = useNavigate();
+  const solNav = () => {
+    navigate("/lets-talk");
+    window.scrollTo(0, 0);
+  };
+  const solNav2 = (id) => {
+    navigate(`/supply-chain/${id}`);
+    window.scrollTo(0, 0);
+  };
+  useEffect(() => {
+    getCardData();
+  }, []);
+  
   return (
     <div>
       <Nav />
@@ -109,8 +134,8 @@ useEffect(()=>{
           planning solutions, in-depth insights and plans to drive decisions and
           results.
         </h3>
-        <div className="getinbtndiv"ref={(el) => setElementRef(-1)(el)}>
-          <button className="getinbutton"onClick={()=>solNav()}>
+        <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
+          <button className="getinbutton" onClick={() => solNav()}>
             Get in touch
             <span
               className="fas fa-arrow-right"
@@ -125,116 +150,40 @@ useEffect(()=>{
         </div>
       </div>
       <div className="square1">
-        <div className="sqr">
-          <div className="sqr-content">
-            <img src={sol1} alt="ss" className="sqrimg" />
-            <h1 className="sqrh1">Supply Chain</h1>
-            <p className="sqrp">
-              Adapt a more collaborative and integrated supply chain solution in
-              sync with finance and operational areas of your business. Achieve
-              real-time insights, identify patterns, streamline demand and
-              supply, leverage AI capabilities and cost optimization techniques.
-            </p>
-            <h2 className="sqrh2" onClick={()=>solNav2()}>
-              Read More
-              <span
-                style={{
-                  fontFamily: "'Font Awesome 5 Free'",
-                  fontWeight: 700,
-                  color: "#001e6c",
-                  fontSize: 12,
-                }}
-                
-              >
-                {" "}
-                &gt;&gt;
-              </span>
-            </h2>
-          </div>
-        </div>
-        <div className="sqr">
-          <div className="sqr-content">
-            <img src={sol2} alt="ss" className="sqrimg" />
-            <h1 className="sqrh1">Finance</h1>
-            <p className="sqrp">
-              Automate financial planning, budgeting and reporting process, gain
-              transparency and fast track the business performance, execute
-              strategic and quick scenario modelling, improve decision making
-              and exercise better control of funds.
-            </p>
-            <h2 className="sqrh2" onClick={()=>solNav2()}>
-              Read More
-              <span
-                style={{
-                  fontFamily: "'Font Awesome 5 Free'",
-                  fontWeight: 700,
-                  color: "#001e6c",
-                  fontSize: 12,
-                }}
-              >
-                {" "}
-                &gt;&gt;
-              </span>
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div className="square2">
-        <div className="sqr">
-          <div className="sqr-content">
-            <img src={sol3} alt="ss" className="sqrimg" />
-            <h1 className="sqrh1">HR & Workforce</h1>
-            <p className="sqrp">
-              Empower and optimize existing workforce, dynamic headcount
-              planning, identify skill gaps, manage risks, better compensation
-              plans, succession planning, monitor hiring and framework
-              recruitment strategies.
-            </p>
-            <h2 className="sqrh2"  onClick={()=>solNav2()}>
-              Read More
-              <span
-                style={{
-                  fontFamily: "'Font Awesome 5 Free'",
-                  fontWeight: 700,
-                  color: "#001e6c",
-                  fontSize: 12,
-                }}
-              >
-                {" "}
-                &gt;&gt;
-              </span>
-            </h2>
-          </div>
-        </div>
-        <div className="sqr">
-          <div className="sqr-content">
-            <img src={sol4} alt="ss" className="sqrimg" />
-            <h1 className="sqrh1">Sales & Marketing</h1>
-            <p className="sqrp">
-              Connect sales planning to sales performance, manage go-to-market
-              strategy, enhance predictability, design and optimize territories,
-              account segmentation, manage incentive plans and gain a
-              competitive advantage.
-            </p>
-            <h2 className="sqrh2" onClick={()=>solNav2()}>
-              Read More
-              <span
-                style={{
-                  fontFamily: "'Font Awesome 5 Free'",
-                  fontWeight: 700,
-                  color: "#001e6c",
-                  fontSize: 12,
-                }}
-              >
-                {" "}
-                &gt;&gt;
-              </span>
-            </h2>
-          </div>
-        </div>
+        {solutionData ? (
+          solutionData.map((item, index) => {
+            return(
+              <div className="sqr" key={index}>
+              <div className="sqr-content">
+                <img src={sol1} alt="ss" className="sqrimg" />
+                <h1 className="sqrh1">{item.contentHeading}</h1>
+                <p className="sqrp">
+                  {item.contentDescription}
+                </p>
+                <h2 className="sqrh2" onClick={() => solNav2(item._id)}>
+                  Read More
+                  <span
+                    style={{
+                      fontFamily: "'Font Awesome 5 Free'",
+                      fontWeight: 700,
+                      color: "#001e6c",
+                      fontSize: 12,
+                    }}
+                  >
+                    {" "}
+                    &gt;&gt;
+                  </span>
+                </h2>
+              </div>
+            </div>
+            )
+          })
+        ) : (
+          <p>loading</p>
+        )}
       </div>
       <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
-        <button className="getinbutton" onClick={()=>solNav()}>
+        <button className="getinbutton" onClick={() => solNav()}>
           Read More
           <span
             className="fas fa-arrow-right"
@@ -341,52 +290,27 @@ useEffect(()=>{
         </h3>
       </div>
       <div className="sec4-icons">
-        {/* <div className="sec4-1"> */}
-        <div className="wrapper2">
-          <img src={icon1} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Mining & Metals</h1>
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon4} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Healthcare</h1>
+        {industries.length > 0 ? (
+          <div className="industry-grid">
+            {industries.map((industry, index) => (
+              <div key={index} className="wrapper2">
+                <img
+                  src={`${baseUrl}${industry.industryImage[0].path}`}
+                  alt={industry.heading}
+                  className="sec4-image"
+                />
+                <h1 className="sec4-h1">{industry.heading}</h1>
+              </div>
+            ))}
           </div>
-          <div className="wrapper2">
-            <img src={icon7} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Real Estate</h1>
-          </div>
-        </div>
-        {/* <div className="sec4-2"> */}
-        <div className="wrapper2">
-          <img src={icon2} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Manufactuaring</h1>
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon5} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Technology</h1>
-          </div>
-          <div className="wrapper2">
-            <img src={icon6} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Oil and Gas</h1>
-          </div>
-        </div>
-        {/* <div className="sec4-3"> */}
-        <div className="wrapper2">
-          <img src={icon3} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Aviation</h1>
-
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon8} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Retail</h1>
-          </div>
-          <div className="wrapper2">
-            <img src={icon9} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">E-Commerce</h1>
-          </div>
-        </div>
+        ) : (
+          <p style={{ textAlign: "center", color: "gray" }}>
+            Loading industries...
+          </p>
+        )}
       </div>
       <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
-        <button className="getinbutton" onClick={()=>solNav()}>
+        <button className="getinbutton" onClick={() => solNav()}>
           Know More
           <span
             className="fas fa-arrow-right"
