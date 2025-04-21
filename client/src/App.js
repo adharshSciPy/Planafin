@@ -90,6 +90,7 @@ function App() {
           <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
           <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
           <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
+          
 
 
         </Routes>
