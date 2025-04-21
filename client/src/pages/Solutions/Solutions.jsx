@@ -28,7 +28,8 @@ import axios from "axios";
 
 function Solutions() {
   const [startIndex, setStartIndex] = useState(0);
-  const[cards,setCardData]=useState([]) 
+  const[cards,setCardData]=useState([]) ;
+  const [industries, setIndustries] = useState([]); 
   const getCardData=async() => {
     try {
       
@@ -39,7 +40,22 @@ function Solutions() {
       console.log(error);
       
     }
-  }
+  };
+  const getIndustryData = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/user/industryDetails`);
+      setIndustries(response.data.data);
+      console.log("edapoda",response.data.data);
+    } catch (error) {
+      console.error("Error fetching industries:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCardData();
+    getIndustryData();
+  }, []);
+
   
   const handleNext = () => {
     if (startIndex + 3 < cards.length) {
@@ -341,49 +357,18 @@ useEffect(()=>{
         </h3>
       </div>
       <div className="sec4-icons">
-        {/* <div className="sec4-1"> */}
-        <div className="wrapper2">
-          <img src={icon1} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Mining & Metals</h1>
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon4} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Healthcare</h1>
+        {industries.length > 0 ? (
+          <div className="industry-grid">
+            {industries.map((industry, index) => (
+              <div key={index} className="wrapper2">
+                <img src={`${baseUrl}${industry.industryImage[0].path}`} alt={industry.heading} className="sec4-image" />
+                <h1 className="sec4-h1">{industry.heading}</h1>
+              </div>
+            ))}
           </div>
-          <div className="wrapper2">
-            <img src={icon7} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Real Estate</h1>
-          </div>
-        </div>
-        {/* <div className="sec4-2"> */}
-        <div className="wrapper2">
-          <img src={icon2} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Manufactuaring</h1>
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon5} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Technology</h1>
-          </div>
-          <div className="wrapper2">
-            <img src={icon6} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Oil and Gas</h1>
-          </div>
-        </div>
-        {/* <div className="sec4-3"> */}
-        <div className="wrapper2">
-          <img src={icon3} alt="" className="sec4-img" />
-          <h1 className="sec4-h1">Aviation</h1>
-
-          {/* </div> */}
-          <div className="wrapper2">
-            <img src={icon8} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">Retail</h1>
-          </div>
-          <div className="wrapper2">
-            <img src={icon9} alt="" className="sec4-img" />
-            <h1 className="sec4-h1">E-Commerce</h1>
-          </div>
-        </div>
+        ) : (
+          <p style={{ textAlign: "center", color: "gray" }}>Loading industries...</p>
+        )}
       </div>
       <div className="getinbtndiv" ref={(el) => setElementRef(-1)(el)}>
         <button className="getinbutton" onClick={()=>solNav()}>
