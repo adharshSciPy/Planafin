@@ -947,21 +947,14 @@ const addBusinessPlanning=async(req,res)=>{
     if(!title||!description || !contentHeading || !contentPoints){
       return res.status(400).json({ message: "All fields are required!" });
     }
-    let parsedContentPoints;
-    try {
-      parsedContentPoints = typeof contentPoints === 'string' ? JSON.parse(contentPoints) : contentPoints;
-    } catch (err) {
-      return res.status(400).json({ message: "Invalid format for contentPoints" });
-    }
 
-    const formattedPoints = parsedContentPoints.map((point) => ({ contentPoints: point }));
     const result=await businessPlanning.create({
       businessPlanningImage,
       title,
       description,  
       contentHeading,
       contentDescription,
-      contentPoints: formattedPoints,
+      contentPoints
     });
     res.status(200).json({ message: "Business Planing Created", data: result });
   } catch (error) {

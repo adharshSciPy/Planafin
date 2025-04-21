@@ -26,8 +26,7 @@ const businessPlanning=new Schema({
         type:String
     } ,
     contentPoints:{
-        type:[contentPoints],
-        required:true
+        type: Array
     }
 },{timestamps:true})
 export default mongoose.model ("Business Planing",businessPlanning)
