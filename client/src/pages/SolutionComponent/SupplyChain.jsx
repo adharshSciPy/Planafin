@@ -1,30 +1,34 @@
-import {React,useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import styles from "./solution.module.css";
 import image from "../../assets/about.people.png";
 import tickImage from "../../assets/point-tick.png";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-
+import { useParams } from "react-router-dom";
+import Item from "antd/es/list/Item";
 
 function SupplyChain() {
-  const [supplyData,setSupplyData]=useState()
-  const getData=async()=>{
-   try {
-    const response = await axios.get(
-      `${baseUrl}/api/v1/user/industryDetails`
-    );
-    setSupplyData(response.data.data);
-    
-   } catch (error) {
-    console.log(error);
-    
-   }
-  }
-  useEffect(()=>{
-    getData()
-  })
+  const [supplyData, setSupplyData] = useState();
+  const { id } = useParams();
+  console.log(supplyData);
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user//getBusinessPlanningById/${id}`
+      );
+      setSupplyData(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log(supplyData);
+
   return (
     <>
       <Header></Header>
@@ -58,62 +62,38 @@ function SupplyChain() {
               <img src={image} alt="about" />
             </div>
           </div>
-          {supplyData?(
-            supplyData.map((item,index)=>{
-              return(
-                <div className={styles.secondRightContainer}>
+          <div className={styles.secondRightContainer}>
             <div className={styles.secondRightHeading}>
-              <h1>Financial Planning & Analysis</h1>
+              <h1>{supplyData?.contentHeading || ""}</h1>
             </div>
             <div className={styles.secondRightpara}>
-              <p>
-                Fuel growth, optimize costs, and mitigate risk with our
-                financial planning solutions. Make proactive decisions and
-                execute the right actions to optimize revenue, cost, and profit.
-                Connect people, data, and plans across your organization to
-                empower business growth. Deliver timely, accurate predictions,
-                analyses, and management reports using automated processes and
-                workflows.
-              </p>
+              <p>{supplyData?.description || ""}</p>
             </div>
             <div className={styles.secondContentList}>
               <div className={styles.listMain}>
                 <ul className={styles.secondRightUl}>
-                  <li className={styles.secondRightUlLi}>
-                    <div className={styles.secondContentTick}>
+                  {supplyData?.contentPoints.map((item,index)=>{
+                    return(
+                      <li className={styles.secondRightUlLi} key={index}>
+                    <div className={styles.secondContentTick} >
                       <img src={tickImage} alt="" />
                     </div>
                     <div className={styles.listContent}>
                       <p>
-                        Execute “what-if” scenario analysis and enable teams to
-                        quickly see the impacts of dynamic market changes and
-                        their effects on business outcomes.
+                        {item}
                       </p>
                     </div>
                   </li>
-                  <li className={styles.secondRightUlLi}>
-                    <div className={styles.secondContentTick}>
-                      <img src={tickImage} alt="" />
-                    </div>
-                    <div className={styles.listContent}>
-                      <p>
-                        Replace rigid applications, gain a high degree of
-                        visibility and flexibility in defining driver-based
-                        models for realistic predictions and orchestrating
-                        business strategies.
-                      </p>
-                    </div>
-                  </li>
+                    )
+                  })}
+                  
                 </ul>
               </div>
             </div>
           </div>
-              )
-            })
-          ):(<p>loading</p>)}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
