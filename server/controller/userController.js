@@ -13,8 +13,9 @@ import { Solution } from "../model/solutionSchema.js";
 import { Industry } from "../model/industrySchema.js";
 import SolutionAccelerators from "../model/solutionAccelerators.js";
 import businessPlanning from "../model/businessPlanning.js";
-// import { OurService } from "../model/ourServiceSchema.js";
-import serviceCounter from "../model/serviceCounter.js"
+import { OurService } from "../model/ourServiceSchema.js";
+import serviceCounter from "../model/serviceCounter.js";
+import planafinConsulting from "../model/planafinConsulting.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -831,29 +832,6 @@ const deleteAccelerationSolutions = async (req, res) => {
   }
 };
 
-// const createOurservice = async (req, res) => {
-//   const { title, subText, details, description } = req.body;
-//   let image = req.file ? req.file.path : null;
-//   if (image) {
-//     image = resume.replace(/\\/g, "/")
-//   }
-//   try {
-//     const servicedata = await OurService.create({
-//       title, subText, details, description, image
-//     })
-//     res.status(200).json({ message: "Service Created Successfully", data: servicedata })
-//   } catch (error) {
-//     res.status(500).json({ message: "Internal Server Error", error: error.message })
-//   }
-// }
-
-
-
-
-
-
-
-
 
 const addSolutionCounters = async (req, res) => {
   const { counter, title } = req.body;
@@ -881,7 +859,7 @@ const addSolutionCounters = async (req, res) => {
 const getSolutionCounters = async (req, res) => {
   try {
     const allSolutions = await serviceCounter.find();
-    
+
     res.status(200).json({
       success: true,
       data: allSolutions,
@@ -891,9 +869,9 @@ const getSolutionCounters = async (req, res) => {
 
   }
 };
-const updateSolutionCounters=async(req,res)=>{
-  const{id}=req.params;
-  const{title,counter}=req.body;
+const updateSolutionCounters = async (req, res) => {
+  const { id } = req.params;
+  const { title, counter } = req.body;
   try {
     const response = await serviceCounter.findByIdAndUpdate(
       id,
@@ -913,9 +891,9 @@ const updateSolutionCounters=async(req,res)=>{
       message: "Solution counter updated successfully",
       data: response,
     });
-   }
-    catch (error) {
-      console.error("Error updating solution counter:", error.message);
+  }
+  catch (error) {
+    console.error("Error updating solution counter:", error.message);
   }
 }
 const deleteSolutionCounters = async (req, res) => {
@@ -937,14 +915,14 @@ const deleteSolutionCounters = async (req, res) => {
   }
 };
 
-const addBusinessPlanning=async(req,res)=>{
+const addBusinessPlanning = async (req, res) => {
   try {
-    const {title,description,contentHeading, contentDescription, contentPoints}=req.body;
-    let businessPlanningImage=req.file?req.file.path:null;
-    if(businessPlanningImage){
-      businessPlanningImage=businessPlanningImage.replace(/\\/g, "/");
+    const { title, description, contentHeading, contentDescription, contentPoints } = req.body;
+    let businessPlanningImage = req.file ? req.file.path : null;
+    if (businessPlanningImage) {
+      businessPlanningImage = businessPlanningImage.replace(/\\/g, "/");
     }
-    if(!title||!description || !contentHeading || !contentPoints){
+    if (!title || !description || !contentHeading || !contentPoints) {
       return res.status(400).json({ message: "All fields are required!" });
     }
     let parsedContentPoints;
@@ -955,10 +933,10 @@ const addBusinessPlanning=async(req,res)=>{
     }
 
     const formattedPoints = parsedContentPoints.map((point) => ({ contentPoints: point }));
-    const result=await businessPlanning.create({
+    const result = await businessPlanning.create({
       businessPlanningImage,
       title,
-      description,  
+      description,
       contentHeading,
       contentDescription,
       contentPoints: formattedPoints,
@@ -989,6 +967,7 @@ const getBusinessPlanning = async (req, res) => {
     });
   }
 };
+
 const deleteBusinessPlanning = async (req, res) => {
   const { id } = req.params;
   try {
@@ -1010,11 +989,120 @@ const deleteBusinessPlanning = async (req, res) => {
   }
 };
 
+const addPlanafinConsultations = async (req, res) => {
+  try {
+    const { consultations } = req.body;
+    if (!consultations || !Array.isArray(consultations) || consultations.length === 0) {
+      return res.status(400).json({ message: "An array of consultation strings is required." });
+    }
+    const formatted = consultations.map(item => ({ consultation: item }));
+    const result = await planafinConsulting.create({
+      consultations: formatted,
+    });
+
+    res.status(200).json({
+      message: "Consultation data saved successfully.",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error.",
+      error: error.message,
+    });
+  }
+}
+const getPlanafinConsultations = async (req, res) => {
+  try {
+    const response = await planafinConsulting.find();
+    res.status(200).json({
+      message: "Fetched all Planafin consultations successfully.",
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+};
+const deletePlanafinConsultations = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    if (!id) {
+      return res.status(400).json({ message: "ID is required for deletion" });
+    }
+
+    const deleted = await planafinConsulting.findByIdAndDelete(id);
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Consultation not found" });
+    }
+
+    res.status(200).json({
+      message: "Planafin Consultation deleted successfully",
+      data: deleted,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error during deletion",
+      error: error.message,
+    });
+  }
+};
+
+
+const createOurservice = async (req, res) => {
+  const { title, subText, details, description } = req.body;
+  let image = req.file ? req.file.path : null;
+  if (image) {
+    image = image.replace(/\\/g, "/")
+  }
+  console.log("body", req.body)
+  try {
+    const servicedata = await OurService.create({
+      title, subText, details, description, image
+    })
+    res.status(200).json({ message: "Service Created Successfully", data: servicedata })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const serviceDetails = async (req, res) => {
+  try {
+    const servicedata = await OurService.find();
+    res.status(200).json({ message: "Service Details", data: servicedata })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const servicedata = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const servicedata = await OurService.findById(id);
+    res.status(200).json({ message: "Service Data", data: servicedata })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const deleteservice = async (req, res) => {
+  const { id } = req.params
+  try {
+    const deleteService = await OurService.findByIdAndDelete(id);
+    res.status(200).json({ message: "Service Deleted Successfully", data: deleteService });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions,addSolutionCounters ,getSolutionCounters,updateSolutionCounters,deleteSolutionCounters,addBusinessPlanning,getBusinessPlanning,deleteBusinessPlanning
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice
 
 }
