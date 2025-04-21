@@ -6,7 +6,11 @@ import {
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
     solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters,
     addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteservice,
-    getBusinessPlanningById,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters
+    getBusinessPlanningById,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters,
+    addTechPartners,
+    getTechPartners,
+    getTechPartnersById,
+    deleteTechPartners
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -75,6 +79,10 @@ userRoute.route("/addAnaplanCounter").post(addAnaplanCounters)
 userRoute.route("/getAnaplanDetails").get(getAnaplanCounters)
 userRoute.route("/updateAnaplan/:id").put(updateAnaplanCounters)
 userRoute.route("/deleteAnaplan/:id").delete(deleteAnaplanCounters)
+userRoute.route("/addTechPartners").post(upload.single('techPartnersImg'),addTechPartners);
+userRoute.route("/getTechPartners").get(getTechPartners);
+userRoute.route("/getTechPartnersById/:id").get(getTechPartnersById);
+userRoute.route("/deleteTechPartners/:id").delete(deleteTechPartners);
 
 
 
