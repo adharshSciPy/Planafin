@@ -961,6 +961,27 @@ const getBusinessPlanning = async (req, res) => {
   }
 };
 
+const getBusinessPlanningById = async (req, res) => {
+  const{id}=req.params;
+  try {
+    const response = await businessPlanning.findById(id);
+
+    if (!response || response.length === 0) {
+      return res.status(404).json({ message: "No business planning data found" });
+    }
+
+    res.status(200).json({
+      message: "Business Planning data fetched successfully",
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 const deleteBusinessPlanning = async (req, res) => {
   const { id } = req.params;
   try {
@@ -1096,6 +1117,6 @@ export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice
 
 }

@@ -5,7 +5,8 @@ import {
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
     solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters,
-    addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteservice
+    addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteservice,
+    getBusinessPlanningById
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -60,6 +61,8 @@ userRoute.route("/updateSolutionCounter/:id").put(updateSolutionCounters);
 userRoute.route("/deleteSolutionCounter/:id").delete(deleteSolutionCounters);
 userRoute.route("/addBusinessPlanning").post(upload.single('businessPlanningImage'), addBusinessPlanning);
 userRoute.route("/getBusinessPlanning").get(getBusinessPlanning);
+userRoute.route("/getBusinessPlanningById/:id").get(getBusinessPlanningById);
+
 userRoute.route("/deleteBusinessPlanning/:id").delete(deleteBusinessPlanning);
 userRoute.route("/addPlanafinConsultation").post(addPlanafinConsultations);
 userRoute.route("/getPlanafinConsultation").get(getPlanafinConsultations);
