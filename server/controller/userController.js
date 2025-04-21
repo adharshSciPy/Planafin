@@ -12,6 +12,9 @@ import { Project } from "../model/projectSchema.js";
 import { Solution } from "../model/solutionSchema.js";
 import { Industry } from "../model/industrySchema.js";
 import SolutionAccelerators from "../model/solutionAccelerators.js";
+import businessPlanning from "../model/businessPlanning.js";
+// import { OurService } from "../model/ourServiceSchema.js";
+import serviceCounter from "../model/serviceCounter.js"
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -828,10 +831,190 @@ const deleteAccelerationSolutions = async (req, res) => {
   }
 };
 
+// const createOurservice = async (req, res) => {
+//   const { title, subText, details, description } = req.body;
+//   let image = req.file ? req.file.path : null;
+//   if (image) {
+//     image = resume.replace(/\\/g, "/")
+//   }
+//   try {
+//     const servicedata = await OurService.create({
+//       title, subText, details, description, image
+//     })
+//     res.status(200).json({ message: "Service Created Successfully", data: servicedata })
+//   } catch (error) {
+//     res.status(500).json({ message: "Internal Server Error", error: error.message })
+//   }
+// }
+
+
+
+
+
+
+
+
+
+const addSolutionCounters = async (req, res) => {
+  const { counter, title } = req.body;
+
+  try {
+    if (!counter || !title) {
+      return res.status(400).json({ message: "Counter and title are required." });
+    }
+
+    const response = await serviceCounter.create({
+      counter,
+      title
+    });
+
+    res.status(201).json({
+      message: "Service Counter created successfully!",
+      data: response
+    });
+
+  } catch (error) {
+    console.error("Error adding service counter:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+const getSolutionCounters = async (req, res) => {
+  try {
+    const allSolutions = await serviceCounter.find();
+    
+    res.status(200).json({
+      success: true,
+      data: allSolutions,
+    });
+  } catch (error) {
+    console.error("Error fetching solution counters:", error.message);
+
+  }
+};
+const updateSolutionCounters=async(req,res)=>{
+  const{id}=req.params;
+  const{title,counter}=req.body;
+  try {
+    const response = await serviceCounter.findByIdAndUpdate(
+      id,
+      { title, counter },
+      { new: true }
+    );
+
+    if (!response) {
+      return res.status(404).json({
+        success: false,
+        message: "Solution counter not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter updated successfully",
+      data: response,
+    });
+   }
+    catch (error) {
+      console.error("Error updating solution counter:", error.message);
+  }
+}
+const deleteSolutionCounters = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await serviceCounter.findByIdAndDelete(id);
+
+    if (!response) {
+      return res.status(404).json({ success: false, message: "Counter not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter deleted successfully",
+      data: response
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+  }
+};
+
+const addBusinessPlanning=async(req,res)=>{
+  try {
+    const {title,description,contentHeading, contentDescription, contentPoints}=req.body;
+    let businessPlanningImage=req.file?req.file.path:null;
+    if(businessPlanningImage){
+      businessPlanningImage=businessPlanningImage.replace(/\\/g, "/");
+    }
+    if(!title||!description || !contentHeading || !contentPoints){
+      return res.status(400).json({ message: "All fields are required!" });
+    }
+    let parsedContentPoints;
+    try {
+      parsedContentPoints = typeof contentPoints === 'string' ? JSON.parse(contentPoints) : contentPoints;
+    } catch (err) {
+      return res.status(400).json({ message: "Invalid format for contentPoints" });
+    }
+
+    const formattedPoints = parsedContentPoints.map((point) => ({ contentPoints: point }));
+    const result=await businessPlanning.create({
+      businessPlanningImage,
+      title,
+      description,  
+      contentHeading,
+      contentDescription,
+      contentPoints: formattedPoints,
+    });
+    res.status(200).json({ message: "Business Planing Created", data: result });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal server error", data: error.message });
+  }
+}
+const getBusinessPlanning = async (req, res) => {
+  try {
+    const response = await businessPlanning.find();
+
+    if (!response || response.length === 0) {
+      return res.status(404).json({ message: "No business planning data found" });
+    }
+
+    res.status(200).json({
+      message: "Business Planning data fetched successfully",
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+const deleteBusinessPlanning = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedData = await businessPlanning.findByIdAndDelete(id);
+
+    if (!deletedData) {
+      return res.status(404).json({ message: "Business Planning data not found" });
+    }
+
+    res.status(200).json({
+      message: "Business Planning data deleted successfully",
+      data: deletedData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions,addSolutionCounters ,getSolutionCounters,updateSolutionCounters,deleteSolutionCounters,addBusinessPlanning,getBusinessPlanning,deleteBusinessPlanning
+
 }
