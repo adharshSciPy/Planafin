@@ -18,7 +18,7 @@ function OurSolution() {
   const navigate = useNavigate();
   // Sync sections with form field
   useEffect(() => {
-    form.setFieldsValue({ attendSession: sections });
+    form.setFieldsValue({ contentPoints: sections });
   }, [sections, form]);
 
   // Handle File Selection
@@ -32,7 +32,7 @@ function OurSolution() {
     try {
       const formData = new FormData();
       Object.keys(values).forEach((key) => {
-        if (key === "attendSession") {
+        if (key === "contentPoints") {
           sections.forEach((section) => {
             formData.append(`${key}[]`, section.name);
           });
@@ -42,11 +42,11 @@ function OurSolution() {
       });
 
       if (imageFile) {
-        formData.append("image", imageFile);
+        formData.append("businessPlanningImage", imageFile);
       }
 
       const response = await axios.post(
-        `${baseurl}/api/v1/user/onDemand`,
+        `${baseurl}/api/v1/user/addBusinessPlanning`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -117,11 +117,10 @@ function OurSolution() {
           form={form}
           initialValues={{
             title: "",
-            speaker: "",
-            heading:"",
             description:"",
-            summary:"",
-            attendSession: [],
+            contentHeading: "",
+            contentDescription:"",
+            contentPoints: [],
           }}
           onFinish={handleSubmit}
           style={{ paddingBlock: 32 }}
@@ -155,16 +154,16 @@ function OurSolution() {
             <Input.TextArea rows={6} />
           </Form.Item>  
           <Form.Item
-            name="heading"
-            label="Heading"
+            name="contentHeading"
+            label="Content Heading"
             rules={[{ required: true, message: "Please enter a heading" }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            name="summary"
-            label="Session Summary"
+            name="contentDescription"
+            label="Content Description"
             rules={[
               { required: true, message: "Please enter a session summary" },
             ]}
@@ -174,7 +173,7 @@ function OurSolution() {
           
 
           {/* Attended Sessions */}
-          <Form.Item name="attendSession" label="Attended Sessions">
+          <Form.Item name="contentPoints" label="ContentPoints">
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
