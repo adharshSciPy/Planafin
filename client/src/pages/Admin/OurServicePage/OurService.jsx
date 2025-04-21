@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState,useRef  } from 'react';
 import axios from 'axios';
 import styles from './ourService.module.css';
+import baseUrl from '../../../baseUrl';
 
 function OurService() {
   const [formData, setFormData] = useState({
     title: '',
     subText: '',
-    details: '',
     description: '',
   });
 
+  const [details, setDetails] = useState([]);
+  const [detailInput, setDetailInput] = useState('');
+
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
-
+  const fileInputRef = useRef(null);
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleDetailChange = (e) => {
+    setDetailInput(e.target.value);
+  };
+
+  const handleAddDetail = () => {
+    if (detailInput.trim() !== '') {
+      setDetails([...details, detailInput.trim()]);
+      setDetailInput('');
+    }
+  };
+
+  const handleRemoveDetail = (index) => {
+    const updated = [...details];
+    updated.splice(index, 1);
+    setDetails(updated);
   };
 
   const handleImageChange = (e) => {
@@ -26,19 +46,33 @@ function OurService() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
 
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
+    const data = new FormData();
+    const key = 'service1';
+
+    data.append(`${key}[title]`, formData.title);
+    data.append(`${key}[subText]`, formData.subText);
+    data.append(`${key}[description]`, formData.description);
+
+    details.forEach((item, index) => {
+      data.append(`${key}[details][${index}]`, item);
+    });
 
     if (image) {
-      data.append('image', image);
-    }
+        data.append('image', image); 
+      }
 
     try {
-      const res = await axios.post('/createourservice', data);
+      const res = await axios.post(`${baseUrl}/api/v1/user/createourservice`, data);
       setMessage(res.data.message);
+      setFormData({ title: '', subText: '', description: '' });
+      setDetails([]);
+      setDetailInput('');
+      setImage(null);
+     
+  if (fileInputRef.current) {
+    fileInputRef.current.value = '';
+  }
     } catch (err) {
       setMessage(err.response?.data?.message || 'Error submitting form');
     }
@@ -64,14 +98,34 @@ function OurService() {
           onChange={handleChange}
           required
         />
-        <input
-          type="text"
-          name="details"
-          placeholder="Details"
-          value={formData.details}
-          onChange={handleChange}
-          required
-        />
+
+        <div className={styles.detailInput}>
+          <input
+            type="text"
+            placeholder="Add a detail"
+            value={detailInput}
+            onChange={handleDetailChange}
+          />
+          <button type="button" onClick={handleAddDetail}>
+            Add Detail
+          </button>
+        </div>
+
+        <ul className={styles.detailList}>
+          {details.map((detail, index) => (
+            <li key={index}>
+              {detail}
+              <button
+                type="button"
+                onClick={() => handleRemoveDetail(index)}
+                style={{ marginLeft: '10px', color: 'red' }}
+              >
+                ×
+              </button>
+            </li>
+          ))}
+        </ul>
+
         <textarea
           name="description"
           placeholder="Description"
@@ -79,9 +133,18 @@ function OurService() {
           onChange={handleChange}
           required
         />
-        <input type="file" name="image" onChange={handleImageChange} accept="image/*" />
+
+        <input
+          type="file"
+          name="image"
+          onChange={handleImageChange}
+          accept="image/*"
+          ref={fileInputRef}
+        />
+
         <button type="submit">Submit</button>
       </form>
+
       {message && <p className={styles.message}>{message}</p>}
     </div>
   );
