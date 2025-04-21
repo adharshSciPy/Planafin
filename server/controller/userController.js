@@ -1067,28 +1067,32 @@ const deletePlanafinConsultations = async (req, res) => {
 
 
 const createOurservice = async (req, res) => {
-  const { title, subText, details, description } = req.body;
-  let image = req.file ? req.file.path : null;
-  if (image) {
-    image = image.replace(/\\/g, "/")
-  }
-  console.log("body", req.body)
   try {
-    const servicedata = await OurService.create({
-      title, subText, details, description, image
-    })
-    res.status(200).json({ message: "Service Created Successfully", data: servicedata })
+    const services = req.body;
+
+    for (const key in services) {
+      const data = services[key];
+      await OurService.findOneAndUpdate(
+        { key },
+        { ...data, key },
+        { upsert: true, new: true }
+      );
+    }
+
+    res.status(200).json({ message: "Services saved/updated successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    console.error("Error saving services:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 const serviceDetails = async (req, res) => {
   try {
-    const servicedata = await OurService.find();
-    res.status(200).json({ message: "Service Details", data: servicedata })
+    const services = await OurService.find();
+    res.status(200).json(services);
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    console.error("Error fetching services:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 }
 
@@ -1102,21 +1106,28 @@ const servicedata = async (req, res) => {
   }
 }
 
-const deleteservice = async (req, res) => {
-  const { id } = req.params
+const deleteOurService = async (req, res) => {
   try {
-    const deleteService = await OurService.findByIdAndDelete(id);
-    res.status(200).json({ message: "Service Deleted Successfully", data: deleteService });
+    const { key } = req.params;
+
+    const deleted = await OurService.findOneAndDelete({ key });
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Service not found" });
+    }
+
+    res.status(200).json({ message: "Service deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    console.error("Error deleting service:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService
 
 }
