@@ -5,7 +5,7 @@ import {
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
     solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters,
-    addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteservice,
+    addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteOurService,
     getBusinessPlanningById,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters,
     addTechPartners,
     getTechPartners,
@@ -74,7 +74,7 @@ userRoute.route("/deletePlanafinConsultation/:id").delete(deletePlanafinConsulta
 userRoute.route("/createourservice").post(upload.single('image'), createOurservice);
 userRoute.route("/servicedetails").get(serviceDetails);
 userRoute.route("/serviceById/:id").get(servicedata)
-userRoute.route("/deleteService/:id").delete(deleteservice)
+userRoute.route("/our-services/:key").delete(deleteOurService)
 userRoute.route("/addAnaplanCounter").post(addAnaplanCounters)
 userRoute.route("/getAnaplanDetails").get(getAnaplanCounters)
 userRoute.route("/updateAnaplan/:id").put(updateAnaplanCounters)

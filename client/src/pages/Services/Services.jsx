@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./services.css";
 import Nav from "../../components/Header/Header.jsx";
 import padam from "../../assets/AdobeStock_369214822-Cropped-1024x451.jpg";
@@ -8,95 +7,38 @@ import Footer from "../../components/Footer/Footer.jsx";
 import padam3 from "../.././assets/dice.jpg";
 import s2 from "../.././assets/s2.png";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import baseUrl from "../../baseUrl.js";
 
 function Services() {
-  const [activeTab, setActiveTab] = useState("Business-Consulting");
-
-  const tabContent = {
-    "Business-Consulting": {
-      title: "Business Consulting Services",
-      heading:
-        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey,",
-      description: [
-        "Our team of business experts help you adapt to constantly shifting market dynamics, align business strategy to reflect the long-term strategic vision, improve performance and address operational setbacks and challenges.",
-        "We are focused on establishing sustainable solutions for continuous improvement, by seamlessly integrating our business consulting, technology, and industry practices to help organizations improve their efficiency.",
-        "We bring in-depth functional expertise with a holistic perspective, capturing cross-functional value replacing the silo-based approach in organizations.",
-        "Achieve quicker transformation, go from strategy to implementation, and gain efficiency with our business consulting services.",
-      ],
-      points: [
-        "Roadmap definition services",
-        "Business use case and user story development",
-        "Platform evaluation services",
-        "Proof of concept & personalized demonstrations",
-        "Program management & change management strategy",
-      ],
-      image: padam3, // Change with actual image path
-    },
-    "Solution-Deployment": {
-      title: "Solution Deployment Services",
-      heading:
-        "We provide the following training programs, to enable faster adoption and onboarding,",
-      description: [
-        "We provide the following solution deployment services, helping you implement EPM solutions",
-        "Planafin has adopted an agile project approach, focused towards successful implementation, including scoping, sprint reviews and implementation, quality assurance and go-live with managed services.",
-        "Our expert team comprising of business experts, solution architect, model builder, quality assurance analyst, project manager and change management professional work together throughout the project to not just deploy the solution but also to enable faster user adoption and prepare self sustainable internal CoE to maintain the solution in future",
-      ],
-      points: [
-        "Model architecture & design",
-        "Project execution including project management",
-        "Agile implementation methodology",
-        "Data integration",
-        "Quality assurance",
-      ],
-      image: s2,
-    },
-    "Managed-Support-Services": {
-      title: "Managed Support Services",
-      heading:
-        "We provide the following managed support services, as you continue to benefit from EPM solution,",
-      description: [
-        "Our managed support services ensure smooth operation and long-term sustainability of your projects.",
-        "Planafin offers a range of managed services that empowers your solution, reduces risk with proactive monitoring from certified technology and functional experts that get you to benefit from all the capabilities of the platform and maximize ROI.",
-        "While traditional reactive SLA based approach may still exist, it is no more meeting the expectation of current technology demands.  Avoiding delayed responses keeps you ahead while accelerating performance, bringing faster end-user adoption, and facilitating expansion to higher value-add use cases.",
-        "Take advantage of our managed services, make a wise decision, and help your organization effectively maintain and enrich the planning solution in a cost-effective manner.",
-      ],
-      points: [
-        "24/7 technical support",
-        "Regular system updates",
-        "Performance monitoring",
-        "Issue resolution",
-      ],
-      image: s2,
-    },
-    "Training & Enablement": {
-      title: "Training & Enablement Services",
-      heading:
-        "We provide the following business consulting services, partnering with you, as you start your digital EPM journey",
-      description: [
-        "Our training programs help teams gain expertise in modern technologies and business methodologies.",
-        "As an official training partner, our training team consists of best in class expertise. We improve user enablement from project initiation throughout the implementation for faster adoption through our customized range of training programs",
-        "Our wide range of training programs include workshops for every level of skillset from beginners to advanced to enhance model building knowledge.",
-        "Get trained by our experienced team of certified experts to enable faster adoption.",
-      ],
-      points: [
-        "Hands-on workshops",
-        "Online training modules",
-        "Expert-led sessions",
-        "Certification programs",
-      ],
-      image: s2,
-    },
-  };
+  const [activeTab, setActiveTab] = useState("Business Consulting");
+  const [tabContent, setTabContent] = useState([]);
   const location = useLocation();
   const tabContainerRef = useRef(null);
+  const myRef = useRef([]);
+  const observerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const tabData = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
+      setTabContent(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    tabData();
+  }, []);
+
   useEffect(() => {
     if (location.state && location.state.activeTab) {
       const tab = location.state.activeTab;
-      if (tabContent[tab]) {
-        setActiveTab(tab);
-      }
+      setActiveTab(tab);
     }
   }, [location.state]);
+
   useEffect(() => {
     if (location.state && location.state.scrollToTabs) {
       tabContainerRef.current?.scrollIntoView({
@@ -112,16 +54,7 @@ function Services() {
       }, 300);
     }
   }, [location.state]);
-  // useEffect(() => {
-  //   console.log("Current activeTab:", activeTab);
-  // }, [activeTab]);
-  const navigate = useNavigate();
-  const consultationBtn = () => {
-    navigate("/");
-    window.scrollTo(0, 0);
-  };
-  const myRef = useRef([]);
-  const observerRef = useRef(null);
+
   useEffect(() => {
     if (!observerRef.current) {
       observerRef.current = new IntersectionObserver((entries) => {
@@ -143,16 +76,24 @@ function Services() {
       }
     };
   }, []);
+
   const setElementRef = (index) => (el) => {
     if (el) {
       myRef.current[index] = el;
       if (observerRef.current) observerRef.current.observe(el);
     }
   };
+
+  const consultationBtn = () => {
+    navigate("/");
+    window.scrollTo(0, 0);
+  };
+
   const consultationNav = () => {
     navigate("/consultation");
     window.scrollTo(0, 0);
   };
+
   return (
     <div>
       <Nav />
@@ -166,7 +107,7 @@ function Services() {
         </h2>
       </div>
       <div className="service-content1">
-        More than 100+ industry leading EPM business planning deployment
+        More than 100+ industry-leading EPM business planning deployment
         experience
       </div>
       <div className="service-image" ref={(el) => setElementRef(-1)(el)}>
@@ -214,55 +155,64 @@ function Services() {
       <div className="tab-container">
         {/* Tabs */}
         <div className="tab-boxes">
-          {Object.keys(tabContent).map((tab, index) => (
+          {tabContent.map((tab, index) => (
             <div
               key={index}
-              id={`tab-${tab}`}
-              className={`tab-box ${activeTab === tab ? "active" : ""}`} 
-              onClick={() => setActiveTab(tab)} 
+              id={`tab-${tab.key}`}
+              className={`tab-box ${activeTab === tab.key ? "active" : ""}`}
+              onClick={() => setActiveTab(tab.key)}
             >
-              <h2>{tab.replace(/-/g, " ")}</h2>
+              <h2>{tab.key.replace(/-/g, " ")}</h2>
             </div>
           ))}
         </div>
 
         {/* Content Section */}
         <div className="tab-content">
-          <div
-            className="text-section"
-            id={`content-${activeTab.replace(/\s/g, "-")}`}
-          >
-            <h1>{tabContent[activeTab].title.replace(/-/g, " ")}</h1>
-            {tabContent[activeTab].heading && (
-              <h6 className="gokuls">{tabContent[activeTab].heading}</h6>
-            )}
-            {/* ithanu mone sanam ivide keri kali ennittu mukalil poyittu tabcontent il poyi oru heading ondakkanam content idanam */}
+          {activeTab && tabContent.find((tab) => tab.key === activeTab) && (
+            <>
+              <section
+                className="text-section"
+                id={`content-${activeTab.replace(/\s/g, "-")}`}
+              >
+                <h1>{tabContent.find((tab) => tab.key === activeTab).title}</h1>
+                <h6 className="gokuls">
+                  {tabContent.find((tab) => tab.key === activeTab).subText}
+                </h6>
 
-            <div className="content-flex">
-              <ul>
-                {tabContent[activeTab].points.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
-              </ul>
+                <div className="content-flex">
+                  <ul>
+                    {tabContent
+                      .find((tab) => tab.key === activeTab)
+                      .details?.map((point, index) => (
+                        <li key={index}>{point}</li>
+                      ))}
+                  </ul>
 
-              <div className="paragraphs">
-                {tabContent[activeTab].description.map((desc, index) => (
-                  <p key={index}>{desc}</p>
-                ))}
+                  <div className="paragraphs">
+                    {tabContent
+                      .find((tab) => tab.key === activeTab)
+                      .description?.map((desc, index) => (
+                        <p key={index}>{desc}</p>
+                      ))}
+                  </div>
+                </div>
+
+                <a href="mailto:example@example.com" className="services-link">
+                  Know More &gt;&gt;
+                </a>
+              </section>
+
+              <div className="image-section">
+                <img
+                  src={
+                    `${baseUrl}/${tabContent.find((tab) => tab.key === activeTab).image}`
+                  }
+                  alt={tabContent.find((tab) => tab.key === activeTab).title}
+                />
               </div>
-            </div>
-
-            <Link to="mailto:example@example.com" className="services-link">
-              Know More &gt;&gt;
-            </Link>
-          </div>
-
-          <div
-            className="image-section"
-            id={`content-${activeTab.replace(/\s/g, "-")}`}
-          >
-            <img src={tabContent[activeTab].image} alt={activeTab} />
-          </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -451,11 +401,8 @@ function Services() {
         </div>
         <div className="overlayimagemaindiv"></div>
       </div>
+
       <Footer />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check_circle"
-      />
     </div>
   );
 }

@@ -38,6 +38,7 @@ import OurSolution from "./pages/Admin/OurSolution.jsx";
 import SolutionDataFull from "./pages/Admin/SolutionDataFull.jsx";
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 import Solutioncounter from "./pages/Admin/Solutioncounter.jsx";
+import OurServices from "./pages/Admin/OurServicePage/OurService.jsx"
 function App() {
   return (
     <div className="App">
@@ -95,6 +96,14 @@ function App() {
           <Route path="/industryimages" element={<IndustryImages />} />
           <Route path="/viewAllSolution" element={<SolutionDataFull />} />
           <Route path="/SolutionCounter" element={<Solutioncounter />} />
+          <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
+          <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
+          <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
+          <Route path="/ourSolution" element= {<OurSolution/>}/>
+          <Route path="/industryimages" element={<IndustryImages/>} />
+          <Route path="/viewAllSolution" element={<SolutionDataFull/>} />
+          <Route path="/ourServices" element={<OurServices/>} />
+
 
 
         </Routes>
