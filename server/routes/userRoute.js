@@ -4,7 +4,7 @@ import {
     registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, demandDetails, getOnDemandById, addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage,
     deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage, deleteJobopenings,
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
-    solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions,
+    solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions,addSolutionCounters,getSolutionCounters,updateSolutionCounters,deleteSolutionCounters
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -53,6 +53,11 @@ userRoute.route('/deleteIndustry').delete(deleteIndustry)
 userRoute.route("/addSolutionAccelerators").post(addAccelerationSolutions)
 userRoute.route("/getSolutionAccelerators").get(getAccelerationSolutions);
 userRoute.route("/deleteSolutionAccelerators/:id").delete(deleteAccelerationSolutions)
+// userRoute.route("/createourservice").post(createOurservice)
+userRoute.route("/addSolutionCounter").post(addSolutionCounters);
+userRoute.route("/getSolutionCounter").get(getSolutionCounters);
+userRoute.route("/updateSolutionCounter/:id").put(updateSolutionCounters);
+userRoute.route("/deleteSolutionCounter/:id").delete(deleteSolutionCounters);
 
 
 
