@@ -1,11 +1,30 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import Header from "../../components/Header/Header";
 import styles from "./solution.module.css";
 import image from "../../assets/about.people.png";
 import tickImage from "../../assets/point-tick.png";
 import Footer from "../../components/Footer/Footer"
+import axios from "axios";
+import baseUrl from "../../baseUrl";
+
 
 function SupplyChain() {
+  const [supplyData,setSupplyData]=useState()
+  const getData=async()=>{
+   try {
+    const response = await axios.get(
+      `${baseUrl}/api/v1/user/industryDetails`
+    );
+    setSupplyData(response.data.data);
+    
+   } catch (error) {
+    console.log(error);
+    
+   }
+  }
+  useEffect(()=>{
+    getData()
+  })
   return (
     <>
       <Header></Header>
@@ -39,7 +58,10 @@ function SupplyChain() {
               <img src={image} alt="about" />
             </div>
           </div>
-          <div className={styles.secondRightContainer}>
+          {supplyData?(
+            supplyData.map((item,index)=>{
+              return(
+                <div className={styles.secondRightContainer}>
             <div className={styles.secondRightHeading}>
               <h1>Financial Planning & Analysis</h1>
             </div>
@@ -86,6 +108,9 @@ function SupplyChain() {
               </div>
             </div>
           </div>
+              )
+            })
+          ):(<p>loading</p>)}
         </div>
       </div>
       <Footer/>
