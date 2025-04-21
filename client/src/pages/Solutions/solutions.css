@@ -149,6 +149,10 @@
   font-size: 40px;
   font-weight: 700;
 }
+/* .industry-grid{
+  display: flex;
+  flex-wrap: wrap;
+} */
 .sec4-head2{
   width: 70%;
   text-align: center;
@@ -166,6 +170,9 @@
   gap: 150px;
   
 } 
+.sec4-image{
+height: 80px;
+}
 .wrapper2{
   margin-top: 80px;
 }

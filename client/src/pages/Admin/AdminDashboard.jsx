@@ -87,8 +87,8 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="tsecondcard">
-              <h3>Watch Now</h3>
-              <Link to="/WatchNowDetails">
+              <h3>Industry Images</h3>
+              <Link to="/industryimages">
                 <button className="secondcard-btn3">View</button>
               </Link>
             </div>

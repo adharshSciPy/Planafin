@@ -3,18 +3,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "../Admin/industryimages.css";
+import baseUrl from '../../baseUrl';
+
 
 function IndustryImages() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
+  // const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
+    // if (file) {
+    //   setPreview(URL.createObjectURL(file));
+    // }
   };
 
   const handleSubmit = async (e) => {
@@ -25,23 +27,19 @@ function IndustryImages() {
     }
 
     const formData = new FormData();
-    formData.append("title", title);
+    formData.append("heading", title);
     formData.append("industryImage", image); 
 
     try {
-      const response = await axios.post("/industryImage", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(`${baseUrl}/api/v1/user/industryImage`,formData);
 
-      console.log("Upload success:", response.data);
+      console.log("Upload success:", response);
       alert("Uploaded Successfully!");
 
     
       setTitle("");
       setImage(null);
-      setPreview(null);
+      // setPreview(null);
     } catch (error) {
       console.error("Upload error:", error);
       alert("Upload failed. Try again.");
@@ -72,7 +70,7 @@ function IndustryImages() {
             onChange={handleImageChange}
             required
           />
-          {preview && <img src={preview} alt="Preview" className="Indimage-preview" />}
+          {/* {preview && <img src={preview} alt="Preview" className="Indimage-preview" />} */}
         </div>
 
         <button type="submit" className="Indsubmit-button">
