@@ -1112,11 +1112,95 @@ const deleteservice = async (req, res) => {
   }
 }
 
+const addAnaplanCounters = async (req, res) => {
+  const { counter, title } = req.body;
+
+  try {
+    if (!counter || !title) {
+      return res.status(400).json({ message: "Counter and title are required." });
+    }
+
+    const response = await serviceCounter.create({
+      counter,
+      title
+    });
+
+    res.status(201).json({
+      message: "Service Counter created successfully!",
+      data: response
+    });
+
+  } catch (error) {
+    console.error("Error adding service counter:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+const getAnaplanCounters = async (req, res) => {
+  try {
+    const allSolutions = await serviceCounter.find();
+
+    res.status(200).json({
+      success: true,
+      data: allSolutions,
+    });
+  } catch (error) {
+    console.error("Error fetching solution counters:", error.message);
+
+  }
+};
+const updateAnaplanCounters = async (req, res) => {
+  const { id } = req.params;
+  const { title, counter } = req.body;
+  try {
+    const response = await serviceCounter.findByIdAndUpdate(
+      id,
+      { title, counter },
+      { new: true }
+    );
+
+    if (!response) {
+      return res.status(404).json({
+        success: false,
+        message: "Solution counter not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter updated successfully",
+      data: response,
+    });
+  }
+  catch (error) {
+    console.error("Error updating solution counter:", error.message);
+  }
+}
+const deleteAnaplanCounters = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await serviceCounter.findByIdAndDelete(id);
+
+    if (!response) {
+      return res.status(404).json({ success: false, message: "Counter not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Solution counter deleted successfully",
+      data: response
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+  }
+};
+
+
+
 
 export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteservice,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters
 
 }

@@ -6,7 +6,7 @@ import {
     deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject,
     solution, solutionDetails, solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, deleteAccelerationSolutions, getAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters,
     addBusinessPlanning, getBusinessPlanning, deleteBusinessPlanning, createOurservice, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, serviceDetails, servicedata, deleteservice,
-    getBusinessPlanningById
+    getBusinessPlanningById,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -71,6 +71,10 @@ userRoute.route("/createourservice").post(upload.single('image'), createOurservi
 userRoute.route("/servicedetails").get(serviceDetails);
 userRoute.route("/serviceById/:id").get(servicedata)
 userRoute.route("/deleteService/:id").delete(deleteservice)
+userRoute.route("/addAnaplanCounter").post(addAnaplanCounters)
+userRoute.route("/getAnaplanDetails").get(getAnaplanCounters)
+userRoute.route("/updateAnaplan/:id").put(updateAnaplanCounters)
+userRoute.route("/deleteAnaplan/:id").delete(deleteAnaplanCounters)
 
 
 
