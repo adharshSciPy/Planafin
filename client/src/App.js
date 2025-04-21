@@ -90,7 +90,8 @@ function App() {
           <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
           <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
           <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
-
+          <Route path="/ourSolution" element= {<OurSolution/>}/>
+          <Route path="/industryimages" element={<IndustryImages/>} />
 
         </Routes>
       </BrowserRouter>
