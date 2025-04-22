@@ -9,6 +9,11 @@ import s2 from "../.././assets/s2.png";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../baseUrl.js";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
@@ -20,6 +25,7 @@ function Services() {
   const observerRef = useRef(null);
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
+  const [partners, setPartners] = useState([]);//
 
   const tabData = async () => {
     try {
@@ -116,6 +122,20 @@ function Services() {
     getCounterData();
     getDataConsulting();
   }, []);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const res = await axios.get(`${baseUrl}/api/v1/user/getTechPartners`);
+        console.log("helloooi",res.data.data);
+        
+        setPartners(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch tech partners:", err);
+      }
+    };
+    fetchPartners();
+  }, []);
   return (
     <div>
       <Nav />
@@ -260,12 +280,50 @@ function Services() {
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
         </h3>
-        <img
+        {/* <img
           src={padam2}
           alt="anaplan"
           style={{ cursor: "pointer" }}
           onClick={() => consultationNav()}
-        />
+        /> */}
+        <Swiper
+        slidesPerView={3}
+        spaceBetween={30}
+        navigation
+        pagination={{ clickable: true }}
+        modules={[Navigation, Pagination,Autoplay]}
+        className="tech-carousel"
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          320: {          
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          640: {          
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {         
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
+        // loop={true}
+      >
+        {partners.map((partner) => (
+          <SwiperSlide key={partner._id}>
+            <img
+              src={`${baseUrl}/${partner.techPartnersImg}`}
+              alt={partner.name}
+              style={{ width: "100%", cursor: "pointer" }}
+              onClick={() => consultationNav(partner._id)}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
       </div>
 
       <div className="overlaymaindiv" ref={(el) => setElementRef(-1)(el)}>
