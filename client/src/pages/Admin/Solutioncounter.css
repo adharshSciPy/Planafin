@@ -42,6 +42,9 @@
   font-weight: 1000;
 }
 
-.servicecard Button{
-    gap: 20px;
+.cardbutton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 10px;
 }
