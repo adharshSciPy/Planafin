@@ -1,41 +1,51 @@
-.container {
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
-  }
-  
-  .form {
+.solutioncountermain {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
   
-  .field {
+  .solutioncounter {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 50px;
+    gap: 30px;
+    width: 700px;
   }
   
-  input {
-    padding: 8px;
-    font-size: 16px;
+  .solutioncounter Input {
+    height: 50px;
+    font-size: large;
+    font-weight: 900;
   }
   
-  .button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
+  .solutioncounter Button {
+    height: 40px;
+    width: 100px;
+    font-size: large;
+    font-weight: 900;
   }
   
-  .button:hover {
-    background-color: #0056b3;
+  .servicecard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
   }
   
-  .message {
-    margin-top: 10px;
-    color: green;
-    font-weight: bold;
+  .servicecard h1 {
+    font-size: 40px;
+    color: #c1c1c1;
+    font-weight: 1000;
+  }
+  
+  .cardbutton {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 10px;
   }
   
