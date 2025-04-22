@@ -209,7 +209,7 @@ function Services() {
 
               <div className="image-section">
                 <img
-                  src={`${baseUrl}/${
+                  src={`${baseUrl}/uploads/${
                     tabContent.find((tab) => tab.key === activeTab).image
                   }`}
                   alt={tabContent.find((tab) => tab.key === activeTab).title}
