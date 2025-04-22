@@ -34,10 +34,11 @@ import WatchNowDetails from "./pages/Admin/WatchNowDetails"
 import ProjectDetails from "./pages/Admin/Project.jsx";
 import OurJourneyAccelarators from "./pages/Admin/OurJourneyAccelarators.jsx"
 import OurJourneyAccelaratorsAll from "./pages/Admin/OurJourneyAccelaratorsAll.jsx"
-import OurSolution from "./pages/Admin/OurSolution.jsx";  
+import OurSolution from "./pages/Admin/OurSolution.jsx";
 import SolutionDataFull from "./pages/Admin/SolutionDataFull.jsx";
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
-import OurServices from "./pages/Admin/OurServicePage/OurService.jsx"
+import Solutioncounter from "./pages/Admin/Solutioncounter.jsx";
+import OurService from "./pages/Admin/OurServicePage/OurService.jsx"
 function App() {
   return (
     <div className="App">
@@ -59,21 +60,21 @@ function App() {
 
 
           <Route path="/webinarData" element={<ProtectedRoute roleRequired="400"><WebinarData /></ProtectedRoute>} />
-          <Route path="/ourJourneyAdmin" element={<ProtectedRoute roleRequired="400"><Ourjourneyadmin  /></ProtectedRoute>} />
-          <Route path="/getOurJourney" element={<GetAllJourney  />} />
-          <Route path="/getWebinarData" element={<GetWebinarData  />} />
+          <Route path="/ourJourneyAdmin" element={<ProtectedRoute roleRequired="400"><Ourjourneyadmin /></ProtectedRoute>} />
+          <Route path="/getOurJourney" element={<GetAllJourney />} />
+          <Route path="/getWebinarData" element={<GetWebinarData />} />
           <Route path="/feedbackdata" element={<ProtectedRoute roleRequired="400">
-            <FeedBack/>
-          </ProtectedRoute>}/>
-          <Route path="/jobopenings"element={<ProtectedRoute roleRequired="400">
-            <JobOpening/>
+            <FeedBack />
           </ProtectedRoute>} />
-          <Route path="/admindashboard" element={<ProtectedRoute roleRequired="400"> <AdminDashboard  /> </ProtectedRoute>} />
-          <Route path="/jobdetails" element={<ProtectedRoute roleRequired="400"><JobDetails  /></ProtectedRoute>} />
-          <Route path="/applicationDetails" element={<ProtectedRoute roleRequired="400"><ApplicationDetails  /></ProtectedRoute> } />
+          <Route path="/jobopenings" element={<ProtectedRoute roleRequired="400">
+            <JobOpening />
+          </ProtectedRoute>} />
+          <Route path="/admindashboard" element={<ProtectedRoute roleRequired="400"> <AdminDashboard /> </ProtectedRoute>} />
+          <Route path="/jobdetails" element={<ProtectedRoute roleRequired="400"><JobDetails /></ProtectedRoute>} />
+          <Route path="/applicationDetails" element={<ProtectedRoute roleRequired="400"><ApplicationDetails /></ProtectedRoute>} />
           <Route path="/employeeimage" element={<ProtectedRoute roleRequired="400">
-            <EmployeeImage/>
-          </ProtectedRoute>}/>
+            <EmployeeImage />
+          </ProtectedRoute>} />
           {/* <Route
             path="/employeeimage"
             element={
@@ -82,19 +83,26 @@ function App() {
               </ProtectedRoute>
             }
           /> */}
-          <Route path="/clientList" element={<ProtectedRoute roleRequired="400"><EmployeeList  /></ProtectedRoute>} />
+          <Route path="/clientList" element={<ProtectedRoute roleRequired="400"><EmployeeList /></ProtectedRoute>} />
           <Route path="/adminreg" element={<AdminReg />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
-          <Route path="/employeeData/:id" element={<EmployeeData  />} />
-          <Route path="/admincontactus" element={<ProtectedRoute roleRequired="400"><AdContact  /></ProtectedRoute>} />
+          <Route path="/employeeData/:id" element={<EmployeeData />} />
+          <Route path="/admincontactus" element={<ProtectedRoute roleRequired="400"><AdContact /></ProtectedRoute>} />
           <Route path="/WatchNowDetails" element={<ProtectedRoute roleRequired="400"><WatchNowDetails /></ProtectedRoute>} />
+          <Route path="/projectDetails" element={<ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
+          <Route path="/accelerators" element={<OurJourneyAccelarators />} />
+          <Route path="/acceleratorsAll" element={<OurJourneyAccelaratorsAll />} />
+          <Route path="/ourSolution" element={<OurSolution />} />
+          <Route path="/industryimages" element={<IndustryImages />} />
+          <Route path="/viewAllSolution" element={<SolutionDataFull />} />
+          <Route path="/SolutionCounter" element={<Solutioncounter />} />
           <Route path="/projectDetails" element={ <ProtectedRoute roleRequired="400"><ProjectDetails /></ProtectedRoute>} />
           <Route path="/accelerators" element= {<OurJourneyAccelarators/>}/>
           <Route path="/acceleratorsAll" element= {<OurJourneyAccelaratorsAll/>}/>
           <Route path="/ourSolution" element= {<OurSolution/>}/>
           <Route path="/industryimages" element={<IndustryImages/>} />
           <Route path="/viewAllSolution" element={<SolutionDataFull/>} />
-          <Route path="/ourServices" element={<OurServices/>} />
+          <Route path="/ourServices" element={<OurService/>} />
 
 
 

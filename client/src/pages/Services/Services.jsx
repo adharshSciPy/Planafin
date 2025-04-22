@@ -11,7 +11,7 @@ import axios from "axios";
 import baseUrl from "../../baseUrl.js";
 
 function Services() {
-  const [activeTab, setActiveTab] = useState("Business-Consulting");
+  const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
   const location = useLocation();
   const tabContainerRef = useRef(null);

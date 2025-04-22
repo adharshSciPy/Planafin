@@ -7,7 +7,7 @@
     border-radius: 12px;
   }
   
-  h2 {
+  .heading {
     text-align: center;
     margin-bottom: 1.5rem;
     color: #333;
@@ -20,9 +20,8 @@
     gap: 1rem;
   }
   
-  input[type="text"],
-  textarea,
-  input[type="file"] {
+  .input,
+  .textarea {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -31,17 +30,62 @@
     transition: border-color 0.3s ease;
   }
   
-  input[type="text"]:focus,
-  textarea:focus {
+  .input:focus,
+  .textarea:focus {
     border-color: #0077ff;
   }
   
-  textarea {
+  .textarea {
     resize: vertical;
     min-height: 100px;
   }
   
-  button {
+  .detailInputGroup {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .addDetailsButton {
+    padding: 0.75rem 1rem;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addDetailsButton:hover {
+    background-color: #005dc0;
+  }
+  
+  .detailList {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .removeButton {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: red;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .submitButton {
     padding: 0.75rem;
     background-color: #0077ff;
     color: white;
@@ -52,7 +96,7 @@
     transition: background-color 0.3s ease;
   }
   
-  button:hover {
+  .submitButton:hover {
     background-color: #005dc0;
   }
   
@@ -61,5 +105,25 @@
     text-align: center;
     font-weight: 500;
     color: #0077ff;
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .heading {
+      font-size: 1.5rem;
+    }
+  
+    .detailInputGroup {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  
+    .detailItem {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
   

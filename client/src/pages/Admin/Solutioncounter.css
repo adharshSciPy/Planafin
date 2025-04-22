@@ -1,0 +1,29 @@
+.solutioncountermain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.solutioncounter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 50px;
+    gap: 30px;
+    width: 700px;
+}
+
+.solutioncounter Input{
+    height: 50px;
+    font-size: large;
+    font-weight: 900;
+}
+
+.solutioncounter Button{
+    height: 40px;
+    width: 100px;
+    font-size: large;
+    font-weight: 900;
+}
