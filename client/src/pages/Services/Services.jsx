@@ -13,12 +13,13 @@ import baseUrl from "../../baseUrl.js";
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
-  const [counterData,setCounterData]=useState([])
+  const [counterData, setCounterData] = useState([]);
   const location = useLocation();
   const tabContainerRef = useRef(null);
   const myRef = useRef([]);
   const observerRef = useRef(null);
   const navigate = useNavigate();
+  const [consultingData, setConsultingData] = useState([]);
 
   const tabData = async () => {
     try {
@@ -28,7 +29,16 @@ function Services() {
       console.log(error);
     }
   };
-
+  const getDataConsulting = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/getPlanafinConsultation`
+      );
+      setConsultingData(response.data.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     tabData();
   }, []);
@@ -94,18 +104,18 @@ function Services() {
     navigate("/consultation");
     window.scrollTo(0, 0);
   };
-  const getCounterData=async()=>{
+  const getCounterData = async () => {
     try {
-      const response=await axios.get(`${baseUrl}/api/v1/user/getSolutionCounter`)
+      const response = await axios.get(
+        `${baseUrl}/api/v1/user/getSolutionCounter`
+      );
       setCounterData(response.data.data);
-      
-    } catch (error) {
-      
-    }
-  }
-  useEffect(()=>{
-    getCounterData()
-  },[])
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getCounterData();
+    getDataConsulting();
+  }, []);
   return (
     <div>
       <Nav />
@@ -127,15 +137,15 @@ function Services() {
       </div>
       <div className="increment-content">
         <div className="increment-section">
-          {counterData.map((item,index)=>{
-            return(
+          {counterData.map((item, index) => {
+            return (
               <div className="js-contents" key={index}>
-            <span className="num" data-val="11">
-              {item.counter}
-            </span>
-            <p>{item.title}</p>
-          </div>
-            )
+                <span className="num" data-val="11">
+                  {item.counter}
+                </span>
+                <p>{item.title}</p>
+              </div>
+            );
           })}
         </div>
       </div>
@@ -199,9 +209,9 @@ function Services() {
 
               <div className="image-section">
                 <img
-                  src={
-                    `${baseUrl}/${tabContent.find((tab) => tab.key === activeTab).image}`
-                  }
+                  src={`${baseUrl}/${
+                    tabContent.find((tab) => tab.key === activeTab).image
+                  }`}
                   alt={tabContent.find((tab) => tab.key === activeTab).title}
                 />
               </div>
@@ -213,9 +223,14 @@ function Services() {
       <section className="consulting-container">
         <h2>Why Planafin Consulting?</h2>
         <div className="consulting-content">
-          <div className="consulting-column">
-            <ul>
-              <li>
+          <div className="consulting-grid">
+            {consultingData.map((item, index) => (
+              <div
+                key={index}
+                className={`consulting-item ${
+                  index % 2 === 0 ? "left" : "right"
+                }`}
+              >
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -226,125 +241,17 @@ function Services() {
                   >
                     <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
                   </svg>
-                </span>{" "}
-                <strong>Customer centric</strong>, we understand every customer
-                is unique and henceforth our services and solutions are catered
-                to each customer based on their specific needs.
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Immense industry experience</strong>, with the number of
-                years of experience across various industries, our planning
-                accelerators are tailored to each domain and business sector.
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Unparalleled excellence</strong> – our excellence and
-                quality of delivery is unparalleled with quality assurance,
-                sustainable and future-proof solutions.
-              </li>
-            </ul>
-            <button
-              className="consulting-btn"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Click here
-            </button>
-          </div>
-          <div className="consulting-column">
-            <ul>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Integrated services</strong> – we provide a range of
-                integrated services with a holistic approach to maximize your
-                ROI and improve the benefits.
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Strategy to action</strong> – our solutions are aligned
-                to your overall business strategies and objectives, addressing
-                the challenges and risk in executing it.
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Global support</strong> – strengthened with our diverse
-                portfolio, we provide services and support across multiple
-                geographical locations.
-              </li>
-              <li>
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -1180 960 1060"
-                    width="24px"
-                    fill="#5ac2a5"
-                  >
-                    <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
-                  </svg>
-                </span>{" "}
-                <strong>Proactive Approach</strong> – we take a proactive
-                approach in supporting our clients helping them stay ahead.
-              </li>
-            </ul>
-            {/* <Link to={'/'}> */}
+                </span>
+                <p className="text-p"><strong>{item.title}</strong>-{item.subtext}</p>
+              </div>
+            ))}
+
             <button
               className="consulting-btn"
               onClick={() => consultationBtn()}
             >
               Read more
             </button>
-            {/* </Link> */}
           </div>
         </div>
       </section>
