@@ -35,6 +35,10 @@
     align-items: center;
     gap: 25px;
   }
+
+  .servicecard Card{
+    height: 100px;
+  }
   
   .servicecard h1 {
     font-size: 40px;

@@ -94,7 +94,7 @@ function Solutioncounter() {
             </div>
             <div className='servicecard'>
                 {data.map((item, index) => (
-                    <Card key={index} style={{ width: 300 }}>
+                    <Card key={index} style={{ width: 300, height: 250, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                         <h2>{item.title}</h2>
                         <h1>{item.counter}</h1>
                         <div className='cardbutton'>
