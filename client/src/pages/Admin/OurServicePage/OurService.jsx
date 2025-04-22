@@ -2,16 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import styles from './ourService.module.css';
 import baseUrl from '../../../baseUrl';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function OurService() {
   const [formData, setFormData] = useState({
     title: '',
     subText: '',
-    description: '',
+    
   });
 
   const [details, setDetails] = useState([]);
   const [detailInput, setDetailInput] = useState('');
+  const [descriptionInput, setDescriptionInput] = useState('');
+const [descriptions, setDescriptions] = useState([]);
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
   const [services, setServices] = useState([]); 
@@ -38,6 +42,23 @@ function OurService() {
     setDetails(updated);
   };
 
+  const handleDescriptionInput = (e) => {
+    setDescriptionInput(e.target.value);
+  };
+  
+  const handleAddDescription = () => {
+    if (descriptionInput.trim() !== '') {
+      setDescriptions([...descriptions, descriptionInput.trim()]);
+      setDescriptionInput('');
+    }
+  };
+  
+  const handleRemoveDescription = (index) => {
+    const updated = [...descriptions];
+    updated.splice(index, 1);
+    setDescriptions(updated);
+  };
+  
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -55,8 +76,9 @@ function OurService() {
 
   const handleDelete = async (key) => {
     try {
-      await axios.delete(`${baseUrl}/api/v1/user/deleteourservice/${key}`);
+      await axios.delete(`${baseUrl}/api/v1/user/our-services/${key}`);
       setMessage("Service deleted successfully");
+      toast.success("Service deleted successfully");
       fetchServices(); 
     } catch (err) {
       setMessage(err.response?.data?.message || "Error deleting service");
@@ -66,13 +88,16 @@ function OurService() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    const key = formData.title.trim().replace(/\s+/g, '_').toLowerCase();
+    const key = formData.title;
   
     const data = new FormData();
   
     data.append(`${key}[title]`, formData.title);
     data.append(`${key}[subText]`, formData.subText);
-    data.append(`${key}[description]`, formData.description);
+    descriptions.forEach((desc, index) => {
+        data.append(`${key}[description][${index}]`, desc);
+      });
+      
   
     details.forEach((item, index) => {
       data.append(`${key}[details][${index}]`, item);
@@ -84,15 +109,16 @@ function OurService() {
   
     try {
       const res = await axios.post(`${baseUrl}/api/v1/user/createourservice`, data);
-      setMessage(res.data.message);
-      setFormData({ title: '', subText: '', description: '' });
+      toast.success(res.data.message);
+      setFormData({ title: '', subText: ''});
       setDetails([]);
+      setDescriptions([])
       setDetailInput('');
       setImage(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
       fetchServices();
     } catch (err) {
-      setMessage(err.response?.data?.message || 'Error submitting form');
+        toast.error(err.response?.data?.message || 'Error submitting form');
     }
   };
   
@@ -103,6 +129,7 @@ function OurService() {
 
   return (
     <div>
+         <ToastContainer position="bottom-right" autoClose={3000} />
     <div className={styles.container}>
       <h2 className={styles.heading}>Create a Service</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -124,6 +151,37 @@ function OurService() {
           required
           className={styles.input}
         />
+               <div className={styles.detailInputGroup}>
+
+<textarea
+  id="description"
+  placeholder="Add a description"
+  value={descriptionInput}
+  onChange={handleDescriptionInput}
+  className={styles.textarea}
+/>
+<button
+  type="button"
+  className={styles.addDetailsButton}
+  onClick={handleAddDescription}
+>
+  Add Description
+</button>
+</div>
+<ul className={styles.detailList}>
+  {descriptions.map((desc, index) => (
+    <li key={index} className={styles.detailItem}>
+      {desc}
+      <button
+        type="button"
+        onClick={() => handleRemoveDescription(index)}
+        className={styles.removeButton}
+      >
+        ×
+      </button>
+    </li>
+  ))}
+</ul>
         <div className={styles.detailInputGroup}>
           <input
             type="text"
@@ -146,14 +204,10 @@ function OurService() {
             </li>
           ))}
         </ul>
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-          className={styles.textarea}
-        />
+ 
+
+
+
         <input
           type="file"
           name="image"
@@ -167,7 +221,7 @@ function OurService() {
         </button>
       </form>
 
-      {message && <p className={styles.message}>{message}</p>}
+      {/* {message && <p className={styles.message}>{message}</p>} */}
 
   
     </div>
