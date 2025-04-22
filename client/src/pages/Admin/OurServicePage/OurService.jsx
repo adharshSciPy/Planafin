@@ -234,29 +234,7 @@ const [descriptions, setDescriptions] = useState([]);
         {services.map((service, index) => (
   <div key={index} className={styles.card}>
     <h4 className={styles.cardTitle}>{service.title}</h4>
-    {/* <p className={styles.cardSubText}>{service.subText}</p> */}
-
-    {/* {Array.isArray(service.description) ? (
-      service.description.map((desc, i) => (
-        <p key={i} className={styles.cardDescription}>{desc}</p>
-      ))
-    ) : (
-      <p className={styles.cardDescription}>{service.description}</p>
-    )}
-
-    <ul className={styles.cardList}>
-      {service.details?.map((d, i) => (
-        <li key={i}>{d}</li>
-      ))}
-    </ul>
-
-    {service.image && (
-      <img
-        src={`${baseUrl}/uploads/${service.image}`}
-        alt="service"
-        className={styles.cardImage}
-      />
-    )} */}
+   
 
     <button
       className={styles.deleteButton}

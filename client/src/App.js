@@ -39,6 +39,7 @@ import SolutionDataFull from "./pages/Admin/SolutionDataFull.jsx";
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 import Solutioncounter from "./pages/Admin/Solutioncounter.jsx";
 import OurService from "./pages/Admin/OurServicePage/OurService.jsx"
+import AnaplanCounter from "./pages/Admin/Anaplan Counter/AnaplanCounter.jsx";
 function App() {
   return (
     <div className="App">
@@ -58,6 +59,8 @@ function App() {
           <Route path="/supply-chain/:id" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
 
+{/* Admin Routes */}
+<Route path="/adminlogin" element={<Adminlogin />} />
 
           <Route path="/webinarData" element={<ProtectedRoute roleRequired="400"><WebinarData /></ProtectedRoute>} />
           <Route path="/ourJourneyAdmin" element={<ProtectedRoute roleRequired="400"><Ourjourneyadmin /></ProtectedRoute>} />
@@ -75,17 +78,8 @@ function App() {
           <Route path="/employeeimage" element={<ProtectedRoute roleRequired="400">
             <EmployeeImage />
           </ProtectedRoute>} />
-          {/* <Route
-            path="/employeeimage"
-            element={
-              <ProtectedRoute roleRequired="400">
-                <EmployeeImage />
-              </ProtectedRoute>
-            }
-          /> */}
           <Route path="/clientList" element={<ProtectedRoute roleRequired="400"><EmployeeList /></ProtectedRoute>} />
           <Route path="/adminreg" element={<AdminReg />} />
-          <Route path="/adminlogin" element={<Adminlogin />} />
           <Route path="/employeeData/:id" element={<EmployeeData />} />
           <Route path="/admincontactus" element={<ProtectedRoute roleRequired="400"><AdContact /></ProtectedRoute>} />
           <Route path="/WatchNowDetails" element={<ProtectedRoute roleRequired="400"><WatchNowDetails /></ProtectedRoute>} />
@@ -103,6 +97,8 @@ function App() {
           <Route path="/industryimages" element={<IndustryImages/>} />
           <Route path="/viewAllSolution" element={<SolutionDataFull/>} />
           <Route path="/ourServices" element={<OurService/>} />
+          <Route path="/anaplanCounter" element={<AnaplanCounter/>} />
+
 
 
 
