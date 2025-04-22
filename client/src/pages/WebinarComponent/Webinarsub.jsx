@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import styles from "./webinar.module.css";
 import Header from "../../components/Header/Header";
 import axios from "axios";
@@ -78,6 +78,28 @@ function Webinarsub() {
     }
   };
 
+  const myDivRef = useRef(null); // Reference to the div
+  const [scrollDistance, setScrollDistance] = useState(0); // State to store the scroll distance
+
+  useEffect(() => {
+    const calculateScrollDistance = () => {
+      if (myDivRef.current) {
+        const rect = myDivRef.current.getBoundingClientRect();
+        const distance = window.pageYOffset + rect.top;
+        setScrollDistance(distance);
+      }
+    };
+    calculateScrollDistance();
+    window.addEventListener("scroll", calculateScrollDistance);
+    return () => {
+      window.removeEventListener("scroll", calculateScrollDistance);
+    };
+  }, []);
+  const scrollToDiv = () => {
+    if (myDivRef.current) {
+      myDivRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   return (
     <>
       <ToastContainer />
@@ -96,7 +118,7 @@ function Webinarsub() {
                   </h2>
                 </div>
                 <div>
-                  <button className={styles.buttonContainer}>
+                  <button className={styles.buttonContainer} onClick={scrollToDiv}>
                     Watch Now
                     <i className={styles.buttonArrow}></i>
                   </button>
@@ -161,7 +183,7 @@ function Webinarsub() {
                 </p>
               </div>
             </div>
-            <div className={styles.mainFirstTwoSubRight}>
+            <div className={styles.mainFirstTwoSubRight} ref={myDivRef}>
               <div className={styles.twoMainRight}>
                 <h3>Watch now</h3>
                 <form onSubmit={handleSubmitform}>

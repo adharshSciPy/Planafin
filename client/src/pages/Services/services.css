@@ -1,6 +1,7 @@
 
 .services-container{
     width: 100%;
+    overflow: hidden;
   }
   .service-container2{
       margin-top: 100px;
@@ -354,7 +355,8 @@ font-size: 18px;
 .consulting-item {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
 }
 .text-p{
   text-align: left;
@@ -394,6 +396,15 @@ font-size: 18px;
   .paragraphs p,
   .content-flex li {
     font-size: 16px;
+  }
+  .consulting-grid {
+    display: flex;
+    flex-direction: column; /* single column */
+  }
+
+  .consulting-item {
+    width: 100%; /* full width inside single column */
+    justify-content: flex-start;
   }
 }
 .image-section {
@@ -503,6 +514,7 @@ li {
   .service-container2,
   .service-content1 {
     text-align: center;
+    padding: 0px 10px;
   }
   .tab-content{
     height: auto;
@@ -552,7 +564,9 @@ li {
   .overlaymainheading {
     font-size: 24px;
   }
-
+  .increment-section {
+    width: 100%;
+  }
   .overlaymainpara {
     font-size: 14px;
   }
@@ -574,5 +588,8 @@ li {
   }
   .overlaymaindiv {
     background-image: none;
+  }
+  .consulting-grid {
+    padding: 0;
   }
 }

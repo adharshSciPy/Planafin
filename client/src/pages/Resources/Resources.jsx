@@ -65,7 +65,9 @@ function Resources() {
         <div className={styles.ondemandContent}>
           <div className={styles.card}>
             {arrayItem.map((item, i) => (
-              <div className={styles.cardone}>
+              <div className={styles.cardone} onClick={() =>{
+                navigate(`/webinar/${item._id}`)
+              }}>
                 <Card
                   key={i}
                   hoverable
