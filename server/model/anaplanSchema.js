@@ -11,4 +11,4 @@ const anaplanSchema = new Schema({
     }
 })
 
-export const Anaplan = mongoose.model("Anaplan", anaplanSchema)
+export default mongoose.model("Anaplan", anaplanSchema)
