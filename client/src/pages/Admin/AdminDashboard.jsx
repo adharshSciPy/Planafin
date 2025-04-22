@@ -105,7 +105,7 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="tfifthcard">
-              <h3>   Counter</h3>
+              <h3>  Service Counter</h3>
               <Link to="/Servicecounter">
                 <button className="fifthcard-btn3">View</button>
               </Link>
