@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./consultation.module.css";
 import anaplan from "../../assets/Anaplan_logo.svg-2048x452.png";
 import Footer from "../../components/Footer/Footer";
@@ -10,10 +10,13 @@ import imgoverlay from "../../assets/imgoverlay.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../../baseUrl";
+import axios from "axios";
 
 // import { faMinus } from "@fortawesome/free-solid-svg-icons";
 
 function Consultation() {
+  const [data, setData] = useState([])
   const toggleData = [
     {
       id: 1,
@@ -46,7 +49,23 @@ function Consultation() {
         : [...prevOpenIndex, index]
     );
   };
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
+  const counterdata = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/v1/user/getAnaplanDetails`)
+      console.log("data", res.data.data)
+      setData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    counterdata()
+  }, [])
+
+
   return (
     <div>
       <Header />
@@ -70,7 +89,7 @@ function Consultation() {
             trusted system of record built for agility.
           </p>
           <div className={styles.topSecondTalkBtnDiv}>
-            <button className={styles.topSecondTalkButton} onClick={()=>{
+            <button className={styles.topSecondTalkButton} onClick={() => {
               navigate('/lets-talk');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}>
@@ -100,28 +119,16 @@ function Consultation() {
             to implement the Anaplan platform.
           </p>
           <div className={styles.consultaionCardsOuter}>
-            <div className={styles.consultationSingleCard}>
-              <h2 className={styles.CsSingleCardHead}>15+</h2>
-              <p className={styles.CsSingleCardPara}>
-                Certified Master Anaplanners
-              </p>
-            </div>
-            <div className={styles.consultationSingleCard}>
-              <h2 className={styles.CsSingleCardHead}>85+</h2>
-              <p className={styles.CsSingleCardPara}>
-                Certified Solution Architect & Model Builders
-              </p>
-            </div>
-            <div className={styles.consultationSingleCard}>
-              <h2 className={styles.CsSingleCardHead}>100+</h2>
-              <p className={styles.CsSingleCardPara}>Anaplan Projects</p>
-            </div>
-            <div className={styles.consultationSingleCard}>
-              <h2 className={styles.CsSingleCardHead}>#1</h2>
-              <p className={styles.CsSingleCardPara}>
-                Anaplan Partner in Middle East
-              </p>
-            </div>
+            {data.map((item, index) => (
+              <div className={styles.consultationSingleCard}>
+                <>
+                  <h2 className={styles.CsSingleCardHead}>{item.counter}</h2>
+                  <p className={styles.CsSingleCardPara}>
+                    {item.title}
+                  </p>
+                </>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -202,7 +209,7 @@ function Consultation() {
                       color: "#5AC2A5",
                       fontSize: "18px",
                       width: "100%",
-                   
+
                     }}
                   ></i>
                 </span>

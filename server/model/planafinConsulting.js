@@ -1,17 +1,11 @@
 import mongoose, { Schema } from "mongoose";
 
-const consultationSchema = new Schema({
-  consultation: {
-    type: String,
-    required: true,
-  },
-});
-
 const planafinConsultationSchema = new Schema({
-  consultations: {
-    type: [consultationSchema],
-    required: true,
-  },
+  title: { type: String, required: true },
+  subtext: { type: String, required: true },
 });
 
-export default mongoose.model("PlanafinConsultation", planafinConsultationSchema);
+export default mongoose.model(
+  "PlanafinConsultation",
+  planafinConsultationSchema
+);

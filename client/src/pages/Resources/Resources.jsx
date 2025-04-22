@@ -15,7 +15,6 @@ function Resources() {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/demandDetails`);
       setArrayItem(response.data?.data || []);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +64,9 @@ function Resources() {
         <div className={styles.ondemandContent}>
           <div className={styles.card}>
             {arrayItem.map((item, i) => (
-              <div className={styles.cardone}>
+              <div className={styles.cardone} onClick={() =>{
+                navigate(`/webinar/${item._id}`)
+              }}>
                 <Card
                   key={i}
                   hoverable

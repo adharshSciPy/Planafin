@@ -1,6 +1,7 @@
 
 .services-container{
     width: 100%;
+    overflow: hidden;
   }
   .service-container2{
       margin-top: 100px;
@@ -342,6 +343,40 @@ font-size: 18px;
   line-height: 30px;
   margin-top: 20px;
 }
+.consulting-grid {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.consulting-item {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+.text-p{
+  text-align: left;
+}
+.text-h4{
+  white-space: nowrap;
+}
+.left {
+  justify-self: start;
+}
+
+.right {
+  justify-self: end;
+}
+
+.consulting-btn {
+  grid-column: span 2;
+  justify-self: center;
+  margin-top: 2rem;
+}
 
 
 @media (max-width: 768px) {
@@ -362,6 +397,15 @@ font-size: 18px;
   .content-flex li {
     font-size: 16px;
   }
+  .consulting-grid {
+    display: flex;
+    flex-direction: column; /* single column */
+  }
+
+  .consulting-item {
+    width: 100%; /* full width inside single column */
+    justify-content: flex-start;
+  }
 }
 .image-section {
   flex: 1;
@@ -372,8 +416,8 @@ font-size: 18px;
 }
 .image-section img {
   width: 100%;
-  max-width: auto;
-  height: 200px;
+  height: 100%;
+  object-fit: cover;
 }
 .image-section h1 {
   font-size: 25px;
@@ -470,6 +514,7 @@ li {
   .service-container2,
   .service-content1 {
     text-align: center;
+    padding: 0px 10px;
   }
   .tab-content{
     height: auto;
@@ -519,7 +564,9 @@ li {
   .overlaymainheading {
     font-size: 24px;
   }
-
+  .increment-section {
+    width: 100%;
+  }
   .overlaymainpara {
     font-size: 14px;
   }
@@ -541,5 +588,8 @@ li {
   }
   .overlaymaindiv {
     background-image: none;
+  }
+  .consulting-grid {
+    padding: 0;
   }
 }

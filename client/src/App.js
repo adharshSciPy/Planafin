@@ -42,6 +42,8 @@ import OurService from "./pages/Admin/OurServicePage/OurService.jsx";
 import IndustryImageList from "./pages/Admin/IndustryImageList.jsx";
 import AnaplanCounter from "./pages/Admin/Anaplan Counter/AnaplanCounter.jsx";
 import TechPartners from "./pages/Admin/Technology Partners/TechPartners.jsx";
+import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx"
+import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx"
 function App() {
   return (
     <div className="App">
@@ -193,6 +195,10 @@ function App() {
           <Route path="/anaplanCounter" element={<AnaplanCounter />} />
           <Route path="/industryImageList" element={<IndustryImageList />} />
           <Route path="/techPartners" element={<TechPartners/>} />
+
+          <Route path="/PlanafinConsulting" element={<PlanafinConsulting />} />
+          <Route path="/PlanafinConsultingAll" element={<PlanafinConsultingAll />} />
+
 
         </Routes>
       </BrowserRouter>

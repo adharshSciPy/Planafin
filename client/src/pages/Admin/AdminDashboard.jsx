@@ -119,8 +119,8 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="fsecondcard">
-              <h3>demo</h3>
-              <Link to="/industryimages">
+              <h3>PlanafinConsulting</h3>
+              <Link to="/PlanafinConsulting">
                 <button className="secondcard-btn4">View</button>
               </Link>
             </div>
