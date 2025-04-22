@@ -73,7 +73,7 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="ffthcard">
-              <h3>About Us</h3>
+              <h3>About Us Counter</h3>
               <Link to="/projectDetails">
                 <button className="fifthcard-btn2">View</button>
               </Link>
@@ -99,14 +99,14 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="tforthcard">
-              <h3>Watch Now</h3>
-              <Link to="/WatchNowDetails">
+              <h3>Our Service</h3>
+              <Link to="/ourServices">
                 <button className="forthcard-btn3">View</button>
               </Link>
             </div>
             <div className="tfifthcard">
-              <h3>Watch Now</h3>
-              <Link to="/WatchNowDetails">
+              <h3>Service Counter</h3>
+              <Link to="/Servicecounter">
                 <button className="fifthcard-btn3">View</button>
               </Link>
             </div>

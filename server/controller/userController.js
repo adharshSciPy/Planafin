@@ -927,7 +927,7 @@ const addBusinessPlanning = async (req, res) => {
       return res.status(400).json({ message: "All fields are required!" });
     }
 
-    const result=await businessPlanning.create({
+    const result = await businessPlanning.create({
       businessPlanningImage,
       title,
       description,
@@ -963,7 +963,7 @@ const getBusinessPlanning = async (req, res) => {
 };
 
 const getBusinessPlanningById = async (req, res) => {
-  const{id}=req.params;
+  const { id } = req.params;
   try {
     const response = await businessPlanning.findById(id);
 
@@ -1224,13 +1224,13 @@ const deleteAnaplanCounters = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error", error: error.message });
   }
 };
-const addTechPartners=async(req,res)=>{
+const addTechPartners = async (req, res) => {
   try {
-    let techPartnersImg=req.file?req.file.path:null;
-    if(techPartnersImg){
-      techPartnersImg=techPartnersImg.replace(/\\/g, "/");
+    let techPartnersImg = req.file ? req.file.path : null;
+    if (techPartnersImg) {
+      techPartnersImg = techPartnersImg.replace(/\\/g, "/");
     }
-    const result=await technologyPartners.create({
+    const result = await technologyPartners.create({
       techPartnersImg
     })
     return res.status(201).json({
@@ -1241,13 +1241,14 @@ const addTechPartners=async(req,res)=>{
     console.error("Error adding tech partner:", error);
     return res.status(500).json({ message: "Server error", error: error.message });
   }
- 
+
 }
-const getTechPartners=async(req,res)=>{
+const getTechPartners = async (req, res) => {
   try {
-    const result=await technologyPartners.find();
-    res.status(200).json({message:"Data fetch succesfully",
-      data:result
+    const result = await technologyPartners.find();
+    res.status(200).json({
+      message: "Data fetch succesfully",
+      data: result
     })
   } catch (error) {
     res.status(500).json({
@@ -1256,15 +1257,16 @@ const getTechPartners=async(req,res)=>{
     });
   }
 }
-const getTechPartnersById=async(req,res)=>{
-  const {id}=req.params;
+const getTechPartnersById = async (req, res) => {
+  const { id } = req.params;
   try {
-    if(!id){
-      return res.status(400).json({message:"Invalid Id"})
+    if (!id) {
+      return res.status(400).json({ message: "Invalid Id" })
     }
-    const result=await technologyPartners.findById(id);
-    res.status(200).json({message:"Data fetch succesfully",
-      data:result
+    const result = await technologyPartners.findById(id);
+    res.status(200).json({
+      message: "Data fetch succesfully",
+      data: result
     })
   } catch (error) {
     res.status(500).json({
@@ -1274,13 +1276,13 @@ const getTechPartnersById=async(req,res)=>{
   }
 
 }
-const deleteTechPartners=async(req,res)=>{
-  const{id}=req.params;
+const deleteTechPartners = async (req, res) => {
+  const { id } = req.params;
   try {
-    if(!id){
-      return res.status(400).json({message:"Invalid Id"})
+    if (!id) {
+      return res.status(400).json({ message: "Invalid Id" })
     }
-    const deletedData=await technologyPartners.findByIdAndDelete(id);
+    const deletedData = await technologyPartners.findByIdAndDelete(id);
     if (!deletedData) {
       return res.status(404).json({ message: "No data found with the given ID." });
     }
@@ -1289,7 +1291,7 @@ const deleteTechPartners=async(req,res)=>{
       message: "Technology partner deleted successfully.",
       data: deletedData,
     });
-    
+
   } catch (error) {
     res.status(500).json({
       message: "Internal server error while fetching consultations.",
@@ -1304,6 +1306,6 @@ export {
   registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
   addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
   deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning,getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService,addAnaplanCounters,getAnaplanCounters,updateAnaplanCounters,deleteAnaplanCounters,addTechPartners,getTechPartners,getTechPartnersById,deleteTechPartners
+  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning, getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService, addAnaplanCounters, getAnaplanCounters, updateAnaplanCounters, deleteAnaplanCounters, addTechPartners, getTechPartners, getTechPartnersById, deleteTechPartners
 
 }
