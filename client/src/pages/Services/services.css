@@ -275,6 +275,9 @@ strong{
 .tab-boxes {
   display: flex;
   gap: 30px;
+  overflow: scroll;
+  scrollbar-width: none;
+
 }
 .tab-box {
   padding: 25px 22px;

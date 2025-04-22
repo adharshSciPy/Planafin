@@ -1070,12 +1070,31 @@ const deletePlanafinConsultations = async (req, res) => {
 const createOurservice = async (req, res) => {
   try {
     const services = req.body;
+    const uploadedImage = req.file ? req.file.filename : null;
 
     for (const key in services) {
       const data = services[key];
+
+      // Handle nested fields correctly (if using FormData)
+      const parsedDetails = Array.isArray(data.details)
+        ? data.details
+        : typeof data.details === 'string'
+        ? [data.details]
+        : [];
+
+      const serviceData = {
+        ...data,
+        key,
+        details: parsedDetails,
+      };
+
+      if (uploadedImage) {
+        serviceData.image = uploadedImage;
+      }
+
       await OurService.findOneAndUpdate(
         { key },
-        { ...data, key },
+        serviceData,
         { upsert: true, new: true }
       );
     }
