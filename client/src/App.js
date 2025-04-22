@@ -177,7 +177,7 @@ function App() {
           <Route path="/ourSolution" element={<OurSolution />} />
           <Route path="/industryimages" element={<IndustryImages />} />
           <Route path="/viewAllSolution" element={<SolutionDataFull />} />
-          <Route path="/SolutionCounter" element={<Solutioncounter />} />
+          <Route path="/ServiceCounter" element={<Solutioncounter />} />
           <Route
             path="/projectDetails"
             element={
