@@ -1339,30 +1339,30 @@ const getTechPartnersById = async (req, res) => {
     });
   }
 };
-const deleteTechPartners = async (req, res) => {
-  const { id } = req.params;
-  try {
-    if (!id) {
-      return res.status(400).json({ message: "Invalid Id" });
-    }
-    const deletedData = await technologyPartners.findByIdAndDelete(id);
-    if (!deletedData) {
-      return res
+  const deleteTechPartners = async (req, res) => {
+    const { id } = req.params;
+    try {
+      if (!id) {
+        return res.status(400).json({ message: "Invalid Id" });
+      }
+      const deletedData = await technologyPartners.findByIdAndDelete(id);
+      if (!deletedData) {
+        return res
         .status(404)
         .json({ message: "No data found with the given ID." });
-    }
+      }
 
-    return res.status(200).json({
-      message: "Technology partner deleted successfully.",
-      data: deletedData,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "Internal server error while fetching consultations.",
-      error: error.message,
-    });
-  }
-};
+      return res.status(200).json({
+        message: "Technology partner deleted successfully.",
+        data: deletedData,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Internal server error while fetching consultations.",
+        error: error.message,
+      });
+    }
+  };
 
 export {
   registerUser,

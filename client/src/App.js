@@ -41,6 +41,7 @@ import Solutioncounter from "./pages/Admin/Solutioncounter.jsx";
 import OurService from "./pages/Admin/OurServicePage/OurService.jsx";
 import IndustryImageList from "./pages/Admin/IndustryImageList.jsx";
 import AnaplanCounter from "./pages/Admin/Anaplan Counter/AnaplanCounter.jsx";
+import TechPartners from "./pages/Admin/Technology Partners/TechPartners.jsx";
 import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx"
 import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx"
 function App() {
@@ -62,8 +63,8 @@ function App() {
           <Route path="/supply-chain/:id" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
 
-{/* Admin Routes */}
-<Route path="/adminlogin" element={<Adminlogin />} />
+          {/* Admin Routes */}
+          <Route path="/adminlogin" element={<Adminlogin />} />
           <Route
             path="/webinarData"
             element={
@@ -191,9 +192,10 @@ function App() {
           <Route path="/industryimages" element={<IndustryImages />} />
           <Route path="/viewAllSolution" element={<SolutionDataFull />} />
           <Route path="/ourServices" element={<OurService />} />
-          <Route path="/anaplanCounter" element={<AnaplanCounter/>} />
-
+          <Route path="/anaplanCounter" element={<AnaplanCounter />} />
           <Route path="/industryImageList" element={<IndustryImageList />} />
+          <Route path="/techPartners" element={<TechPartners/>} />
+
           <Route path="/PlanafinConsulting" element={<PlanafinConsulting />} />
           <Route path="/PlanafinConsultingAll" element={<PlanafinConsultingAll />} />
 
