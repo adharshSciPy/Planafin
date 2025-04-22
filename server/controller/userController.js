@@ -15,14 +15,13 @@ import SolutionAccelerators from "../model/solutionAccelerators.js";
 import businessPlanning from "../model/businessPlanning.js";
 import { OurService } from "../model/ourServiceSchema.js";
 import serviceCounter from "../model/serviceCounter.js";
-import anaplanSchema from "../model/anaplanSchema.js"
+import anaplanSchema from "../model/anaplanSchema.js";
 import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-
 
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -58,15 +57,16 @@ const registerUser = async (req, res) => {
       userName,
       email,
       password: hashedPassword,
-      role
+      role,
     });
-    const createdUser = await User.findOne({ _id: user._id }).select("-password");
+    const createdUser = await User.findOne({ _id: user._id }).select(
+      "-password"
+    );
 
     return res.status(200).json({
       message: "User Registration Successful",
       user: createdUser,
     });
-
 
     // if (!createdUser) {
     //   return res.status(500).json({ message: "User registration failed" });
@@ -111,7 +111,7 @@ const loginUser = async (req, res) => {
     return res.status(200).json({
       message: "Login Successful",
       token,
-      role: process.env.ADMIN_ROLE
+      role: process.env.ADMIN_ROLE,
     });
   } catch (err) {
     return res
@@ -165,14 +165,17 @@ const ContactById = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await Contact.findById(id);
-    res.status(200).json({ message: "Successfully Fetched", data: result })
+    res.status(200).json({ message: "Successfully Fetched", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const jobOpenings = async (req, res) => {
-  const { title, location, workSchedule, workTime, requiredSkills, jobType } = req.body;
+  const { title, location, workSchedule, workTime, requiredSkills, jobType } =
+    req.body;
   try {
     const result = await JobOpening.create({
       title,
@@ -244,11 +247,13 @@ const deleteFeedback = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await Feedback.findByIdAndDelete(id);
-    res.status(200).json({ message: "Feedback deleted successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Feedback deleted successfully", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error", data: error })
+    res.status(500).json({ message: "Internal server error", data: error });
   }
-}
+};
 
 const jobApplication = async (req, res) => {
   try {
@@ -315,11 +320,15 @@ const deleteApplication = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await JobApplication.findByIdAndDelete(id);
-    res.status(200).json({ message: "Application deleted successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Application deleted successfully", data: result });
   } catch (error) {
-    res.status(200).json({ message: "Internal server error", error: error.message })
+    res
+      .status(200)
+      .json({ message: "Internal server error", error: error.message });
   }
-}
+};
 
 const onDemand = async (req, res) => {
   try {
@@ -372,13 +381,13 @@ const getemployeeData = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await JobApplication.findById(id);
-    res.status(200).json({ message: "employee Data", data: result })
+    res.status(200).json({ message: "employee Data", data: result });
   } catch (error) {
     res
       .status(500)
       .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 const demandDetails = async (req, res) => {
   try {
     const result = await OnDemand.find().select("image title summary id");
@@ -485,12 +494,16 @@ const watchNowDetails = async (req, res) => {
 const watchnowDelete = async (req, res) => {
   const { id } = req.params;
   try {
-    const deleteddata = await WatchNow.findByIdAndDelete(id)
-    res.status(200).json({ message: "Deleted Successfully", data: deleteddata });
+    const deleteddata = await WatchNow.findByIdAndDelete(id);
+    res
+      .status(200)
+      .json({ message: "Deleted Successfully", data: deleteddata });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const profileImage = async (req, res) => {
   try {
@@ -539,25 +552,30 @@ const profileImage = async (req, res) => {
   }
 };
 
-
 const employeeDetails = async (req, res) => {
   try {
-    const employeedata = await Employee.find()
-    res.status(200).json({ message: "Employee Data Fetched", data: employeedata })
+    const employeedata = await Employee.find();
+    res
+      .status(200)
+      .json({ message: "Employee Data Fetched", data: employeedata });
   } catch (error) {
-    res.status(500).json({ message: "INternal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "INternal Server Error", error: error.message });
   }
-}
+};
 
 const deleteProfileImage = async (req, res) => {
   const { id } = req.query;
   try {
-    const result = await Employee.findByIdAndDelete(id)
-    res.status(200).json({ message: "Image Removed", data: result })
+    const result = await Employee.findByIdAndDelete(id);
+    res.status(200).json({ message: "Image Removed", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Intenal Server Error", error: error.message });
   }
-}
+};
 
 const customerImage = async (req, res) => {
   try {
@@ -608,32 +626,42 @@ const customerImage = async (req, res) => {
 
 const customerDetails = async (req, res) => {
   try {
-    const customerdata = await Customer.find()
-    res.status(200).json({ message: "Customer Fetched Successfully", data: customerdata })
+    const customerdata = await Customer.find();
+    res
+      .status(200)
+      .json({ message: "Customer Fetched Successfully", data: customerdata });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const deleteCustomerImage = async (req, res) => {
   const { id } = req.query;
   try {
-    const result = await Customer.findByIdAndDelete(id)
-    res.status(200).json({ message: "Image Removed", data: result })
+    const result = await Customer.findByIdAndDelete(id);
+    res.status(200).json({ message: "Image Removed", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Intenal Server Error", error: error.message });
   }
-}
+};
 
 const deleteJobopenings = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await JobOpening.findByIdAndDelete(id);
-    res.status(200).json({ message: "Openings deleted successfully", data: result })
+    res
+      .status(200)
+      .json({ message: "Openings deleted successfully", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Intenal Server Error", error: error.message });
   }
-}
+};
 
 const projectUpdate = async (req, res) => {
   const { consultants, projects, cases } = req.body;
@@ -644,64 +672,83 @@ const projectUpdate = async (req, res) => {
         $set: { consultants, projects, cases },
       },
       {
-        new: true,     // Return the updated document
-        upsert: true,  // Create it if it doesn't exist
+        new: true, // Return the updated document
+        upsert: true, // Create it if it doesn't exist
       }
     );
-    res.status(200).json({ message: "Count Updated", data: result })
+    res.status(200).json({ message: "Count Updated", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
-
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const viewProject = async (req, res) => {
   try {
-    const result = await Project.find()
-    res.status(200).json({ message: "Project Details", data: result })
+    const result = await Project.find();
+    res.status(200).json({ message: "Project Details", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const solution = async (req, res) => {
-  const { heading, description, descriptionPoints } = req.body
+  const { heading, description, descriptionPoints } = req.body;
   try {
-    const result = await Solution.create({ heading, description, descriptionPoints });
-    res.status(200).json({ message: "Solution Created Successfully", data: result })
+    const result = await Solution.create({
+      heading,
+      description,
+      descriptionPoints,
+    });
+    res
+      .status(200)
+      .json({ message: "Solution Created Successfully", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const solutionDetails = async (req, res) => {
   try {
-    const solutiondeatils = await Solution.find()
-    res.status(200).json({ message: "Solution Details Fetched", data: solutiondeatils })
+    const solutiondeatils = await Solution.find();
+    res
+      .status(200)
+      .json({ message: "Solution Details Fetched", data: solutiondeatils });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const solutionById = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const solutionresult = await Solution.findById(id)
-    res.status(200).json({ message: "Solution Fetched", data: solutionresult })
+    const solutionresult = await Solution.findById(id);
+    res.status(200).json({ message: "Solution Fetched", data: solutionresult });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const deleteSolution = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const solutionresult = await Solution.findByIdAndDelete(id)
-    res.status(200).json({ message: "Solution Deleted", data: solutionresult })
+    const solutionresult = await Solution.findByIdAndDelete(id);
+    res.status(200).json({ message: "Solution Deleted", data: solutionresult });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const industryImage = async (req, res) => {
   try {
@@ -754,52 +801,61 @@ const industryImage = async (req, res) => {
 
 const industryDetails = async (req, res) => {
   try {
-    const industrydata = await Industry.find()
-    res.status(200).json({ message: "Industry Fetched Successfully", data: industrydata })
+    const industrydata = await Industry.find();
+    res
+      .status(200)
+      .json({ message: "Industry Fetched Successfully", data: industrydata });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const deleteIndustry = async (req, res) => {
   const { id } = req.query;
   try {
-    const result = await Industry.findByIdAndDelete(id)
-    res.status(200).json({ message: "Image Removed", data: result })
+    const result = await Industry.findByIdAndDelete(id);
+    res.status(200).json({ message: "Image Removed", data: result });
   } catch (error) {
-    res.status(500).json({ message: "Intenal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Intenal Server Error", error: error.message });
   }
-}
+};
 
 const addAccelerationSolutions = async (req, res) => {
   try {
     const { title, features } = req.body;
     if (!title || !features || !Array.isArray(features)) {
-      return res.status(400).json({ message: "Title and features array are required." });
+      return res
+        .status(400)
+        .json({ message: "Title and features array are required." });
     }
-    const formattedFeatures = features.map(feature => ({ features: feature }));
+    const formattedFeatures = features.map((feature) => ({
+      features: feature,
+    }));
     const newSolution = new SolutionAccelerators({
       title,
-      features: formattedFeatures
+      features: formattedFeatures,
     });
     await newSolution.save();
     res.status(201).json({
       message: "Solution Accelerator created successfully!",
-      data: newSolution
+      data: newSolution,
     });
   } catch (error) {
     console.error("Error adding solution accelerator:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
-
-}
+};
 const getAccelerationSolutions = async (req, res) => {
   try {
     const allAccelerationSolutions = await SolutionAccelerators.find();
 
     res.status(200).json({
       message: "Fetched all Solution Accelerators successfully",
-      data: allAccelerationSolutions
+      data: allAccelerationSolutions,
     });
   } catch (error) {
     console.error("Error fetching solution accelerators:", error);
@@ -811,48 +867,47 @@ const deleteAccelerationSolutions = async (req, res) => {
   try {
     const { id } = req.params;
 
-
     if (!id) {
       return res.status(400).json({ message: "ID is required" });
     }
 
-
     const deletedData = await SolutionAccelerators.findByIdAndDelete(id);
 
     if (!deletedData) {
-      return res.status(404).json({ message: "Solution Accelerator not found" });
+      return res
+        .status(404)
+        .json({ message: "Solution Accelerator not found" });
     }
 
     res.status(200).json({
       message: "Solution Accelerator deleted successfully",
-      data: deletedData
+      data: deletedData,
     });
-
   } catch (error) {
     console.error("Error deleting solution accelerator:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-
 const addSolutionCounters = async (req, res) => {
   const { counter, title } = req.body;
 
   try {
     if (!counter || !title) {
-      return res.status(400).json({ message: "Counter and title are required." });
+      return res
+        .status(400)
+        .json({ message: "Counter and title are required." });
     }
 
     const response = await serviceCounter.create({
       counter,
-      title
+      title,
     });
 
     res.status(201).json({
       message: "Service Counter created successfully!",
-      data: response
+      data: response,
     });
-
   } catch (error) {
     console.error("Error adding service counter:", error);
     res.status(500).json({ message: "Server error", error: error.message });
@@ -868,7 +923,6 @@ const getSolutionCounters = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching solution counters:", error.message);
-
   }
 };
 const updateSolutionCounters = async (req, res) => {
@@ -893,33 +947,42 @@ const updateSolutionCounters = async (req, res) => {
       message: "Solution counter updated successfully",
       data: response,
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error updating solution counter:", error.message);
   }
-}
+};
 const deleteSolutionCounters = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await serviceCounter.findByIdAndDelete(id);
 
     if (!response) {
-      return res.status(404).json({ success: false, message: "Counter not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Counter not found" });
     }
 
     res.status(200).json({
       success: true,
       message: "Solution counter deleted successfully",
-      data: response
+      data: response,
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server Error", error: error.message });
   }
 };
 
 const addBusinessPlanning = async (req, res) => {
   try {
-    const { title, description, contentHeading, contentDescription, contentPoints } = req.body;
+    const {
+      title,
+      description,
+      contentHeading,
+      contentDescription,
+      contentPoints,
+    } = req.body;
     let businessPlanningImage = req.file ? req.file.path : null;
     if (businessPlanningImage) {
       businessPlanningImage = businessPlanningImage.replace(/\\/g, "/");
@@ -934,7 +997,7 @@ const addBusinessPlanning = async (req, res) => {
       description,
       contentHeading,
       contentDescription,
-      contentPoints
+      contentPoints,
     });
     res.status(200).json({ message: "Business Planing Created", data: result });
   } catch (error) {
@@ -942,13 +1005,15 @@ const addBusinessPlanning = async (req, res) => {
       .status(500)
       .json({ message: "Internal server error", data: error.message });
   }
-}
+};
 const getBusinessPlanning = async (req, res) => {
   try {
     const response = await businessPlanning.find();
 
     if (!response || response.length === 0) {
-      return res.status(404).json({ message: "No business planning data found" });
+      return res
+        .status(404)
+        .json({ message: "No business planning data found" });
     }
 
     res.status(200).json({
@@ -969,7 +1034,9 @@ const getBusinessPlanningById = async (req, res) => {
     const response = await businessPlanning.findById(id);
 
     if (!response || response.length === 0) {
-      return res.status(404).json({ message: "No business planning data found" });
+      return res
+        .status(404)
+        .json({ message: "No business planning data found" });
     }
 
     res.status(200).json({
@@ -990,7 +1057,9 @@ const deleteBusinessPlanning = async (req, res) => {
     const deletedData = await businessPlanning.findByIdAndDelete(id);
 
     if (!deletedData) {
-      return res.status(404).json({ message: "Business Planning data not found" });
+      return res
+        .status(404)
+        .json({ message: "Business Planning data not found" });
     }
 
     res.status(200).json({
@@ -1007,26 +1076,16 @@ const deleteBusinessPlanning = async (req, res) => {
 
 const addPlanafinConsultations = async (req, res) => {
   try {
-    const { consultations } = req.body;
-    if (!consultations || !Array.isArray(consultations) || consultations.length === 0) {
-      return res.status(400).json({ message: "An array of consultation strings is required." });
-    }
-    const formatted = consultations.map(item => ({ consultation: item }));
+    const { title,subtext} = req.body;
     const result = await planafinConsulting.create({
-      consultations: formatted,
+      title,
+      subtext,
     });
-
-    res.status(200).json({
-      message: "Consultation data saved successfully.",
-      data: result,
-    });
+    res.status(200).json({ message: "successfully added", data: result });
   } catch (error) {
-    res.status(500).json({
-      message: "Internal server error.",
-      error: error.message,
-    });
+    res.status(200).json({ message: "error while creating", error: error.message });
   }
-}
+};
 const getPlanafinConsultations = async (req, res) => {
   try {
     const response = await planafinConsulting.find();
@@ -1067,7 +1126,6 @@ const deletePlanafinConsultations = async (req, res) => {
   }
 };
 
-
 const createOurservice = async (req, res) => {
   try {
     const services = req.body;
@@ -1079,7 +1137,7 @@ const createOurservice = async (req, res) => {
       // Handle nested fields correctly (if using FormData)
       const parsedDetails = Array.isArray(data.details)
         ? data.details
-        : typeof data.details === 'string'
+        : typeof data.details === "string"
         ? [data.details]
         : [];
 
@@ -1093,11 +1151,10 @@ const createOurservice = async (req, res) => {
         serviceData.image = uploadedImage;
       }
 
-      await OurService.findOneAndUpdate(
-        { key },
-        serviceData,
-        { upsert: true, new: true }
-      );
+      await OurService.findOneAndUpdate({ key }, serviceData, {
+        upsert: true,
+        new: true,
+      });
     }
 
     res.status(200).json({ message: "Services saved/updated successfully" });
@@ -1115,17 +1172,19 @@ const serviceDetails = async (req, res) => {
     console.error("Error fetching services:", error);
     res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 const servicedata = async (req, res) => {
   const { id } = req.params;
   try {
     const servicedata = await OurService.findById(id);
-    res.status(200).json({ message: "Service Data", data: servicedata })
+    res.status(200).json({ message: "Service Data", data: servicedata });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error", error: error.message })
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
   }
-}
+};
 
 const deleteOurService = async (req, res) => {
   try {
@@ -1149,19 +1208,20 @@ const addAnaplanCounters = async (req, res) => {
 
   try {
     if (!counter || !title) {
-      return res.status(400).json({ message: "Counter and title are required." });
+      return res
+        .status(400)
+        .json({ message: "Counter and title are required." });
     }
 
     const response = await anaplanSchema.create({
       counter,
-      title
+      title,
     });
 
     res.status(201).json({
       message: "Service Counter created successfully!",
-      data: response
+      data: response,
     });
-
   } catch (error) {
     console.error("Error adding service counter:", error);
     res.status(500).json({ message: "Server error", error: error.message });
@@ -1177,7 +1237,6 @@ const getAnaplanCounters = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching solution counters:", error.message);
-
   }
 };
 const updateAnaplanCounters = async (req, res) => {
@@ -1202,27 +1261,30 @@ const updateAnaplanCounters = async (req, res) => {
       message: "Solution counter updated successfully",
       data: response,
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error updating solution counter:", error.message);
   }
-}
+};
 const deleteAnaplanCounters = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await anaplanSchema.findByIdAndDelete(id);
 
     if (!response) {
-      return res.status(404).json({ success: false, message: "Counter not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Counter not found" });
     }
 
     res.status(200).json({
       success: true,
       message: "Solution counter deleted successfully",
-      data: response
+      data: response,
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    res
+      .status(500)
+      .json({ success: false, message: "Server Error", error: error.message });
   }
 };
 const addTechPartners = async (req, res) => {
@@ -1232,81 +1294,141 @@ const addTechPartners = async (req, res) => {
       techPartnersImg = techPartnersImg.replace(/\\/g, "/");
     }
     const result = await technologyPartners.create({
-      techPartnersImg
-    })
+      techPartnersImg,
+    });
     return res.status(201).json({
       message: "Technology partner added successfully",
-      data: result
+      data: result,
     });
   } catch (error) {
     console.error("Error adding tech partner:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
-
-}
+};
 const getTechPartners = async (req, res) => {
   try {
     const result = await technologyPartners.find();
     res.status(200).json({
       message: "Data fetch succesfully",
-      data: result
-    })
+      data: result,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Internal server error while fetching consultations.",
       error: error.message,
     });
   }
-}
+};
 const getTechPartnersById = async (req, res) => {
   const { id } = req.params;
   try {
     if (!id) {
-      return res.status(400).json({ message: "Invalid Id" })
+      return res.status(400).json({ message: "Invalid Id" });
     }
     const result = await technologyPartners.findById(id);
     res.status(200).json({
       message: "Data fetch succesfully",
-      data: result
-    })
+      data: result,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Internal server error while fetching consultations.",
       error: error.message,
     });
   }
-
-}
+};
 const deleteTechPartners = async (req, res) => {
   const { id } = req.params;
   try {
     if (!id) {
-      return res.status(400).json({ message: "Invalid Id" })
+      return res.status(400).json({ message: "Invalid Id" });
     }
     const deletedData = await technologyPartners.findByIdAndDelete(id);
     if (!deletedData) {
-      return res.status(404).json({ message: "No data found with the given ID." });
+      return res
+        .status(404)
+        .json({ message: "No data found with the given ID." });
     }
 
     return res.status(200).json({
       message: "Technology partner deleted successfully.",
       data: deletedData,
     });
-
   } catch (error) {
     res.status(500).json({
       message: "Internal server error while fetching consultations.",
       error: error.message,
     });
   }
-}
-
-
+};
 
 export {
-  registerUser, loginUser, ContactUs, ContactDetails, jobOpenings, jobListing, addFeedback, viewFeedback, jobApplication, applicationDetails, onDemand, getOnDemandById, demandDetails,
-  addJourney, journeyDetails, addWatchnow, watchNowDetails, profileImage, deleteDemand, deleteJourney, deleteFeedback, deleteProfileImage, customerImage, deleteCustomerImage,
-  deleteJobopenings, deleteApplication, ContactById, getemployeeData, employeeDetails, customerDetails, watchnowDelete, projectUpdate, viewProject, solution, solutionDetails,
-  solutionById, deleteSolution, industryImage, industryDetails, deleteIndustry, addAccelerationSolutions, getAccelerationSolutions, deleteAccelerationSolutions, addSolutionCounters, getSolutionCounters, updateSolutionCounters, deleteSolutionCounters, addBusinessPlanning, getBusinessPlanning, getBusinessPlanningById, deleteBusinessPlanning, addPlanafinConsultations, getPlanafinConsultations, deletePlanafinConsultations, createOurservice, serviceDetails, servicedata, deleteOurService, addAnaplanCounters, getAnaplanCounters, updateAnaplanCounters, deleteAnaplanCounters, addTechPartners, getTechPartners, getTechPartnersById, deleteTechPartners
-
-}
+  registerUser,
+  loginUser,
+  ContactUs,
+  ContactDetails,
+  jobOpenings,
+  jobListing,
+  addFeedback,
+  viewFeedback,
+  jobApplication,
+  applicationDetails,
+  onDemand,
+  getOnDemandById,
+  demandDetails,
+  addJourney,
+  journeyDetails,
+  addWatchnow,
+  watchNowDetails,
+  profileImage,
+  deleteDemand,
+  deleteJourney,
+  deleteFeedback,
+  deleteProfileImage,
+  customerImage,
+  deleteCustomerImage,
+  deleteJobopenings,
+  deleteApplication,
+  ContactById,
+  getemployeeData,
+  employeeDetails,
+  customerDetails,
+  watchnowDelete,
+  projectUpdate,
+  viewProject,
+  solution,
+  solutionDetails,
+  solutionById,
+  deleteSolution,
+  industryImage,
+  industryDetails,
+  deleteIndustry,
+  addAccelerationSolutions,
+  getAccelerationSolutions,
+  deleteAccelerationSolutions,
+  addSolutionCounters,
+  getSolutionCounters,
+  updateSolutionCounters,
+  deleteSolutionCounters,
+  addBusinessPlanning,
+  getBusinessPlanning,
+  getBusinessPlanningById,
+  deleteBusinessPlanning,
+  addPlanafinConsultations,
+  getPlanafinConsultations,
+  deletePlanafinConsultations,
+  createOurservice,
+  serviceDetails,
+  servicedata,
+  deleteOurService,
+  addAnaplanCounters,
+  getAnaplanCounters,
+  updateAnaplanCounters,
+  deleteAnaplanCounters,
+  addTechPartners,
+  getTechPartners,
+  getTechPartnersById,
+  deleteTechPartners,
+};
