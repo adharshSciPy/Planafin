@@ -13,6 +13,7 @@ import baseUrl from "../../baseUrl.js";
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
+  const [counterData,setCounterData]=useState([])
   const location = useLocation();
   const tabContainerRef = useRef(null);
   const myRef = useRef([]);
@@ -93,7 +94,18 @@ function Services() {
     navigate("/consultation");
     window.scrollTo(0, 0);
   };
-
+  const getCounterData=async()=>{
+    try {
+      const response=await axios.get(`${baseUrl}/api/v1/user/getSolutionCounter`)
+      setCounterData(response.data.data);
+      
+    } catch (error) {
+      
+    }
+  }
+  useEffect(()=>{
+    getCounterData()
+  },[])
   return (
     <div>
       <Nav />
@@ -115,34 +127,16 @@ function Services() {
       </div>
       <div className="increment-content">
         <div className="increment-section">
-          <div className="js-contents">
+          {counterData.map((item,index)=>{
+            return(
+              <div className="js-contents" key={index}>
             <span className="num" data-val="11">
-              110
+              {item.counter}
             </span>
-            <span className="span-contents">+</span>
-            <p>Projects</p>
+            <p>{item.title}</p>
           </div>
-          <div className="js-contents">
-            <span className="num" data-val="180">
-              65
-            </span>
-            <span className="span-contents">+</span>
-            <p>Customers</p>
-          </div>
-          <div className="js-contents">
-            <span className="num" data-val="3">
-              100
-            </span>
-            <span className="span-contents">+</span>
-            <p>Use Cases</p>
-          </div>
-          <div className="js-contents">
-            <span className="num" data-val="100">
-              94
-            </span>
-            <span className="span-contents">%</span>
-            <p>CSAT Score</p>
-          </div>
+            )
+          })}
         </div>
       </div>
       <div className="serv_sec2">

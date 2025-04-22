@@ -56,7 +56,6 @@ function Solutions() {
       const response = await axios.get(
         `${baseUrl}/api/v1/user/getBusinessPlanning`
       );
-      console.log("ssokjxois",response.data.data);
       setSolutionData(response.data.data);
       
     } catch (error) {
@@ -294,7 +293,7 @@ function Solutions() {
          
             industries.map((industry, index) => (
               <div key={index} className="wrapper2">
-                <img src={`${baseUrl}${`industry.industryImage[0].path`}`} alt={industry.heading} className="sec4-image" />
+                <img src={`${baseUrl}${industry.industryImage[0].path}`} alt={industry.heading} className="sec4-image" />
                 <h1 className="sec4-h1">{industry.heading}</h1>
               </div>
             ))
