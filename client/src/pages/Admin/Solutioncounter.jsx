@@ -68,9 +68,10 @@ function Solutioncounter() {
         setIsEditing(true);
     }
 
-    const deleteHandler = async (item) => {
+    const deleteHandler = async (id) => {
         try {
-            const deleted = await axios.delete(`${baseUrl}/api/v1/user/deleteSolutionCounter/${item}`)
+            const deleted = await axios.delete(`${baseUrl}/api/v1/user/deleteSolutionCounter/${id}`)
+            setData((prevData) => prevData.filter(item => item._id !== id));
             toast.success("Deleted Successfully")
         } catch (error) {
             toast.error(error)
@@ -83,8 +84,8 @@ function Solutioncounter() {
             <div className='solutioncountermain'>
                 <div className='solutioncounter'>
                     <h1>Service Counter</h1>
-                    <Input name='counter' placeholder="Count *" onChange={handleChange} />
-                    <Input name='title' placeholder="Title *" onChange={handleChange} />
+                    <Input name='counter' placeholder="Count *" value={form.counter} onChange={handleChange} />
+                    <Input name='title' placeholder="Title *" value={form.title} onChange={handleChange} />
                     {/* <Button type="primary" onClick={handleSubmit}>Submit</Button> */}
                     <Button type="primary" onClick={handleSubmit}>
                         {isEditing ? "Update" : "Submit"}
@@ -96,8 +97,10 @@ function Solutioncounter() {
                     <Card key={index} style={{ width: 300 }}>
                         <h2>{item.title}</h2>
                         <h1>{item.counter}</h1>
-                        <Button onClick={() => updateHandler(item)}>Edit</Button>
-                        <Button onClick={() => deleteHandler(item._id)}>Delete</Button>
+                        <div className='cardbutton'>
+                            <Button onClick={() => updateHandler(item)}>Edit</Button>
+                            <Button onClick={() => deleteHandler(item._id)}>Delete</Button>
+                        </div>
                     </Card>
                 ))}
             </div>
