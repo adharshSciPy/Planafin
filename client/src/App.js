@@ -38,7 +38,7 @@ import OurSolution from "./pages/Admin/OurSolution.jsx";
 import SolutionDataFull from "./pages/Admin/SolutionDataFull.jsx";
 import IndustryImages from "./pages/Admin/IndustryImages.jsx";
 import Solutioncounter from "./pages/Admin/Solutioncounter.jsx";
-import OurServices from "./pages/Admin/OurServicePage/OurService.jsx"
+import OurService from "./pages/Admin/OurServicePage/OurService.jsx"
 function App() {
   return (
     <div className="App">
@@ -102,7 +102,7 @@ function App() {
           <Route path="/ourSolution" element= {<OurSolution/>}/>
           <Route path="/industryimages" element={<IndustryImages/>} />
           <Route path="/viewAllSolution" element={<SolutionDataFull/>} />
-          <Route path="/ourServices" element={<OurServices/>} />
+          <Route path="/ourServices" element={<OurService/>} />
 
 
 
