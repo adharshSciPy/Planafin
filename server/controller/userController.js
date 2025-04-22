@@ -15,6 +15,7 @@ import SolutionAccelerators from "../model/solutionAccelerators.js";
 import businessPlanning from "../model/businessPlanning.js";
 import { OurService } from "../model/ourServiceSchema.js";
 import serviceCounter from "../model/serviceCounter.js";
+import anaplanSchema from "../model/anaplanSchema.js"
 import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
@@ -1151,7 +1152,7 @@ const addAnaplanCounters = async (req, res) => {
       return res.status(400).json({ message: "Counter and title are required." });
     }
 
-    const response = await serviceCounter.create({
+    const response = await anaplanSchema.create({
       counter,
       title
     });
@@ -1168,7 +1169,7 @@ const addAnaplanCounters = async (req, res) => {
 };
 const getAnaplanCounters = async (req, res) => {
   try {
-    const allSolutions = await serviceCounter.find();
+    const allSolutions = await anaplanSchema.find();
 
     res.status(200).json({
       success: true,
@@ -1183,7 +1184,7 @@ const updateAnaplanCounters = async (req, res) => {
   const { id } = req.params;
   const { title, counter } = req.body;
   try {
-    const response = await serviceCounter.findByIdAndUpdate(
+    const response = await anaplanSchema.findByIdAndUpdate(
       id,
       { title, counter },
       { new: true }
@@ -1209,7 +1210,7 @@ const updateAnaplanCounters = async (req, res) => {
 const deleteAnaplanCounters = async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await serviceCounter.findByIdAndDelete(id);
+    const response = await anaplanSchema.findByIdAndDelete(id);
 
     if (!response) {
       return res.status(404).json({ success: false, message: "Counter not found" });
