@@ -35,7 +35,7 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="forthcard">
-              <h3>Feedback application</h3>
+              <h3>Employee Feedback </h3>
               <Link to="/feedbackdata">
                 <button className="fourthcard-btn1">View</button>
               </Link>
@@ -125,9 +125,15 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="fthirdcard">
-              <h3>demo</h3>
-              <Link to="/WatchNowDetails">
+              <h3>Technology Partners</h3>
+              <Link to="/techPartners">
                 <button className="thirdcard-btn4">View</button>
+              </Link>
+            </div>
+            <div className="tforthcard">
+              <h3>Anaplan Counter</h3>
+              <Link to="/anaplanCounter">
+                <button className="forthcard-btn3">View</button>
               </Link>
             </div>
           </div>
