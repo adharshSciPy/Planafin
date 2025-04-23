@@ -45,7 +45,7 @@ navigate('/admindashboard')
   return (
     <div>
        <div className="admlogin-container">
-      <h2>Login</h2>
+      <h2>Admin Login</h2>
      
 
       <form onSubmit={handleSubmit}>
