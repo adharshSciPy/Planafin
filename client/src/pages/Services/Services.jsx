@@ -241,7 +241,7 @@ function Services() {
       </div>
 
       <section className="consulting-container">
-        <h2>Why Planafin Consulting?</h2>
+        <h2 className="consultingH2">Why Planafin Consulting?</h2>
         <div className="consulting-content">
           <div className="consulting-grid">
             {consultingData.map((item, index) => (

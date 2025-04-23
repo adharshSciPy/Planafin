@@ -85,8 +85,8 @@ function PlanafinConsultingAll() {
                 </button>
               }
             >
-              <h3 className={styles.ourjourh3}>{item.year || "loading"}</h3>
-              <p className={styles.ourjourp}>{item.title}</p>
+              <h3 className={styles.ourjourh3}>{item.title || "loading"}</h3>
+              <p className={styles.ourjourp}>{item.subtext || "loading"}</p>
               
             </Card>
           ))}

@@ -422,7 +422,9 @@ font-size: 18px;
   .content-flex {
     flex-direction: column;
   }
-
+  .consultingH2{
+    margin-bottom: 20px;
+  }
   .paragraphs,
   .content-flex ul {
     width: 100%;
