@@ -42,8 +42,8 @@ import OurService from "./pages/Admin/OurServicePage/OurService.jsx";
 import IndustryImageList from "./pages/Admin/IndustryImageList.jsx";
 import AnaplanCounter from "./pages/Admin/Anaplan Counter/AnaplanCounter.jsx";
 import TechPartners from "./pages/Admin/Technology Partners/TechPartners.jsx";
-import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx"
-import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx"
+import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx";
+import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx";
 function App() {
   return (
     <div className="App">
@@ -81,8 +81,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/getOurJourney" element={<GetAllJourney />} />
-          <Route path="/getWebinarData" element={<GetWebinarData />} />
+          <Route
+            path="/getOurJourney"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <GetAllJourney />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/getWebinarData"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <GetWebinarData />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/feedbackdata"
             element={
@@ -141,7 +155,14 @@ function App() {
             }
           />
           <Route path="/adminreg" element={<AdminReg />} />
-          <Route path="/employeeData/:id" element={<EmployeeData />} />
+          <Route
+            path="/employeeData/:id"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <EmployeeData />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/admincontactus"
             element={
@@ -166,15 +187,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/accelerators" element={<OurJourneyAccelarators />} />
+          <Route
+            path="/accelerators"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <OurJourneyAccelarators />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/acceleratorsAll"
-            element={<OurJourneyAccelaratorsAll />}
+            element={ <ProtectedRoute roleRequired="400"> <OurJourneyAccelaratorsAll /></ProtectedRoute>}
           />
-          <Route path="/ourSolution" element={<OurSolution />} />
-          <Route path="/industryimages" element={<IndustryImages />} />
-          <Route path="/viewAllSolution" element={<SolutionDataFull />} />
-          <Route path="/ServiceCounter" element={<Solutioncounter />} />
+          <Route path="/ourSolution" element={<ProtectedRoute roleRequired="400"> <OurSolution /></ProtectedRoute>} />
+          <Route path="/industryimages" element={<ProtectedRoute roleRequired="400"> <IndustryImages /></ProtectedRoute>} />
+          <Route path="/viewAllSolution" element={<ProtectedRoute roleRequired="400"> <SolutionDataFull /></ProtectedRoute>} />
+          <Route path="/ServiceCounter" element={<ProtectedRoute roleRequired="400"> <Solutioncounter /></ProtectedRoute>} />
           <Route
             path="/projectDetails"
             element={
@@ -183,23 +211,24 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/accelerators" element={<OurJourneyAccelarators />} />
+          <Route path="/accelerators" element={<ProtectedRoute roleRequired="400"> <OurJourneyAccelarators /></ProtectedRoute>} />
           <Route
             path="/acceleratorsAll"
-            element={<OurJourneyAccelaratorsAll />}
+            element={<ProtectedRoute roleRequired="400"> <OurJourneyAccelaratorsAll /></ProtectedRoute>}
           />
-          <Route path="/ourSolution" element={<OurSolution />} />
-          <Route path="/industryimages" element={<IndustryImages />} />
-          <Route path="/viewAllSolution" element={<SolutionDataFull />} />
-          <Route path="/ourServices" element={<OurService />} />
-          <Route path="/anaplanCounter" element={<AnaplanCounter />} />
-          <Route path="/industryImageList" element={<IndustryImageList />} />
-          <Route path="/techPartners" element={<TechPartners/>} />
+          <Route path="/ourSolution" element={<ProtectedRoute roleRequired="400"> <OurSolution /></ProtectedRoute>} />
+          <Route path="/industryimages" element={<ProtectedRoute roleRequired="400"> <IndustryImages /></ProtectedRoute>} />
+          <Route path="/viewAllSolution" element={<ProtectedRoute roleRequired="400"> <SolutionDataFull /></ProtectedRoute>} />
+          <Route path="/ourServices" element={<ProtectedRoute roleRequired="400"> <OurService /></ProtectedRoute>} />
+          <Route path="/anaplanCounter" element={<ProtectedRoute roleRequired="400"> <AnaplanCounter /></ProtectedRoute>} />
+          <Route path="/industryImageList" element={<ProtectedRoute roleRequired="400"> <IndustryImageList /></ProtectedRoute>} />
+          <Route path="/techPartners" element={<ProtectedRoute roleRequired="400"> <TechPartners /></ProtectedRoute>} />
 
-          <Route path="/PlanafinConsulting" element={<PlanafinConsulting />} />
-          <Route path="/PlanafinConsultingAll" element={<PlanafinConsultingAll />} />
-
-
+          <Route path="/PlanafinConsulting" element={<ProtectedRoute roleRequired="400"> <PlanafinConsulting /></ProtectedRoute>} />
+          <Route
+            path="/PlanafinConsultingAll"
+            element={<ProtectedRoute roleRequired="400"> <PlanafinConsultingAll /></ProtectedRoute>}
+          />
         </Routes>
       </BrowserRouter>
     </div>
