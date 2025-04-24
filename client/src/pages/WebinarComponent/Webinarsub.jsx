@@ -18,6 +18,8 @@ function Webinarsub() {
         `${baseUrl}/api/v1/user/demandCardDetails/${id}`
       );
       arrayItem(response.data.data || {});
+      console.log(response.data.data);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -489,7 +491,7 @@ function Webinarsub() {
                   </div>
                 </form>
                 ):(<div className={styles.videoContainer}>
-                  <iframe title="vimeo-player" src="https://player.vimeo.com/video/928333596?h=83d848f0ee" width="100%" height="100%" frameborder="0"    allowfullscreen></iframe>
+                  <iframe title="vimeo-player" src={`${item.videolink}`|| ""} width="100%" height="100%" frameborder="0"    allowfullscreen></iframe>
                 </div>)}
               </div>
             </div>
