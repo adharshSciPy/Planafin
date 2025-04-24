@@ -17,7 +17,7 @@ function AdminDashboard() {
         <div className="dashboard-cards-container">
           <div className="firstrow">
             <div className="firstcard">
-              <h3>Job Application</h3>
+              <h3>Job Details</h3>
               <Link to="/jobdetails">
                 <button className="firstcard-btn1">View</button>
               </Link>
