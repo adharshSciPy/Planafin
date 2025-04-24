@@ -16,7 +16,7 @@ function WebinarData() {
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   // Sync sections with form field
   useEffect(() => {
     form.setFieldsValue({ attendSession: sections });
@@ -99,9 +99,9 @@ function WebinarData() {
       fileInputRef.current.value = "";
     }
   };
-  const showOurWebinar=()=>{
-    navigate("/getWebinarData")
-  }
+  const showOurWebinar = () => {
+    navigate("/getWebinarData");
+  };
   return (
     <>
       <Header />
@@ -122,6 +122,7 @@ function WebinarData() {
             pigment: "",
             speaker: "",
             attendSession: [],
+            videolink: "",
           }}
           onFinish={handleSubmit}
           style={{ paddingBlock: 32 }}
@@ -212,6 +213,22 @@ function WebinarData() {
                 />
               </div>
             ))}
+          </Form.Item>
+          <Form.Item
+            name="videolink"
+            label="Video Link"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a video link",
+              },
+              {
+                type: "url",
+                message: "Please enter a valid URL",
+              },
+            ]}
+          >
+            <Input placeholder="" />
           </Form.Item>
 
           {/* Image Upload */}
