@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./adcontact.css";
 import baseUrl from '../../baseUrl';
-import { FaEye } from 'react-icons/fa'; // 👁️ Eye Icon
+import { Table, Button, message } from 'antd';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import { FaEye } from 'react-icons/fa'; 
 
 function AdContact() {
   const [contactList, setContactList] = useState([]);
@@ -29,10 +32,35 @@ function AdContact() {
     setShowModal(false);
     setSelectedMessage('');
   };
-
+  const exportToExcel = () => {
+    const formattedData = contactList.map((item, index) => ({
+      'Sl. No': index + 1,
+      'Name': `${item.firstName} ${item.lastName}`,
+      'Email': item.email,
+      'Country': item.country,
+      'Phone': item.phone,
+      'Job Title': item.jobTitle,
+      'Company': item.company,
+      'Message': item.message
+    }));
+  
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Contact Details');
+  
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const file = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(file, 'ContactDetails.xlsx');
+  };
+  
   return (
     <div className="table-container">
       <h2>Contact Details</h2>
+      <div className="tableHeader">
+       <Button type="primary" onClick={exportToExcel} className="exportBtn">
+         Export to Excel
+       </Button>
+     </div>
       <table className="contact-table">
         <thead>
           <tr>

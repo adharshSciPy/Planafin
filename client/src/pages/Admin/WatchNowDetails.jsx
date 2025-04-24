@@ -4,6 +4,8 @@ import { Table, Button, message } from 'antd'
 import { Trash } from 'lucide-react'
 import baseUrl from '../../baseUrl'
 import './WatchNowDetails.css'
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 function WatchNowDetails() {
     const [details, setDetails] = useState([])
@@ -83,9 +85,34 @@ function WatchNowDetails() {
         },
     ];
 
-
+ const exportToExcel = () => {
+    const formattedData = details.map((item, index) => ({
+      'Sl. No': index + 1,
+      'Name': `${item.firstName} ${item.lastName}`,
+      'Business Email': item.businessEmail,
+      'Country': item.selectCountry,
+    
+      'Designation': item.designation,
+      'Company Name': item.companyName,
+      
+    }));
+  
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Contact Details');
+  
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const file = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(file, 'ContactDetails.xlsx');
+  };
 
     return (
+        <>
+        <div className="tableHeader">
+               <Button type="primary" onClick={exportToExcel} className="exportBtn">
+                 Export to Excel
+               </Button>
+             </div>
         <Table
             columns={columns}
             dataSource={details}
@@ -93,6 +120,8 @@ function WatchNowDetails() {
             loading={loading}
             pagination={{ pageSize: 10 }}
         />
+        </>
+
     )
 }
 

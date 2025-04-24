@@ -92,6 +92,21 @@
     cursor: pointer;
     margin-left: 187px;
   }
+  .exportBtn {
+    background-color: #1677ff;
+    border-color: #1677ff;
+    color: white;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    /* margin-left: 0; */
+    transition: background-color 0.3s ease;
+  }
+  
+  .exportBtn:hover {
+    background-color: #0e5fd8;
+    border-color: #0e5fd8;
+  }
   @media (max-width: 900px) {
     .contact-table,
     .contact-table thead,
