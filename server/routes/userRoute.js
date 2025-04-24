@@ -11,7 +11,9 @@ import {
     getTechPartners,
     getTechPartnersById,
     deleteTechPartners,
-    createUpcomingWebinar,upcomingWebinarUser,getAllupcomingWebinar
+    createUpcomingWebinar,upcomingWebinarUser,getAllupcomingWebinar,
+    forgotPassword,
+    resetPasswordUser
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -86,6 +88,8 @@ userRoute.route("/deleteTechPartners/:id").delete(deleteTechPartners);
 userRoute.route("/createupcomingwebinar").post(createUpcomingWebinar);
 userRoute.route("/createUserupcomingWebinar/:id").post(upcomingWebinarUser)
 userRoute.route("/getAllUpcomingwebinar").get(getAllupcomingWebinar)
+userRoute.route("/forgotPassword").post(forgotPassword)
+userRoute.route("/resetPasswordUser/:userId/:token").post(resetPasswordUser);
 
 
 
