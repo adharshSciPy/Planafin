@@ -10,7 +10,8 @@ import {
     addTechPartners,
     getTechPartners,
     getTechPartnersById,
-    deleteTechPartners
+    deleteTechPartners,
+    createUpcomingWebinar,upcomingWebinarUser,getAllupcomingWebinar
 
 } from "../controller/userController.js"
 const userRoute = Router()
@@ -83,6 +84,11 @@ userRoute.route("/addTechPartners").post(upload.single('techPartnersImg'),addTec
 userRoute.route("/getTechPartners").get(getTechPartners);
 userRoute.route("/getTechPartnersById/:id").get(getTechPartnersById);
 userRoute.route("/deleteTechPartners/:id").delete(deleteTechPartners);
+userRoute.route("/createupcomingwebinar").post(createUpcomingWebinar);
+userRoute.route("/createUserupcomingWebinar/:id").post(upcomingWebinarUser)
+userRoute.route("/getAllUpcomingwebinar").get(getAllupcomingWebinar)
+
+
 
 
 

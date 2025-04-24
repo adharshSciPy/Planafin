@@ -19,6 +19,10 @@ import anaplanSchema from "../model/anaplanSchema.js";
 import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
+import {upcomingWebinar} from "../model/upcomingwebinarSchema.js"
+
+
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
@@ -1076,14 +1080,16 @@ const deleteBusinessPlanning = async (req, res) => {
 
 const addPlanafinConsultations = async (req, res) => {
   try {
-    const { title,subtext} = req.body;
+    const { title, subtext } = req.body;
     const result = await planafinConsulting.create({
       title,
       subtext,
     });
     res.status(200).json({ message: "successfully added", data: result });
   } catch (error) {
-    res.status(200).json({ message: "error while creating", error: error.message });
+    res
+      .status(200)
+      .json({ message: "error while creating", error: error.message });
   }
 };
 const getPlanafinConsultations = async (req, res) => {
@@ -1339,30 +1345,90 @@ const getTechPartnersById = async (req, res) => {
     });
   }
 };
-  const deleteTechPartners = async (req, res) => {
-    const { id } = req.params;
-    try {
-      if (!id) {
-        return res.status(400).json({ message: "Invalid Id" });
-      }
-      const deletedData = await technologyPartners.findByIdAndDelete(id);
-      if (!deletedData) {
-        return res
+const deleteTechPartners = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!id) {
+      return res.status(400).json({ message: "Invalid Id" });
+    }
+    const deletedData = await technologyPartners.findByIdAndDelete(id);
+    if (!deletedData) {
+      return res
         .status(404)
         .json({ message: "No data found with the given ID." });
-      }
-
-      return res.status(200).json({
-        message: "Technology partner deleted successfully.",
-        data: deletedData,
-      });
-    } catch (error) {
-      res.status(500).json({
-        message: "Internal server error while fetching consultations.",
-        error: error.message,
-      });
     }
-  };
+
+    return res.status(200).json({
+      message: "Technology partner deleted successfully.",
+      data: deletedData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+};
+const createUpcomingWebinar=async(req,res)=>{
+  const { name, webinarDate, remindBeforeDays } = req.body;
+
+if (!name || !webinarDate || remindBeforeDays == null) {
+  return res.status(400).json({ message: "Please provide all fields." });
+}
+
+try {
+  const newWebinar = new upcomingWebinar({
+    name,
+    webinarDate,
+    remindBeforeDays,
+    usersRegistered: [] // empty initially
+  });
+
+  await newWebinar.save();
+  res.status(201).json({ message: "Webinar created successfully", webinar: newWebinar });
+} catch (err) {
+  console.error("Create webinar error:", err);
+  res.status(500).json({ message: "Server error" });
+}
+}
+const upcomingWebinarUser=async (req,res) => {
+  const webinarId = req.params.id;
+  const { name, email } = req.body;
+
+  try {
+    const webinar = await upcomingWebinar.findById(webinarId);
+    if (!webinar) return res.status(404).json({ message: "Webinar not found" });
+
+    // Check if already registered
+    const alreadyRegistered = webinar.usersRegistered.some(user => user.email === email);
+    if (alreadyRegistered) {
+      return res.status(400).json({ message: "User already registered" });
+    }
+
+    // Add the user
+    webinar.usersRegistered.push({ name, email });
+    await webinar.save();
+
+    res.status(200).json({ message: "Registered successfully" });
+  } catch (err) {
+    console.error("Error registering:", err);
+    res.status(500).json({ message: "Server error" });
+  }  
+}
+const getAllupcomingWebinar=async(req,res)=>{
+  try {
+    const result=await upcomingWebinar.find();
+    res.status(200).json({
+      message: "Data fetch succesfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal server error while fetching consultations.",
+      error: error.message,
+    });
+  }
+}
 
 export {
   registerUser,
@@ -1431,4 +1497,7 @@ export {
   getTechPartners,
   getTechPartnersById,
   deleteTechPartners,
+  createUpcomingWebinar,
+  upcomingWebinarUser,
+  getAllupcomingWebinar
 };
