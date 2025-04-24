@@ -46,6 +46,7 @@ import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx";
 import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx";
 import UpDataAll from "./pages/Admin/UpDataAll.jsx";
 import UpWebdata from "./pages/Admin/UpWebdata.jsx";
+import UpCommingWebinar from "./pages/WebinarComponent/UpCommingWebinar.jsx";
 function App() {
   return (
     <div className="App">
@@ -56,6 +57,7 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/webinar/:id" element={<Webinar />} />
+          <Route path="/upcomingWebinar/:id" element={<UpCommingWebinar />} />
           <Route path="/webinar-2" element={<Demandforecasting />} />
           <Route path="/webinar-3" element={<Budgeting />} />
           <Route path="/webinar-4" element={<Targetsetting />} />

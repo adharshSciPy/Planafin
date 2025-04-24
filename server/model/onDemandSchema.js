@@ -18,6 +18,9 @@ const onDemandSchema = new Schema({
     },
     attendSession: {
         type: Array
+    },
+    videolink:{
+        type:String
     }
 })
 

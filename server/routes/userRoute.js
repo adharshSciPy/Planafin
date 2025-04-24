@@ -67,7 +67,6 @@ userRoute.route("/deleteSolutionCounter/:id").delete(deleteSolutionCounters);
 userRoute.route("/addBusinessPlanning").post(upload.single('businessPlanningImage'), addBusinessPlanning);
 userRoute.route("/getBusinessPlanning").get(getBusinessPlanning);
 userRoute.route("/getBusinessPlanningById/:id").get(getBusinessPlanningById);
-
 userRoute.route("/deleteBusinessPlanning/:id").delete(deleteBusinessPlanning);
 userRoute.route("/addPlanafinConsultation").post(addPlanafinConsultations);
 userRoute.route("/getPlanafinConsultation").get(getPlanafinConsultations);
