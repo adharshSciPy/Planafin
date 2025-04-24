@@ -56,7 +56,7 @@ function Resources() {
         <div className={styles.card}>
             {arrayItem.map((item, i) => (
               <div className={styles.cardone} onClick={() =>{
-                navigate(`/webinar/${item._id}`)
+                navigate(`/upcomingWebinar/${item._id}`)
               }}>
                 <Card
                   key={i}
@@ -85,7 +85,7 @@ function Resources() {
                       <button
                         className={styles.button}
                         onClick={() =>{
-                          navigate(`/webinar/${item._id}`)
+                          navigate(`/upcomingWebinar/${item._id}`)
                         }}
                       >
                         Watch Now <CaretRight size={30} color="#FFFFFF" />
