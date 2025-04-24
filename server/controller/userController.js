@@ -21,6 +21,7 @@ import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import {upcomingWebinar} from "../model/upcomingwebinarSchema.js"
 
+import nodemailer from "nodemailer";
 
 
 import bcrypt from "bcrypt";
@@ -477,6 +478,29 @@ const addWatchnow = async (req, res) => {
       designation,
       selectCountry,
     });
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: businessEmail,
+      subject: "Registration confirmation",
+      html: `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+      <h2 style="color: #007bff;">Email Verification</h2>
+      <p>Your One-Time Password (OTP) for email verification is:</p>
+      <p style="font-size: 24px; font-weight: bold; color: #d9534f; background: #f8d7da; padding: 10px; border-radius: 5px; display: inline-block;">
+        this
+      </p>
+    </div>`,
+    };
+
+    await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "Watch Now Form Submitted", data: result });
   } catch (error) {
     res

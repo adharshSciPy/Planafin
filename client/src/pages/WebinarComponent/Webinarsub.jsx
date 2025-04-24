@@ -12,6 +12,7 @@ function Webinarsub() {
   const [item, arrayItem] = useState({});
   const { id } = useParams();
   const [isVisible, setVisible] = useState(true);
+  const [loading, setLoading] = useState(false);
   const getData = async () => {
     try {
       const response = await axios.get(
@@ -49,6 +50,7 @@ function Webinarsub() {
 
   const handleSubmitform = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         `${baseUrl}/api/v1/user/addWatchnow`,
@@ -79,6 +81,8 @@ function Webinarsub() {
         "Submission Error:",
         error.response ? error.response.data : error.message
       );
+    }finally{
+      setLoading(false); 
     }
   };
 
@@ -153,7 +157,7 @@ function Webinarsub() {
                 </p>
                 <p>{item.summary || "Loading"}</p>
                 <p>
-                  <strong>About Pigment:</strong>
+                  <strong>About Company:</strong>
                 </p>
                 <p>{item.pigment || "Loading"}</p>
                 <p>
@@ -487,10 +491,11 @@ function Webinarsub() {
                     </label>
                   </div>
                   <div className={styles.buttonTwo}>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
                   </div>
                 </form>
                 ):(<div className={styles.videoContainer}>
+                  <div className={styles.confirmationText}>Thank you for your registration</div>
                   <iframe title="vimeo-player" src={`${item.videolink}`|| ""} width="100%" height="100%" frameborder="0"    allowfullscreen></iframe>
                 </div>)}
               </div>
