@@ -336,7 +336,7 @@ const deleteApplication = async (req, res) => {
 
 const onDemand = async (req, res) => {
   try {
-    const { title, summary, pigment, speaker, attendSession } = req.body;
+    const { title, summary, pigment, speaker, attendSession,videolink } = req.body;
     let image = "";
 
     if (req.file) {
@@ -355,6 +355,7 @@ const onDemand = async (req, res) => {
       speaker,
       attendSession,
       image,
+      videolink
     });
 
     res

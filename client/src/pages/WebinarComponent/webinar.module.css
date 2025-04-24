@@ -101,7 +101,16 @@
     color: #696d79;
     margin-bottom: 17px     ;
 }
-
+.videoContainer{
+    overflow: hidden;
+    height: 360px;
+    width: 100%;
+}
+.videoContainer iframe{
+height: 100%;
+width: 100%;
+object-fit: contain;
+}
 .containerTwoLi{
     font-size: 16px;
     line-height: 24px;
