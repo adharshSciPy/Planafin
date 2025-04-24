@@ -57,6 +57,8 @@ function Solutions() {
         `${baseUrl}/api/v1/user/getBusinessPlanning`
       );
       setSolutionData(response.data.data);
+      console.log("solu",response.data.data);
+
       
     } catch (error) {
       console.error("Error fetching industries:", error);
@@ -154,7 +156,7 @@ function Solutions() {
             return(
               <div className="sqr" key={index}>
               <div className="sqr-content">
-                <img src={sol1} alt="ss" className="sqrimg" />
+                <img src={`${baseUrl}/${item.businessPlanningImage}`}alt="ss" className="sqrimg" />
                 <h1 className="sqrh1">{item.contentHeading}</h1>
                 <p className="sqrp">
                   {item.contentDescription}

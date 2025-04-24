@@ -79,6 +79,9 @@
     line-height: 22px;
   }
   .sqrimg{
+    height: 120px;
+    width: 120px;
+    object-fit:cover;
     display: flex;
     margin-bottom: 20px;
   }
