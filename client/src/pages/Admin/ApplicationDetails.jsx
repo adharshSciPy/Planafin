@@ -5,6 +5,8 @@ import { Eye, Trash } from 'lucide-react';
 import baseUrl from '../../baseUrl';
 import './JobDetails.css'; // Ensure modal styles are here or add new CSS
 import { useNavigate } from "react-router-dom";
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 function ApplicationDetails() {
   const [details, setDetails] = useState([]);
@@ -59,14 +61,44 @@ function ApplicationDetails() {
       render: (text, record, index) => index + 1,
     },
     {
-      title: 'First Name',
-      dataIndex: 'firstName',
-      key: 'firstName',
+      title: 'Name',
+      key: 'name',
+      render: (text, record) => `${record.firstName} ${record.lastName}`,
     },
     {
-      title: 'Last Name',
-      dataIndex: 'lastName',
-      key: 'lastName',
+      title: 'Email',
+      dataIndex: 'email',
+      key: 'email',
+    },
+    {
+      title: 'Phone Number',
+      dataIndex: 'phone',
+      key: 'phone',
+    },
+    {
+      title: 'Company',
+      dataIndex: 'company',
+      key: 'company',
+    },
+    {
+      title: 'Current Company',
+      dataIndex: 'currentCompany',
+      key: 'currentCompany',
+    },
+    {
+      title: 'GitHub URL',
+      dataIndex: 'github',
+      key: 'github',
+    },
+    {
+      title: 'LinkedIn URL',
+      dataIndex: 'linkedIn',
+      key: 'linkedIn',
+    },
+    {
+      title: 'Job Title',
+      dataIndex: 'jobTitle',
+      key: 'jobTitle',
     },
     {
       title: 'Action',
@@ -87,9 +119,52 @@ function ApplicationDetails() {
       ),
     },
   ];
+  const exportToExcel = () => {
+    const formattedData = details.map((item, index) => ({
+      'Sl. No': index + 1,
+      'Name': `${item.firstName} ${item.lastName}`,
+      'Email': item.email,
+      'Phone Number': item.phone,
+      'Company':item.company,
+      'Current Company':item.currentCompany,
+      'GitHub URL':item.github,
+      'LinkedIn URL': item.linkedIn,
+      'Job Title':item.jobTitle,
+      'Resume Download Link': item.resume
+        ? `${baseUrl}/${item.resume}`
+        : 'No Resume',
+    }));
+  
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+  
+    
+    const range = XLSX.utils.decode_range(worksheet['!ref']);
+    for (let row = 1; row <= range.e.r; ++row) {
+      const cellRef = `F${row + 1}`; 
+      const cell = worksheet[cellRef];
+      if (cell && cell.v && cell.v.startsWith('http')) {
+        worksheet[cellRef].l = { Target: cell.v, Tooltip: 'Download Resume' };
+      }
+    }
+  
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Applications');
+  
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const data = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(data, 'Job_Applications.xlsx');
+  };
+  
 
   return (
     <>
+  <div className="tableHeader">
+  <Button type="primary" onClick={exportToExcel} className="exportBtn">
+    Export to Excel
+  </Button>
+</div>
+
+<div className="tableWrapper">
       <Table
         columns={columns}
         dataSource={details}
@@ -97,7 +172,7 @@ function ApplicationDetails() {
         loading={loading}
         pagination={{ pageSize: 10 }}
       />
-
+</div>
       {showModal && (
         <div className="modalOverlayJD">
           <div className="modalContentJD">
