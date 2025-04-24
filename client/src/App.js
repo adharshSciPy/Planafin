@@ -44,6 +44,8 @@ import AnaplanCounter from "./pages/Admin/Anaplan Counter/AnaplanCounter.jsx";
 import TechPartners from "./pages/Admin/Technology Partners/TechPartners.jsx";
 import PlanafinConsulting from "./pages/Admin/PlanafinConsulting.jsx";
 import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx";
+import UpDataAll from "./pages/Admin/UpDataAll.jsx";
+import UpWebdata from "./pages/Admin/UpWebdata.jsx";
 function App() {
   return (
     <div className="App">
@@ -78,6 +80,22 @@ function App() {
             element={
               <ProtectedRoute roleRequired="400">
                 <Ourjourneyadmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/upcomingdataall"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <UpDataAll />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/upcomingdata"
+            element={
+              <ProtectedRoute roleRequired="400">
+                <UpWebdata />
               </ProtectedRoute>
             }
           />

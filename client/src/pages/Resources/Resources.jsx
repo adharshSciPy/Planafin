@@ -53,7 +53,52 @@ function Resources() {
         }`}
       >
         <div className={styles.upcomingContent}>
-          <Footer className={styles.footer} />
+        <div className={styles.card}>
+            {arrayItem.map((item, i) => (
+              <div className={styles.cardone} onClick={() =>{
+                navigate(`/webinar/${item._id}`)
+              }}>
+                <Card
+                  key={i}
+                  hoverable
+                  style={{
+                    height: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                  cover={
+                    <img
+                      height="213px"
+                      width="355px"
+                      alt="example"
+                      src={`${baseUrl}/${item.image}`}
+                    />
+                  }
+                >
+                  <div className={styles.webinarContent}>
+                    <div className={styles.webinar}>UPCOMING WEBINAR</div>
+                    <div className={styles.webinardata}>
+                      <h3>{item.title}</h3>
+                      <div className={styles.webinardataPara}>
+                      <p>{item.summary}</p>
+                      </div>
+                      <button
+                        className={styles.button}
+                        onClick={() =>{
+                          navigate(`/webinar/${item._id}`)
+                        }}
+                      >
+                        Watch Now <CaretRight size={30} color="#FFFFFF" />
+                      </button>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </div>
+          <div>
+            <Footer />
+          </div>
         </div>
       </div>
       <div

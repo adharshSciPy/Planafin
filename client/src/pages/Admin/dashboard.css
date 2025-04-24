@@ -661,7 +661,7 @@ h3 {
 .dashbtn:hover {
   background: #0056b3;
 }
-/* Tablet View */
+
 @media (max-width: 1200px) {
   .firstrow,
   .secondrow,
