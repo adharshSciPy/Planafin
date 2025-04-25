@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import styles from "./FeedBack.module.css";
 import axios from 'axios';
 import baseUrl from '../../baseUrl';
+// import { message } from 'antd';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function FeedBack() {
+  const [feedbacks,setFeedbacks]=useState([]);
+    // const [message, setMessage] = useState('');
+    const [selectedFeedbackId, setSelectedFeedbackId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
+  
   const [form, setForm] = useState({
     name: "",
     jobPosition: "",
@@ -52,7 +61,7 @@ function FeedBack() {
 
       setForm({
         name: "",
-        jobPositionPosition: "",
+        jobPosition: "",
         message: "",
         image: null,
       });
@@ -60,12 +69,46 @@ function FeedBack() {
       // Optional: Reset file input field (if using a file input)
       const fileInput = document.querySelector('input[type="file"]');
       if (fileInput) fileInput.value = "";
+      fetchFeedback();
+       toast.success("Form Submitted successfully");
 
     } catch (error) {
       console.log("Error submitting formData", error.response?.data || error);
     }
   };
+ 
+    const fetchFeedback = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/v1/user/viewFeedback`);
+        console.log("feedback data", response.data.data);
+        setFeedbacks(response.data.data);
+      } catch (error) {
+        console.error("Error fetching feedback data:", error);
+      }
+    };
+    useEffect(() => {
+fetchFeedback()
+  },[])
+  const confirmDelete = async () => {
+    if (!selectedFeedbackId) return;
+    try {
+      await axios.delete(`${baseUrl}/api/v1/user/deleteFeedback/${selectedFeedbackId}`);
+      fetchFeedback();
+      setShowModal(false);
+      setSelectedFeedbackId(null);
+    } catch (error) {
+      console.error("Error deleting feedback:", error);
+    }
+  };
+  
+  const cancelDelete = () => {
+    setShowModal(false);
+    setSelectedFeedbackId(null);
+  };
+  
   return (
+<>
+         <ToastContainer position="bottom-right" autoClose={3000} />
 
     <div className={styles.applicationFormOuter}>
       <form className={styles.applicationFormMain} onSubmit={handleSubmit}>
@@ -130,7 +173,46 @@ function FeedBack() {
 
 
     </div>
+    <div className={styles.cardContainer}>
+  {feedbacks.map((feedback) => (
+    <div key={feedback._id} className={styles.card}>
+      <img
+        src={`${baseUrl}/${feedback.image}`} 
+        alt={feedback.name}
+        className={styles.cardImage}
+      />
+      <div className={styles.cardContent}>
+        <h3>{feedback.name}</h3>
+        <p>{feedback.jobPosition}</p>
+        {/* <p>{feedbacks.message}</p> */}
+        <button
+          className={styles.deleteButton}
+          onClick={() => {
+            setSelectedFeedbackId(feedback._id);
+            setShowModal(true);
+          }}
+        
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+   ))} 
+   {showModal && (
+  <div className={styles.modalBackdrop}>
+    <div className={styles.modalContent}>
+      <p>Are you sure you want to delete this feedback?</p>
+      <div className={styles.modalActions}>
+        <button className={styles.confirmButton} onClick={confirmDelete}>Yes, Delete</button>
+        <button className={styles.cancelButton} onClick={cancelDelete}>Cancel</button>
+      </div>
+    </div>
+  </div>
+)}
 
+</div>
+
+    </>
   )
 }
 
