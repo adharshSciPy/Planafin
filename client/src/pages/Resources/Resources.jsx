@@ -10,6 +10,7 @@ import baseUrl from "../../baseUrl";
 
 function Resources() {
   const [arrayItem, setArrayItem] = useState([]);
+  const [uparrayItem, setUpArrayItem] = useState([]);
   const navigate=useNavigate()
   const getData = async () => {
     try {
@@ -21,6 +22,17 @@ function Resources() {
   };
   useEffect(() => {
     getData();
+  }, []);
+  const getUpData = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/api/v1/user/getAllUpcomingwebinar`);
+      setUpArrayItem(response.data?.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getUpData();
   }, []);
   const [activeTab, setActiveTab] = useState("upcoming");
   return (
@@ -54,7 +66,7 @@ function Resources() {
       >
         <div className={styles.upcomingContent}>
         <div className={styles.card}>
-            {arrayItem.map((item, i) => (
+            {uparrayItem.map((item, i) => (
               <div className={styles.cardone} onClick={() =>{
                 navigate(`/upcomingWebinar/${item._id}`)
               }}>
