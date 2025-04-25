@@ -136,6 +136,12 @@ function AdminDashboard() {
                 <button className="forthcard-btn3">View</button>
               </Link>
             </div>
+            <div className="tfifthcard">
+              <h3>Anaplan Counter</h3>
+              <Link to="/upcomingdata">
+                <button className="fifthcard-btn3">View</button>
+              </Link>
+            </div>
           </div>
         </div>
         <button className="dashbtn" onClick={handleLogout}>
