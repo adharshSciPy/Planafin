@@ -59,7 +59,7 @@ function UpWebdata() {
           position: "bottom-right",
           autoClose: 3000,
         });
-
+        
         form.resetFields();
         setSections([]);
         setImageFile(null);

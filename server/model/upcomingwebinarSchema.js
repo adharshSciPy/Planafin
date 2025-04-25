@@ -21,6 +21,7 @@ const upcomingwebinarSchema = new mongoose.Schema({
   },
   attendSession: {
     type: Array,
+    required:true
   },
   usersRegistered: [
     {

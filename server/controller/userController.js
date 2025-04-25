@@ -1398,7 +1398,7 @@ const createUpcomingWebinar = async (req, res) => {
   try {
     const {
       title,
-      attendedSession,
+      attendSession,
       webinarDate,
       remindBeforeDays,
       summary,
@@ -1407,7 +1407,7 @@ const createUpcomingWebinar = async (req, res) => {
     } = req.body;
     let image = "";
     if (req.file) {
-      image = `uploads/${req.file.filename}`; // Fix Windows backslashes
+      image = `uploads/${req.file.filename}`;
     } else {
       console.log("⚠️ No file uploaded!");
     }
@@ -1418,13 +1418,14 @@ const createUpcomingWebinar = async (req, res) => {
       speaker,
       webinarDate,
       remindBeforeDays,
-      usersRegistered: [], // empty initially
-      attendedSession:attendedSession || [],
+      usersRegistered: [], 
+      attendSession:attendSession||[],
+      image
     });
 
     await newWebinar.save();
     res
-      .status(201)
+      .status(200)
       .json({ message: "Webinar created successfully", webinar: newWebinar });
   } catch (err) {
     console.error("Create webinar error:", err);
@@ -1471,6 +1472,94 @@ const getAllupcomingWebinar = async (req, res) => {
     });
   }
 };
+const forgotPassword = async (req, res) => {
+  const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+  const email = process.env.SINGLE_USER_EMAIL;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const token = jwt.sign({ id: user._id }, ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
+
+    const resetLink = `${process.env.CLIENT_URL}/resetPasswordUser/${user._id}/${token}`;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Password Reset Request",
+      html: `
+        <p>Hi ${user.userName},</p>
+        <p>We received a request to reset your password. Click the link below to reset your password:</p>
+        <a href="${resetLink}" target="_blank">${resetLink}</a>
+        <p>If you didn't request this, please ignore this email.</p>
+      `,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        return res.status(500).json({ message: "Failed to send email." });
+      } else {
+        console.log("Email sent:", info.response);
+        return res
+          .status(200)
+          .json({ message: "Password reset email sent successfully." });
+      }
+    });
+  } catch (error) {
+    console.error("Error in forgotPassword:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }}
+  const resetPasswordUser = async (req, res) => {
+    const { userId, token } = req.params;
+    const { password } = req.body;
+  
+    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+  
+    try {
+      const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+      if (decoded.id !== userId) {
+        return res.status(403).json({ message: "Invalid token or user mismatch." });
+      }
+  
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found." });
+      }
+  
+      // ✅ Hash the password before saving
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+  
+      user.password = hashedPassword;
+      await user.save();
+  
+      return res.status(200).json({ message: "Password has been reset successfully." });
+    } catch (error) {
+      console.error("Error in resetPasswordUser:", error);
+      return res.status(500).json({
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  };
 
 export {
   registerUser,
@@ -1542,4 +1631,7 @@ export {
   createUpcomingWebinar,
   upcomingWebinarUser,
   getAllupcomingWebinar,
+  forgotPassword,
+  resetPasswordUser
+
 };
