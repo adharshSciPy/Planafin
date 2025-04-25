@@ -137,7 +137,7 @@ function AdminDashboard() {
               </Link>
             </div>
             <div className="tfifthcard">
-              <h3>Anaplan Counter</h3>
+              <h3>Upcoming Webinar </h3>
               <Link to="/upcomingdata">
                 <button className="fifthcard-btn3">View</button>
               </Link>

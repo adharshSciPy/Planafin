@@ -25,8 +25,12 @@ const upcomingwebinarSchema = new mongoose.Schema({
   },
   usersRegistered: [
     {
-      name: String,
-      email: String,
+      firstName: String,
+      lastName: String,
+      businessEmail:String,
+      companyName:String,
+      designation:String,
+      selectCountry:String,
       reminded: { type: Boolean, default: false },
     },
   ],

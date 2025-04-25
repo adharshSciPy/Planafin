@@ -14,7 +14,7 @@ function UpCommingWebinar() {
       const getData = async () => {
         try {
           const response = await axios.get(
-            `${baseUrl}/api/v1/user/demandCardDetails/${id}`
+            `${baseUrl}/api/v1/user/getupcomingWebinardata/${id}`
           );
           arrayItem(response.data.data || {});
         } catch (error) {
@@ -46,7 +46,7 @@ function UpCommingWebinar() {
             e.preventDefault();
             try {
               const response = await axios.post(
-                `${baseUrl}/api/v1/user/addWatchnow`,
+                `${baseUrl}/api/v1/user/createUserupcomingWebinar/${id}`,
                 formdata
               );
               if (response.status === 200) {

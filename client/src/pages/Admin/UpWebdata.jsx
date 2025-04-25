@@ -111,7 +111,7 @@ function UpWebdata() {
         </button>
       </div>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <h1 style={{ fontSize: "36px" }}>Webinar Data</h1>
+        <h1 style={{ fontSize: "36px" }}>Upcoming Webinar Data</h1>
       </div>
       <div style={{ padding: "10px", overflow: "hidden" }}>
         <Form
