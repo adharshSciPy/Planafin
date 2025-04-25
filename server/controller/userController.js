@@ -1499,6 +1499,19 @@ const getAllupcomingWebinar = async (req, res) => {
     });
   }
 };
+const deleteupcomingWebinar = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await OnDemand.findByIdAndDelete(id);
+    res
+      .status(200)
+      .json({ message: "Delete Ondemand Successfully", data: result });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+};
 const forgotPassword = async (req, res) => {
   const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
   const email = process.env.SINGLE_USER_EMAIL;
@@ -1666,4 +1679,5 @@ export {
   forgotPassword,
   resetPasswordUser,
   getupcomingById,
+  deleteupcomingWebinar
 };
