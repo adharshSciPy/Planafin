@@ -1418,9 +1418,9 @@ const createUpcomingWebinar = async (req, res) => {
       speaker,
       webinarDate,
       remindBeforeDays,
-      usersRegistered: [], 
-      attendSession:attendSession||[],
-      image
+      usersRegistered: [],
+      attendSession: attendSession || [],
+      image,
     });
 
     await newWebinar.save();
@@ -1446,8 +1446,15 @@ const getupcomingById = async (req, res) => {
   }
 };
 const upcomingWebinarUser = async (req, res) => {
-  const webinarId = req.params;
-  const { name, email } = req.body;
+  const webinarId = req.params.id;
+  const {
+    firstName,
+    lastName,
+    businessEmail,
+    companyName,
+    designation,
+    selectCountry,
+  } = req.body;
 
   try {
     const webinar = await upcomingWebinar.findById(webinarId);
@@ -1455,17 +1462,24 @@ const upcomingWebinarUser = async (req, res) => {
 
     // Check if already registered
     const alreadyRegistered = webinar.usersRegistered.some(
-      (user) => user.email === email
+      (user) => user.businessEmail === businessEmail
     );
     if (alreadyRegistered) {
       return res.status(400).json({ message: "User already registered" });
     }
 
     // Add the user
-    webinar.usersRegistered.push({ name, email });
+    webinar.usersRegistered.push({
+      firstName,
+      lastName,
+      businessEmail,
+      companyName,
+      designation,
+      selectCountry,
+    });
     await webinar.save();
 
-    res.status(200).json({ message: "Registered successfully" });
+    res.status(200).json({ message: "Registered successfully", data: webinar });
   } catch (err) {
     console.error("Error registering:", err);
     res.status(500).json({ message: "Server error" });
@@ -1539,40 +1553,45 @@ const forgotPassword = async (req, res) => {
       message: "Internal server error",
       error: error.message,
     });
-  }}
-  const resetPasswordUser = async (req, res) => {
-    const { userId, token } = req.params;
-    const { password } = req.body;
-  
-    const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
-  
-    try {
-      const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
-      if (decoded.id !== userId) {
-        return res.status(403).json({ message: "Invalid token or user mismatch." });
-      }
-  
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).json({ message: "User not found." });
-      }
-  
-      // ✅ Hash the password before saving
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-  
-      user.password = hashedPassword;
-      await user.save();
-  
-      return res.status(200).json({ message: "Password has been reset successfully." });
-    } catch (error) {
-      console.error("Error in resetPasswordUser:", error);
-      return res.status(500).json({
-        message: "Internal server error",
-        error: error.message,
-      });
+  }
+};
+const resetPasswordUser = async (req, res) => {
+  const { userId, token } = req.params;
+  const { password } = req.body;
+
+  const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
+
+  try {
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+    if (decoded.id !== userId) {
+      return res
+        .status(403)
+        .json({ message: "Invalid token or user mismatch." });
     }
-  };
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // ✅ Hash the password before saving
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ message: "Password has been reset successfully." });
+  } catch (error) {
+    console.error("Error in resetPasswordUser:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
 
 export {
   registerUser,
@@ -1646,6 +1665,5 @@ export {
   getAllupcomingWebinar,
   forgotPassword,
   resetPasswordUser,
-  getupcomingById
-
+  getupcomingById,
 };
