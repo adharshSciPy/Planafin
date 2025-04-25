@@ -1432,8 +1432,21 @@ const createUpcomingWebinar = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+const getupcomingById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await upcomingWebinar.findById(id);
+    res
+      .status(200)
+      .json({ message: "On Demand Sessions Viewed", data: result });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+};
 const upcomingWebinarUser = async (req, res) => {
-  const webinarId = req.params.id;
+  const webinarId = req.params;
   const { name, email } = req.body;
 
   try {
@@ -1632,6 +1645,7 @@ export {
   upcomingWebinarUser,
   getAllupcomingWebinar,
   forgotPassword,
-  resetPasswordUser
+  resetPasswordUser,
+  getupcomingById
 
 };
