@@ -1502,10 +1502,10 @@ const getAllupcomingWebinar = async (req, res) => {
 const deleteupcomingWebinar = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await OnDemand.findByIdAndDelete(id);
+    const result = await upcomingWebinar.findByIdAndDelete(id);
     res
       .status(200)
-      .json({ message: "Delete Ondemand Successfully", data: result });
+      .json({ message: "Delete upcomingwebinar Successfully", data: result });
   } catch (error) {
     res
       .status(500)
