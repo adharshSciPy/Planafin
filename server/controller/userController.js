@@ -19,10 +19,9 @@ import anaplanSchema from "../model/anaplanSchema.js";
 import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
-import {upcomingWebinar} from "../model/upcomingwebinarSchema.js"
+import { upcomingWebinar } from "../model/upcomingwebinarSchema.js";
 
 import nodemailer from "nodemailer";
-
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -337,7 +336,8 @@ const deleteApplication = async (req, res) => {
 
 const onDemand = async (req, res) => {
   try {
-    const { title, summary, pigment, speaker, attendSession,videolink } = req.body;
+    const { title, summary, pigment, speaker, attendSession, videolink } =
+      req.body;
     let image = "";
 
     if (req.file) {
@@ -356,7 +356,7 @@ const onDemand = async (req, res) => {
       speaker,
       attendSession,
       image,
-      videolink
+      videolink,
     });
 
     res
@@ -1394,29 +1394,44 @@ const deleteTechPartners = async (req, res) => {
     });
   }
 };
-const createUpcomingWebinar=async(req,res)=>{
-  const { name, webinarDate, remindBeforeDays } = req.body;
+const createUpcomingWebinar = async (req, res) => {
+  try {
+    const {
+      title,
+      attendedSession,
+      webinarDate,
+      remindBeforeDays,
+      summary,
+      pigment,
+      speaker,
+    } = req.body;
+    let image = "";
+    if (req.file) {
+      image = `uploads/${req.file.filename}`; // Fix Windows backslashes
+    } else {
+      console.log("⚠️ No file uploaded!");
+    }
+    const newWebinar = new upcomingWebinar({
+      title,
+      summary,
+      pigment,
+      speaker,
+      webinarDate,
+      remindBeforeDays,
+      usersRegistered: [], // empty initially
+      attendedSession:attendedSession || [],
+    });
 
-if (!name || !webinarDate || remindBeforeDays == null) {
-  return res.status(400).json({ message: "Please provide all fields." });
-}
-
-try {
-  const newWebinar = new upcomingWebinar({
-    name,
-    webinarDate,
-    remindBeforeDays,
-    usersRegistered: [] // empty initially
-  });
-
-  await newWebinar.save();
-  res.status(201).json({ message: "Webinar created successfully", webinar: newWebinar });
-} catch (err) {
-  console.error("Create webinar error:", err);
-  res.status(500).json({ message: "Server error" });
-}
-}
-const upcomingWebinarUser=async (req,res) => {
+    await newWebinar.save();
+    res
+      .status(201)
+      .json({ message: "Webinar created successfully", webinar: newWebinar });
+  } catch (err) {
+    console.error("Create webinar error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+const upcomingWebinarUser = async (req, res) => {
   const webinarId = req.params.id;
   const { name, email } = req.body;
 
@@ -1425,7 +1440,9 @@ const upcomingWebinarUser=async (req,res) => {
     if (!webinar) return res.status(404).json({ message: "Webinar not found" });
 
     // Check if already registered
-    const alreadyRegistered = webinar.usersRegistered.some(user => user.email === email);
+    const alreadyRegistered = webinar.usersRegistered.some(
+      (user) => user.email === email
+    );
     if (alreadyRegistered) {
       return res.status(400).json({ message: "User already registered" });
     }
@@ -1438,11 +1455,11 @@ const upcomingWebinarUser=async (req,res) => {
   } catch (err) {
     console.error("Error registering:", err);
     res.status(500).json({ message: "Server error" });
-  }  
-}
-const getAllupcomingWebinar=async(req,res)=>{
+  }
+};
+const getAllupcomingWebinar = async (req, res) => {
   try {
-    const result=await upcomingWebinar.find();
+    const result = await upcomingWebinar.find();
     res.status(200).json({
       message: "Data fetch succesfully",
       data: result,
@@ -1453,7 +1470,7 @@ const getAllupcomingWebinar=async(req,res)=>{
       error: error.message,
     });
   }
-}
+};
 
 export {
   registerUser,
@@ -1524,5 +1541,5 @@ export {
   deleteTechPartners,
   createUpcomingWebinar,
   upcomingWebinarUser,
-  getAllupcomingWebinar
+  getAllupcomingWebinar,
 };
