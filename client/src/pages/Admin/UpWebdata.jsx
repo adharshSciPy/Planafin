@@ -44,9 +44,10 @@ function UpWebdata() {
       if (imageFile) {
         formData.append("image", imageFile);
       }
-
+      console.log('.thid',formData);
+      
       const response = await axios.post(
-        `${baseurl}/api/v1/user/onDemand`,
+        `${baseurl}/api/v1/user/createupcomingwebinar`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -123,7 +124,7 @@ function UpWebdata() {
             attendSession: [],
             webinarDate: "",
             remindBeforeDays: "",
-            userRegistered: [],
+            // userRegistered: [],
           }}
           onFinish={handleSubmit}
           style={{ paddingBlock: 32 }}
@@ -173,9 +174,6 @@ function UpWebdata() {
           <Form.Item
             name="webinarDate"
             label="Webinar Date"
-            rules={[
-              { required: true, message: "Please enter the webinar date" },
-            ]}
           >
             <Input type="date" />
           </Form.Item>
@@ -183,9 +181,6 @@ function UpWebdata() {
           <Form.Item
             name="remindBeforeDays"
             label="Remind Before (Days)"
-            rules={[
-              { required: true, message: "Please enter the reminder days" },
-            ]}
           >
             <Input type="number" min={0} />
           </Form.Item>
