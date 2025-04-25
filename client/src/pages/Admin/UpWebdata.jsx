@@ -46,7 +46,7 @@ function UpWebdata() {
       }
 
       const response = await axios.post(
-        `${baseurl}/api/v1/user/onDemand`,
+        `${baseurl}/api/v1/user/createupcomingwebinar`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -58,7 +58,7 @@ function UpWebdata() {
           position: "bottom-right",
           autoClose: 3000,
         });
-
+        
         form.resetFields();
         setSections([]);
         setImageFile(null);
@@ -183,9 +183,6 @@ function UpWebdata() {
           <Form.Item
             name="remindBeforeDays"
             label="Remind Before (Days)"
-            rules={[
-              { required: true, message: "Please enter the reminder days" },
-            ]}
           >
             <Input type="number" min={0} />
           </Form.Item>

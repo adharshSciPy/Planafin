@@ -1398,7 +1398,7 @@ const createUpcomingWebinar = async (req, res) => {
   try {
     const {
       title,
-      attendedSession,
+      attendSession,
       webinarDate,
       remindBeforeDays,
       summary,
@@ -1407,7 +1407,7 @@ const createUpcomingWebinar = async (req, res) => {
     } = req.body;
     let image = "";
     if (req.file) {
-      image = `uploads/${req.file.filename}`; // Fix Windows backslashes
+      image = `uploads/${req.file.filename}`;
     } else {
       console.log("⚠️ No file uploaded!");
     }
@@ -1418,13 +1418,14 @@ const createUpcomingWebinar = async (req, res) => {
       speaker,
       webinarDate,
       remindBeforeDays,
-      usersRegistered: [], // empty initially
-      attendedSession:attendedSession || [],
+      usersRegistered: [], 
+      attendSession:attendSession||[],
+      image
     });
 
     await newWebinar.save();
     res
-      .status(201)
+      .status(200)
       .json({ message: "Webinar created successfully", webinar: newWebinar });
   } catch (err) {
     console.error("Create webinar error:", err);
