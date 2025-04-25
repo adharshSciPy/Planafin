@@ -59,7 +59,7 @@ function UpWebdata() {
           position: "bottom-right",
           autoClose: 3000,
         });
-        
+
         form.resetFields();
         setSections([]);
         setImageFile(null);
@@ -100,7 +100,7 @@ function UpWebdata() {
     }
   };
   const showOurWebinar = () => {
-    navigate("/getWebinarData");
+    navigate("/upcomingdataall");
   };
   return (
     <>
@@ -111,7 +111,7 @@ function UpWebdata() {
         </button>
       </div>
       <div style={{ textAlign: "center", marginTop: "50px" }}>
-        <h1 style={{ fontSize: "36px" }}>Upcoming Webinar Data</h1>
+        <h1 style={{ fontSize: "36px" }}>Webinar Data</h1>
       </div>
       <div style={{ padding: "10px", overflow: "hidden" }}>
         <Form
@@ -134,7 +134,8 @@ function UpWebdata() {
           <Form.Item
             name="title"
             label="Heading"
-            rules={[{ required: true, message: "Please enter a heading" }]}
+            rules={[{ required: true, message: "Please enter a heading" },
+            ]}
           >
             <Input />
           </Form.Item>

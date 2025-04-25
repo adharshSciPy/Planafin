@@ -25,7 +25,7 @@ function UpDataAll() {
     try {
       
       const response = await axios.delete(
-        `${baseUrl}/api/v1/user/deleteDemand/${selectId}`
+        `${baseUrl}/api/v1/user/deleteupcomingdata/${id}`
       );
       if (response.status === 200) {
         toast.success("successfully deleted webinar data", {
@@ -34,7 +34,7 @@ function UpDataAll() {
         });
       }
       setjourneyData((prevData) =>
-        prevData.filter((webData) => webData.id !== selectId)
+        prevData.filter((webData) => webData.id !== id)
       );
       await getData()
       setOpen(false);
@@ -53,7 +53,7 @@ function UpDataAll() {
   };
   const getData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/v1/user/demandDetails`);
+      const response = await axios.get(`${baseUrl}/api/v1/user/getAllUpcomingwebinar`);
       setjourneyData(response.data.data || []);
     } catch (error) {
       console.log(error);
