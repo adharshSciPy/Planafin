@@ -16,7 +16,7 @@ function UpWebdata() {
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
   const [imageFile, setImageFile] = useState(null);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     form.setFieldsValue({ attendSession: sections });
   }, [sections, form]);
@@ -98,9 +98,9 @@ function UpWebdata() {
       fileInputRef.current.value = "";
     }
   };
-  const showOurWebinar=()=>{
-    navigate("/getWebinarData")
-  }
+  const showOurWebinar = () => {
+    navigate("/getWebinarData");
+  };
   return (
     <>
       <Header />
@@ -121,6 +121,9 @@ function UpWebdata() {
             pigment: "",
             speaker: "",
             attendSession: [],
+            webinarDate: "",
+            remindBeforeDays: "",
+            userRegistered: [],
           }}
           onFinish={handleSubmit}
           style={{ paddingBlock: 32 }}
@@ -167,7 +170,25 @@ function UpWebdata() {
           >
             <Input.TextArea rows={6} />
           </Form.Item>
+          <Form.Item
+            name="webinarDate"
+            label="Webinar Date"
+            rules={[
+              { required: true, message: "Please enter the webinar date" },
+            ]}
+          >
+            <Input type="date" />
+          </Form.Item>
 
+          <Form.Item
+            name="remindBeforeDays"
+            label="Remind Before (Days)"
+            rules={[
+              { required: true, message: "Please enter the reminder days" },
+            ]}
+          >
+            <Input type="number" min={0} />
+          </Form.Item>
           {/* Attended Sessions */}
           <Form.Item name="attendSession" label="Attended Sessions">
             <div style={{ textAlign: "center" }}>
