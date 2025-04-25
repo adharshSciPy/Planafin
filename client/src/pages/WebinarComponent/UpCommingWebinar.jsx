@@ -46,7 +46,7 @@ function UpCommingWebinar() {
             e.preventDefault();
             try {
               const response = await axios.post(
-                `${baseUrl}/api/v1/user/addWatchnow`,
+                `${baseUrl}/api/v1/user/createUserupcomingWebinar/${id}`,
                 formdata
               );
               if (response.status === 200) {
