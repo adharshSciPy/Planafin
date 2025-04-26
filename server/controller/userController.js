@@ -1460,15 +1460,13 @@ const upcomingWebinarUser = async (req, res) => {
     const webinar = await upcomingWebinar.findById(webinarId);
     if (!webinar) return res.status(404).json({ message: "Webinar not found" });
 
-    // Check if already registered
     const alreadyRegistered = webinar.usersRegistered.some(
-      (user) => user.businessEmail === businessEmail
+      (user) => user.businessEmail.toLowerCase() === businessEmail.toLowerCase()
     );
     if (alreadyRegistered) {
       return res.status(400).json({ message: "User already registered" });
     }
 
-    // Add the user
     webinar.usersRegistered.push({
       firstName,
       lastName,
@@ -1479,12 +1477,72 @@ const upcomingWebinarUser = async (req, res) => {
     });
     await webinar.save();
 
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+    const startDate = new Date(webinar.webinarDate);
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // 1 hour duration
+
+    const formatDate = (date) =>
+      date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Your Company//Webinar Reminder//EN
+BEGIN:VEVENT
+UID:${Date.now()}@yourdomain.com
+DTSTAMP:${formatDate(new Date())}
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(endDate)}
+SUMMARY:${webinar.title}
+ORGANIZER;CN=Webinar Host:mailto:${process.env.EMAIL_USER}
+DESCRIPTION:Join us for  the webinar: ${webinar.title}
+LOCATION:Online
+END:VEVENT
+END:VCALENDAR`;
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: businessEmail,
+      subject: "Webinar Registration Confirmation",
+      html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
+                <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                  <h2 style="color: #333;">📅 Webinar Reminder</h2>
+                  <p style="font-size: 16px; color: #555;">
+                    Hi <strong>${firstName}</strong>,
+                  </p>
+                  <p style="font-size: 16px; color: #555;">
+                    registration successful for the webinar <strong>"${
+                      webinar.title
+                    }"</strong> which is being conducted on <strong>${startDate.toDateString()}</strong>.
+                  </p>
+                  <p style="font-size: 16px; color: #555;">
+                    We're excited to have you join us!
+                  </p>
+                  <hr />
+                </div>
+              </div>`,
+      attachments: [
+        {
+          filename: "webinar-invite.ics",
+          content: icsContent,
+          contentType: "text/calendar",
+        },
+      ],
+    };
+
+    await transporter.sendMail(mailOptions);
     res.status(200).json({ message: "Registered successfully", data: webinar });
   } catch (err) {
     console.error("Error registering:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 const getAllupcomingWebinar = async (req, res) => {
   try {
     const result = await upcomingWebinar.find();
@@ -1679,5 +1737,5 @@ export {
   forgotPassword,
   resetPasswordUser,
   getupcomingById,
-  deleteupcomingWebinar
+  deleteupcomingWebinar,
 };

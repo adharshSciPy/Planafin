@@ -17,12 +17,12 @@ cron.schedule("*/30 * * * * *", async () => {
   const today = new Date();
 
   const webinars = await upcomingWebinar.find();
-
   for (const webinar of webinars) {
-    // const targetDate = new Date(webinar.webinarDate);
-    // targetDate.setDate(targetDate.getDate() - webinar.remindBeforeDays);
+    const targetDate = new Date(webinar.webinarDate);
+    targetDate.setDate(targetDate.getDate() - webinar.remindBeforeDays);
 
-    const isToday = webinar.webinarDate.toDateString() === today.toDateString();
+    const isToday =
+      targetDate.toDateString() === today.toDateString(); // fixed comparison
 
     if (isToday) {
       for (let user of webinar.usersRegistered) {
@@ -41,33 +41,34 @@ UID:${Date.now()}@yourdomain.com
 DTSTAMP:${formatDate(new Date())}
 DTSTART:${formatDate(startDate)}
 DTEND:${formatDate(endDate)}
-SUMMARY:${webinar.name}
-DESCRIPTION:Join us for the webinar: ${webinar.name}
+SUMMARY:${webinar.title}
+ORGANIZER;CN=Webinar Host:mailto:${process.env.EMAIL_USER}
+DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
 END:VEVENT
 END:VCALENDAR`;
 
           const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: user.email,
-            subject: `Reminder: "${webinar.name}" is coming up!`,
-            text: `Hi ${user.name}, just a heads up — your webinar "${webinar.name}" is happening on ${startDate.toDateString()}.`,
+            to: user.businessEmail,
+            subject: `Reminder: "${webinar.title}" is coming up!`,
+            text: `Hi ${user.firstName}, just a heads up — your webinar "${webinar.title}" is happening on ${startDate.toDateString()}.`,
             html: `
-              <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
-                <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                  <h2 style="color: #333;">📅 Webinar Reminder</h2>
-                  <p style="font-size: 16px; color: #555;">
-                    Hi <strong>${user.name}</strong>,
-                  </p>
-                  <p style="font-size: 16px; color: #555;">
-                    Just a quick reminder that your webinar <strong>"${webinar.name}"</strong> is scheduled for <strong>${startDate.toDateString()}</strong>.
-                  </p>
-                  <p style="font-size: 16px; color: #555;">
-                    We're excited to have you join us!
-                  </p>
-                  <hr />
-                </div>
-              </div>`,
+    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
+      <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2 style="color: #333;">📅 Webinar Reminder</h2>
+        <p style="font-size: 16px; color: #555;">
+          Hi <strong>${user.firstName}</strong>,
+        </p>
+        <p style="font-size: 16px; color: #555;">
+          Just a quick reminder that your webinar <strong>"${webinar.title}"</strong> is scheduled for <strong>${startDate.toDateString()}</strong>.
+        </p>
+        <p style="font-size: 16px; color: #555;">
+          We're excited to have you join us!
+        </p>
+        <hr />
+      </div>
+    </div>`,
             attachments: [
               {
                 filename: "webinar-invite.ics",
@@ -79,10 +80,10 @@ END:VCALENDAR`;
 
           try {
             await transporter.sendMail(mailOptions);
-            console.log(`Reminder sent to ${user.email}`);
+            console.log(`Reminder sent to ${user.businessEmail}`); // fixed
             user.reminded = true;
           } catch (err) {
-            console.error(`Email failed for ${user.email}:`, err);
+            console.error(`Email failed for ${user.businessEmail}:`, err); // fixed
           }
         }
       }
