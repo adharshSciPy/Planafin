@@ -30,7 +30,7 @@ function ResetPassword() {
           autoClose: 2000,
           position: "top-center",
         });
-        setTimeout(() => navigate("/login"), 2200); // delay a bit more than toast
+        setTimeout(() => navigate("/adminlogin"), 2000); // delay a bit more than toast
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Reset failed", {
