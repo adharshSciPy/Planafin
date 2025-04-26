@@ -47,6 +47,7 @@ import PlanafinConsultingAll from "./pages/Admin/PlanafinConsultingAll.jsx";
 import UpDataAll from "./pages/Admin/UpDataAll.jsx";
 import UpWebdata from "./pages/Admin/UpWebdata.jsx";
 import UpCommingWebinar from "./pages/WebinarComponent/UpCommingWebinar.jsx";
+import ResetPassword from "./pages/Admin/ResetPassword/ResetPassword.jsx";
 function App() {
   return (
     <div className="App">
@@ -249,6 +250,10 @@ function App() {
             path="/PlanafinConsultingAll"
             element={<ProtectedRoute roleRequired="400"> <PlanafinConsultingAll /></ProtectedRoute>}
           />
+          <Route
+  path="/resetPasswordUser/:userId/:token"
+  element={<ResetPassword />}
+/>
         </Routes>
       </BrowserRouter>
     </div>

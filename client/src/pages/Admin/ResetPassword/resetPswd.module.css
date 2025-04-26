@@ -1,0 +1,32 @@
+.resetContainer {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .resetForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .inputField {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #999;
+  }
+  
+  .resetButton {
+    background-color: #1890ff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

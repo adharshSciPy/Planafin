@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, } from "react";
 import baseUrl from "../../baseUrl";
-import { useNavigate} from "react-router-dom";
+import { useNavigate,Link} from "react-router-dom";
 import { Eye, EyeOff } from 'lucide-react';
 
 
@@ -41,6 +41,16 @@ navigate('/admindashboard')
   const passwordToggle=()=>{
     setShowPassword(prev => !prev);
   }
+  const handleForgotPassword = async () => {
+    try {
+      const response = await axios.post(`${baseUrl}/api/v1/user/forgotPassword`);
+      alert(response.data.message);
+    } catch (error) {
+      console.error("Forgot Password Error:", error);
+      alert(error.response?.data?.message || "Something went wrong.");
+    }
+  };
+  
 
   return (
     <div>
@@ -77,6 +87,9 @@ navigate('/admindashboard')
         </div>
 
         <button className="admbtn" type="submit">Login</button>
+        <p className="forgot-password-link" onClick={handleForgotPassword} style={{cursor: 'pointer', color: 'blue', marginTop: '10px'}}>
+  Forgot Password?
+</p>
         {/* <p className="admsignup-link">
           Don't have an account? <Link to={'/adminReg'}>Sign up</Link>
         </p> */}
