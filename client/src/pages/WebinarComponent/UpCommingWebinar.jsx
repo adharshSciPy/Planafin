@@ -19,6 +19,7 @@ function UpCommingWebinar() {
         `${baseUrl}/api/v1/user/getupcomingWebinardata/${id}`
       );
       arrayItem(response.data.data || {});
+          
     } catch (error) {
       console.error("Error fetching data:", error);
     }

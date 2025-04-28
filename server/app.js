@@ -11,9 +11,9 @@ const __dirname = path.dirname(__filename);
 dotenv.config()
 
 const app = express();
-dotenv.config({
-    path: './env'
-})
+// dotenv.config({
+//     path: './env'
+// })
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: '16kb' }))
