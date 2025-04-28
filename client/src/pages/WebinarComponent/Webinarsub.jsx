@@ -53,7 +53,7 @@ function Webinarsub() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${baseUrl}/api/v1/user/addWatchnow`,
+        `${baseUrl}/api/v1/user/addWatchnow/${id}`,
         formdata
       );
       if (response.status === 200) {
@@ -70,17 +70,12 @@ function Webinarsub() {
           selectCountry: "",
         });
         setVisible(false)
-      } else {
       }
     } catch (error) {
-      toast.error("Error while submitting data", {
+      toast.error(  "Already registered or try after some time", {
         position: "bottom-right",
         autoClose: 3000,
       });
-      console.error(
-        "Submission Error:",
-        error.response ? error.response.data : error.message
-      );
     }finally{
       setLoading(false); 
     }
@@ -232,7 +227,6 @@ function Webinarsub() {
                       onChange={handleInput}
                     />
                     {
-                      // Show error message for non-business emails
                       formdata.businessEmail &&
                         /@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$/i.test(
                           formdata.businessEmail
@@ -494,10 +488,19 @@ function Webinarsub() {
                     <button type="submit" disabled={loading}>{loading ? "Submitting..." : "Submit"}</button>
                   </div>
                 </form>
-                ):(<div className={styles.videoContainer}>
-                  <div className={styles.confirmationText}>Thank you for your registration</div>
-                  <iframe title="vimeo-player" src={`${item.videolink}`|| ""} width="100%" height="100%" frameborder="0"    allowfullscreen></iframe>
-                </div>)}
+                  ):item.videolink==="undefined" ? null:(
+                    <div className={styles.videoContainer}>
+                      <div className={styles.confirmationText}>Thank you for your registration</div>
+                      <iframe
+                        title="vimeo-player"
+                        src={item.videolink}
+                        width="100%"
+                        height="100%"
+                        frameBorder="0"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  ) }
               </div>
             </div>
           </div>

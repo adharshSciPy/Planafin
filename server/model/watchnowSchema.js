@@ -12,11 +12,11 @@ const watchnowSchema = new Schema({
     businessEmail: {
         type: String,
         required: true,
-        match: [
-            // Disallow common free email domains
-            /^(?!.*@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$).+@.+\..+$/,
-            "Please use your business email address"
-        ]
+        // match: [
+           
+        //     /^(?!.*@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$).+@.+\..+$/,
+        //     "Please use your business email address"
+        // ]
     },
     companyName: {
         type: String,

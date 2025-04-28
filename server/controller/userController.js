@@ -20,12 +20,17 @@ import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import { upcomingWebinar } from "../model/upcomingwebinarSchema.js";
-
+import path from "path";
 import nodemailer from "nodemailer";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
+import { fileURLToPath } from "url";
+
+// These two lines recreate __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
@@ -461,7 +466,11 @@ const deleteJourney = async (req, res) => {
 };
 
 const addWatchnow = async (req, res) => {
+  const { id } = req.params;
   try {
+    const webinarDetails = await OnDemand.findById(id);
+    console.log(id);
+
     const {
       firstName,
       lastName,
@@ -470,6 +479,7 @@ const addWatchnow = async (req, res) => {
       designation,
       selectCountry,
     } = req.body;
+
     const result = await WatchNow.create({
       firstName,
       lastName,
@@ -478,6 +488,7 @@ const addWatchnow = async (req, res) => {
       designation,
       selectCountry,
     });
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -491,16 +502,58 @@ const addWatchnow = async (req, res) => {
       to: businessEmail,
       subject: "Registration confirmation",
       html: `
-    <div style="font-family: Arial, sans-serif; color: #333;">
-      <h2 style="color: #007bff;">Email Verification</h2>
-      <p>Your One-Time Password (OTP) for email verification is:</p>
-      <p style="font-size: 24px; font-weight: bold; color: #d9534f; background: #f8d7da; padding: 10px; border-radius: 5px; display: inline-block;">
-        this
-      </p>
-    </div>`,
+        <body style="font-family: Arial, sans-serif; background-color: #ffffff; margin: 0; padding: 20px;">
+          <div style="display: flex; justify-content:space-around; align-items:center; margin-bottom:30px;width:100%">
+            <img src="cid:logo" alt="Planafin Logo" style="height: 50px;">
+            
+          </div>
+
+          <div style="max-width: 600px; margin: auto; text-align: center;">
+            <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; margin-bottom: 30px;">
+              <h2 style="margin: 0; color: #000;">Webinar is available for access</h2>
+            </div>
+            
+            <div style="text-align: left; margin-bottom: 30px;">
+              <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
+              <p>Our webinar on <strong>${
+                webinarDetails.title || `No title available for this webinar`
+              }</strong> is now available for access.</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;width:100%">
+            <img src="cid:webinarImage"  alt="webinarImage " style="height: 150px;">
+            
+             </div>
+            <div style="text-align: left; font-size: 14px; color: #555;">
+              <p>${
+                webinarDetails.summary ||
+                `No summary available for this webinar`
+              }</p>
+            </div>
+            <div style="width:100%;display:flex;align-items: end;">
+            <a href="${
+              webinarDetails.videolink
+            }" style="background-color: #f0f0f0; padding: 10px 20px; color: #007bff; text-decoration: none; border-radius: 5px; font-weight: bold;">Watch Now</a>
+            </div>
+          </div>
+        </body>
+      `,
+      attachments: [
+        {
+          filename: "logo.png",
+          path: path.join(__dirname, "../public/images/logo.png"), // adjust path if needed
+          cid: "logo",
+        },
+        {
+          filename: webinarDetails.image,
+          path: path.join(__dirname, "../", webinarDetails.image),
+          cid: "webinarImage", // Inline image referenced in HTML
+        },
+      ],
     };
+    console.log(webinarDetails.image);
 
     await transporter.sendMail(mailOptions);
+
     res.status(200).json({ message: "Watch Now Form Submitted", data: result });
   } catch (error) {
     res
@@ -1509,9 +1562,13 @@ END:VCALENDAR`;
       to: businessEmail,
       subject: "Webinar Registration Confirmation",
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;">
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <div style="display: flex; justify-content:space-around; align-items:center; margin-bottom:30px;width:100%">
+            <img src="cid:logo" alt="Planafin Logo" style="height: 50px;">
+            
+          </div>
                 <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                  <h2 style="color: #333;">📅 Webinar Reminder</h2>
+                  <h2 style="color: #333;"> Webinar Reminder</h2>
                   <p style="font-size: 16px; color: #555;">
                     Hi <strong>${firstName}</strong>,
                   </p>
@@ -1531,6 +1588,11 @@ END:VCALENDAR`;
           filename: "webinar-invite.ics",
           content: icsContent,
           contentType: "text/calendar",
+        },
+        {
+          filename: "logo.png",
+          path: path.join(__dirname, "../public/images/logo.png"), // adjust path if needed
+          cid: "logo",
         },
       ],
     };
