@@ -14,41 +14,35 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Cron job - Runs daily at midnight UTC
-cron.schedule("0 0 * * *", async () => {
+// Cron job - Runs every minute (change back to "0 0 * * *" in production)
+cron.schedule("* * * * *", async () => {
   const today = new Date();
-  today.setUTCHours(0, 0, 0, 0); // Normalize to UTC midnight
+  today.setUTCHours(0, 0, 0, 0);
 
   try {
     const webinars = await upcomingWebinar.find();
 
     for (const webinar of webinars) {
       const targetDate = new Date(webinar.webinarDate);
-      targetDate.setUTCHours(0, 0, 0, 0);
       targetDate.setUTCDate(targetDate.getUTCDate() - webinar.remindBeforeDays);
 
       if (targetDate.toISOString() === today.toISOString()) {
         for (let user of webinar.usersRegistered) {
           if (!user.reminded) {
+            if (!webinar.startTime) {
+              console.warn(`Skipping "${webinar.title}" due to missing startTime.`);
+              continue;
+            }
+
+            const startDate = new Date(webinar.webinarDate);
             const [startHour, startMinute] = webinar.startTime.split(":").map(Number);
-            const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
+            startDate.setUTCHours(startHour, startMinute, 0, 0);
 
-            const baseDate = new Date(webinar.webinarDate);
-            baseDate.setUTCHours(0, 0, 0, 0); // Set base to start of day UTC
+            // Set endDate to 1 hour later
+            const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
 
-            // Manually adjust IST to UTC
-            const localStart = new Date(baseDate);
-            localStart.setUTCHours(startHour - 5, startMinute - 30, 0, 0);
-
-            const localEnd = new Date(baseDate);
-            localEnd.setUTCHours(endHour - 5, endMinute - 30, 0, 0);
-
-            const formatDateTimeUTC = (date) => {
-              return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-            };
-
-            const dtStart = formatDateTimeUTC(localStart);
-            const dtEnd = formatDateTimeUTC(localEnd);
+            const formatDateTime = (date) =>
+              date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
             const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
@@ -57,8 +51,8 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:${Date.now()}@yourdomain.com
 SUMMARY:${webinar.title}
-DTSTART:${dtStart}
-DTEND:${dtEnd}
+DTSTART:${formatDateTime(startDate)}
+DTEND:${formatDateTime(endDate)}
 DESCRIPTION:Join the webinar "${webinar.title}"
 LOCATION:Online
 STATUS:CONFIRMED
@@ -76,7 +70,7 @@ END:VCALENDAR`;
                   <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
                     <h2 style="color: #333;">📅 Webinar Reminder</h2>
                     <p>Hi <strong>${user.firstName}</strong>,</p>
-                    <p>Your webinar <strong>"${webinar.title}"</strong> is scheduled for <strong>${localStart.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</strong>.</p>
+                    <p>Your webinar <strong>"${webinar.title}"</strong> is scheduled for <strong>${startDate.toUTCString()}</strong>.</p>
                     <p>We're excited to have you join us!</p>
                     <hr />
                   </div>
