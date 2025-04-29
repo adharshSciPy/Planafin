@@ -3,6 +3,14 @@ import mongoose, { Schema } from "mongoose";
 const upcomingwebinarSchema = new mongoose.Schema({
   name: String,
   webinarDate: Date,
+  startTime: {
+    type: String, 
+    required: true,
+  },
+  endTime: {
+    type: String, 
+    required: true,
+  },
   remindBeforeDays: Number,
   image: {
     type: String,
@@ -21,16 +29,16 @@ const upcomingwebinarSchema = new mongoose.Schema({
   },
   attendSession: {
     type: Array,
-    required:true
+    required: true,
   },
   usersRegistered: [
     {
       firstName: String,
       lastName: String,
-      businessEmail:String,
-      companyName:String,
-      designation:String,
-      selectCountry:String,
+      businessEmail: String,
+      companyName: String,
+      designation: String,
+      selectCountry: String,
       reminded: { type: Boolean, default: false },
     },
   ],

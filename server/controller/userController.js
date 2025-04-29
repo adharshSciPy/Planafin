@@ -1457,6 +1457,8 @@ const createUpcomingWebinar = async (req, res) => {
       summary,
       pigment,
       speaker,
+      startTime,
+      endTime,
     } = req.body;
     let image = "";
     if (req.file) {
@@ -1474,6 +1476,8 @@ const createUpcomingWebinar = async (req, res) => {
       usersRegistered: [],
       attendSession: attendSession || [],
       image,
+      startTime,
+      endTime,
     });
 
     await newWebinar.save();
@@ -1537,9 +1541,43 @@ const upcomingWebinarUser = async (req, res) => {
         pass: process.env.EMAIL_PASS,
       },
     });
-    const startDate = new Date(webinar.webinarDate);
-    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // 1 hour duration
 
+    // Ensure webinarDate is a valid Date object
+    let webinarDate = new Date(webinar.webinarDate);
+    if (isNaN(webinarDate)) {
+      return res.status(400).json({ message: "Invalid webinar date." });
+    }
+
+    const startTime = webinar.startTime?.trim(); // Time part, e.g., "03:30"
+    const endTime = webinar.endTime?.trim(); // Time part, e.g., "06:30"
+
+    if (!startTime || !endTime) {
+      return res.status(400).json({ message: "Invalid startTime or endTime." });
+    }
+
+    // Split the startTime and endTime into hours and minutes
+    const [startHour, startMinute] = startTime.split(":");
+    const [endHour, endMinute] = endTime.split(":");
+
+    // Check if the time values are valid
+    if (isNaN(startHour) || isNaN(startMinute) || isNaN(endHour) || isNaN(endMinute)) {
+      return res.status(400).json({ message: "Invalid start or end time format." });
+    }
+
+    // Create start and end dates by adding the startTime and endTime to the webinarDate
+    const startDate = new Date(webinarDate); // Copy the webinarDate for startDate
+    const endDate = new Date(webinarDate);   // Copy the webinarDate for endDate
+
+    // Apply the startTime and endTime to the dates
+    startDate.setHours(startHour, startMinute, 0, 0); // Set hours, minutes, seconds, and milliseconds
+    endDate.setHours(endHour, endMinute, 0, 0);       // Set hours, minutes, seconds, and milliseconds
+
+    // Check if the dates are valid
+    if (isNaN(startDate) || isNaN(endDate)) {
+      return res.status(400).json({ message: "Failed to parse start/end date. Check date/time format." });
+    }
+
+    // Format dates to ISO string format for ics
     const formatDate = (date) =>
       date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
@@ -1553,36 +1591,48 @@ DTSTART:${formatDate(startDate)}
 DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
 ORGANIZER;CN=Webinar Host:mailto:${process.env.EMAIL_USER}
-DESCRIPTION:Join us for  the webinar: ${webinar.title}
+DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
 END:VEVENT
 END:VCALENDAR`;
+
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: businessEmail,
       subject: "Webinar Registration Confirmation",
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <div style="display: flex; justify-content:space-around; align-items:center; margin-bottom:30px;width:100%">
+        <body style="font-family: Arial, sans-serif; background-color: #ffffff; margin: 0; padding: 20px;">
+          <div style="display: flex; justify-content:space-around; align-items:center; margin-bottom:30px;width:100%">
             <img src="cid:logo" alt="Planafin Logo" style="height: 50px;">
-            
           </div>
-                <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                  <h2 style="color: #333;"> Webinar Reminder</h2>
-                  <p style="font-size: 16px; color: #555;">
-                    Hi <strong>${firstName}</strong>,
-                  </p>
-                  <p style="font-size: 16px; color: #555;">
-                    registration successful for the webinar <strong>"${
-                      webinar.title
-                    }"</strong> which is being conducted on <strong>${startDate.toDateString()}</strong>.
-                  </p>
-                  <p style="font-size: 16px; color: #555;">
-                    We're excited to have you join us!
-                  </p>
-                  <hr />
-                </div>
-              </div>`,
+          <div style="max-width: 600px; margin: auto; text-align: center;">
+            <div style="background-color: #f7f7f7; padding: 15px; border-radius: 5px; margin-bottom: 30px;">
+              <h2 style="margin: 0; color: #000;">Planafin Webinar Invitation</h2>
+            </div>
+            <div style="text-align: left; margin-bottom: 30px;">
+              <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
+              <p>Your registration is confirmed for the event: <strong>${webinar.title || `No title available for this webinar`}</strong></p>
+            </div>
+            <div style="text-align: left; font-size: 14px; color: #555;">
+              <p>Here are your registration details:</p>
+              <p>${webinar.title || `No summary available for this webinar`}</p>
+              <div style="display: flex;">
+                <p style="margin-right: 10px;">
+                  ${startTime || `nil`}
+                </p>
+                <p>
+                  ${endTime || `nil`}
+                </p>
+              </div>
+            </div>
+            <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
+              <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
+            </div>
+            <div style="text-align: left;">
+              <p>${webinar.summary}</p>
+            </div>
+          </div>
+        </body>`,
       attachments: [
         {
           filename: "webinar-invite.ics",
@@ -1591,8 +1641,13 @@ END:VCALENDAR`;
         },
         {
           filename: "logo.png",
-          path: path.join(__dirname, "../public/images/logo.png"), // adjust path if needed
+          path: path.join(__dirname, "../public/images/logo.png"),
           cid: "logo",
+        },
+        {
+          filename: webinar.image,
+          path: path.join(__dirname, "../", webinar.image),
+          cid: "webinarImage",
         },
       ],
     };

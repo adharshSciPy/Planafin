@@ -44,8 +44,8 @@ function UpWebdata() {
       if (imageFile) {
         formData.append("image", imageFile);
       }
-      console.log('.thid',formData);
-      
+      console.log(".thid", formData);
+
       const response = await axios.post(
         `${baseurl}/api/v1/user/createupcomingwebinar`,
         formData,
@@ -124,6 +124,8 @@ function UpWebdata() {
             attendSession: [],
             webinarDate: "",
             remindBeforeDays: "",
+            startTime: "",
+            endTime: "",
             // userRegistered: [],
           }}
           onFinish={handleSubmit}
@@ -134,8 +136,7 @@ function UpWebdata() {
           <Form.Item
             name="title"
             label="Heading"
-            rules={[{ required: true, message: "Please enter a heading" },
-            ]}
+            rules={[{ required: true, message: "Please enter a heading" }]}
           >
             <Input />
           </Form.Item>
@@ -172,18 +173,26 @@ function UpWebdata() {
           >
             <Input.TextArea rows={6} />
           </Form.Item>
-          <Form.Item
-            name="webinarDate"
-            label="Webinar Date"
-          >
+          <Form.Item name="webinarDate" label="Webinar Date">
             <Input type="date" />
           </Form.Item>
 
-          <Form.Item
-            name="remindBeforeDays"
-            label="Remind Before (Days)"
-          >
+          <Form.Item name="remindBeforeDays" label="Remind Before (Days)">
             <Input type="number" min={0} />
+          </Form.Item>
+          <Form.Item
+            name="startTime"
+            label="Start Time"
+            rules={[{ required: true, message: "Please select a start time" }]}
+          >
+            <Input type="time" />
+          </Form.Item>
+          <Form.Item
+            name="endTime"
+            label="End Time"
+            rules={[{ required: true, message: "Please select an end time" }]}
+          >
+            <Input type="time" />
           </Form.Item>
           {/* Attended Sessions */}
           <Form.Item name="attendSession" label="Attended Sessions">
@@ -251,6 +260,7 @@ function UpWebdata() {
               </Button>
             </Flex>
           </Form.Item>
+          
         </Form>
       </div>
       <ToastContainer />
