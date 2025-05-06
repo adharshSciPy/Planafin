@@ -55,11 +55,9 @@
   padding: 13px 40px 13px 37px;
   border: none;
 }
-.topContentBtn:hover{
-
-    transition: opacity 1s ease ;
-    opacity: 0.6; 
-  
+.topContentBtn:hover {
+  transition: opacity 1s ease;
+  opacity: 0.6;
 }
 
 .topElementImageDiv {
@@ -269,10 +267,9 @@
   padding: 13px 40px 13px 37px;
   border: none;
 }
-.aboutContentBtn:hover{
-    transition: opacity 1s ease ;
-    opacity: 0.6; 
-  
+.aboutContentBtn:hover {
+  transition: opacity 1s ease;
+  opacity: 0.6;
 }
 .aboutBtnDiv {
   display: flex;
@@ -364,8 +361,8 @@
 }
 
 .sliderWrapper {
-  max-width: 1200px; 
-  width: 100%; 
+  max-width: 1200px;
+  width: 100%;
   margin: auto;
 }
 
@@ -383,10 +380,10 @@
   padding: 30px;
   border: 2px solid #e0e0e0;
   border-radius: 15px;
-  max-width: 450px;  /* Keep it smaller */
+  max-width: 450px; /* Keep it smaller */
   text-align: center;
-height: 300px;
-  margin: auto;  /* Ensures cards are centered */
+  height: max-content;
+  margin: auto; /* Ensures cards are centered */
 }
 
 .singleWrapper {
@@ -412,7 +409,6 @@ height: 300px;
   color: #20303d;
   font-weight: 500;
   line-height: 24px;
-  
 }
 
 .singleCardName {
@@ -548,10 +544,9 @@ height: 300px;
   border-style: none;
   border-radius: 5px;
 }
-.subimtButton:hover{
-    transition: opacity 1s ease ;
-    opacity: 0.6; 
-  
+.subimtButton:hover {
+  transition: opacity 1s ease;
+  opacity: 0.6;
 }
 .locationOuterDiv {
   width: 100%;
@@ -589,7 +584,7 @@ height: 300px;
 .imageSingleCard {
   width: 100%;
   height: 175px;
-  display: block; 
+  display: block;
 }
 
 .singleImageLoc {
@@ -643,103 +638,104 @@ height: 300px;
 
 .slick-dots li.slick-active .customDot {
   transform: scale(1.5);
-  background-color:black;
+  background-color: black;
 }
 
-@media (max-width:786px) {
-  .topElementOuter{
+@media (max-width: 786px) {
+  .topElementOuter {
     flex-direction: column-reverse;
-    padding: 2rem  ;
+    padding: 2rem;
   }
-  .topElementContentDiv,.topElementImageDiv{
+  .topElementContentDiv,
+  .topElementImageDiv {
     width: 100%;
   }
-  .outerSingleFeedbackCard{
+  .outerSingleFeedbackCard {
     flex-direction: column;
     gap: 20px;
   }
 
-  .carouselHeading{
+  .carouselHeading {
     text-align: center;
   }
-  .carouselSingleCardOuter{
-  padding: 18px;
-   height: max-content;
+  .carouselSingleCardOuter {
+    padding: 18px;
+    height: max-content;
   }
-  .formRow{
+  .formRow {
     flex-direction: column;
     width: 100%;
   }
-  .formInput{
+  .formInput {
     width: 100%;
   }
-  .locationImgOuter{
+  .locationImgOuter {
     flex-direction: column;
   }
-  .locationImgSingle{
+  .locationImgSingle {
     width: 90%;
     margin: auto;
   }
-  .companyLocation{
+  .companyLocation {
     flex-direction: column;
     align-items: start;
     margin-left: 30px;
     gap: 20px;
   }
-  .jobMoreDetailsOuter{
+  .jobMoreDetailsOuter {
     flex-direction: column;
     width: 100%;
   }
-  .jobDetailsListingDiv{
+  .jobDetailsListingDiv {
     width: 90%;
   }
-  .workCultureOuterDiv{
+  .workCultureOuterDiv {
     padding-top: 0;
   }
-  .workCultureImg{
+  .workCultureImg {
     border-radius: 0;
   }
-  .workCulture{
+  .workCulture {
     flex-direction: column;
   }
-  .workCultureContentDiv{
+  .workCultureContentDiv {
     text-align: center;
   }
-  .singleCardStaticImg{
-  display: none;
-}}
-@media (max-width:486px) {
-  .topElementOuter{
+  .singleCardStaticImg {
+    display: none;
+  }
+}
+@media (max-width: 486px) {
+  .topElementOuter {
     padding: 1rem;
   }
-  .aboutOuterDiv{
+  .aboutOuterDiv {
     padding: 4rem 2rem;
   }
-  .carouselOuterDiv{
-  padding: 1rem;
+  .carouselOuterDiv {
+    padding: 1rem;
   }
-  .imageGridOuterDiv{
+  .imageGridOuterDiv {
     gap: 10px;
     padding: 0 6px;
   }
-  .singlePersonImg{
- width: 100px;
- height: 100px;
-
+  .singlePersonImg {
+    width: 100px;
+    height: 100px;
   }
-  .carouselHeading{
-  font-size:30px;
+  .carouselHeading {
+    font-size: 30px;
   }
-  .subimtButton{
-  padding: 8px 25px;
+  .subimtButton {
+    padding: 8px 25px;
   }
-  .locationImgSingle{
-  width: 80%;
+  .locationImgSingle {
+    width: 80%;
   }
-  .locationHeading{
-  font-size: 30px;
+  .locationHeading {
+    font-size: 30px;
   }
-  .officeLocation{
-  margin: 1rem 0;
+  .officeLocation {
+    margin: 1rem 0;
   }
 }
