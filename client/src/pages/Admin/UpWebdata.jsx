@@ -153,9 +153,9 @@ function UpWebdata() {
 
           <Form.Item
             name="pigment"
-            label="About Pigment"
+            label="About Company"
             rules={[
-              { required: true, message: "Please enter details about pigment" },
+              { required: true, message: "Please enter details about Company" },
             ]}
           >
             <Input.TextArea rows={6} />
