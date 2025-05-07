@@ -224,14 +224,14 @@ function UpCommingWebinar() {
                       placeholder="Work / business email*"
                       onChange={handleInput}
                     />
-                    {/* {
+                    {
                     formdata.businessEmail &&
                     /@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$/i.test(formdata.businessEmail) && (
                       <p style={{ color: 'red', marginTop: '5px' }}>
                         Please provide your business email address.
                       </p>
                     )
-                  } */}
+                  }
                   </div>
                   <div className={styles.formDiv}>
                     <input
