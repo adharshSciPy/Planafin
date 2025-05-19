@@ -45,7 +45,6 @@ function Aboutus() {
       const response = await axios.get(
         `${baseUrl}/api/v1/user/employeeDetails`
       );
-      console.log("employee image", response.data.data);
       setSlides(response.data.data);
     } catch (error) {
       console.log("Error fetching the data", error);

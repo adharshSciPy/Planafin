@@ -8,7 +8,6 @@ import enterpriseImg from "../../assets/businesspeople-working-finance-accountin
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import peopleImg from "../../assets/people.png";
 import vector1 from "../../assets/Vector-1.png";
 import vector2 from "../../assets/Vector-2.png";
 import vector3 from "../../assets/Vector-3.png";

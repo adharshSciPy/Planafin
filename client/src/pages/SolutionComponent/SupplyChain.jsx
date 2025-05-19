@@ -7,7 +7,6 @@ import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
 import { useParams } from "react-router-dom";
-import Item from "antd/es/list/Item";
 
 function SupplyChain() {
   const [supplyData, setSupplyData] = useState();
