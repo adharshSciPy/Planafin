@@ -46,10 +46,6 @@ function Home() {
               entry.target.classList.add(styles.animateIn);
             }
           });
-        },
-        {
-          rootMargin: "0px 0px -100px 0px", // trigger earlier
-          threshold: 0.1,
         }
       );
     }
