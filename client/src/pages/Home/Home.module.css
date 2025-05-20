@@ -7,7 +7,7 @@
   transition: all ease 1s;
   transform: scale(1);
   transform: translateY(100px);
-  opacity: 0;
+  opacity: 1;
 }
 
 .elementorWidgetContainer {
@@ -45,7 +45,7 @@
   transition: all ease 1s;
   transform: scale(1);
   transform: translateY(100px);
-  opacity: 0;
+  opacity: 1;
 }
 
 .elementorColumnMain {
@@ -148,7 +148,7 @@
   transition: all ease 1s;
   transform: scale(1);
   transform: translateX(100px);
-  opacity: 0;
+  opacity: 1;
 }
 
 .serviceCardImage img {
@@ -274,7 +274,7 @@
     /* justify-content: center; */
     flex-direction: column;
     margin: 3rem 0;
-    opacity: 0;
+    opacity: 1;
   transform: translateY(100px);
   scale: 0; 
   transition: all 1s ease-out;
@@ -313,7 +313,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
+  opacity: 1;
   transform: translateY(100px);
   scale: 0; 
   transition: all 1s ease-out;
@@ -384,7 +384,7 @@
   gap: 1.5rem;
 }
 .expertiseCardImgDiv{
-  opacity: 0;
+  opacity: 1;
   transform: translateY(100px);
   scale: 0; 
   transition: all 1.3s ease-out;
@@ -458,7 +458,7 @@
     /* align-items: flex-start; */
     
     /* padding:0 0 1.5rem 0; */
-    opacity: 0;
+    opacity: 1;
     transform: translateY(100px);
     scale: 0; 
     transition: all 1.3s ease-out;
@@ -490,7 +490,7 @@
 .flickeringImgInner{
   width: 70%;
 margin: auto;
-opacity: 0;
+opacity: 1;
 transform: scale(0.9);
 transition: all 0.5s ease-out;
 /* border: 2px solid red; */
