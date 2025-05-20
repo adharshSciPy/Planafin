@@ -37,31 +37,7 @@ function Home() {
   const myRef = useRef([]);
   const observerRef = useRef(null);
   const headingRef = useRef([]);
-  useEffect(() => {
-    if (!observerRef.current) {
-      observerRef.current = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add(styles.animateIn);
-            }
-          });
-        }
-      );
-    }
-    headingRef.current.forEach((el) => {
-      if (el && observerRef.current) observerRef.current.observe(el);
-    });
-    myRef.current.forEach((el) => {
-      if (el && observerRef.current) observerRef.current.observe(el);
-    });
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, []);
+ 
   const setElementRef = (index) => (el) => {
     if (el) {
       myRef.current[index] = el;
