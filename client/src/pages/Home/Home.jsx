@@ -71,7 +71,7 @@ function Home() {
             Get a holistic view of your business and make better decisions
           </p>
         </div>
-        <div className={styles.swiperSliderContainer}>
+        <div className={styles.swiperSliderContainer}>  
           <img
             src={swiperImg}
             alt="swiperSlider"

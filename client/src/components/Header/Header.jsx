@@ -85,7 +85,7 @@ const Header = () => {
               <Link to="/Solutions" className={styles.navLink}> Solutions</Link>
             </div>
             <div class={styles.mobileNavContents}>
-              <Link to="/About Us" className={styles.navLink}>About Us</Link>
+              <Link to="/AboutUs" className={styles.navLink}>About Us</Link>
             </div>
             <div class={styles.mobileNavContents}>
               <Link to="/career" className={styles.navLink}>career</Link>

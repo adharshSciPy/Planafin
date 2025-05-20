@@ -137,6 +137,7 @@
   justify-content: space-between; /* Distribute space between elements */
   min-height: 350px;
   padding: 20px;
+  overflow: hidden;
 }
 
 .serviceCardImage {
@@ -145,8 +146,9 @@
   justify-content: center;
   transition: all ease 1s;
   transform: scale(1);
-  transform: translateX(100px);
   opacity: 1;
+  overflow: hidden;
+
 }
 
 .serviceCardImage img {
@@ -700,5 +702,49 @@ transition: all 0.5s ease-out;
     font-size: 16px;
     font-weight: 100;
     /* word-spacing: 6px; */
+  }
+  .elementorHeading{
+    font-size: 24px;
+  }
+  .elementorWidgetContainer{
+    padding: 0 20px;
+
+  }
+  .elementorSpaceInner{
+    height: 25px;
+  }
+  .elementorColumnMain{
+    width: 100%;
+    padding: 20px 0 20px 20px
+    
+  }
+  .elementorWidgetContainerHead{
+    font-size: 26px;
+  }
+  .elementorColumnQuotes{
+    width: 100%;
+  }
+  .elementorSectionContainer{
+    margin-bottom: 50px;
+  }
+  .elementorColumn{
+    margin: 0;
+  }
+  .widgetContainerQuotesPara{
+    font-size: 25px;
+    padding: 0 20px
+  }
+  .serviceOfferingPara{
+    padding: 0 10px;
+    text-align: justify;
+  }
+  .headingLine{
+    display: none;
+  }
+  .enterpriseContentMainHead{
+    font-size: 25px;
+  }
+  .enterpriseContentSubHead{
+    font-size: 24px;
   }
 }

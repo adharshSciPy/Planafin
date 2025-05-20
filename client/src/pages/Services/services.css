@@ -215,6 +215,7 @@ strong{
   padding:0 0 1.5rem 0;
   margin-top: 10px;
 }
+
 .overlaybutton {
   font-size: 18px;
   font-weight: 700;
@@ -632,5 +633,11 @@ li {
   }
   .consulting-grid {
     padding: 0;
+  }
+  .service-container2{
+    margin-top: 20px;
+  }
+  .overlaymaindiv{
+    min-height: max-content;
   }
 }

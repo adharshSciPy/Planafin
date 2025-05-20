@@ -452,8 +452,7 @@
     width: 330px;
   }
   .solution-head1 {
-    width: 300px;
-    font-size: 24px;
+    font-size: 36px;
     text-align: center;
   }
 
@@ -518,6 +517,12 @@
   }
   .sqr-content {
     width: 100%;
+  }
+  .solution-container1{
+    margin-top: 25px;
+  }
+  .getinbtndiv{
+    margin-top: 50px;
   }
 }
 @media (max-width: 379px) {

@@ -148,6 +148,9 @@
     width: 300px;
     margin: 0 auto;
   }
+  .maincontainer{
+    padding-top: 10px;
+  }
 }
 
 @media (max-width: 480px) {
