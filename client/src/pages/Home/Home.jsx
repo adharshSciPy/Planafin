@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Home.module.css";
 import swiperImg from "../../assets/planafin.home.swiper-slider.png";
 import cardImg1 from "../../assets/card.image.1.png";
@@ -17,40 +17,41 @@ import flickeringImg from "../../assets/flickeringImg.png";
 import Carousel from "../../components/Carousel/EmblaCarousel";
 import { useNavigate } from "react-router-dom";
 
-
-
 function Home() {
-  const navigate=useNavigate();
-  const readMoreNavigation=(id)=>{
-    navigate('/Services', { state: { activeTab: id ,scrollToTabs:true} }); 
+  const navigate = useNavigate();
+  const readMoreNavigation = (id) => {
+    navigate("/Services", { state: { activeTab: id, scrollToTabs: true } });
     // window.scrollTo(0, 0);
-
-  }
-  // contact us 
-  const ContactUs=()=>{
-    navigate('/lets-talk')
+  };
+  // contact us
+  const ContactUs = () => {
+    navigate("/lets-talk");
     window.scrollTo(0, 0);
-  }
+  };
   // solution readmore
-  const solutionReadMore=()=>{
-    navigate('/solutions')
+  const solutionReadMore = () => {
+    navigate("/solutions");
     window.scrollTo(0, 0);
-
-  }
+  };
   const OPTIONS = { loop: true };
   const myRef = useRef([]);
-  const observerRef = useRef(null); 
+  const observerRef = useRef(null);
   const headingRef = useRef([]);
-  useEffect(()=>{
-    if(!observerRef.current){
-      observerRef.current=new IntersectionObserver((entries)=>{
-        entries.forEach((entry)=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add(styles.animateIn);
-
-          }
-        })
-      })
+  useEffect(() => {
+    if (!observerRef.current) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add(styles.animateIn);
+            }
+          });
+        },
+        {
+          rootMargin: "0px 0px -100px 0px", // trigger earlier
+          threshold: 0.1,
+        }
+      );
     }
     headingRef.current.forEach((el) => {
       if (el && observerRef.current) observerRef.current.observe(el);
@@ -58,14 +59,13 @@ function Home() {
     myRef.current.forEach((el) => {
       if (el && observerRef.current) observerRef.current.observe(el);
     });
-    
+
     return () => {
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
     };
-    
-  },[]);
+  }, []);
   const setElementRef = (index) => (el) => {
     if (el) {
       myRef.current[index] = el;
@@ -80,12 +80,14 @@ function Home() {
     }
   };
   return (
-    <div >
+    <div>
       <Header />
-      
+
       <div className={styles.elementorSpaceInner}></div>
-      <div className={styles.elementorElement}
-         ref={(el) => setElementRef(-1)(el)}>
+      <div
+        className={styles.elementorElement}
+        ref={(el) => setElementRef(-1)(el)}
+      >
         <div className={styles.elementorWidgetContainer}>
           <h2 className={styles.elementorHeading}>
             <span style={{ color: "#2d9bff" }}>Fast Track </span>
@@ -105,7 +107,10 @@ function Home() {
           />
         </div>
       </div>
-      <div className={styles.elementorSectionContainer} ref={(el) => setElementRef(-1)(el)}>
+      <div
+        className={styles.elementorSectionContainer}
+        ref={(el) => setElementRef(-1)(el)}
+      >
         <div className={styles.elementorColumnMain}>
           <div className={styles.elementorColumn}>
             <div className={styles.elementorWidgetContainerHead}>
@@ -123,7 +128,10 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className={styles.elementorSectionContainer}ref={(el) => setElementRef(-1)(el)} >
+      <div
+        className={styles.elementorSectionContainer}
+        ref={(el) => setElementRef(-1)(el)}
+      >
         <div className={styles.elementorColumnQuotes}>
           <div className={styles.elementorColumn}>
             <p className={styles.widgetContainerQuotesPara}>
@@ -135,7 +143,10 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className={styles.elementorServiceOffering}ref={(el) => setElementRef(-1)(el)}>
+      <div
+        className={styles.elementorServiceOffering}
+        ref={(el) => setElementRef(-1)(el)}
+      >
         <div className={styles.serviceOfferingHeadDiv}>
           <h2 className={styles.serviceOfferingHead}>Our Service Offerings</h2>
         </div>
@@ -151,62 +162,74 @@ function Home() {
         </div>
         <div className={styles.serviseOfferingInnerMain}>
           <div className={styles.serviceCard}>
-            <div className={styles.serviceCardImage}ref={(el) => setElementRef(-1)(el)}>
+            <div
+              className={styles.serviceCardImage}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={cardImg1} alt="cardImg1" />
             </div>
             <div className={styles.serviceCardHeadings}>
-            <div className={styles.headingAndLine}>
-
-              <h2 className={styles.cardHead}>
-                Business Advisory & Consulting
-                
-              </h2>
+              <div className={styles.headingAndLine}>
+                <h2 className={styles.cardHead}>
+                  Business Advisory & Consulting
+                </h2>
               </div>
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
-            <div className={styles.headingLine}></div>
+              <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Business-Consulting')}>
+              <h6
+                className={styles.readMore}
+                onClick={() => readMoreNavigation("Business-Consulting")}
+              >
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
           </div>
           <div className={styles.serviceCard}>
-            <div className={styles.serviceCardImage} ref={(el) => setElementRef(-1)(el)}>
+            <div
+              className={styles.serviceCardImage}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={cardImg2} alt="cardImg2" />
             </div>
             <div className={styles.serviceCardHeadings}>
-            <div className={styles.headingAndLine}>
-
-              <h2 className={styles.cardHead}>
-                Solution 
-                Implementation
-              </h2>
+              <div className={styles.headingAndLine}>
+                <h2 className={styles.cardHead}>Solution Implementation</h2>
               </div>
-
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
-            <div className={styles.headingLine}></div>
+              <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Solution-Deployment')}>
+              <h6
+                className={styles.readMore}
+                onClick={() => readMoreNavigation("Solution-Deployment")}
+              >
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
           </div>
           <div className={styles.serviceCard}>
-            <div className={styles.serviceCardImage} ref={(el) => setElementRef(-1)(el)}>
+            <div
+              className={styles.serviceCardImage}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={cardImg3} alt="cardImg3" />
             </div>
             <div className={styles.serviceCardHeadings}>
-            <div className={styles.headingAndLine}>
-
-              <h2 className={styles.cardHead}>Managed Services & Enablement</h2>
-</div>
+              <div className={styles.headingAndLine}>
+                <h2 className={styles.cardHead}>
+                  Managed Services & Enablement
+                </h2>
+              </div>
             </div>
             <div className={styles.serviceCardReadMoreDiv}>
-            <div className={styles.headingLine}></div>
+              <div className={styles.headingLine}></div>
 
-              <h6 className={styles.readMore} onClick={()=>readMoreNavigation('Managed-Support-Services')} >
+              <h6
+                className={styles.readMore}
+                onClick={() => readMoreNavigation("Managed-Support-Services")}
+              >
                 Read More <span>&gt;&gt;</span>
               </h6>
             </div>
@@ -246,7 +269,10 @@ function Home() {
         </div>
       </div>
 
-      <div className={styles.overlayMainDiv} ref={(el) => setElementRef(-1)(el)}>
+      <div
+        className={styles.overlayMainDiv}
+        ref={(el) => setElementRef(-1)(el)}
+      >
         <div className={styles.elementorOverlayMainBox}>
           <h2 className={styles.overlayMainHeading}>
             Elevate your company's future
@@ -257,8 +283,14 @@ function Home() {
               transformation journey
             </p>
           </div>
-          <div className={styles.overlayMainBtnDiv} ref={(el) => setElementRef(-1)(el)}>
-            <button className={styles.overlayButton} onClick={()=>ContactUs()}>
+          <div
+            className={styles.overlayMainBtnDiv}
+            ref={(el) => setElementRef(-1)(el)}
+          >
+            <button
+              className={styles.overlayButton}
+              onClick={() => ContactUs()}
+            >
               Contact us
               <span
                 className="fas fa-arrow-right"
@@ -287,8 +319,11 @@ function Home() {
           </p>
         </div>
         <div className={styles.expertiseGridMainDiv}>
-          <div className={styles.expertiseSingleCardOuter} >
-            <div className={styles.expertiseCardImgDiv} ref={(el)=>setElementRef(-1)(el)}>
+          <div className={styles.expertiseSingleCardOuter}>
+            <div
+              className={styles.expertiseCardImgDiv}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={vector1} alt="vector1" />
             </div>
             <h2 className={styles.expertiseHead}>Sales & Marketing</h2>
@@ -299,7 +334,10 @@ function Home() {
             </p>
           </div>
           <div className={styles.expertiseSingleCardOuter}>
-            <div className={styles.expertiseCardImgDiv}ref={(el)=>setElementRef(-1)(el)}>
+            <div
+              className={styles.expertiseCardImgDiv}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={vector2} alt="vector2" />
             </div>
             <h2 className={styles.expertiseHead}>Finance & Accounting</h2>
@@ -309,7 +347,10 @@ function Home() {
             </p>
           </div>
           <div className={styles.expertiseSingleCardOuter}>
-            <div className={styles.expertiseCardImgDiv}ref={(el)=>setElementRef(-1)(el)}>
+            <div
+              className={styles.expertiseCardImgDiv}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={vector3} alt="vector3" />
             </div>
             <h2 className={styles.expertiseHead}>Legal Consolidation</h2>
@@ -320,7 +361,10 @@ function Home() {
             </p>
           </div>
           <div className={styles.expertiseSingleCardOuter}>
-            <div className={styles.expertiseCardImgDiv}ref={(el)=>setElementRef(-1)(el)}>
+            <div
+              className={styles.expertiseCardImgDiv}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={frame} alt="frame" />
             </div>
             <h2 className={styles.expertiseHead}>HR & Workforce</h2>
@@ -331,7 +375,10 @@ function Home() {
             </p>
           </div>
           <div className={styles.expertiseSingleCardOuter}>
-            <div className={styles.expertiseCardImgDiv}ref={(el)=>setElementRef(-1)(el)}>
+            <div
+              className={styles.expertiseCardImgDiv}
+              ref={(el) => setElementRef(-1)(el)}
+            >
               <img src={frame1} alt="frame1" />
             </div>
             <h2 className={styles.expertiseHead}>Supply Chain</h2>
@@ -349,8 +396,14 @@ function Home() {
               We also offer an exclusive range of ready to use business planning
               accelerators.
             </p>
-            <div className={styles.overlayMainBtnDiv2}ref={(el)=>setElementRef(-1)(el)}>
-              <button className={styles.overlayButton2} onClick={()=>solutionReadMore()}>
+            <div
+              className={styles.overlayMainBtnDiv2}
+              ref={(el) => setElementRef(-1)(el)}
+            >
+              <button
+                className={styles.overlayButton2}
+                onClick={() => solutionReadMore()}
+              >
                 Read More
                 <span
                   className="fas fa-arrow-right"
@@ -375,7 +428,10 @@ function Home() {
         <Carousel options={OPTIONS} />
       </div>
       <div className={styles.flickeringImageOuter}>
-        <div className={styles.flickeringImgInner} ref={(el)=>(setElementRef(-1)(el))}>
+        <div
+          className={styles.flickeringImgInner}
+          ref={(el) => setElementRef(-1)(el)}
+        >
           <img
             src={flickeringImg}
             alt="flickeringImg"
@@ -387,10 +443,15 @@ function Home() {
             Upscale your business performance <br />
             Enable faster and better decision making
           </h2>
-          <div className={styles.overlayMainBtnDiv}ref={(el)=>(setElementRef(-1)(el))}>
-            <button className={styles.overlayButton3} onClick={()=>ContactUs()}>
+          <div
+            className={styles.overlayMainBtnDiv}
+            ref={(el) => setElementRef(-1)(el)}
+          >
+            <button
+              className={styles.overlayButton3}
+              onClick={() => ContactUs()}
+            >
               Request a Call Back
-            
             </button>
           </div>
         </div>
