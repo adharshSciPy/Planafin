@@ -1582,14 +1582,14 @@ const upcomingWebinarUser = async (req, res) => {
     const formattedStart = startDate.toLocaleString('en-IN', options);
     const formattedEnd = endDate.toLocaleString('en-IN', options);
 
-    const icsContent = `BEGIN:VCALENDAR
+const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
 DTSTAMP:${formatDate(new Date())}
-DTSTART:${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}}
-DTEND:${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}}
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
