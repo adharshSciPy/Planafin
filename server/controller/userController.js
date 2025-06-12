@@ -1588,8 +1588,8 @@ PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
 DTSTAMP:${formatDate(new Date())}
-DTSTART:${formatDate(startDate)}
-DTEND:${formatDate(endDate)}
+DTSTART:${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}}
+DTEND:${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}}
 SUMMARY:${webinar.title}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
