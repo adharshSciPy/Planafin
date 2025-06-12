@@ -27,6 +27,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { fileURLToPath } from "url";
+import { DateTime } from "luxon";
 
 // These two lines recreate __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -1543,48 +1544,26 @@ const upcomingWebinarUser = async (req, res) => {
       },
     });
 
-    let webinarDate = new Date(webinar.webinarDate);
-    // Split time strings
     const [startHour, startMinute] = webinar.startTime.split(":").map(Number);
     const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
 
-    // Construct full datetime objects
-    const startDate = new Date(webinarDate);
-    startDate.setHours(startHour, startMinute, 0, 0);
+    // Use Luxon to fix time zone to Asia/Kolkata
+    const startDate = DateTime.fromJSDate(webinar.webinarDate, {
+      zone: "Asia/Kolkata",
+    }).set({ hour: startHour, minute: startMinute, second: 0, millisecond: 0 });
+    const endDate = DateTime.fromJSDate(webinar.webinarDate, {
+      zone: "Asia/Kolkata",
+    }).set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
 
-    const endDate = new Date(webinarDate);
-    endDate.setHours(endHour, endMinute, 0, 0);
-
-    // Format for .ics calendar
-    const formatDate = (date) => {
-      const pad = (n) => n.toString().padStart(2, "0");
-      return (
-        date.getUTCFullYear().toString() +
-        pad(date.getUTCMonth() + 1) +
-        pad(date.getUTCDate()) +
-        "T" +
-        pad(date.getUTCHours()) +
-        pad(date.getUTCMinutes()) +
-        "00Z"
-      );
-    };
-    // Format for human-readable display
-    const options = {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: "Asia/Kolkata",
-    };
+    // ICS date formatter (UTC)
+    const formatDate = (dt) => dt.toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
 
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
-DTSTAMP:${formatDate(new Date())}
+DTSTAMP:${formatDate(DateTime.utc())}
 DTSTART:${formatDate(startDate)}
 DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
@@ -1613,24 +1592,12 @@ END:VCALENDAR`;
               }</strong></p>
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
-              <p><strong>Date:</strong> <p><strong>Date:</strong> ${startDate.toLocaleDateString(
-                "en-IN",
-                {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }
+              <p><strong>Date:</strong> ${startDate.toFormat(
+                "dd LLLL yyyy"
               )}</p>
-</p>
-              <p><strong>Time:</strong> ${startDate.toLocaleTimeString(
-                "en-IN",
-                { hour: "2-digit", minute: "2-digit", hour12: true }
-              )} – ${endDate.toLocaleTimeString("en-IN", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })} IST</p>
-
+              <p><strong>Time:</strong> ${startDate.toFormat(
+                "hh:mm a"
+              )} – ${endDate.toFormat("hh:mm a")} IST</p>
             </div>
             <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
               <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
