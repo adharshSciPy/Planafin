@@ -53,9 +53,9 @@ function Footer() {
               </ul>
             </div>
           </div>
-          <div className={styles.waterMarkDesign}></div>
           <div className={styles.waterMarkDesign}>
-            <p>© 2022 Planafin. All rights reserved</p>
+            <p>© 2025 Planafin. All rights reserved</p></div>
+          <div className={styles.waterMarkDesign}>
             <p>
               Designed by{" "}
               <Link
