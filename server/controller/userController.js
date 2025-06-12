@@ -550,7 +550,6 @@ const addWatchnow = async (req, res) => {
         },
       ],
     };
-    console.log(webinarDetails.image);
 
     await transporter.sendMail(mailOptions);
 
@@ -1502,8 +1501,11 @@ const getupcomingById = async (req, res) => {
       .json({ message: "Internal Server Error", error: error.message });
   }
 };
+
+
 const upcomingWebinarUser = async (req, res) => {
   const webinarId = req.params.id;
+
   const {
     firstName,
     lastName,
@@ -1521,7 +1523,7 @@ const upcomingWebinarUser = async (req, res) => {
       (user) => user.businessEmail.toLowerCase() === businessEmail.toLowerCase()
     );
     if (alreadyRegistered) {
-      return res.status(400).json({ message: "User already registered" });
+      return res.status(401).json({ message: "User already registered" });
     }
 
     webinar.usersRegistered.push({
@@ -1542,55 +1544,53 @@ const upcomingWebinarUser = async (req, res) => {
       },
     });
 
-    // Ensure webinarDate is a valid Date object
     let webinarDate = new Date(webinar.webinarDate);
     if (isNaN(webinarDate)) {
       return res.status(400).json({ message: "Invalid webinar date." });
     }
 
-    const startTime = webinar.startTime?.trim(); // Time part, e.g., "03:30"
-    const endTime = webinar.endTime?.trim(); // Time part, e.g., "06:30"
+    const startTime = webinar.startTime?.trim();
+    const endTime = webinar.endTime?.trim();
 
-    if (!startTime || !endTime) {
-      return res.status(400).json({ message: "Invalid startTime or endTime." });
-    }
-
-    // Split the startTime and endTime into hours and minutes
     const [startHour, startMinute] = startTime.split(":");
     const [endHour, endMinute] = endTime.split(":");
 
-    // Check if the time values are valid
-    if (isNaN(startHour) || isNaN(startMinute) || isNaN(endHour) || isNaN(endMinute)) {
-      return res.status(400).json({ message: "Invalid start or end time format." });
-    }
+    const startDate = new Date(webinarDate);
+    const endDate = new Date(webinarDate);
+    startDate.setHours(startHour, startMinute, 0, 0);
+    endDate.setHours(endHour, endMinute, 0, 0);
 
-    // Create start and end dates by adding the startTime and endTime to the webinarDate
-    const startDate = new Date(webinarDate); // Copy the webinarDate for startDate
-    const endDate = new Date(webinarDate);   // Copy the webinarDate for endDate
-
-    // Apply the startTime and endTime to the dates
-    startDate.setHours(startHour, startMinute, 0, 0); // Set hours, minutes, seconds, and milliseconds
-    endDate.setHours(endHour, endMinute, 0, 0);       // Set hours, minutes, seconds, and milliseconds
-
-    // Check if the dates are valid
     if (isNaN(startDate) || isNaN(endDate)) {
-      return res.status(400).json({ message: "Failed to parse start/end date. Check date/time format." });
+      return res.status(400).json({ message: "Failed to parse start/end date." });
     }
 
-    // Format dates to ISO string format for ics
+    // Format for .ics calendar
     const formatDate = (date) =>
       date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
 
+    // Format for human-readable display
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'Asia/Kolkata',
+    };
+
+    const formattedStart = startDate.toLocaleString('en-IN', options);
+    const formattedEnd = endDate.toLocaleString('en-IN', options);
+
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Your Company//Webinar Reminder//EN
+PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
-UID:${Date.now()}@yourdomain.com
+UID:${Date.now()}@planafin.com
 DTSTAMP:${formatDate(new Date())}
 DTSTART:${formatDate(startDate)}
 DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
-ORGANIZER;CN=Webinar Host:mailto:${process.env.EMAIL_USER}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
 END:VEVENT
@@ -1611,19 +1611,12 @@ END:VCALENDAR`;
             </div>
             <div style="text-align: left; margin-bottom: 30px;">
               <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
-              <p>Your registration is confirmed for the event: <strong>${webinar.title || `No title available for this webinar`}</strong></p>
+              <p>Your registration is confirmed for the event: <strong>${webinar.title || `No title`}</strong></p>
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
-              <p>Here are your registration details:</p>
-              <p>${webinar.title || `No summary available for this webinar`}</p>
-              <div style="display: flex;">
-                <p style="margin-right: 10px;">
-                  ${startTime || `nil`}
-                </p>
-                <p>
-                  ${endTime || `nil`}
-                </p>
-              </div>
+              <p><strong>Date:</strong> ${formattedStart.split(",")[0]}</p>
+              <p><strong>Time:</strong> ${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })} – ${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })} IST</p>
+
             </div>
             <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
               <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
@@ -1645,7 +1638,7 @@ END:VCALENDAR`;
           cid: "logo",
         },
         {
-          filename: webinar.image,
+          filename: path.basename(webinar.image),
           path: path.join(__dirname, "../", webinar.image),
           cid: "webinarImage",
         },
@@ -1659,6 +1652,7 @@ END:VCALENDAR`;
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 const getAllupcomingWebinar = async (req, res) => {
   try {

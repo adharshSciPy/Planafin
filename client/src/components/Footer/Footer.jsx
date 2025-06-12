@@ -40,7 +40,6 @@ function Footer() {
                         </div>
                     </div>
                     <div className={styles.waterMarkDesign}>
-                        <p>© 2022 Planafin. All rights reserved</p>
                     </div>
                     <div className={styles.waterMarkDesign}>
                         <p>Designed by <Link to="https://scipytechnologies.com/" style={{ textDecoration: 'none', textDecorationColor:'ActiveBorder' }}>SciPy Technologies</Link></p>

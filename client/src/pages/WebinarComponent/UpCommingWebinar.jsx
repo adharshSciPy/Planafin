@@ -19,7 +19,6 @@ function UpCommingWebinar() {
         `${baseUrl}/api/v1/user/getupcomingWebinardata/${id}`
       );
       arrayItem(response.data.data || {});
-          
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -34,11 +33,13 @@ function UpCommingWebinar() {
     companyName: "",
     designation: "",
     selectCountry: "",
+    checkBox: false,
   });
 
   const handleInput = (e) => {
-    const { name, value } = e.target;
-    setFormdata((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormdata((prev) => ({ ...prev, [name]: val }));
   };
 
   // const handleCheck = (e) => {
@@ -66,11 +67,14 @@ function UpCommingWebinar() {
           companyName: "",
           designation: "",
           selectCountry: "",
+          checkBox: false,
         });
       } else {
       }
     } catch (error) {
-      toast.error("Error while submitting data", {
+      const message =
+        error.response?.data?.message || "Error while submitting data";
+      toast.error(message, {
         position: "bottom-right",
         autoClose: 3000,
       });
@@ -224,14 +228,14 @@ function UpCommingWebinar() {
                       placeholder="Work / business email*"
                       onChange={handleInput}
                     />
-                    {
-                    formdata.businessEmail &&
-                    /@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$/i.test(formdata.businessEmail) && (
-                      <p style={{ color: 'red', marginTop: '5px' }}>
-                        Please provide your business email address.
-                      </p>
-                    )
-                  }
+                    {/* {formdata.businessEmail &&
+                      /@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com|protonmail\.com|icloud\.com)$/i.test(
+                        formdata.businessEmail
+                      ) && (
+                        <p style={{ color: "red", marginTop: "5px" }}>
+                          Please provide your business email address.
+                        </p>
+                      )} */}
                   </div>
                   <div className={styles.formDiv}>
                     <input
@@ -472,6 +476,9 @@ function UpCommingWebinar() {
                     <input
                       required
                       type="checkbox"
+                      name="checkBox"
+                      checked={formdata.checkBox}
+                      onChange={handleInput}
                       className={styles.inputStyle}
                     />
                     <label>

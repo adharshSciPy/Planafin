@@ -205,7 +205,7 @@ function Services() {
                 </h6>
 
                 <div className="content-flex">
-                  <ul>
+                  <ul className="ul">
                     {tabContent
                       .find((tab) => tab.key === activeTab)
                       .details?.map((point, index) => (
