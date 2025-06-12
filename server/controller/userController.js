@@ -1502,7 +1502,6 @@ const getupcomingById = async (req, res) => {
   }
 };
 
-
 const upcomingWebinarUser = async (req, res) => {
   const webinarId = req.params.id;
 
@@ -1545,44 +1544,42 @@ const upcomingWebinarUser = async (req, res) => {
     });
 
     let webinarDate = new Date(webinar.webinarDate);
-    if (isNaN(webinarDate)) {
-      return res.status(400).json({ message: "Invalid webinar date." });
-    }
+    // Split time strings
+    const [startHour, startMinute] = webinar.startTime.split(":").map(Number);
+    const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
 
-    const startTime = webinar.startTime?.trim();
-    const endTime = webinar.endTime?.trim();
-
-    const [startHour, startMinute] = startTime.split(":");
-    const [endHour, endMinute] = endTime.split(":");
-
+    // Construct full datetime objects
     const startDate = new Date(webinarDate);
-    const endDate = new Date(webinarDate);
     startDate.setHours(startHour, startMinute, 0, 0);
+
+    const endDate = new Date(webinarDate);
     endDate.setHours(endHour, endMinute, 0, 0);
 
-    if (isNaN(startDate) || isNaN(endDate)) {
-      return res.status(400).json({ message: "Failed to parse start/end date." });
-    }
-
     // Format for .ics calendar
-    const formatDate = (date) =>
-      date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-
+    const formatDate = (date) => {
+      const pad = (n) => n.toString().padStart(2, "0");
+      return (
+        date.getUTCFullYear().toString() +
+        pad(date.getUTCMonth() + 1) +
+        pad(date.getUTCDate()) +
+        "T" +
+        pad(date.getUTCHours()) +
+        pad(date.getUTCMinutes()) +
+        "00Z"
+      );
+    };
     // Format for human-readable display
     const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: true,
-      timeZone: 'Asia/Kolkata',
+      timeZone: "Asia/Kolkata",
     };
 
-    const formattedStart = startDate.toLocaleString('en-IN', options);
-    const formattedEnd = endDate.toLocaleString('en-IN', options);
-
-const icsContent = `BEGIN:VCALENDAR
+    const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
@@ -1611,11 +1608,28 @@ END:VCALENDAR`;
             </div>
             <div style="text-align: left; margin-bottom: 30px;">
               <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
-              <p>Your registration is confirmed for the event: <strong>${webinar.title || `No title`}</strong></p>
+              <p>Your registration is confirmed for the event: <strong>${
+                webinar.title || `No title`
+              }</strong></p>
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
-              <p><strong>Date:</strong> ${formattedStart.split(",")[0]}</p>
-              <p><strong>Time:</strong> ${startDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })} – ${endDate.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })} IST</p>
+              <p><strong>Date:</strong> <p><strong>Date:</strong> ${startDate.toLocaleDateString(
+                "en-IN",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              )}</p>
+</p>
+              <p><strong>Time:</strong> ${startDate.toLocaleTimeString(
+                "en-IN",
+                { hour: "2-digit", minute: "2-digit", hour12: true }
+              )} – ${endDate.toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })} IST</p>
 
             </div>
             <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
@@ -1652,7 +1666,6 @@ END:VCALENDAR`;
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 const getAllupcomingWebinar = async (req, res) => {
   try {
