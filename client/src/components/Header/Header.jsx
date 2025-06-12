@@ -96,7 +96,7 @@ const Header = () => {
             <div
               className={`${styles.mobileNavContents} ${styles.lastChildMob}`}
             >
-              <Link to="/letstalk" className={styles.navLink}>Let's Talk</Link>  
+              <Link to="/lets-talk" className={styles.navLink}>Let's Talk</Link>  
             </div>
           </div>
         </div>
