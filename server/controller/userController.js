@@ -1503,6 +1503,7 @@ const getupcomingById = async (req, res) => {
   }
 };
 
+
 const upcomingWebinarUser = async (req, res) => {
   const webinarId = req.params.id;
 
@@ -1548,53 +1549,25 @@ const upcomingWebinarUser = async (req, res) => {
     const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
 
     // Use Luxon to fix time zone to Asia/Kolkata
-    const startDate = DateTime.fromJSDate(webinar.webinarDate, {
-      zone: "Asia/Kolkata",
-    }).set({ hour: startHour, minute: startMinute, second: 0, millisecond: 0 });
-    const endDate = DateTime.fromJSDate(webinar.webinarDate, {
-      zone: "Asia/Kolkata",
-    }).set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
+    const startDate = DateTime.fromJSDate(webinar.webinarDate, { zone: "Asia/Kolkata" })
+      .set({ hour: startHour, minute: startMinute, second: 0, millisecond: 0 });
+    const endDate = DateTime.fromJSDate(webinar.webinarDate, { zone: "Asia/Kolkata" })
+      .set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
 
     // ICS date formatter (UTC)
-    const pad = (n) => n.toString().padStart(2, "0");
-const formatLocal = (date) => {
-  return (
-    date.getFullYear().toString() +
-    pad(date.getMonth() + 1) +
-    pad(date.getDate()) +
-    "T" +
-    pad(date.getHours()) +
-    pad(date.getMinutes()) +
-    "00"
-  );
-};
+    const formatDate = (dt) => dt.toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
 
-
-const icsContent = `BEGIN:VCALENDAR
+    const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-BEGIN:VTIMEZONE
-TZID:Asia/Kolkata
-BEGIN:STANDARD
-DTSTART:19700101T000000
-TZOFFSETFROM:+0530
-TZOFFSETTO:+0530
-TZNAME:IST
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
-DTSTAMP:${formatLocal(new Date())}
-DTSTART;TZID=Asia/Kolkata:${formatLocal(startDate)}
-DTEND;TZID=Asia/Kolkata:${formatLocal(endDate)}
+DTSTAMP:${formatDate(DateTime.utc())}
+DTSTART:${formatDate(startDate)}
+DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
-STATUS:CONFIRMED
-SEQUENCE:0
-TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR`;
 
@@ -1618,12 +1591,8 @@ END:VCALENDAR`;
               }</strong></p>
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
-              <p><strong>Date:</strong> ${startDate.toFormat(
-                "dd LLLL yyyy"
-              )}</p>
-              <p><strong>Time:</strong> ${startDate.toFormat(
-                "hh:mm a"
-              )} – ${endDate.toFormat("hh:mm a")} IST</p>
+              <p><strong>Date:</strong> ${startDate.toFormat("dd LLLL yyyy")}</p>
+              <p><strong>Time:</strong> ${startDate.toFormat("hh:mm a")} – ${endDate.toFormat("hh:mm a")} IST</p>
             </div>
             <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
               <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
@@ -1659,6 +1628,7 @@ END:VCALENDAR`;
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
 
 const getAllupcomingWebinar = async (req, res) => {
