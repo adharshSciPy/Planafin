@@ -1557,19 +1557,20 @@ const upcomingWebinarUser = async (req, res) => {
 
     // ICS date formatter (UTC)
     const pad = (n) => n.toString().padStart(2, "0");
-    const formatLocal = (date) => {
-      return (
-        date.getFullYear().toString() +
-        pad(date.getMonth() + 1) +
-        pad(date.getDate()) +
-        "T" +
-        pad(date.getHours()) +
-        pad(date.getMinutes()) +
-        "00"
-      );
-    };
+const formatLocal = (date) => {
+  return (
+    date.getFullYear().toString() +
+    pad(date.getMonth() + 1) +
+    pad(date.getDate()) +
+    "T" +
+    pad(date.getHours()) +
+    pad(date.getMinutes()) +
+    "00"
+  );
+};
 
-    const icsContent = `BEGIN:VCALENDAR
+
+const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 CALSCALE:GREGORIAN
