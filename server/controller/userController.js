@@ -1556,19 +1556,44 @@ const upcomingWebinarUser = async (req, res) => {
     }).set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
 
     // ICS date formatter (UTC)
-    const formatDate = (dt) => dt.toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
+    const pad = (n) => n.toString().padStart(2, "0");
+    const formatLocal = (date) => {
+      return (
+        date.getFullYear().toString() +
+        pad(date.getMonth() + 1) +
+        pad(date.getDate()) +
+        "T" +
+        pad(date.getHours()) +
+        pad(date.getMinutes()) +
+        "00"
+      );
+    };
 
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
-DTSTAMP:${formatDate(DateTime.utc())}
-DTSTART:${formatDate(startDate)}
-DTEND:${formatDate(endDate)}
+DTSTAMP:${formatLocal(new Date())}
+DTSTART;TZID=Asia/Kolkata:${formatLocal(startDate)}
+DTEND;TZID=Asia/Kolkata:${formatLocal(endDate)}
 SUMMARY:${webinar.title}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
+STATUS:CONFIRMED
+SEQUENCE:0
+TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR`;
 
