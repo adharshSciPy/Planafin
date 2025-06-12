@@ -1505,7 +1505,6 @@ const getupcomingById = async (req, res) => {
 
 const upcomingWebinarUser = async (req, res) => {
   const webinarId = req.params.id;
-
   const {
     firstName,
     lastName,
@@ -1515,17 +1514,38 @@ const upcomingWebinarUser = async (req, res) => {
     selectCountry,
   } = req.body;
 
+  // Pads single digit numbers with a leading zero
+  const pad = (n) => n.toString().padStart(2, "0");
+
+  // Formats a JS Date or Luxon DateTime (to JS Date) to ICS datetime (YYYYMMDDTHHMMSS)
+  const formatLocal = (date) => {
+    // Ensure a JS Date object
+    if (date.isLuxonDateTime) date = date.toJSDate();
+    return (
+      date.getFullYear().toString() +
+      pad(date.getMonth() + 1) +
+      pad(date.getDate()) +
+      "T" +
+      pad(date.getHours()) +
+      pad(date.getMinutes()) +
+      "00"
+    );
+  };
+
   try {
     const webinar = await upcomingWebinar.findById(webinarId);
     if (!webinar) return res.status(404).json({ message: "Webinar not found" });
 
+    // Check for duplicate registration (case-insensitive email)
     const alreadyRegistered = webinar.usersRegistered.some(
-      (user) => user.businessEmail.toLowerCase() === businessEmail.toLowerCase()
+      (user) =>
+        user.businessEmail.toLowerCase() === businessEmail.toLowerCase()
     );
     if (alreadyRegistered) {
       return res.status(401).json({ message: "User already registered" });
     }
 
+    // Register the user
     webinar.usersRegistered.push({
       firstName,
       lastName,
@@ -1536,6 +1556,7 @@ const upcomingWebinarUser = async (req, res) => {
     });
     await webinar.save();
 
+    // Configure email transporter
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -1544,10 +1565,11 @@ const upcomingWebinarUser = async (req, res) => {
       },
     });
 
+    // Parse start and end time as numbers
     const [startHour, startMinute] = webinar.startTime.split(":").map(Number);
     const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
 
-    // Use Luxon to fix time zone to Asia/Kolkata
+    // Luxon for date and time in Asia/Kolkata
     const startDate = DateTime.fromJSDate(webinar.webinarDate, {
       zone: "Asia/Kolkata",
     }).set({ hour: startHour, minute: startMinute, second: 0, millisecond: 0 });
@@ -1555,22 +1577,8 @@ const upcomingWebinarUser = async (req, res) => {
       zone: "Asia/Kolkata",
     }).set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
 
-    // ICS date formatter (UTC)
-    const pad = (n) => n.toString().padStart(2, "0");
-const formatLocal = (date) => {
-  return (
-    date.getFullYear().toString() +
-    pad(date.getMonth() + 1) +
-    pad(date.getDate()) +
-    "T" +
-    pad(date.getHours()) +
-    pad(date.getMinutes()) +
-    "00"
-  );
-};
-
-
-const icsContent = `BEGIN:VCALENDAR
+    // ICS calendar invite content
+    const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 CALSCALE:GREGORIAN
@@ -1598,6 +1606,7 @@ TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR`;
 
+    // Email options, including calendar invite and images
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: businessEmail,
@@ -1652,7 +1661,9 @@ END:VCALENDAR`;
       ],
     };
 
+    // Send email
     await transporter.sendMail(mailOptions);
+
     res.status(200).json({ message: "Registered successfully", data: webinar });
   } catch (err) {
     console.error("Error registering:", err);
