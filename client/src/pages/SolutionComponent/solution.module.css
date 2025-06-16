@@ -63,6 +63,9 @@ margin-top: 10px;
     
     
  }
+ .oddBackground{
+   background-color: white;
+ }
  .firstButton::after{
     content: "";
     background: url(../../assets/navarrow.png) 0 0 no-repeat;
@@ -87,6 +90,7 @@ margin-top: 10px;
     margin-top: 30px;
     padding:0px 20px;
  }
+
  .secondRightHeading h1{
     font-size: 36px;
     font-weight: 550;
