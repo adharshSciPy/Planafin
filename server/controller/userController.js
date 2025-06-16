@@ -1065,29 +1065,42 @@ const addBusinessPlanning = async (req, res) => {
       contentDescription,
       contentPoints,
     } = req.body;
-    let businessPlanningImage = req.file ? req.file.path : null;
-    if (businessPlanningImage) {
-      businessPlanningImage = businessPlanningImage.replace(/\\/g, "/");
+
+    const businessFile = req.files?.["businessPlanningImage"]?.[0];
+    const contentFile = req.files?.["contentImage"]?.[0];
+
+    if (!businessFile || !contentFile) {
+      return res.status(400).json({ message: "Both images are required!" });
     }
+
+    // Construct paths including 'uploads/' prefix for consistency
+    const businessPlanningImage = `uploads/${businessFile.filename}`;
+    const contentImage = `uploads/${contentFile.filename}`;
+
     if (!title || !description || !contentHeading || !contentPoints) {
       return res.status(400).json({ message: "All fields are required!" });
     }
 
     const result = await businessPlanning.create({
       businessPlanningImage,
+      contentImage,
       title,
       description,
       contentHeading,
       contentDescription,
       contentPoints,
     });
-    res.status(200).json({ message: "Business Planing Created", data: result });
+
+    res.status(200).json({ message: "Business Planning Created", data: result });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Internal server error", data: error.message });
+    res.status(500).json({
+      message: "Internal server error",
+      data: error.message,
+    });
   }
 };
+
+
 const getBusinessPlanning = async (req, res) => {
   try {
     const response = await businessPlanning.find();
@@ -1111,9 +1124,8 @@ const getBusinessPlanning = async (req, res) => {
 };
 
 const getBusinessPlanningById = async (req, res) => {
-  const { id } = req.params;
   try {
-    const response = await businessPlanning.findById(id);
+    const response = await businessPlanning.find();
 
     if (!response || response.length === 0) {
       return res
@@ -1132,6 +1144,7 @@ const getBusinessPlanningById = async (req, res) => {
     });
   }
 };
+
 
 const deleteBusinessPlanning = async (req, res) => {
   const { id } = req.params;

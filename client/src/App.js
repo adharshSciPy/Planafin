@@ -65,7 +65,7 @@ function App() {
           <Route path="solutions" element={<Solutions />} />
           <Route path="/career" element={<Career />} />
           <Route path="/lets-talk" element={<ContactUs />} />
-          <Route path="/supply-chain/:id" element={<SupplyChain />} />
+          <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
 
           {/* Admin Routes */}

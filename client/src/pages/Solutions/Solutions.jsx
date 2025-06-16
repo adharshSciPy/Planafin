@@ -103,7 +103,7 @@ function Solutions() {
     window.scrollTo(0, 0);
   };
   const solNav2 = (id) => {
-    navigate(`/supply-chain/${id}`);
+    navigate(`/supply-chain`);
     window.scrollTo(0, 0);
   };
   useEffect(() => {

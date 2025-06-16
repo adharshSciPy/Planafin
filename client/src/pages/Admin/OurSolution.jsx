@@ -15,6 +15,9 @@ function OurSolution() {
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
   const [imageFile, setImageFile] = useState(null);
+  const [contentImageFile, setContentImageFile] = useState(null);
+  const contentFileInputRef = useRef(null);
+
   const navigate = useNavigate();
   // Sync sections with form field
   useEffect(() => {
@@ -22,9 +25,15 @@ function OurSolution() {
   }, [sections, form]);
 
   // Handle File Selection
-  const handleFileChange = (e) => {
+  const handleFileChange = (e, type) => {
     const selectedFile = e.target.files[0];
-    if (selectedFile) setImageFile(selectedFile);
+    if (selectedFile) {
+      if (type === "business") {
+        setImageFile(selectedFile);
+      } else if (type === "content") {
+        setContentImageFile(selectedFile);
+      }
+    }
   };
 
   // Handle Form Submission
@@ -44,6 +53,9 @@ function OurSolution() {
       if (imageFile) {
         formData.append("businessPlanningImage", imageFile);
       }
+      if (contentImageFile) {
+        formData.append("contentImage", contentImageFile);
+      }
 
       const response = await axios.post(
         `${baseurl}/api/v1/user/addBusinessPlanning`,
@@ -59,10 +71,15 @@ function OurSolution() {
           autoClose: 3000,
         });
 
+        for (let pair of formData.entries()) {
+          console.log(`${pair[0]}:`, pair[1]);
+        }
+
         form.resetFields();
         setSections([]);
         setImageFile(null);
         if (fileInputRef.current) fileInputRef.current.value = "";
+        if (contentFileInputRef.current) contentFileInputRef.current.value = "";
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -117,9 +134,9 @@ function OurSolution() {
           form={form}
           initialValues={{
             title: "",
-            description:"",
+            description: "",
             contentHeading: "",
-            contentDescription:"",
+            contentDescription: "",
             contentPoints: [],
           }}
           onFinish={handleSubmit}
@@ -127,14 +144,24 @@ function OurSolution() {
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 14 }}
         >
-          <Form.Item label="Image Upload">
+          <Form.Item label="Main Image Upload">
             <input
               type="file"
               accept="image/*"
               ref={fileInputRef}
-              onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e, "business")}
             />
           </Form.Item>
+
+          <Form.Item label="Content Image Upload">
+            <input
+              type="file"
+              accept="image/*"
+              ref={contentFileInputRef}
+              onChange={(e) => handleFileChange(e, "content")}
+            />
+          </Form.Item>
+
           <Form.Item
             name="title"
             label="Title"
@@ -152,7 +179,7 @@ function OurSolution() {
             ]}
           >
             <Input.TextArea rows={6} />
-          </Form.Item>  
+          </Form.Item>
           <Form.Item
             name="contentHeading"
             label="Content Heading"
@@ -170,7 +197,6 @@ function OurSolution() {
           >
             <Input.TextArea rows={6} />
           </Form.Item>
-          
 
           {/* Attended Sessions */}
           <Form.Item name="contentPoints" label="ContentPoints">

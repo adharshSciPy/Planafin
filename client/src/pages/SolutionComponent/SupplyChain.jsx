@@ -16,7 +16,7 @@ function SupplyChain() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/api/v1/user//getBusinessPlanningById/${id}`
+        `${baseUrl}/api/v1/user/getBusinessPlanningById`
       );
       setSupplyData(response.data.data);
     } catch (error) {
@@ -54,44 +54,80 @@ function SupplyChain() {
           </div>
         </div>
       </div>
-      <div className={styles.secondContentMain}>
-        <div className={styles.secondContentMainSub}>
-          <div className={styles.secondLeftContainer}>
-            <div className={styles.secondLeftmain}>
-              <img src={image} alt="about" />
-            </div>
-          </div>
-          <div className={styles.secondRightContainer}>
-            <div className={styles.secondRightHeading}>
-              <h1>{supplyData?.contentHeading || ""}</h1>
-            </div>
-            <div className={styles.secondRightpara}>
-              <p>{supplyData?.description || ""}</p>
-            </div>
-            <div className={styles.secondContentList}>
-              <div className={styles.listMain}>
-                <ul className={styles.secondRightUl}>
-                  {supplyData?.contentPoints.map((item,index)=>{
-                    return(
-                      <li className={styles.secondRightUlLi} key={index}>
-                    <div className={styles.secondContentTick} >
-                      <img src={tickImage} alt="" />
+      {supplyData?.map((item, index) => (
+        <div className={styles.secondContentMain} key={index}>
+          <div className={styles.secondContentMainSub}>
+            {index % 2 === 0 ? (
+              // Image on the right (even index)
+              <>
+                <div className={styles.secondRightContainer}>
+                  <div className={styles.secondRightHeading}>
+                    <h1>{item?.contentHeading || ""}</h1>
+                  </div>
+                  <div className={styles.secondRightpara}>
+                    <p>{item?.description || ""}</p>
+                  </div>
+                  <div className={styles.secondContentList}>
+                    <div className={styles.listMain}>
+                      <ul className={styles.secondRightUl}>
+                        {item?.contentPoints?.map((point, i) => (
+                          <li className={styles.secondRightUlLi} key={i}>
+                            <div className={styles.secondContentTick}>
+                              <img src={tickImage} alt="" />
+                            </div>
+                            <div className={styles.listContent}>
+                              <p>{point}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <div className={styles.listContent}>
-                      <p>
-                        {item}
-                      </p>
+                  </div>
+                </div>
+                <div className={styles.secondLeftContainer}>
+                  <div className={styles.secondLeftmain}>
+                    <img src={`${baseUrl}/${item?.contentImage}`  } alt="about" />
+                  </div>
+                </div>
+              </>
+            ) : (
+              // Image on the left (odd index)
+              <>
+                <div className={styles.secondLeftContainer}>
+                  <div className={styles.secondLeftmain}>
+                    <img src={image} alt="about" />
+                  </div>
+                </div>
+                <div className={styles.secondRightContainer}>
+                  <div className={styles.secondRightHeading}>
+                    <h1>{item?.contentHeading || ""}</h1>
+                  </div>
+                  <div className={styles.secondRightpara}>
+                    <p>{item?.description || ""}</p>
+                  </div>
+                  <div className={styles.secondContentList}>
+                    <div className={styles.listMain}>
+                      <ul className={styles.secondRightUl}>
+                        {item?.contentPoints?.map((point, i) => (
+                          <li className={styles.secondRightUlLi} key={i}>
+                            <div className={styles.secondContentTick}>
+                              <img src={tickImage} alt="" />
+                            </div>
+                            <div className={styles.listContent}>
+                              <p>{point}</p>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  </li>
-                    )
-                  })}
-                  
-                </ul>
-              </div>
-            </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
-      </div>
+      ))}
+
       <Footer />
     </>
   );

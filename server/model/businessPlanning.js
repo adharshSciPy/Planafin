@@ -1,32 +1,33 @@
-import mongoose,{Schema} from "mongoose";
-const contentPoints=new Schema({
-    contentPoints:{
-        type:String,
-        required:true
-    }
-})
-const businessPlanning=new Schema({
-    businessPlanningImage:{
-        type:String,
-        required:true
-    },
-    title:{
-        type:String,
-        required:true
-    },
-    description:{
-        type:String,
+import mongoose, { Schema } from "mongoose";
 
+const businessPlanning = new Schema(
+  {
+    businessPlanningImage: {
+      type: String,
+      required: true,
     },
-    contentHeading:{
-        type:String,
-        required:true
+    contentImage: {
+      type: String,
+      required: true,
     },
-    contentDescription:{
-        type:String
-    } ,
-    contentPoints:{
-        type: Array
-    }
-},{timestamps:true})
-export default mongoose.model ("Business Planing",businessPlanning)
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    contentHeading: {
+      type: String,
+      required: true,
+    },
+    contentDescription: {
+      type: String,
+    },
+    contentPoints: {
+      type: Array,
+    },
+  },
+  { timestamps: true }
+);
+export default mongoose.model("Business Planing", businessPlanning);
