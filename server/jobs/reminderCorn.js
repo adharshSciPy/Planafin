@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Cron job runs every minute (adjust to hourly/daily in production)
-cron.schedule("* * * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   const now = DateTime.now().setZone("Asia/Kolkata").startOf("day");
 
   try {

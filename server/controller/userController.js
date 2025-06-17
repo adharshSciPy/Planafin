@@ -1069,14 +1069,18 @@ const addBusinessPlanning = async (req, res) => {
     const businessFile = req.files?.["businessPlanningImage"]?.[0];
     const contentFile = req.files?.["contentImage"]?.[0];
 
+    // Log for debugging
+    console.log("Received files:", req.files);
+
     if (!businessFile || !contentFile) {
       return res.status(400).json({ message: "Both images are required!" });
     }
 
-    // Construct paths including 'uploads/' prefix for consistency
+    // Construct full paths
     const businessPlanningImage = `uploads/${businessFile.filename}`;
     const contentImage = `uploads/${contentFile.filename}`;
 
+    // Validate text fields
     if (!title || !description || !contentHeading || !contentPoints) {
       return res.status(400).json({ message: "All fields are required!" });
     }
@@ -1091,11 +1095,15 @@ const addBusinessPlanning = async (req, res) => {
       contentPoints,
     });
 
-    res.status(200).json({ message: "Business Planning Created", data: result });
+    res.status(200).json({
+      message: "Business Planning Created Successfully",
+      data: result,
+    });
   } catch (error) {
+    console.error("Error adding business planning:", error);
     res.status(500).json({
       message: "Internal server error",
-      data: error.message,
+      error: error.message,
     });
   }
 };
