@@ -193,7 +193,7 @@
 .jobMoreDetailsOuter {
   display: flex;
   justify-content: space-between;
-
+  flex-direction: column;
   width: 80%;
   padding: 12px 0;
 }
@@ -217,6 +217,8 @@
 
 .jobDetailsListingDiv {
   width: 60%;
+  padding-left: 50px;
+  padding-top: 20px;
 }
 .jobDetailsList {
   font-size: 16px;
