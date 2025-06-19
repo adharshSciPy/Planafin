@@ -79,15 +79,15 @@ function WatchNowDetails() {
             dataIndex: 'selectCountry',
             key: 'selectCountry',
         },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                <Button type="text" danger onClick={() => handleDelete(record._id)}>
-                    <Trash size={20} color='red' />
-                </Button>
-            ),
-        },
+        // {
+        //     title: 'Action',
+        //     key: 'action',
+        //     render: (text, record) => (
+        //         <Button type="text" danger onClick={() => handleDelete(record._id)}>
+        //             <Trash size={20} color='red' />
+        //         </Button>
+        //     ),
+        // },
     ];
 
  const exportToExcel = () => {

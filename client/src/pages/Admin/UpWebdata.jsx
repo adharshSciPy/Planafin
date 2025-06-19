@@ -125,7 +125,7 @@ function UpWebdata() {
             webinarDate: "",
             remindBeforeDays: "",
             startTime: "",
-            endTime: "",
+            // endTime: "",
             // userRegistered: [],
           }}
           onFinish={handleSubmit}
@@ -187,13 +187,7 @@ function UpWebdata() {
           >
             <Input type="time" />
           </Form.Item>
-          <Form.Item
-            name="endTime"
-            label="End Time"
-            rules={[{ required: true, message: "Please select an end time" }]}
-          >
-            <Input type="time" />
-          </Form.Item>
+         
           {/* Attended Sessions */}
           <Form.Item name="attendSession" label="Attended Sessions">
             <div style={{ textAlign: "center" }}>

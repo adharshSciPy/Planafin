@@ -9,7 +9,7 @@ const upcomingwebinarSchema = new mongoose.Schema({
   },
   endTime: {
     type: String, 
-    required: true,
+    // required: true,
   },
   remindBeforeDays: Number,
   image: {
