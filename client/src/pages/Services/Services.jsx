@@ -200,7 +200,7 @@ function Services() {
                 className="text-section"
                 id={`content-${activeTab.replace(/\s/g, "-")}`}
               >
-                <h1>{tabContent.find((tab) => tab.key === activeTab).title}</h1>
+                <h4>{tabContent.find((tab) => tab.key === activeTab).title}</h4>
                 <h6 className="gokuls">
                   {tabContent.find((tab) => tab.key === activeTab).subText}
                 </h6>
@@ -284,13 +284,21 @@ function Services() {
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
         </h3>
-        {/* <img
-          src={padam2}
-          alt="anaplan"
-          style={{ cursor: "pointer" }}
-          onClick={() => consultationNav()}
-        /> */}
-       
+
+        <div className="tech-images-row">
+          {partners.map((partner) => (
+            <div
+              key={partner._id}
+              className="tech-image-wrapper"
+              onClick={() => consultationNav(partner._id)}
+            >
+              <img
+                src={`${baseUrl}/${partner.techPartnersImg}`}
+                alt={partner.name}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="overlaymaindiv" ref={(el) => setElementRef(-1)(el)}>
