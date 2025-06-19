@@ -15,9 +15,9 @@ function WatchNowDetails() {
         const fetchDetails = async () => {
             setLoading(true)
             try {
-                const response = await axios.get(`${baseUrl}/api/v1/user/watchnowDetails`);
-                setDetails(response.data.data)
-                console.log(response.data.data)
+                const response = await axios.get(`${baseUrl}/api/v1/user/webinarregisteredusers`);
+                setDetails(response.data.users)
+                console.log("hellooiii",response.data)
             } catch (error) {
                 console.log("Error fetching watch now details", error)
             }
@@ -44,6 +44,11 @@ function WatchNowDetails() {
             key: 'index',
             render: (text, record, index) => index + 1,
         },
+        {
+      title: 'Webinar Title',
+      dataIndex: 'webinarTitle',
+      key: 'webinarTitle',
+    },
         {
             title: 'First Name',
             dataIndex: 'firstName',
@@ -88,6 +93,7 @@ function WatchNowDetails() {
  const exportToExcel = () => {
     const formattedData = details.map((item, index) => ({
       'Sl. No': index + 1,
+        'Webinar Title': item.webinarTitle,
       'Name': `${item.firstName} ${item.lastName}`,
       'Business Email': item.businessEmail,
       'Country': item.selectCountry,

@@ -1772,6 +1772,31 @@ const resetPasswordUser = async (req, res) => {
     });
   }
 };
+const getAllRegisteredUsers = async (req, res) => {
+  try {
+    const webinars = await upcomingWebinar.find({}, {
+      title: 1,
+      usersRegistered: 1,
+    });
+
+    // Flatten the data: add webinar title to each user
+    const allRegisteredUsers = webinars.flatMap(webinar =>
+      webinar.usersRegistered.map(user => ({
+        webinarId: webinar._id,
+        webinarTitle: webinar.title,
+        ...user._doc, // spread user fields like firstName, businessEmail etc.
+      }))
+    );
+
+    res.status(200).json({
+      count: allRegisteredUsers.length,
+      users: allRegisteredUsers,
+    });
+  } catch (err) {
+    console.error("Error fetching registered users:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 export {
   registerUser,
@@ -1847,4 +1872,5 @@ export {
   resetPasswordUser,
   getupcomingById,
   deleteupcomingWebinar,
+  getAllRegisteredUsers
 };
