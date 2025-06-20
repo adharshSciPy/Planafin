@@ -47,7 +47,7 @@
     transition: 0.4s all ease-in-out;
   }
   .navLink:hover {
-    color: #fcb900;
+    color: rgb(45, 155, 255);
   }
   .dropDown {
     position: relative;
@@ -164,7 +164,7 @@
     transition: 0.4s all ease-in-out;
   }
   .activeLink {
-  color: #f1ce3b;
+  color: rgb(45, 155, 255);
   font-weight: bold;
 }
 
