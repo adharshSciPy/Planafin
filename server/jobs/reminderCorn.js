@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Cron job runs every minute (adjust to hourly/daily in production)
-cron.schedule("* * * * *", async () => {
+cron.schedule("0 0 * * *", async () => {
   const now = DateTime.now().setZone("Asia/Kolkata").startOf("day");
 
   try {
@@ -87,7 +87,7 @@ END:VCALENDAR`;
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;width:100%">
       <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
     </div>
-    <p style="font-size: 16px; color: #555;">Click the button below to join the session when it starts:</p>
+    <p style="font-size: 16px; color: #555;">Click the button below to join:</p>
     <div style="text-align: center; margin: 30px 0;">
       <a href="${baseUrl}/resources" style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
         Join Webinar
