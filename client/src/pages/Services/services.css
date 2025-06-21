@@ -381,7 +381,7 @@ strong{
 }
 
 .consulting-grid {
-  width: 95%;
+  width: 100%;
   margin: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -438,7 +438,7 @@ strong{
 }
 
 .tech-image-wrapper {
-  width: 220px;
+  width: 180px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -678,4 +678,17 @@ li {
   .overlaymaindiv{
     min-height: max-content;
   }
+
+  .tech-images-row {
+    flex-direction: column; /* Stack images vertically */
+    align-items: center;
+    gap: 20px; /* Reduce gap if needed */
+  }
+
+  .tech-images-row img {
+    width: 80%; /* Make images scale to screen size */
+    max-width: 300px; /* Optional: cap max width */
+    height: auto; /* Maintain aspect ratio */
+  }
+
 }
