@@ -37,7 +37,7 @@ function Home() {
   const myRef = useRef([]);
   const observerRef = useRef(null);
   const headingRef = useRef([]);
- 
+
   const setElementRef = (index) => (el) => {
     if (el) {
       myRef.current[index] = el;
@@ -71,7 +71,7 @@ function Home() {
             Get a holistic view of your business and make better decisions
           </p>
         </div>
-        <div className={styles.swiperSliderContainer}>  
+        <div className={styles.swiperSliderContainer}>
           <img
             src={swiperImg}
             alt="swiperSlider"
@@ -278,7 +278,13 @@ function Home() {
         </div>
         <div className={styles.overlayImageMainDiv}></div>
       </div>
-      <div className={styles.expertiseMainDiv}>
+      <div
+        className={styles.expertiseMainDiv}
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(244, 246, 254, 1) 0%, rgba(255, 255, 255, 1) 100%)",paddingTop:"50px"
+        }}
+      >
         <h2 className={styles.expertiseHeading}>Our Expertise and Solutions</h2>
         <div className={styles.expertiseParaDiv}>
           <p className={styles.expertiseParagraph}>
@@ -290,7 +296,7 @@ function Home() {
             technology, mining and metals, real estate and education.
           </p>
         </div>
-        <div className={styles.expertiseGridMainDiv}>
+        <div className={styles.expertiseGridMainDiv} style={{backgroundImage:'none'}}>
           <div className={styles.expertiseSingleCardOuter}>
             <div
               className={styles.expertiseCardImgDiv}

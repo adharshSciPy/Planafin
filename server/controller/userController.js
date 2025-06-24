@@ -1069,14 +1069,18 @@ const addBusinessPlanning = async (req, res) => {
     const businessFile = req.files?.["businessPlanningImage"]?.[0];
     const contentFile = req.files?.["contentImage"]?.[0];
 
+    // Log for debugging
+    console.log("Received files:", req.files);
+
     if (!businessFile || !contentFile) {
       return res.status(400).json({ message: "Both images are required!" });
     }
 
-    // Construct paths including 'uploads/' prefix for consistency
+    // Construct full paths
     const businessPlanningImage = `uploads/${businessFile.filename}`;
     const contentImage = `uploads/${contentFile.filename}`;
 
+    // Validate text fields
     if (!title || !description || !contentHeading || !contentPoints) {
       return res.status(400).json({ message: "All fields are required!" });
     }
@@ -1091,11 +1095,15 @@ const addBusinessPlanning = async (req, res) => {
       contentPoints,
     });
 
-    res.status(200).json({ message: "Business Planning Created", data: result });
+    res.status(200).json({
+      message: "Business Planning Created Successfully",
+      data: result,
+    });
   } catch (error) {
+    console.error("Error adding business planning:", error);
     res.status(500).json({
       message: "Internal server error",
-      data: error.message,
+      error: error.message,
     });
   }
 };
@@ -1559,25 +1567,20 @@ const upcomingWebinarUser = async (req, res) => {
     });
 
     const [startHour, startMinute] = webinar.startTime.split(":").map(Number);
-    const [endHour, endMinute] = webinar.endTime.split(":").map(Number);
 
     // Use Luxon to fix time zone to Asia/Kolkata
     const startDate = DateTime.fromJSDate(webinar.webinarDate, { zone: "Asia/Kolkata" })
       .set({ hour: startHour, minute: startMinute, second: 0, millisecond: 0 });
-    const endDate = DateTime.fromJSDate(webinar.webinarDate, { zone: "Asia/Kolkata" })
-      .set({ hour: endHour, minute: endMinute, second: 0, millisecond: 0 });
-
     // ICS date formatter (UTC)
     const formatDate = (dt) => dt.toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
 
-    const icsContent = `BEGIN:VCALENDAR
+const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
 UID:${Date.now()}@planafin.com
 DTSTAMP:${formatDate(DateTime.utc())}
 DTSTART:${formatDate(startDate)}
-DTEND:${formatDate(endDate)}
 SUMMARY:${webinar.title}
 DESCRIPTION:Join us for the webinar: ${webinar.title}
 LOCATION:Online
@@ -1605,7 +1608,8 @@ END:VCALENDAR`;
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
               <p><strong>Date:</strong> ${startDate.toFormat("dd LLLL yyyy")}</p>
-              <p><strong>Time:</strong> ${startDate.toFormat("hh:mm a")} – ${endDate.toFormat("hh:mm a")} IST</p>
+              <p><strong>Time:</strong> ${startDate.toFormat("hh:mm a")} IST</p>
+
             </div>
             <div style="margin-bottom: 30px;width: 100%;display: flex;justify-content: flex-start;">
               <img src="cid:webinarImage" alt="webinarImage" style="height: 150px;">
@@ -1764,6 +1768,31 @@ const resetPasswordUser = async (req, res) => {
     });
   }
 };
+const getAllRegisteredUsers = async (req, res) => {
+  try {
+    const webinars = await upcomingWebinar.find({}, {
+      title: 1,
+      usersRegistered: 1,
+    });
+
+    // Flatten the data: add webinar title to each user
+    const allRegisteredUsers = webinars.flatMap(webinar =>
+      webinar.usersRegistered.map(user => ({
+        webinarId: webinar._id,
+        webinarTitle: webinar.title,
+        ...user._doc, // spread user fields like firstName, businessEmail etc.
+      }))
+    );
+
+    res.status(200).json({
+      count: allRegisteredUsers.length,
+      users: allRegisteredUsers,
+    });
+  } catch (err) {
+    console.error("Error fetching registered users:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 export {
   registerUser,
@@ -1839,4 +1868,5 @@ export {
   resetPasswordUser,
   getupcomingById,
   deleteupcomingWebinar,
+  getAllRegisteredUsers
 };

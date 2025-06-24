@@ -1,7 +1,7 @@
 /* LoginForm.css */
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
  
   }
   
@@ -38,8 +38,7 @@ body {
     font-size: 16px;
 
   }
-  .adminput-group input:last-child{
-  }
+
   .input-span-btn23{
     position: relative;
     cursor: pointer;

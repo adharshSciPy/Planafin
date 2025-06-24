@@ -9,22 +9,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./OurJourney.module.css";
 import { useNavigate } from "react-router-dom";
+
 function OurSolution() {
   const [form] = Form.useForm();
   const fileInputRef = useRef(null);
+  const contentFileInputRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [sections, setSections] = useState([]);
   const [imageFile, setImageFile] = useState(null);
   const [contentImageFile, setContentImageFile] = useState(null);
-  const contentFileInputRef = useRef(null);
-
   const navigate = useNavigate();
-  // Sync sections with form field
+
   useEffect(() => {
     form.setFieldsValue({ contentPoints: sections });
   }, [sections, form]);
 
-  // Handle File Selection
   const handleFileChange = (e, type) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -36,32 +35,55 @@ function OurSolution() {
     }
   };
 
-  // Handle Form Submission
   const handleSubmit = async (values) => {
+    if (!imageFile || !contentImageFile) {
+      toast.error("Please upload both Business and Content Images", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
+    // Prevent uploading the same file twice
+    if (
+      imageFile.name === contentImageFile.name &&
+      imageFile.size === contentImageFile.size
+    ) {
+      toast.error("Please select two different files!", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
     try {
       const formData = new FormData();
+
       Object.keys(values).forEach((key) => {
         if (key === "contentPoints") {
           sections.forEach((section) => {
-            formData.append(`${key}[]`, section.name);
+            formData.append("contentPoints[]", section.name);
           });
         } else {
           formData.append(key, values[key]);
         }
       });
 
-      if (imageFile) {
-        formData.append("businessPlanningImage", imageFile);
-      }
-      if (contentImageFile) {
-        formData.append("contentImage", contentImageFile);
+      formData.append("businessPlanningImage", imageFile);
+      formData.append("contentImage", contentImageFile);
+
+      // Debug: Check exact formData before sending
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
       }
 
       const response = await axios.post(
         `${baseurl}/api/v1/user/addBusinessPlanning`,
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -71,13 +93,10 @@ function OurSolution() {
           autoClose: 3000,
         });
 
-        for (let pair of formData.entries()) {
-          console.log(`${pair[0]}:`, pair[1]);
-        }
-
         form.resetFields();
         setSections([]);
         setImageFile(null);
+        setContentImageFile(null);
         if (fileInputRef.current) fileInputRef.current.value = "";
         if (contentFileInputRef.current) contentFileInputRef.current.value = "";
       }
@@ -90,7 +109,6 @@ function OurSolution() {
     }
   };
 
-  // Add Section
   const addSection = () => {
     if (inputValue.trim() !== "") {
       setSections((prevItems) => [
@@ -101,23 +119,23 @@ function OurSolution() {
     }
   };
 
-  // Remove Section
   const removeSection = (id) => {
     setSections((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Reset Form
   const handleReset = () => {
     form.resetFields();
     setSections([]);
     setImageFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    setContentImageFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+    if (contentFileInputRef.current) contentFileInputRef.current.value = "";
   };
+
   const showOurWebinar = () => {
     navigate("/viewAllSolution");
   };
+
   return (
     <>
       <Header />
@@ -147,7 +165,7 @@ function OurSolution() {
           <Form.Item label="Main Image Upload">
             <input
               type="file"
-              accept="image/*"
+              accept="image/*,application/pdf"
               ref={fileInputRef}
               onChange={(e) => handleFileChange(e, "business")}
             />
@@ -156,7 +174,7 @@ function OurSolution() {
           <Form.Item label="Content Image Upload">
             <input
               type="file"
-              accept="image/*"
+              accept="image/*,application/pdf"
               ref={contentFileInputRef}
               onChange={(e) => handleFileChange(e, "content")}
             />
@@ -165,21 +183,19 @@ function OurSolution() {
           <Form.Item
             name="title"
             label="Title"
-            rules={[
-              { required: true, message: "Please enter a session summary" },
-            ]}
+            rules={[{ required: true, message: "Please enter a title" }]}
           >
             <Input.TextArea rows={1} />
           </Form.Item>
+
           <Form.Item
             name="description"
             label="Description"
-            rules={[
-              { required: true, message: "Please enter details about pigment" },
-            ]}
+            rules={[{ required: true, message: "Please enter a description" }]}
           >
             <Input.TextArea rows={6} />
           </Form.Item>
+
           <Form.Item
             name="contentHeading"
             label="Content Heading"
@@ -191,15 +207,12 @@ function OurSolution() {
           <Form.Item
             name="contentDescription"
             label="Content Description"
-            rules={[
-              { required: true, message: "Please enter a session summary" },
-            ]}
+            rules={[{ required: true, message: "Please enter a description" }]}
           >
             <Input.TextArea rows={6} />
           </Form.Item>
 
-          {/* Attended Sessions */}
-          <Form.Item name="contentPoints" label="ContentPoints">
+          <Form.Item name="contentPoints" label="Content Points">
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
@@ -218,7 +231,6 @@ function OurSolution() {
               </div>
             </div>
 
-            {/* List of sessions */}
             {sections.map((item) => (
               <div
                 key={item.id}
@@ -243,9 +255,6 @@ function OurSolution() {
             ))}
           </Form.Item>
 
-          {/* Image Upload */}
-
-          {/* Submit & Reset Buttons */}
           <Form.Item wrapperCol={{ offset: 6 }} style={{ marginTop: "30px" }}>
             <Flex gap="small">
               <Button type="primary" htmlType="submit">

@@ -9,11 +9,11 @@ import s2 from "../.././assets/s2.png";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../baseUrl.js";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
@@ -25,7 +25,7 @@ function Services() {
   const observerRef = useRef(null);
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
-  const [partners, setPartners] = useState([]);//
+  const [partners, setPartners] = useState([]); //
   const [initialActiveTab, setInitialActiveTab] = useState(null);
 
 
@@ -142,15 +142,15 @@ function Services() {
     const fetchPartners = async () => {
       try {
         const res = await axios.get(`${baseUrl}/api/v1/user/getTechPartners`);
-        console.log("helloooi",res.data.data);
-        
+        console.log("helloooi", res.data.data);
+
         setPartners(res.data.data);
       } catch (err) {
         console.error("Failed to fetch tech partners:", err);
       }
     };
     fetchPartners();
-  }, []);
+  }, []);
   return (
     <div>
       <Nav />
@@ -206,51 +206,53 @@ function Services() {
           ))}
         </div>
 
-        {/* Content Section */}
-        <div className="tab-content">
-          {activeTab && tabContent.find((tab) => tab.key === activeTab) && (
-            <>
+        {/* Two-column layout */}
+        <div className="tab-main">
+          {/* Left Section - Yellow Box */}
+          <div className="tab-content">
+            {activeTab && tabContent.find((tab) => tab.key === activeTab) && (
               <section
                 className="text-section"
                 id={`content-${activeTab.replace(/\s/g, "-")}`}
               >
-                <h1>{tabContent.find((tab) => tab.key === activeTab).title}</h1>
+                <h4>{tabContent.find((tab) => tab.key === activeTab).title}</h4>
                 <h6 className="gokuls">
                   {tabContent.find((tab) => tab.key === activeTab).subText}
                 </h6>
 
-                <div className="content-flex">
-                  <ul className="ul">
-                    {tabContent
-                      .find((tab) => tab.key === activeTab)
-                      .details?.map((point, index) => (
-                        <li key={index}>{point}</li>
-                      ))}
-                  </ul>
+                <ul className="ul">
+                  {tabContent
+                    .find((tab) => tab.key === activeTab)
+                    .details?.map((point, index) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                </ul>
 
-                  <div className="paragraphs">
-                    {tabContent
-                      .find((tab) => tab.key === activeTab)
-                      .description?.map((desc, index) => (
-                        <p key={index}>{desc}</p>
-                      ))}
-                  </div>
+                {/* ✅ Image inside yellow box */}
+                <div className="image-section">
+                  <img
+                    src={`${baseUrl}/uploads/${
+                      tabContent.find((tab) => tab.key === activeTab)?.image
+                    }`}
+                    alt={
+                      tabContent.find((tab) => tab.key === activeTab)?.title ||
+                      "image"
+                    }
+                  />
                 </div>
-
-                <a href="mailto:example@example.com" className="services-link">
-                  Know More &gt;&gt;
-                </a>
               </section>
+            )}
+          </div>
 
-              <div className="image-section">
-                <img
-                  src={`${baseUrl}/uploads/${
-                    tabContent.find((tab) => tab.key === activeTab).image
-                  }`}
-                  alt={tabContent.find((tab) => tab.key === activeTab).title}
-                />
-              </div>
-            </>
+          {/* Right Section - Paragraphs */}
+          {activeTab && (
+            <div className="paragraphs">
+              {tabContent
+                .find((tab) => tab.key === activeTab)
+                ?.description?.map((desc, index) => (
+                  <p key={index}>{desc}</p>
+                ))}
+            </div>
           )}
         </div>
       </div>
@@ -277,7 +279,9 @@ function Services() {
                     <path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
                   </svg>
                 </span>
-                <p className="text-p"><strong>{item.title}</strong>-{item.subtext}</p>
+                <p className="text-p">
+                  <strong>{item.title}</strong>-{item.subtext}
+                </p>
               </div>
             ))}
 
@@ -295,50 +299,21 @@ function Services() {
         <h3 className="tp-head2">
           We have partnered with the best of the technologies in EPM space,
         </h3>
-        {/* <img
-          src={padam2}
-          alt="anaplan"
-          style={{ cursor: "pointer" }}
-          onClick={() => consultationNav()}
-        /> */}
-        <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
-        navigation
-        pagination={{ clickable: true }}
-        modules={[Navigation, Pagination,Autoplay]}
-        className="tech-carousel"
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        breakpoints={{
-          320: {          
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          640: {          
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1024: {         
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        }}
-        // loop={true}
-      >
-        {partners.map((partner) => (
-          <SwiperSlide key={partner._id}>
-            <img
-              src={`${baseUrl}/${partner.techPartnersImg}`}
-              alt={partner.name}
-              style={{ width: "100%", cursor: "pointer" }}
+
+        <div className="tech-images-row">
+          {partners.map((partner) => (
+            <div
+              key={partner._id}
+              className="tech-image-wrapper"
               onClick={() => consultationNav(partner._id)}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            >
+              <img
+                src={`${baseUrl}/${partner.techPartnersImg}`}
+                alt={partner.name}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="overlaymaindiv" ref={(el) => setElementRef(-1)(el)}>

@@ -74,6 +74,7 @@ import {
   resetPasswordUser,
   getupcomingById,
   deleteupcomingWebinar,
+  getAllRegisteredUsers,
 } from "../controller/userController.js";
 const userRoute = Router();
 
@@ -175,5 +176,7 @@ userRoute.route("/forgotPassword").post(forgotPassword);
 userRoute.route("/resetPasswordUser/:userId/:token").post(resetPasswordUser);
 userRoute.route("/getupcomingWebinardata/:id").get(getupcomingById);
 userRoute.route("/deleteupcomingdata/:id").delete(deleteupcomingWebinar);
+userRoute.route("/webinarregisteredusers").get(getAllRegisteredUsers);
+
 
 export default userRoute;

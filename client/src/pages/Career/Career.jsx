@@ -235,7 +235,7 @@ function Career() {
       </div>
       <div className={styles.openingsDisplayOuterDiv}>
         <div className={styles.openingsDisplayInnerDiv}>
-          <h2 className={styles.openingsHeading}>Open Positions</h2>
+          <h2 className={styles.openingsHeading} style={{padding:"30px"}}>Open Positions</h2>
           <div className={styles.openingsContentOuterDiv}>
             {jobDetails.map((item, index) => (
               <div className={styles.singleOpeningContent} key={index}>
