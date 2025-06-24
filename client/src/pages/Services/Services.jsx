@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
+
 function Services() {
   const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
@@ -26,6 +27,7 @@ function Services() {
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
   const [partners, setPartners] = useState([]); //
+    const { pathname } = useLocation();
 
   const tabData = async () => {
     try {
@@ -136,6 +138,9 @@ function Services() {
     };
     fetchPartners();
   }, []);
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <div>
       <Nav />

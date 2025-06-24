@@ -11,12 +11,17 @@ import Nav from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Solutions() {
   const [startIndex, setStartIndex] = useState(0);
   const [cards, setCardData] = useState([]);
   const [industries, setIndustries] = useState([]);
   const [solutionData, setSolutionData] = useState([]);
+   const { pathname } = useLocation();
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const getCardData = async () => {
     try {
       const response = await axios.get(

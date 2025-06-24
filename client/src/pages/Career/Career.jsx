@@ -20,6 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
+import { useLocation } from "react-router-dom";
 
 function Career() {
   const [showDetails, setShowDetails] = useState(false);
@@ -52,6 +53,12 @@ function Career() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+  
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const settings = {
     dots: true,

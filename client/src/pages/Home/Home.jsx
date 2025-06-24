@@ -16,6 +16,7 @@ import frame1 from "../../assets/Frame-1.png";
 import flickeringImg from "../../assets/flickeringImg.png";
 import Carousel from "../../components/Carousel/EmblaCarousel";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom"; 
 
 function Home() {
   const navigate = useNavigate();
@@ -37,6 +38,12 @@ function Home() {
   const myRef = useRef([]);
   const observerRef = useRef(null);
   const headingRef = useRef([]);
+   const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
 
   const setElementRef = (index) => (el) => {
     if (el) {

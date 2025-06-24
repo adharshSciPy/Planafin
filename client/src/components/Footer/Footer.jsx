@@ -53,8 +53,38 @@ function Footer() {
               </ul>
             </div>
           </div>
+          <div className="">
+            <nav className={styles.nav}>
+              <Link to="/" className={styles.navLink}>
+                Home
+              </Link>
+              <Link to="/Services" className={styles.navLink}>
+                Services
+              </Link>
+              <Link to="/solutions" className={styles.navLink}>
+                Solution    
+              </Link>
+              <Link to="/aboutus" className={styles.navLink}>
+                About Us
+              </Link>
+              <Link to="/career" className={styles.navLink}>
+                Career
+              </Link>
+
+              {/* Dropdown */}
+              <div className={styles.dropdown}>
+                <span className={styles.navLink}>Resources</span>
+                <div className={styles.dropdownContent}>
+                  <Link to="/resources" className={styles.navLink}>
+                    Webinar And Events
+                  </Link>
+                </div>
+              </div>
+            </nav>
+          </div>
           <div className={styles.waterMarkDesign}>
-            <p>© 2025 Planafin. All rights reserved</p></div>
+            <p>© 2025 Planafin. All rights reserved</p>
+          </div>
           <div className={styles.waterMarkDesign}>
             <p>
               Designed by{" "}

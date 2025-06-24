@@ -7,11 +7,14 @@ import { CaretRight } from "@phosphor-icons/react";
 import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
+import { useLocation } from "react-router-dom";
 
 function Resources() {
   const [arrayItem, setArrayItem] = useState([]);
   const [uparrayItem, setUpArrayItem] = useState([]);
   const navigate=useNavigate()
+    const { pathname } = useLocation();
+
   const getData = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/demandDetails`);
@@ -35,6 +38,9 @@ function Resources() {
     getUpData();
   }, []);
   const [activeTab, setActiveTab] = useState("upcoming");
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <div>
       <Header />

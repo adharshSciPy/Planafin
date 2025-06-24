@@ -11,7 +11,7 @@ import cardImage4 from "../../assets/cardImage4.png";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import baseUrl from "../../baseUrl";
-import demoImg from "../../assets/Swathi-Yelugoti.png";
+import { useLocation } from "react-router-dom";
 function Aboutus() {
   const [journeyData, setJourneyData] = useState([]);
   const OPTIONS = { loop: true };
@@ -19,6 +19,10 @@ function Aboutus() {
   const [dataImage, setdataImage] = useState();
   const [slides, setSlides] = useState([]);
   const [projectData, setProjectdata] = useState();
+    const { pathname } = useLocation();
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   const journeyDatasAll = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/journeyDetails`);
