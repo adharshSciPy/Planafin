@@ -26,15 +26,30 @@ function Services() {
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
   const [partners, setPartners] = useState([]);//
+  const [initialActiveTab, setInitialActiveTab] = useState(null);
 
-  const tabData = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
-      setTabContent(response.data);
-    } catch (error) {
-      console.log(error);
+
+ const tabData = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
+    const tabs = response.data;
+
+    setTabContent(tabs);
+
+    // Set activeTab only if location state passed a valid one
+    if (initialActiveTab) {
+      const isValid = tabs.some((tab) => tab.key === initialActiveTab);
+      if (isValid) {
+        setActiveTab(initialActiveTab);
+      }
+    } else {
+      setActiveTab(tabs[0]?.key || ""); // Fallback to first tab
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   const getDataConsulting = async () => {
     try {
       const response = await axios.get(
@@ -50,11 +65,11 @@ function Services() {
   }, []);
 
   useEffect(() => {
-    if (location.state && location.state.activeTab) {
-      const tab = location.state.activeTab;
-      setActiveTab(tab);
-    }
-  }, [location.state]);
+  if (location.state?.activeTab) {
+    setInitialActiveTab(location.state.activeTab);
+  }
+}, [location.state]);
+
 
   useEffect(() => {
     if (location.state && location.state.scrollToTabs) {
