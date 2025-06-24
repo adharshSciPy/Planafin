@@ -502,11 +502,6 @@
     width: 95%;
   }
 
-  .card {
-    width: 100%;
-    min-width: 180px;
-    height: 200px;
-  }
 
   .buttons-wrapper {
     gap: 12px;
@@ -532,4 +527,5 @@
   .sec5-padam {
     display: none;
   }
+  
 }
