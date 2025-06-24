@@ -17,7 +17,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 
 function Services() {
-  const [activeTab, setActiveTab] = useState("Business Consulting");
+  // const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
   const [counterData, setCounterData] = useState([]);
   const location = useLocation();
@@ -27,16 +27,39 @@ function Services() {
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
   const [partners, setPartners] = useState([]); //
+  // const [initialActiveTab, setInitialActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState("Business Consulting");
+
     const { pathname } = useLocation();
 
-  const tabData = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
-      setTabContent(response.data);
-    } catch (error) {
-      console.log(error);
+const tabData = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
+    const tabs = response.data;
+    setTabContent(tabs);
+
+    const stateTab = location.state?.activeTab;
+    if (stateTab) {
+      // Try to match with spaces replaced
+      const normalizedStateTab = stateTab.replace(/-/g, ' ');
+      const found = tabs.find(tab => 
+        tab.key === stateTab || tab.key === normalizedStateTab
+      );
+      
+      if (found) {
+        setActiveTab(found.key);
+        return;
+      }
     }
-  };
+
+    setActiveTab(tabs[0]?.key || "");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
+
   const getDataConsulting = async () => {
     try {
       const response = await axios.get(
@@ -47,16 +70,18 @@ function Services() {
       console.log(error);
     }
   };
-  useEffect(() => {
-    tabData();
-  }, []);
+useEffect(() => {
+  tabData();
+}, [location.state?.activeTab]); // Add dependency here
 
-  useEffect(() => {
-    if (location.state && location.state.activeTab) {
-      const tab = location.state.activeTab;
-      setActiveTab(tab);
-    }
-  }, [location.state]);
+
+
+//   useEffect(() => {
+//   if (location.state?.activeTab) {
+//     setInitialActiveTab(location.state.activeTab);
+//   }
+// }, [location.state]);
+
 
   useEffect(() => {
     if (location.state && location.state.scrollToTabs) {
@@ -138,6 +163,13 @@ function Services() {
     };
     fetchPartners();
   }, []);
+  useEffect(() => {
+  console.log("Active tab changed:", activeTab);
+}, [activeTab]);
+
+useEffect(() => {
+  console.log("Tab content loaded:", tabContent);
+}, [tabContent]);
     useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

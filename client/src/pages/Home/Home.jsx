@@ -20,10 +20,13 @@ import { useLocation } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-  const readMoreNavigation = (id) => {
-    navigate("/Services", { state: { activeTab: id, scrollToTabs: true } });
-    // window.scrollTo(0, 0);
-  };
+const readMoreNavigation = (id) => {
+  navigate("/Services", {
+    state: { activeTab: id, scrollToTabs: true },
+    replace: true // optional: avoids state being retained in back navigation
+  });
+};
+
   // contact us
   const ContactUs = () => {
     navigate("/lets-talk");
@@ -58,6 +61,7 @@ function Home() {
       if (observerRef.current) observerRef.current.observe(el);
     }
   };
+  
   return (
     <div>
       <Header />
@@ -207,7 +211,7 @@ function Home() {
 
               <h6
                 className={styles.readMore}
-                onClick={() => readMoreNavigation("Managed-Support-Services")}
+                onClick={() => readMoreNavigation("Managed-Support")}
               >
                 Read More <span>&gt;&gt;</span>
               </h6>

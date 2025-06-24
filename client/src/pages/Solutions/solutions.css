@@ -254,9 +254,12 @@
   border-radius: 8px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   width: 270px;
-  height: 270px;
+  min-height: 270px; /* Allows smaller cards to stay balanced */
+  height: auto; /* Let card expand if needed */
   text-align: center;
+  overflow-wrap: break-word; /* Wrap long text */
 }
+
 
 .buttons-wrapper {
   display: flex;
@@ -499,11 +502,6 @@
     width: 95%;
   }
 
-  .card {
-    width: 100%;
-    min-width: 180px;
-    height: 200px;
-  }
 
   .buttons-wrapper {
     gap: 12px;
@@ -529,4 +527,5 @@
   .sec5-padam {
     display: none;
   }
+  
 }
