@@ -16,7 +16,7 @@ import "swiper/css/pagination";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 function Services() {
-  const [activeTab, setActiveTab] = useState("Business Consulting");
+  // const [activeTab, setActiveTab] = useState("Business Consulting");
   const [tabContent, setTabContent] = useState([]);
   const [counterData, setCounterData] = useState([]);
   const location = useLocation();
@@ -26,29 +26,37 @@ function Services() {
   const navigate = useNavigate();
   const [consultingData, setConsultingData] = useState([]);
   const [partners, setPartners] = useState([]); //
-  const [initialActiveTab, setInitialActiveTab] = useState(null);
+  // const [initialActiveTab, setInitialActiveTab] = useState(null);
+  const [activeTab, setActiveTab] = useState("Business Consulting");
 
 
- const tabData = async () => {
+const tabData = async () => {
   try {
     const response = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
     const tabs = response.data;
-
     setTabContent(tabs);
 
-    // Set activeTab only if location state passed a valid one
-    if (initialActiveTab) {
-      const isValid = tabs.some((tab) => tab.key === initialActiveTab);
-      if (isValid) {
-        setActiveTab(initialActiveTab);
+    const stateTab = location.state?.activeTab;
+    if (stateTab) {
+      // Try to match with spaces replaced
+      const normalizedStateTab = stateTab.replace(/-/g, ' ');
+      const found = tabs.find(tab => 
+        tab.key === stateTab || tab.key === normalizedStateTab
+      );
+      
+      if (found) {
+        setActiveTab(found.key);
+        return;
       }
-    } else {
-      setActiveTab(tabs[0]?.key || ""); // Fallback to first tab
     }
-  } catch (error) {
-    console.log(error);
+
+    setActiveTab(tabs[0]?.key || "");
+  } catch (err) {
+    console.error(err);
   }
 };
+
+
 
   const getDataConsulting = async () => {
     try {
@@ -60,15 +68,17 @@ function Services() {
       console.log(error);
     }
   };
-  useEffect(() => {
-    tabData();
-  }, []);
+useEffect(() => {
+  tabData();
+}, [location.state?.activeTab]); // Add dependency here
 
-  useEffect(() => {
-  if (location.state?.activeTab) {
-    setInitialActiveTab(location.state.activeTab);
-  }
-}, [location.state]);
+
+
+//   useEffect(() => {
+//   if (location.state?.activeTab) {
+//     setInitialActiveTab(location.state.activeTab);
+//   }
+// }, [location.state]);
 
 
   useEffect(() => {
@@ -151,6 +161,13 @@ function Services() {
     };
     fetchPartners();
   }, []);
+  useEffect(() => {
+  console.log("Active tab changed:", activeTab);
+}, [activeTab]);
+
+useEffect(() => {
+  console.log("Tab content loaded:", tabContent);
+}, [tabContent]);
   return (
     <div>
       <Nav />
