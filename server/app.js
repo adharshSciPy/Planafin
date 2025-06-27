@@ -11,14 +11,14 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
-// dotenv.config({
-//     path: './env'
-// })
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(cors());
-
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}));
 app.use("/api/v1/user", userRoute);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const buildPath = path.join(__dirname, "../client/build");

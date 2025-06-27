@@ -1,2 +1,2 @@
-const baseUrl=`http://16.176.171.74:8000`;
+const baseUrl = "https://planafin.com";
 export default baseUrl;
