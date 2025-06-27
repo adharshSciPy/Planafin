@@ -257,7 +257,8 @@ function Career() {
                     </div>
                     <div className={styles.workingHours}>
                       <p className={styles.workingHoursContent}>
-                        Full Time | 5 Working Days
+                       
+                        {item.workSchedule}|{item.workTime}
                       </p>
                     </div>
                     <div className={styles.jobApplyDiv}>
