@@ -25,7 +25,7 @@ function OurJourneyAccelaratorsAll() {
       const response = await axios.delete(
         `${baseUrl}/api/v1/user/deleteSolutionAccelerators/${selectId}`
       );
-      console.log(response);
+      // console.log(response);
       
       if (response.status === 200) {
         toast.success("successfully deleted", {

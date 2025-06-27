@@ -24,7 +24,7 @@ function EmployeeData() {
       console.log(error);
     }
   };
-  console.log("this", employeeData);
+  // console.log("this", employeeData);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   useEffect(() => {

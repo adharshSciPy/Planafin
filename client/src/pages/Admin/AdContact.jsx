@@ -16,7 +16,7 @@ function AdContact() {
     axios.get(`${baseUrl}/api/v1/user/contactdetails`)
       .then((res) => {
         setContactList(res.data.data);
-        console.log(res.data.data, "eda");
+        // console.log(res.data.data, "eda");
       })
       .catch((err) => {
         console.error("Failed to fetch contacts:", err);

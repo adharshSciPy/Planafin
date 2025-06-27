@@ -56,7 +56,7 @@ function AnaplanCounter() {
   const serviceData = async () => {
     try {
       const res = await axios.get(`${baseUrl}/api/v1/user/getAnaplanDetails`);
-      console.log("data", res.data.data);
+      // console.log("data", res.data.data);
       setData(res.data.data);
     } catch (error) {
       console.log(error);

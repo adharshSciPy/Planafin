@@ -52,7 +52,7 @@ function JobOpening() {
         }
       );
 
-      console.log("Job opening submitted", response);
+      // console.log("Job opening submitted", response);
 
       setForm({
         title: "",

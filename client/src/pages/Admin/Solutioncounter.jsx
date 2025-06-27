@@ -50,7 +50,7 @@ function Solutioncounter() {
     const serviceData = async () => {
         try {
             const res = await axios.get(`${baseUrl}/api/v1/user/getSolutionCounter`)
-            console.log("data", res.data.data)
+            // console.log("data", res.data.data)
             setData(res.data.data)
         } catch (error) {
             console.log(error)

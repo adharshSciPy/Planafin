@@ -44,7 +44,7 @@ const getIndustryImage = async () => {
 useEffect(()=>{
     getIndustryImage()
 },[])
-console.log(viewImage);
+// console.log(viewImage);
 
   return (
     

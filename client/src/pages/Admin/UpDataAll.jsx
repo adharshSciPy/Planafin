@@ -23,7 +23,7 @@ function UpDataAll() {
   const handleOk = async () => {
     setConfirmLoading(true);
     try {
-      console.log(selectId);
+      // console.log(selectId);
       
       const response = await axios.delete(
         `${baseUrl}/api/v1/user/deleteupcomingdata/${selectId}`

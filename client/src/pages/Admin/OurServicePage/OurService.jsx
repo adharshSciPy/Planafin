@@ -67,7 +67,7 @@ const [descriptions, setDescriptions] = useState([]);
     try {
       const res = await axios.get(`${baseUrl}/api/v1/user/servicedetails`);
       setServices(res.data);
-      console.log("fetch service",res.data);
+      // console.log("fetch service",res.data);
       
     } catch (error) {
       console.error("Error fetching services:", error);

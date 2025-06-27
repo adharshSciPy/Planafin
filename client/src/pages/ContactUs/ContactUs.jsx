@@ -44,7 +44,7 @@ function ContactUs() {
         e.preventDefault();
         try {
             const response = await axios.post(`${baseUrl}/api/v1/user/contactus`, form)
-            console.log("contact res", response)
+            // console.log("contact res", response)
             setForm({
                 firstName: "",
                 lastName: "",

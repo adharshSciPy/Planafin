@@ -73,9 +73,9 @@ function OurSolution() {
       formData.append("contentImage", contentImageFile);
 
       // Debug: Check exact formData before sending
-      for (let pair of formData.entries()) {
-        console.log(`${pair[0]}:`, pair[1]);
-      }
+      // for (let pair of formData.entries()) {
+      //   console.log(`${pair[0]}:`, pair[1]);
+      // }
 
       const response = await axios.post(
         `${baseurl}/api/v1/user/addBusinessPlanning`,

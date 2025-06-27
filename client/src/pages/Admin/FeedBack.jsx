@@ -56,7 +56,7 @@ function FeedBack() {
         }
       );
 
-      console.log("Form data submitted", response);
+      // console.log("Form data submitted", response);
 
 
       setForm({
@@ -80,7 +80,7 @@ function FeedBack() {
     const fetchFeedback = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/v1/user/viewFeedback`);
-        console.log("feedback data", response.data.data);
+        // console.log("feedback data", response.data.data);
         setFeedbacks(response.data.data);
       } catch (error) {
         console.error("Error fetching feedback data:", error);

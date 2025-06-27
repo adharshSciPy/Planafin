@@ -32,7 +32,7 @@ function Project() {
         });
       }
       form.resetFields();
-      console.log(payload);
+      // console.log(payload);
       
     } catch (error) {
       toast.error("Failed to su bmit form!", {

@@ -17,7 +17,7 @@ function WatchNowDetails() {
             try {
                 const response = await axios.get(`${baseUrl}/api/v1/user/webinarregisteredusers`);
                 setDetails(response.data.users)
-                console.log("hellooiii",response.data)
+                // console.log("hellooiii",response.data)
             } catch (error) {
                 console.log("Error fetching watch now details", error)
             }

@@ -38,7 +38,7 @@ function IndustryImages() {
         formData
       );
 
-      console.log("Upload success:", response);
+      // console.log("Upload success:", response);
       alert("Uploaded Successfully!");
 
       setTitle("");

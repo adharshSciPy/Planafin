@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 function SupplyChain() {
   const [supplyData, setSupplyData] = useState();
   const { id } = useParams();
-  console.log(supplyData);
+  // console.log(supplyData);
 
   const getData = async () => {
     try {
@@ -26,7 +26,7 @@ function SupplyChain() {
   useEffect(() => {
     getData();
   }, []);
-  console.log(supplyData);
+  // console.log(supplyData);
 
   return (
     <>

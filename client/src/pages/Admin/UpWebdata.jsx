@@ -44,7 +44,7 @@ function UpWebdata() {
       if (imageFile) {
         formData.append("image", imageFile);
       }
-      console.log(".thid", formData);
+      // console.log(".thid", formData);
 
       const response = await axios.post(
         `${baseurl}/api/v1/user/createupcomingwebinar`,

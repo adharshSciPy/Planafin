@@ -154,7 +154,7 @@ useEffect(() => {
     const fetchPartners = async () => {
       try {
         const res = await axios.get(`${baseUrl}/api/v1/user/getTechPartners`);
-        console.log("helloooi", res.data.data);
+        // console.log("helloooi", res.data.data);
 
         setPartners(res.data.data);
       } catch (err) {
@@ -164,11 +164,11 @@ useEffect(() => {
     fetchPartners();
   }, []);
   useEffect(() => {
-  console.log("Active tab changed:", activeTab);
+  // console.log("Active tab changed:", activeTab);
 }, [activeTab]);
 
 useEffect(() => {
-  console.log("Tab content loaded:", tabContent);
+  // console.log("Tab content loaded:", tabContent);
 }, [tabContent]);
     useEffect(() => {
     window.scrollTo(0, 0);

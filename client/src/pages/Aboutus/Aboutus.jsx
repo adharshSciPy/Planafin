@@ -39,7 +39,7 @@ function Aboutus() {
         `${baseUrl}/api/v1/user/customerDetails`
       );
       setClientImage(response.data.data[0].imageCustomer);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +57,7 @@ function Aboutus() {
   const getProject = async () => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/viewProject`);
-      console.log("pro", response.data.data);
+      // console.log("pro", response.data.data);
       setProjectdata(response.data.data);
     } catch (error) {}
   };
@@ -68,7 +68,7 @@ function Aboutus() {
     getProject();
   }, []);
 
-  console.log(clientImage);
+  // console.log(clientImage);
 
   return (
     <div>

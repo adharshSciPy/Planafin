@@ -47,7 +47,7 @@ function Career() {
     setSelectedJobId((prevId) => (prevId === id ? null : id));
   };
   const scrollToApplicationForm = (titile) => {
-    console.log(titile);
+    // console.log(titile);
     const element = document.querySelector(`.${styles.applicationFormOuter}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -102,7 +102,7 @@ function Career() {
   const fetchCarouselData = async (req, res) => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/viewFeedback`);
-      console.log("Response fetched succesfully", response.data.data);
+      // console.log("Response fetched succesfully", response.data.data);
       setCarouselData(response.data.data);
     } catch (error) {
       console.log("Error fetching data", error);
@@ -112,7 +112,7 @@ function Career() {
   const fetchJobDetails = async (req, res) => {
     try {
       const response = await axios.get(`${baseUrl}/api/v1/user/joblisting`);
-      console.log("Job Details", response.data.data);
+      // console.log("Job Details", response.data.data);
       setJobDetails(response.data.data);
       setJobDetailsDescription(response.data.data.requiredSkills);
     } catch (error) {
@@ -158,7 +158,7 @@ function Career() {
         }
       );
   
-      console.log("Form data submitted", response);
+      // console.log("Form data submitted", response);
   
       // Reset the form after successful submission
       setForm({

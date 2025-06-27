@@ -28,7 +28,7 @@ function Solutions() {
         `${baseUrl}/api/v1/user/getSolutionAccelerators`
       );
       setCardData(response.data.data);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +49,7 @@ function Solutions() {
         `${baseUrl}/api/v1/user/getBusinessPlanning`
       );
       setSolutionData(response.data.data);
-      console.log("solu",response.data.data);
+      // console.log("solu",response.data.data);
 
       
     } catch (error) {
