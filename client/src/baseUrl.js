@@ -1,2 +1,2 @@
-const baseUrl = "https://planafin.com";
+const baseUrl = "https://your-backend-service.onrender.com";
 export default baseUrl;
