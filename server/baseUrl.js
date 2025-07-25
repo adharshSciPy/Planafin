@@ -1,2 +1,2 @@
-const baseUrl=`https://planafin-bgq8.onrender.com`;
+const baseUrl=`https://www.planafin.com`;
 export default baseUrl
