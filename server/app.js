@@ -20,7 +20,7 @@ app.use(cors({
   credentials: true,
 }));
 app.use("/api/v1/user", userRoute);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static("/mnt/storage/uploads"));
 const buildPath = path.join(__dirname, "../client/build");
 app.use(express.static(buildPath));
 
