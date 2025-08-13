@@ -88,7 +88,7 @@ function Aboutus() {
           <div className={styles.paraOne}>
             <div className={styles.textContainer}>
               <p className={styles.headingPara}>
-                Founded in 2015, Planafin is an independent consulting firm,
+                Founded in 2016, Planafin is an independent consulting firm,
                 focused on strategy, technology, implementation, deployment of
                 solutions in the enterprise planning and performance management
                 zone.

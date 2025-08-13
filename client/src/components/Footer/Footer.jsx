@@ -19,11 +19,29 @@ function Footer() {
                 <li className={styles.listHeading}>
                   <p>USA Office</p>
                 </li>
+                <li className={styles.listFontStyle}>
+                  <span>Planafin North America LLC</span> <br></br>4010 Moorpark Ave, Suite 115, <br></br>San
+                  Jose, California 95117
+                </li>
                 <li className={styles.listFontStyle}>+1 (307) 381-0718</li>
                 <li className={styles.listFontStyle}>
-                  30 N Gould St Ste N Sheridan
+                  Planafin LLC<br></br> 30 N Gould St Ste N Sheridan<br></br> WY 82801, USA
                 </li>
-                <li className={styles.listFontStyle}>WY 82801, USA</li>
+              </ul>
+            </div>
+            <div className={styles.detailsContainer}>
+              <ul className={styles.detailsList}>
+                <li className={styles.listHeading}>
+                  <p>INDIA Office</p>
+                </li>
+                <li className={styles.listFontStyle}>
+                  Planafin Technologies <br></br>A4, Brindavan Sapthagiri, Bellandur,<br></br>
+                  Near Trinity Meadows, Bangalore-560103
+                </li>
+                {/* <li className={styles.listFontStyle}>
+                  30 N Gould St Ste N Sheridan
+                </li> */}
+                <li className={styles.listFontStyle}>+91 9886759625</li>
               </ul>
             </div>
             <div className={styles.detailsContainer}>
@@ -31,25 +49,16 @@ function Footer() {
                 <li className={styles.listHeading}>
                   <p>UAE Office</p>
                 </li>
-                <li className={styles.listFontStyle}>+971503210586</li>
-                <li className={styles.listFontStyle}>#G-035, TechnoHub,</li>
                 <li className={styles.listFontStyle}>
-                  Dubai Silicon Oasis, Dubai, United Arab Emirates
-                </li>
-              </ul>
-            </div>
-            <div className={styles.detailsContainer}>
-              <ul className={styles.detailsList}>
-                <li className={styles.listHeading}>
-                  <p>India Office</p>
-                </li>
-                <li className={styles.listFontStyle}>+91 9886759625</li>
-                <li className={styles.listFontStyle}>
-                  A4, Brindavan Sapthagiri, Bellandur,
+                  Planafin FZE<br></br> #G-035, TechnoHub, Dubai Silicon Oasis, <br></br>Dubai,
+                  United Arab Emirates
                 </li>
                 <li className={styles.listFontStyle}>
+                 +971503210586
+                </li>
+                {/* <li className={styles.listFontStyle}>
                   Near Trinity Meadows, Bangalore-560103
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -62,7 +71,7 @@ function Footer() {
                 Services
               </Link>
               <Link to="/solutions" className={styles.navLink}>
-                Solution    
+                Solution
               </Link>
               <Link to="/aboutus" className={styles.navLink}>
                 About Us
