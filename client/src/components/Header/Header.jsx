@@ -83,7 +83,7 @@ const Header = () => {
                   isActive("/audit") ? styles.activeLink : ""
                 }`}
               >
-                Career
+                Audit
               </Link>
             </div>
             <div
