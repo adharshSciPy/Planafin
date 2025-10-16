@@ -198,6 +198,16 @@ const Header = () => {
             </div>
             <div className={styles.mobileNavContents}>
               <Link
+                to="/audit"
+                className={`${styles.navLink} ${
+                  isActive("/audit") ? styles.activeLink : ""
+                }`}
+              >
+                Audit
+              </Link>
+            </div>
+            <div className={styles.mobileNavContents}>
+              <Link
                 to="/resources"
                 className={`${styles.navLink} ${
                   location.pathname.startsWith("/resources")
