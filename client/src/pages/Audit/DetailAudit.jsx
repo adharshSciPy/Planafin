@@ -21,7 +21,6 @@ function DetailAudit() {
     const getData = async () => {
       try {
         const res = await axios.get(`${baseUrl}/api/v1/user/KpoById/${id}`);
-        console.log(res);
         setAuditData(res.data.data);
       } catch (error) {
         console.log(error);

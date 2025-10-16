@@ -12,7 +12,6 @@ const Audit = () => {
     const getAuditData = async () => {
       try {
         const res = await axios.get(`${baseUrl}/api/v1/user/kpoDetails`);
-        console.log(res);
         setServices(res.data.data);
       } catch (error) {
         console.log(error);
