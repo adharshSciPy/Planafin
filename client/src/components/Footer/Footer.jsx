@@ -79,6 +79,9 @@ function Footer() {
               <Link to="/career" className={styles.navLink}>
                 Career
               </Link>
+              <Link to="/audit" className={styles.navLink}>
+                Audit
+              </Link>
 
               {/* Dropdown */}
               <div className={styles.dropdown}>
