@@ -1,2 +1,2 @@
-const baseUrl=`https://www.planafin.com`;
+const baseUrl=`http://localhost:8000`;
 export default baseUrl
