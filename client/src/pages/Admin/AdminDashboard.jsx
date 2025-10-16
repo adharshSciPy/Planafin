@@ -142,6 +142,12 @@ function AdminDashboard() {
                 <button className="fifthcard-btn3">View</button>
               </Link>
             </div>
+             <div className="tfifthcard">
+              <h3>Add KPO</h3>
+              <Link to="/KPOform">
+                <button className="fifthcard-btn3">View</button>
+              </Link>
+            </div>
           </div>
         </div>
         <button className="dashbtn" onClick={handleLogout}>
