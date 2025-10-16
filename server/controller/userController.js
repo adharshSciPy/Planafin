@@ -20,6 +20,7 @@ import planafinConsulting from "../model/planafinConsulting.js";
 import technologyPartners from "../model/technologyPartners.js";
 import { passwordValidator } from "../utils/passwordValidator.js";
 import { upcomingWebinar } from "../model/upcomingwebinarSchema.js";
+import { KPO } from "../model/KPOSchema.js";
 import path from "path";
 import nodemailer from "nodemailer";
 
@@ -28,6 +29,7 @@ import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { fileURLToPath } from "url";
 import { DateTime } from "luxon";
+import fs from "fs";
 
 // These two lines recreate __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -516,24 +518,21 @@ const addWatchnow = async (req, res) => {
             
             <div style="text-align: left; margin-bottom: 30px;">
               <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
-              <p>Our webinar on <strong>${
-                webinarDetails.title || `No title available for this webinar`
-              }</strong> is now available for access.</p>
+              <p>Our webinar on <strong>${webinarDetails.title || `No title available for this webinar`
+        }</strong> is now available for access.</p>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;width:100%">
             <img src="cid:webinarImage"  alt="webinarImage " style="height: 150px;">
             
              </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
-              <p>${
-                webinarDetails.summary ||
-                `No summary available for this webinar`
-              }</p>
+              <p>${webinarDetails.summary ||
+        `No summary available for this webinar`
+        }</p>
             </div>
             <div style="width:100%;display:flex;align-items: end;">
-            <a href="${
-              webinarDetails.videolink
-            }" style="background-color: #f0f0f0; padding: 10px 20px; color: #007bff; text-decoration: none; border-radius: 5px; font-weight: bold;">Watch Now</a>
+            <a href="${webinarDetails.videolink
+        }" style="background-color: #f0f0f0; padding: 10px 20px; color: #007bff; text-decoration: none; border-radius: 5px; font-weight: bold;">Watch Now</a>
             </div>
           </div>
         </body>
@@ -1243,8 +1242,8 @@ const createOurservice = async (req, res) => {
       const parsedDetails = Array.isArray(data.details)
         ? data.details
         : typeof data.details === "string"
-        ? [data.details]
-        : [];
+          ? [data.details]
+          : [];
 
       const serviceData = {
         ...data,
@@ -1574,7 +1573,7 @@ const upcomingWebinarUser = async (req, res) => {
     // ICS date formatter (UTC)
     const formatDate = (dt) => dt.toUTC().toFormat("yyyyLLdd'T'HHmmss'Z'");
 
-const icsContent = `BEGIN:VCALENDAR
+    const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Planafin//Webinar Reminder//EN
 BEGIN:VEVENT
@@ -1602,9 +1601,8 @@ END:VCALENDAR`;
             </div>
             <div style="text-align: left; margin-bottom: 30px;">
               <p>Dear <strong>${firstName} ${lastName}</strong>,</p>
-              <p>Your registration is confirmed for the event: <strong>${
-                webinar.title || `No title`
-              }</strong></p>
+              <p>Your registration is confirmed for the event: <strong>${webinar.title || `No title`
+        }</strong></p>
             </div>
             <div style="text-align: left; font-size: 14px; color: #555;">
               <p><strong>Date:</strong> ${startDate.toFormat("dd LLLL yyyy")}</p>
@@ -1794,6 +1792,98 @@ const getAllRegisteredUsers = async (req, res) => {
   }
 };
 
+const createKPO = async (req, res) => {
+  try {
+    const { title, subTitle, description } = req.body;
+    let { features } = req.body;
+
+    // 🔹 Handle uploaded files
+    let icon = req.files?.icon ? req.files.icon[0].path.replace(/\\/g, "/") : null;
+    let image = req.files?.image ? req.files.image[0].path.replace(/\\/g, "/") : null;
+
+    // Convert to public URL paths
+    if (icon) icon = icon.replace(/^\/mnt\/storage/, "");
+    if (image) image = image.replace(/^\/mnt\/storage/, "");
+
+    // 🔹 Ensure features is always an array
+    if (typeof features === "string") {
+      // If passed as comma separated
+      if (features.includes(",")) {
+        features = features.split(",").map(f => f.trim());
+      } else {
+        features = [features];
+      }
+    }
+
+    if (!title || !description || !features?.length) {
+      return res.status(400).json({
+        message: "Title, description, and features are required!",
+      });
+    }
+
+    const newKPO = await KPO.create({
+      icon,
+      image,
+      title,
+      subTitle,
+      description,
+      features,
+    });
+
+    res.status(200).json({
+      message: "KPO Created Successfully",
+      data: newKPO,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
+const kpoDetails = async (req, res) => {
+  try {
+    const details = await KPO.find();
+    res.status(200).json({ message: "KPO Fetched Successfully", data: details })
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+const kpoById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const Kpo = await KPO.findById(id);
+    res.status(200).json({ message: "KPO data", data: Kpo });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error: error.message })
+  }
+}
+
+
+// 🔴 Delete KPO
+const deleteKPO = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const kpo = await KPO.findById(id);
+
+    if (!kpo) return res.status(404).json({ success: false, message: "KPO not found" });
+
+    // Delete uploaded files
+    const files = [kpo.icon, kpo.image].filter(Boolean).map(f => path.join("/mnt/storage", f));
+    files.forEach(filePath => {
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    });
+
+    await kpo.deleteOne();
+    res.status(200).json({ success: true, message: "KPO deleted successfully", data: kpo });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -1868,5 +1958,5 @@ export {
   resetPasswordUser,
   getupcomingById,
   deleteupcomingWebinar,
-  getAllRegisteredUsers
+  getAllRegisteredUsers, createKPO, deleteKPO, kpoDetails, kpoById
 };

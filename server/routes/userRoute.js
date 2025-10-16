@@ -74,7 +74,7 @@ import {
   resetPasswordUser,
   getupcomingById,
   deleteupcomingWebinar,
-  getAllRegisteredUsers,
+  getAllRegisteredUsers, createKPO, deleteKPO, kpoDetails, kpoById
 } from "../controller/userController.js";
 const userRoute = Router();
 
@@ -177,6 +177,19 @@ userRoute.route("/resetPasswordUser/:userId/:token").post(resetPasswordUser);
 userRoute.route("/getupcomingWebinardata/:id").get(getupcomingById);
 userRoute.route("/deleteupcomingdata/:id").delete(deleteupcomingWebinar);
 userRoute.route("/webinarregisteredusers").get(getAllRegisteredUsers);
+
+userRoute.post(
+  "/createKpo",
+  upload.fields([
+    { name: "icon", maxCount: 1 },
+    { name: "image", maxCount: 1 },
+  ]),
+  createKPO
+);
+userRoute.route("/kpoDetails").get(kpoDetails);
+userRoute.route("/KpoById/:id").get(kpoById)
+userRoute.delete("/deleteKpo/:id", deleteKPO);
+
 
 
 export default userRoute;
