@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1439px" height="64px" viewBox="0 0 1439 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>Hero SVG</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="100.57314%" y1="49.7692366%" x2="11.5945095%" y2="50.2441911%" id="linearGradient-1">
+            <stop stop-color="#BBBBBB" offset="0%"></stop>
+            <stop stop-color="#DFDFDF" stop-opacity="0.306244537" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rendering/Promotion/Hero---Right" transform="translate(0.000000, -360.000000)">
+            <g id="Group-2">
+                <g id="Hero-SVG" transform="translate(0.000000, 360.000000)">
+                    <rect id="BG" fill="#FFFFFF" x="0" y="0" width="1439" height="64"></rect>
+                    <path d="M349.933594,0 L403.177129,47.9941728 C414.519644,58.2184118 429.545512,63.3672551 444.774946,62.2483005 L1292,0 L1292,0 L349.933594,0 Z" id="Color-1" fill="url(#linearGradient-1)" transform="translate(820.966797, 32.000000) scale(-1, 1) translate(-820.966797, -32.000000) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

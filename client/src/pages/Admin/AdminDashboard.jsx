@@ -144,7 +144,7 @@ function AdminDashboard() {
             </div>
              <div className="tfifthcard">
               <h3>Add KPO</h3>
-              <Link to="/upcomingdata">
+              <Link to="/KPOform">
                 <button className="fifthcard-btn3">View</button>
               </Link>
             </div>

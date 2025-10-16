@@ -48,6 +48,10 @@ import UpDataAll from "./pages/Admin/UpDataAll.jsx";
 import UpWebdata from "./pages/Admin/UpWebdata.jsx";
 import UpCommingWebinar from "./pages/WebinarComponent/UpCommingWebinar.jsx";
 import ResetPassword from "./pages/Admin/ResetPassword/ResetPassword.jsx";
+import Audit from "./pages/Audit/Audit.jsx";
+import DetailAudit from "./pages/Audit/DetailAudit.jsx";
+import AddKpo from "./pages/Admin/AddKpo/AddKpo.jsx";
+
 function App() {
   return (
     <div className="App">
@@ -67,6 +71,9 @@ function App() {
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
+          <Route path="/audit" element={<Audit />} />
+          <Route path="/detail-audit" element={<DetailAudit />} />
+
 
           {/* Admin Routes */}
           <Route path="/adminlogin" element={<Adminlogin />} />
@@ -218,12 +225,49 @@ function App() {
           />
           <Route
             path="/acceleratorsAll"
-            element={ <ProtectedRoute roleRequired="400"> <OurJourneyAccelaratorsAll /></ProtectedRoute>}
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurJourneyAccelaratorsAll />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/ourSolution" element={<ProtectedRoute roleRequired="400"> <OurSolution /></ProtectedRoute>} />
-          <Route path="/industryimages" element={<ProtectedRoute roleRequired="400"> <IndustryImages /></ProtectedRoute>} />
-          <Route path="/viewAllSolution" element={<ProtectedRoute roleRequired="400"> <SolutionDataFull /></ProtectedRoute>} />
-          <Route path="/ServiceCounter" element={<ProtectedRoute roleRequired="400"> <Solutioncounter /></ProtectedRoute>} />
+          <Route
+            path="/ourSolution"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurSolution />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/industryimages"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <IndustryImages />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/viewAllSolution"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <SolutionDataFull />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ServiceCounter"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <Solutioncounter />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/projectDetails"
             element={
@@ -232,28 +276,119 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/accelerators" element={<ProtectedRoute roleRequired="400"> <OurJourneyAccelarators /></ProtectedRoute>} />
+          <Route
+            path="/accelerators"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurJourneyAccelarators />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/acceleratorsAll"
-            element={<ProtectedRoute roleRequired="400"> <OurJourneyAccelaratorsAll /></ProtectedRoute>}
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurJourneyAccelaratorsAll />
+              </ProtectedRoute>
+            }
           />
-          <Route path="/ourSolution" element={<ProtectedRoute roleRequired="400"> <OurSolution /></ProtectedRoute>} />
-          <Route path="/industryimages" element={<ProtectedRoute roleRequired="400"> <IndustryImages /></ProtectedRoute>} />
-          <Route path="/viewAllSolution" element={<ProtectedRoute roleRequired="400"> <SolutionDataFull /></ProtectedRoute>} />
-          <Route path="/ourServices" element={<ProtectedRoute roleRequired="400"> <OurService /></ProtectedRoute>} />
-          <Route path="/anaplanCounter" element={<ProtectedRoute roleRequired="400"> <AnaplanCounter /></ProtectedRoute>} />
-          <Route path="/industryImageList" element={<ProtectedRoute roleRequired="400"> <IndustryImageList /></ProtectedRoute>} />
-          <Route path="/techPartners" element={<ProtectedRoute roleRequired="400"> <TechPartners /></ProtectedRoute>} />
+          <Route
+            path="/ourSolution"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurSolution />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/industryimages"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <IndustryImages />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/viewAllSolution"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <SolutionDataFull />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ourServices"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <OurService />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/anaplanCounter"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <AnaplanCounter />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/industryImageList"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <IndustryImageList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/techPartners"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <TechPartners />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/PlanafinConsulting" element={<ProtectedRoute roleRequired="400"> <PlanafinConsulting /></ProtectedRoute>} />
+          <Route
+            path="/PlanafinConsulting"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <PlanafinConsulting />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/PlanafinConsultingAll"
-            element={<ProtectedRoute roleRequired="400"> <PlanafinConsultingAll /></ProtectedRoute>}
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <PlanafinConsultingAll />
+              </ProtectedRoute>
+            }
           />
           <Route
-  path="/resetPasswordUser/:userId/:token"
-  element={<ResetPassword />}
-/>
+            path="/KPOform"
+            element={
+              <ProtectedRoute roleRequired="400">
+                {" "}
+                <AddKpo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/resetPasswordUser/:userId/:token"
+            element={<ResetPassword />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
