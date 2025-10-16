@@ -70,7 +70,7 @@ function App() {
           <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/audit" element={<Audit />} />
-          <Route path="/detail-audit" element={<DetailAudit />} />
+          <Route path="/detail-audit/:id" element={<DetailAudit />} />
 
 
           {/* Admin Routes */}

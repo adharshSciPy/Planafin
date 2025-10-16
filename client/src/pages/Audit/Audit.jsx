@@ -1,109 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header.jsx";
 import styles from "./Audit.module.css";
-import Footer from "../../components/Footer/Footer.jsx"
+import Footer from "../../components/Footer/Footer.jsx";
+import axios from "axios";
+import baseUrl from "../../baseUrl.js";
+import { useLocation, useNavigate } from "react-router-dom";
 const Audit = () => {
-  const services = [
-    {
-      id: 1,
-      icon: (
-        <svg className={styles.icon} viewBox="0 0 100 100" fill="none">
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="#4A90A4"
-            strokeWidth="2"
-            fill="none"
-          />
-          <circle
-            cx="35"
-            cy="40"
-            r="12"
-            stroke="#90C695"
-            strokeWidth="2"
-            fill="#E8F5E9"
-          />
-          <circle
-            cx="65"
-            cy="40"
-            r="12"
-            stroke="#90C695"
-            strokeWidth="2"
-            fill="#E8F5E9"
-          />
-          <path
-            d="M35 52 L35 65 L50 75 L65 65 L65 52"
-            stroke="#4A90A4"
-            strokeWidth="2"
-            fill="none"
-          />
-          <circle
-            cx="50"
-            cy="60"
-            r="8"
-            fill="#F4B942"
-            stroke="#F4B942"
-            strokeWidth="2"
-          />
-          <rect x="48" y="58" width="4" height="6" fill="#333" />
-        </svg>
-      ),
-      title: "ESG Consulting",
-      description:
-        "Strengthen your adherence to environmental, social and governance practices",
-    },
-    {
-      id: 2,
-      icon: (
-        <svg className={styles.icon} viewBox="0 0 100 100" fill="none">
-          <rect
-            x="15"
-            y="20"
-            width="70"
-            height="50"
-            rx="3"
-            stroke="#4A90A4"
-            strokeWidth="2"
-            fill="#fff"
-          />
-          <rect x="20" y="25" width="60" height="35" fill="#E8F5E9" />
-          <path
-            d="M30 35 L35 45 L45 32 L55 48 L65 38 L70 50"
-            stroke="#90C695"
-            strokeWidth="3"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <rect x="25" y="65" width="50" height="3" rx="1.5" fill="#DDD" />
-        </svg>
-      ),
-      title: "Forensic Audit",
-      description:
-        "Investigate your organization for financial irregularities or potential fraud",
-    },
-    {
-      id: 3,
-      icon: (
-        <svg className={styles.icon} viewBox="0 0 100 100" fill="none">
-          <rect x="25" y="65" width="50" height="8" fill="#F4B942" />
-          <rect x="28" y="55" width="8" height="10" fill="#4A90A4" />
-          <rect x="46" y="45" width="8" height="20" fill="#4A90A4" />
-          <rect x="64" y="35" width="8" height="30" fill="#4A90A4" />
-          <path
-            d="M50 25 L60 35 L60 30 L75 30 L75 20 L60 20 L60 15 Z"
-            fill="#90C695"
-          />
-          <rect x="20" y="73" width="60" height="2" fill="#333" />
-        </svg>
-      ),
-      title: "Construction Audit & Project Cost Advisory Services",
-      description:
-        "Rein in project complexities while strengthening financial controls and mitigating risk",
-    },
-  ];
+  const [services, setServices] = useState([]);
+    const navigate=useNavigate()
+  useEffect(() => {
+    const getAuditData = async () => {
+      try {
+        const res = await axios.get(`${baseUrl}/api/v1/user/kpoDetails`);
+        console.log(res);
+        setServices(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAuditData();
+  }, []);
+   const { pathname } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
   return (
     <>
       <Header></Header>
@@ -190,10 +111,6 @@ const Audit = () => {
           <h1 className={styles.title}>
             Our Comprehensive HR KPO Offerings include:
           </h1>
-          {/* <p className={styles.subtitle}>
-            Benefit from customized evaluations that address your specific
-            industry requirements and help you comply with regulatory standards.
-          </p> */}
 
           <div className={styles.cardsGrid}>
             {services.map((service) => (
@@ -202,8 +119,13 @@ const Audit = () => {
                 className={`${styles.card} ${
                   service.highlighted ? styles.highlighted : ""
                 }`}
+                onClick={()=>{
+                    navigate(`/detail-audit/${service._id}`)
+                }}
               >
-                <div className={styles.iconWrapper}>{service.icon}</div>
+                <div className={styles.iconWrapper}>
+                  <img src={`${baseUrl}${service.icon}`} alt="" />
+                </div>
                 <h3 className={styles.cardTitle}>{service.title}</h3>
                 <p className={styles.cardDescription}>{service.description}</p>
                 <button className={styles.buttonStyle}>Get In Touch</button>
