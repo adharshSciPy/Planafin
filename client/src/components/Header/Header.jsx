@@ -76,6 +76,16 @@ const Header = () => {
                 Career
               </Link>
             </div>
+            <div className={styles.navItem}>
+              <Link
+                to="/audit"
+                className={`${styles.navLink} ${
+                  isActive("/audit") ? styles.activeLink : ""
+                }`}
+              >
+                Career
+              </Link>
+            </div>
             <div
               className={`${styles.navItem} ${styles.dropDown}`}
               onClick={() => setResourceOpen(!isResourceOpen)}
