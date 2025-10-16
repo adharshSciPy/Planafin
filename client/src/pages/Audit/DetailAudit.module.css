@@ -1,0 +1,199 @@
+.hero {
+  position: relative;
+  /* min-height: 500px; */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/environmental-social-governance.jpg");
+  background-position: center;
+}
+
+.container {
+  position: relative;
+  z-index: 16;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.heroWrapper {
+  max-width: 600px;
+}
+
+.heroSubheader {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.heroHeader {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-family: Georgia, serif;
+}
+
+.heroDescription {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.ctaLink {
+  display: inline-block;
+}
+
+.ctaLink a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ctaLink a:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateX(5px);
+}
+
+.ctaLink a::after {
+  content: "→";
+  font-size: 1.25rem;
+}
+
+.image {
+  position: absolute;
+  opacity: 1;
+  background: linear-gradient(135deg, #d97f34 0%, #e89b4f 50%, #8fad3e 100%);
+  width: 70%;
+  z-index: 15;
+  top: 0;
+  bottom: 0;
+  -webkit-clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);
+  opacity: 0.7;
+}
+
+.heroBackGradient {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  bottom: 0;
+}
+
+.heroFrontGradient {
+  position: relative;
+  z-index: 100;
+  background-repeat: no-repeat;
+}
+/* ESGConsultant.module.css */
+
+.containertwo {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #333;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.highlight {
+  color: #ff9500;
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.checkmark {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 400px;
+  }
+
+  .container {
+    padding: 3rem 1.5rem;
+  }
+
+  .heroHeader {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroHeader {
+    font-size: 2rem;
+  }
+
+  .ctaLink a {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+  }
+}
