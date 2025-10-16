@@ -124,10 +124,9 @@ const Audit = () => {
                 }}
               >
                 <div className={styles.iconWrapper}>
-                  <img src={`${baseUrl}${service.icon}`} alt="" />
+                  <img src={`${baseUrl}${service.icon}`} alt="" className={styles.imageIcon}/>
                 </div>
                 <h3 className={styles.cardTitle}>{service.title}</h3>
-                <p className={styles.cardDescription}>{service.description}</p>
                 <button className={styles.buttonStyle}>Get In Touch</button>
               </div>
             ))}
