@@ -9,12 +9,6 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 function DetailAudit() {
-  const benefits = [
-    "Knowledge of ESG materiality issues across a diverse set of industries",
-    "Assess which ESG frameworks and reporting requirements apply to your business",
-    "Application of financial reporting principals and controls to non-financial data",
-    "Access to technology solutions to reduce the error-prone and time-consuming manual data entry process for ESG reporting",
-  ];
   const { id } = useParams();
   const [auditData, setAuditData] = useState();
   useEffect(() => {
