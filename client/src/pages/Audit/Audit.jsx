@@ -119,7 +119,7 @@ const Audit = () => {
                   service.highlighted ? styles.highlighted : ""
                 }`}
                 onClick={()=>{
-                    navigate(`/detail-audit/${service._id}`)
+                    navigate(`/detail-KPO/${service._id}`)
                 }}
               >
                 <div className={styles.iconWrapper}>
