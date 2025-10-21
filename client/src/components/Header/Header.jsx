@@ -78,9 +78,9 @@ const Header = () => {
             </div>
             <div className={styles.navItem}>
               <Link
-                to="/audit"
+                to="/KPOServices"
                 className={`${styles.navLink} ${
-                  isActive("/audit") ? styles.activeLink : ""
+                  isActive("/KPOServices") ? styles.activeLink : ""
                 }`}
               >
                 KPO
