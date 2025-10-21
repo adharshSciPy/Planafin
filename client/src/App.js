@@ -71,8 +71,8 @@ function App() {
           <Route path="/lets-talk" element={<ContactUs />} />
           <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
-          <Route path="/audit" element={<Audit />} />
-          <Route path="/detail-audit/:id" element={<DetailAudit />} />
+          <Route path="/KPOServices" element={<Audit />} />
+          <Route path="/detail-KPO/:id" element={<DetailAudit />} />
 
 
           {/* Admin Routes */}
