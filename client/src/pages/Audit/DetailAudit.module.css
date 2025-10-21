@@ -85,7 +85,7 @@
 .image {
   position: absolute;
   opacity: 1;
-  background: linear-gradient(135deg, #d97f34 0%, #e89b4f 50%, #8fad3e 100%);
+  background: linear-gradient(135deg, rgb(93, 172, 246) 0%,  rgb(45, 155, 255) 50%, #f1ce3b 100%);
   width: 70%;
   z-index: 15;
   top: 0;
