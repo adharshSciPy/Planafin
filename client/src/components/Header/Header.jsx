@@ -83,7 +83,7 @@ const Header = () => {
                   isActive("/audit") ? styles.activeLink : ""
                 }`}
               >
-                Audit
+                KPO
               </Link>
             </div>
             <div
@@ -203,7 +203,7 @@ const Header = () => {
                   isActive("/audit") ? styles.activeLink : ""
                 }`}
               >
-                Audit
+                KPO
               </Link>
             </div>
             <div className={styles.mobileNavContents}>
