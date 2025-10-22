@@ -76,7 +76,7 @@ const Header = () => {
                 Career
               </Link>
             </div>
-            <div className={styles.navItem}>
+            {/* <div className={styles.navItem}>
               <Link
                 to="/KPOServices"
                 className={`${styles.navLink} ${
@@ -85,7 +85,7 @@ const Header = () => {
               >
                 KPO
               </Link>
-            </div>
+            </div> */}
             <div
               className={`${styles.navItem} ${styles.dropDown}`}
               onClick={() => setResourceOpen(!isResourceOpen)}
@@ -196,7 +196,7 @@ const Header = () => {
                 Career
               </Link>
             </div>
-            <div className={styles.mobileNavContents}>
+            {/* <div className={styles.mobileNavContents}>
               <Link
                 to="/KPOServices"
                 className={`${styles.navLink} ${
@@ -205,7 +205,7 @@ const Header = () => {
               >
                 KPO
               </Link>
-            </div>
+            </div> */}
             <div className={styles.mobileNavContents}>
               <Link
                 to="/resources"
