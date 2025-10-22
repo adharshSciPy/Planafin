@@ -140,10 +140,10 @@ const Audit = () => {
 
           <div style={{ textAlign: 'center', marginBottom: 'clamp(30px, 4vw, 40px)' }}>
             <div style={{
-              fontSize: 'clamp(9px, 1.5vw, 11px)',
+              fontSize: 'clamp(9px, 1.5vw, 14px)',
               fontWeight: '700',
               letterSpacing: '2px',
-              color: '#d97706',
+              color: '#2d9bff',
               marginBottom: '12px'
             }}>
               FEATURED INDUSTRIES
@@ -161,7 +161,7 @@ const Audit = () => {
             </h1>
 
             <p style={{
-              color: '#6b7280',
+              color: '#6d6b80ff',
               fontSize: 'clamp(13px, 2vw, 15px)',
               lineHeight: '1.6',
               maxWidth: '800px',
@@ -174,7 +174,7 @@ const Audit = () => {
 
           {/* Tabs - Desktop */}
           {!isMobile && (
-            <div className="custom-scrollbar"
+            <div className={styles.customscrollbar}
               style={{
                 display: 'flex',
                 justifyContent: 'flex-start',
@@ -201,8 +201,8 @@ const Audit = () => {
                       fontSize: '14px',
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
-                      color: activeTab === index ? '#ea580c' : '#9ca3af',
-                      borderBottom: activeTab === index ? '3px solid #ea580c' : '3px solid transparent',
+                      color: activeTab === index ? '#2d9bff ' : '#9ca3af',
+                      borderBottom: activeTab === index ? '3px solid #2d9bff ' : '3px solid transparent',
                       marginBottom: '-1px',
                       whiteSpace: 'nowrap',
                       fontFamily: 'system-ui, -apple-system, sans-serif'
@@ -253,7 +253,7 @@ const Audit = () => {
                         flexShrink: 0,          // prevent shrinking
                         padding: '10px 20px',
                         border: 'none',
-                        background: activeTab === index ? '#ea580c' : '#f3f4f6',
+                        background: activeTab === index ? '#2d9bff ' : '#f3f4f6',
                         color: activeTab === index ? '#fff' : '#6b7280',
                         borderRadius: '20px',
                         fontWeight: '600',
@@ -302,7 +302,7 @@ const Audit = () => {
                   transition: 'all 0.3s ease'
                 }}
               >
-                <ChevronLeft style={{ width: '28px', height: '28px', color: '#ea580c' }} />
+                <ChevronLeft style={{ width: '28px', height: '28px', color: '#2d9bff ' }} />
               </button>
             )}
 
@@ -328,7 +328,7 @@ const Audit = () => {
                   transition: 'all 0.3s ease'
                 }}
               >
-                <ChevronRight style={{ width: '28px', height: '28px', color: '#ea580c' }} />
+                <ChevronRight style={{ width: '28px', height: '28px', color: '#2d9bff ' }} />
               </button>
             )}
 
@@ -421,7 +421,7 @@ const Audit = () => {
                 onClick={goToPrevious}
                 style={{
                   background: '#fff',
-                  border: '2px solid #ea580c',
+                  border: '2px solid #2d9bff ',
                   borderRadius: '50%',
                   width: '40px',
                   height: '40px',
@@ -432,7 +432,7 @@ const Audit = () => {
                   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <ChevronLeft style={{ width: '20px', height: '20px', color: '#ea580c' }} />
+                <ChevronLeft style={{ width: '20px', height: '20px', color: '#2d9bff ' }} />
               </button>
             )}
 
@@ -450,7 +450,7 @@ const Audit = () => {
                     height: '8px',
                     borderRadius: '4px',
                     border: 'none',
-                    background: activeTab === index ? '#ea580c' : '#d1d5db',
+                    background: activeTab === index ? '#2d9bff ' : '#d1d5db',
                     cursor: 'pointer',
                     transition: 'all 0.3s ease'
                   }}
@@ -463,7 +463,7 @@ const Audit = () => {
                 onClick={goToNext}
                 style={{
                   background: '#fff',
-                  border: '2px solid #ea580c',
+                  border: '2px solid #2d9bff ',
                   borderRadius: '50%',
                   width: '40px',
                   height: '40px',
@@ -474,7 +474,7 @@ const Audit = () => {
                   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
                 }}
               >
-                <ChevronRight style={{ width: '20px', height: '20px', color: '#ea580c' }} />
+                <ChevronRight style={{ width: '20px', height: '20px', color: '#2d9bff ' }} />
               </button>
             )}
           </div>
@@ -511,10 +511,10 @@ const ServiceCard = ({ service, isMobile }) => {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+      background: 'linear-gradient(135deg, #2d9bff  0%, #2d9bff  50%, #2d9bff  100%)',
       borderRadius: isMobile ? '20px' : '24px',
       padding: isMobile ? '6px' : '8px',
-      boxShadow: '0 20px 50px rgba(234, 88, 12, 0.3)'
+      // boxShadow: '0 20px 50px rgba(234, 88, 12, 0.3)'
     }}>
       <div style={{
         background: '#fff',
@@ -535,8 +535,8 @@ const ServiceCard = ({ service, isMobile }) => {
             background: '#fff'
           }}>
             <div style={{
-              color: '#ea580c',
-              fontSize: isMobile ? '10px' : '11px',
+              color: '#2d9bff ',
+              fontSize: isMobile ? '12px' : '14px',
               fontWeight: '700',
               marginBottom: isMobile ? '16px' : '20px',
               letterSpacing: '1.5px'
@@ -558,7 +558,7 @@ const ServiceCard = ({ service, isMobile }) => {
                 <h3 style={{
                   fontSize: isMobile ? '13px' : '14px',
                   fontWeight: '700',
-                  color: '#ea580c',
+                  color: '#2d9bff ',
                   marginBottom: isMobile ? '12px' : '16px',
                   letterSpacing: '0.5px'
                 }}>
@@ -575,7 +575,7 @@ const ServiceCard = ({ service, isMobile }) => {
                         display: 'inline-block',
                         width: '5px',
                         height: '5px',
-                        background: '#ea580c',
+                        background: '#2d9bff ',
                         borderRadius: '50%',
                         marginTop: '7px',
                         marginRight: '10px',
@@ -598,8 +598,8 @@ const ServiceCard = ({ service, isMobile }) => {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              background: '#ea580c',
-              color: '#fff',
+              background: '#ffd700 ',
+              color: '#000',
               padding: isMobile ? '10px 24px' : '12px 28px',
               borderRadius: '50px',
               border: 'none',
@@ -652,21 +652,25 @@ const ServiceCard = ({ service, isMobile }) => {
                   left: isMobile ? '15px' : '20px',
                   width: isMobile ? '80px' : '100px',
                   height: isMobile ? '80px' : '100px',
-                  background: 'linear-gradient(135deg, #86efac 0%, #22c55e 100%)',
+                  // background: 'linear-gradient(135deg, #86efac 0%, #22c55e 100%)',
                   borderRadius: '16px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  boxShadow: '0 15px 30px rgba(34, 197, 94, 0.25)',
+                  // boxShadow: '0 15px 30px rgba(34, 197, 94, 0.25)',
                   overflow: 'hidden'
                 }}>
                   <img
                     src={`${baseUrl}${service.icon}`}
                     alt="icon"
                     style={{
+                      position:"absolute",
+                      top: 0,
+                      left: 0,
                       width: '60%',
                       height: '60%',
-                      objectFit: 'contain'
+                      objectFit: 'contain',
+                      borderRadius: "10px"
                     }}
                   />
                 </div>
@@ -687,7 +691,7 @@ const MiniServiceCard = ({ service }) => {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%)',
+      background: 'linear-gradient(135deg, #2d9bff  0%, #2d9bff  50%, #2d9bff  100%)',
       borderRadius: '20px',
       padding: '6px',
       height: '400px'
@@ -702,7 +706,7 @@ const MiniServiceCard = ({ service }) => {
         justifyContent: 'center'
       }}>
         <div style={{
-          color: '#ea580c',
+          color: '#2d9bff ',
           fontSize: '9px',
           fontWeight: '700',
           marginBottom: '12px',
