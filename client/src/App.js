@@ -49,7 +49,6 @@ import UpWebdata from "./pages/Admin/UpWebdata.jsx";
 import UpCommingWebinar from "./pages/WebinarComponent/UpCommingWebinar.jsx";
 import ResetPassword from "./pages/Admin/ResetPassword/ResetPassword.jsx";
 import Audit from "./pages/Audit/Audit.jsx";
-import DetailAudit from "./pages/Audit/DetailAudit.jsx";
 import AddKpo from "./pages/Admin/AddKpo/AddKpo.jsx";
 
 function App() {
@@ -72,7 +71,6 @@ function App() {
           <Route path="/supply-chain" element={<SupplyChain />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/KPOServices" element={<Audit />} />
-          <Route path="/detail-KPO/:id" element={<DetailAudit />} />
 
 
           {/* Admin Routes */}

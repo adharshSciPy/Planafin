@@ -54,7 +54,7 @@ function Footer() {
                   United Arab Emirates
                 </li>
                 <li className={styles.listFontStyle}>
-                 +971503210586
+                  +971503210586
                 </li>
                 {/* <li className={styles.listFontStyle}>
                   Near Trinity Meadows, Bangalore-560103
@@ -70,6 +70,14 @@ function Footer() {
               <Link to="/Services" className={styles.navLink}>
                 Services
               </Link>
+              {/* <div className={styles.dropdown}>
+                <span className={styles.navLink}>KPO</span>
+                <div className={styles.dropdownContent}>
+                  <Link to="/KPOServices" className={styles.navLink}>
+                    HR as a Service
+                  </Link>
+                </div>
+              </div> */}
               <Link to="/solutions" className={styles.navLink}>
                 Solution
               </Link>
@@ -79,9 +87,6 @@ function Footer() {
               <Link to="/career" className={styles.navLink}>
                 Career
               </Link>
-              {/* <Link to="/KPOServices" className={styles.navLink}>
-                KPO
-              </Link> */}
 
               {/* Dropdown */}
               <div className={styles.dropdown}>

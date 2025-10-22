@@ -8,6 +8,7 @@ const Header = () => {
   const location = useLocation();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isResourceOpen, setResourceOpen] = useState(false);
+  const [isKPOopen, setKpoOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
@@ -29,9 +30,8 @@ const Header = () => {
             <div className={styles.navItem}>
               <Link
                 to="/"
-                className={`${styles.navLink} ${
-                  isActive("/") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/") ? styles.activeLink : ""
+                  }`}
               >
                 Home
               </Link>
@@ -39,19 +39,45 @@ const Header = () => {
             <div className={styles.navItem}>
               <Link
                 to="/Services"
-                className={`${styles.navLink} ${
-                  isActive("/Services") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/Services") ? styles.activeLink : ""
+                  }`}
               >
                 Services
               </Link>
             </div>
+            {/* <div
+              className={`${styles.navItem} ${styles.dropDown}`}
+              onClick={() => setKpoOpen(!isKPOopen)}
+            >
+              <Link
+                to="#"
+                className={`${styles.navLink} ${location.pathname.startsWith("/KPOServices")
+                    ? styles.activeLink
+                    : ""
+                  }`}
+              >
+                KPO
+              </Link>
+              <ul
+                className={`${styles.subMenuNav} ${isKPOopen ? styles.active : ""
+                  }`}
+              >
+                <li>
+                  <Link
+                    to="/KPOServices"
+                    className={`${styles.navLink} ${isActive("/KPOServices") ? styles.activeLink : ""
+                      }`}
+                  >
+                    HR as a Service
+                  </Link>
+                </li>
+              </ul>
+            </div> */}
             <div className={styles.navItem}>
               <Link
                 to="/Solutions"
-                className={`${styles.navLink} ${
-                  isActive("/Solutions") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/Solutions") ? styles.activeLink : ""
+                  }`}
               >
                 Solutions
               </Link>
@@ -59,9 +85,8 @@ const Header = () => {
             <div className={styles.navItem}>
               <Link
                 to="/AboutUs"
-                className={`${styles.navLink} ${
-                  isActive("/AboutUs") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/AboutUs") ? styles.activeLink : ""
+                  }`}
               >
                 About Us
               </Link>
@@ -69,48 +94,34 @@ const Header = () => {
             <div className={styles.navItem}>
               <Link
                 to="/career"
-                className={`${styles.navLink} ${
-                  isActive("/career") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/career") ? styles.activeLink : ""
+                  }`}
               >
                 Career
               </Link>
             </div>
-            {/* <div className={styles.navItem}>
-              <Link
-                to="/KPOServices"
-                className={`${styles.navLink} ${
-                  isActive("/KPOServices") ? styles.activeLink : ""
-                }`}
-              >
-                KPO
-              </Link>
-            </div> */}
             <div
               className={`${styles.navItem} ${styles.dropDown}`}
               onClick={() => setResourceOpen(!isResourceOpen)}
             >
               <Link
                 to="#"
-                className={`${styles.navLink} ${
-                  location.pathname.startsWith("/resources")
+                className={`${styles.navLink} ${location.pathname.startsWith("/resources")
                     ? styles.activeLink
                     : ""
-                }`}
+                  }`}
               >
                 Resources
               </Link>
               <ul
-                className={`${styles.subMenuNav} ${
-                  isResourceOpen ? styles.active : ""
-                }`}
+                className={`${styles.subMenuNav} ${isResourceOpen ? styles.active : ""
+                  }`}
               >
                 <li>
                   <Link
                     to="/resources"
-                    className={`${styles.navLink} ${
-                      isActive("/resources") ? styles.activeLink : ""
-                    }`}
+                    className={`${styles.navLink} ${isActive("/resources") ? styles.activeLink : ""
+                      }`}
                   >
                     Webinars & Events
                   </Link>
@@ -120,9 +131,8 @@ const Header = () => {
             <div className={`${styles.navItem} ${styles.lastChild}`}>
               <Link
                 to="/lets-talk"
-                className={`${styles.navLink} ${
-                  isActive("/lets-talk") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/lets-talk") ? styles.activeLink : ""
+                  }`}
               >
                 Let's Talk
               </Link>
@@ -141,17 +151,15 @@ const Header = () => {
         </div>
 
         <div
-          className={`${styles.mobileNavMain} ${
-            isMobileNavOpen ? styles.active : ""
-          }`}
+          className={`${styles.mobileNavMain} ${isMobileNavOpen ? styles.active : ""
+            }`}
         >
           <div className={styles.mobileNavItem}>
             <div className={styles.mobileNavContents}>
               <Link
                 to="/"
-                className={`${styles.navLink} ${
-                  isActive("/") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/") ? styles.activeLink : ""
+                  }`}
               >
                 Home
               </Link>
@@ -159,9 +167,8 @@ const Header = () => {
             <div className={styles.mobileNavContents}>
               <Link
                 to="/Services"
-                className={`${styles.navLink} ${
-                  isActive("/Services") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/Services") ? styles.activeLink : ""
+                  }`}
               >
                 Services
               </Link>
@@ -169,9 +176,8 @@ const Header = () => {
             <div className={styles.mobileNavContents}>
               <Link
                 to="/Solutions"
-                className={`${styles.navLink} ${
-                  isActive("/Solutions") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/Solutions") ? styles.activeLink : ""
+                  }`}
               >
                 Solutions
               </Link>
@@ -179,9 +185,8 @@ const Header = () => {
             <div className={styles.mobileNavContents}>
               <Link
                 to="/AboutUs"
-                className={`${styles.navLink} ${
-                  isActive("/AboutUs") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/AboutUs") ? styles.activeLink : ""
+                  }`}
               >
                 About Us
               </Link>
@@ -189,9 +194,8 @@ const Header = () => {
             <div className={styles.mobileNavContents}>
               <Link
                 to="/career"
-                className={`${styles.navLink} ${
-                  isActive("/career") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/career") ? styles.activeLink : ""
+                  }`}
               >
                 Career
               </Link>
@@ -209,11 +213,10 @@ const Header = () => {
             <div className={styles.mobileNavContents}>
               <Link
                 to="/resources"
-                className={`${styles.navLink} ${
-                  location.pathname.startsWith("/resources")
+                className={`${styles.navLink} ${location.pathname.startsWith("/resources")
                     ? styles.activeLink
                     : ""
-                }`}
+                  }`}
               >
                 Resources
               </Link>
@@ -221,9 +224,8 @@ const Header = () => {
             <div className={`${styles.mobileNavContents} ${styles.lastChildMob}`}>
               <Link
                 to="/lets-talk"
-                className={`${styles.navLink} ${
-                  isActive("/lets-talk") ? styles.activeLink : ""
-                }`}
+                className={`${styles.navLink} ${isActive("/lets-talk") ? styles.activeLink : ""
+                  }`}
               >
                 Let's Talk
               </Link>

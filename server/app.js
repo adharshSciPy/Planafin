@@ -15,10 +15,11 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-}))
+app.use(cors())
+// app.use(cors({
+//   origin: process.env.CLIENT_URL,
+//   credentials: true,
+// }))
 app.use("/api/v1/user", userRoute);
 app.use("/uploads", express.static("/mnt/storage/uploads"));
 const buildPath = path.join(__dirname, "../client/build");

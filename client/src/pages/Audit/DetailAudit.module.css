@@ -1,13 +1,11 @@
-.hero {
+/* .hero {
   position: relative;
-  /* min-height: 500px; */
   display: flex;
   align-items: center;
   overflow: hidden;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  /* background-image: url("../../assets/environmental-social-governance.jpg"); */
   background-position: center;
 }
 
@@ -107,7 +105,7 @@
   z-index: 100;
   background-repeat: no-repeat;
 }
-/* ESGConsultant.module.css */
+
 
 .containertwo {
   max-width: 900px;
@@ -168,7 +166,7 @@
   flex-shrink: 0;
   margin-top: 2px;
 }
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .hero {
     min-height: 400px;
@@ -196,4 +194,4 @@
     padding: 0.75rem 1.5rem;
     font-size: 0.75rem;
   }
-}
+} */
