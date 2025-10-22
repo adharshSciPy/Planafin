@@ -609,7 +609,7 @@ const ServiceCard = ({ service, isMobile }) => {
               width: 'fit-content',
               boxShadow: '0 4px 12px rgba(234, 88, 12, 0.25)'
             }}>
-              SEE ALL
+              Get in Touch
               <ChevronRight style={{ width: '16px', height: '16px' }} />
             </button>
           </div>
