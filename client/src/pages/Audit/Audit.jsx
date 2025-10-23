@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import styles from "./Audit.module.css";
 import Header from "../../components/Header/Header.jsx";
@@ -12,6 +12,9 @@ const Audit = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+  const tabsScrollRef = useRef(null);
 
   useEffect(() => {
     const getAuditData = async () => {
@@ -75,6 +78,36 @@ const Audit = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  const checkTabsScroll = () => {
+    const container = tabsScrollRef.current;
+    if (container) {
+      setShowLeftArrow(container.scrollLeft > 10);
+      setShowRightArrow(
+        container.scrollLeft < container.scrollWidth - container.clientWidth - 10
+      );
+    }
+  };
+
+  const scrollTabs = (direction) => {
+    const container = tabsScrollRef.current;
+    if (container) {
+      const scrollAmount = 300;
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    const container = tabsScrollRef.current;
+    if (container && !isMobile) {
+      checkTabsScroll();
+      window.addEventListener('resize', checkTabsScroll);
+      return () => window.removeEventListener('resize', checkTabsScroll);
+    }
+  }, [services, isMobile]);
 
   const handleTabChange = (index) => {
     if (index >= 0 && index < services.length) {
@@ -172,46 +205,136 @@ const Audit = () => {
             </p>
           </div>
 
-          {/* Tabs - Desktop */}
+          {/* Tabs - Desktop with Arrow Navigation */}
           {!isMobile && (
-            <div className={styles.customscrollbar}
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-start',
-                borderBottom: '1px solid #e5e7eb',
-                overflowX: 'auto',       // horizontal scroll
-                overflowY: 'hidden',     // no vertical scroll
-                whiteSpace: 'nowrap',    // prevent wrapping
-                WebkitOverflowScrolling: 'touch',
-                paddingBottom: '4px',
-              }}
-            >
-              {services.map((service, index) => {
-                if (!service || !service.title) return null;
-                return (
+            <div style={{ position: 'relative' }}>
+              {/* Left Fade & Arrow */}
+              {showLeftArrow && (
+                <>
+                  <div style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: '80px',
+                    background: 'linear-gradient(to right, white, transparent)',
+                    zIndex: 10,
+                    pointerEvents: 'none'
+                  }} />
                   <button
-                    key={`tab-${service._id || index}`}
-                    onClick={() => handleTabChange(index)}
+                    onClick={() => scrollTabs('left')}
                     style={{
-                      flexShrink: 0,          // prevent shrinking
-                      padding: '20px 28px',
+                      position: 'absolute',
+                      left: '8px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 20,
+                      background: '#fff',
                       border: 'none',
-                      background: 'transparent',
-                      fontWeight: '500',
-                      fontSize: '14px',
+                      borderRadius: '50%',
+                      width: '36px',
+                      height: '36px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                       cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      color: activeTab === index ? '#2d9bff ' : '#9ca3af',
-                      borderBottom: activeTab === index ? '3px solid #2d9bff ' : '3px solid transparent',
-                      marginBottom: '-1px',
-                      whiteSpace: 'nowrap',
-                      fontFamily: 'system-ui, -apple-system, sans-serif'
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                      transition: 'all 0.3s ease'
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = '#f9fafb'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = '#fff'}
                   >
-                    {service.title}
+                    <ChevronLeft style={{ width: '20px', height: '20px', color: '#374151' }} />
                   </button>
-                );
-              })}
+                </>
+              )}
+
+              {/* Right Fade & Arrow */}
+              {showRightArrow && (
+                <>
+                  <div style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: '80px',
+                    background: 'linear-gradient(to left, white, transparent)',
+                    zIndex: 10,
+                    pointerEvents: 'none'
+                  }} />
+                  <button
+                    onClick={() => scrollTabs('right')}
+                    style={{
+                      position: 'absolute',
+                      right: '8px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 20,
+                      background: '#fff',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '36px',
+                      height: '36px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = '#f9fafb'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = '#fff'}
+                  >
+                    <ChevronRight style={{ width: '20px', height: '20px', color: '#374151' }} />
+                  </button>
+                </>
+              )}
+
+              {/* Tabs Container */}
+              <div
+                ref={tabsScrollRef}
+                onScroll={checkTabsScroll}
+                className={styles.customscrollbar}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  borderBottom: '1px solid #e5e7eb',
+                  overflowX: 'auto',
+                  overflowY: 'hidden',
+                  whiteSpace: 'nowrap',
+                  WebkitOverflowScrolling: 'touch',
+                  paddingBottom: '4px',
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none'
+                }}
+              >
+                {services.map((service, index) => {
+                  if (!service || !service.title) return null;
+                  return (
+                    <button
+                      key={`tab-${service._id || index}`}
+                      onClick={() => handleTabChange(index)}
+                      style={{
+                        flexShrink: 0,
+                        padding: '20px 28px',
+                        border: 'none',
+                        background: 'transparent',
+                        fontWeight: '500',
+                        fontSize: '14px',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        color: activeTab === index ? '#2d9bff ' : '#9ca3af',
+                        borderBottom: activeTab === index ? '3px solid #2d9bff ' : '3px solid transparent',
+                        marginBottom: '-1px',
+                        whiteSpace: 'nowrap',
+                        fontFamily: 'system-ui, -apple-system, sans-serif'
+                      }}
+                    >
+                      {service.title}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
 
@@ -222,19 +345,12 @@ const Audit = () => {
                 display: 'flex',
                 gap: '10px',
                 padding: '0 20px 10px',
-                overflowX: 'auto',       // horizontal scroll
-                overflowY: 'hidden',     // no vertical scroll
-                whiteSpace: 'nowrap',    // prevent wrapping
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                whiteSpace: 'nowrap',
                 WebkitOverflowScrolling: 'touch'
               }}
             >
-              {/* <style>
-                {`
-                .mobile-tabs-container::-webkit-scrollbar {
-                  display: none;
-                }
-              `}
-              </style> */}
               <div
                 className="mobile-tabs-container"
                 style={{
@@ -250,7 +366,7 @@ const Audit = () => {
                       key={`mobile-tab-${service._id || index}`}
                       onClick={() => handleTabChange(index)}
                       style={{
-                        flexShrink: 0,          // prevent shrinking
+                        flexShrink: 0,
                         padding: '10px 20px',
                         border: 'none',
                         background: activeTab === index ? '#2d9bff ' : '#f3f4f6',
@@ -334,76 +450,105 @@ const Audit = () => {
 
             {/* Mobile: Single slide */}
             {isMobile ? (
-              <div style={{ padding: '0 10px' }}>
+              <div style={{ padding: '0 10px' }} key="mobile-carousel">
                 <ServiceCard service={activeService} isMobile={true} />
               </div>
             ) : (
-              /* Desktop: 3-slide carousel */
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '30px'
-              }}>
-                {/* Left slide */}
-                {prevService && (
-                  <div
-                    onClick={() => handleTabChange(activeTab - 1)}
-                    style={{
-                      flex: '0 0 280px',
-                      opacity: 0.3,
-                      transform: 'scale(0.75)',
-                      cursor: 'pointer',
-                      transition: 'all 0.4s ease',
-                      filter: 'blur(1px)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = '0.5';
-                      e.currentTarget.style.transform = 'scale(0.78)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = '0.3';
-                      e.currentTarget.style.transform = 'scale(0.75)';
-                    }}
-                  >
-                    <MiniServiceCard service={prevService} />
-                  </div>
-                )}
+              /* Desktop: 3-slide carousel with orange background */
+              <div style={{ position: 'relative' }} key="desktop-carousel">
+                {/* Orange Background Layer */}
+                <div 
+                  key="orange-bg"
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '85%',
+                    height: '85%',
+                   background: 'linear-gradient(135deg, #2d9bff  0%, #2d9bff  50%, #2d9bff  100%)',
+                    borderRadius: '40px',
+                    zIndex: 0,
+                    boxShadow: '0 20px 60px rgba(255, 107, 53, 0.3)'
+                  }} 
+                />
 
-                {/* Center slide */}
-                <div style={{
-                  flex: '0 0 900px',
-                  maxWidth: '900px',
-                  transition: 'all 0.4s ease',
-                  zIndex: 5
-                }}>
-                  <ServiceCard service={activeService} isMobile={false} />
+                {/* Carousel Slides */}
+                <div 
+                  key="carousel-slides"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '30px',
+                    position: 'relative',
+                    zIndex: 1,
+                    padding: '60px 40px'
+                  }}>
+                  {/* Left slide */}
+                  {prevService && (
+                    <div
+                      key={`prev-${prevService._id || activeTab - 1}`}
+                      onClick={() => handleTabChange(activeTab - 1)}
+                      style={{
+                        flex: '0 0 280px',
+                        opacity: 0.3,
+                        transform: 'scale(0.75)',
+                        cursor: 'pointer',
+                        transition: 'all 0.4s ease',
+                        filter: 'blur(1px)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '0.5';
+                        e.currentTarget.style.transform = 'scale(0.78)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '0.3';
+                        e.currentTarget.style.transform = 'scale(0.75)';
+                      }}
+                    >
+                      <MiniServiceCard service={prevService} />
+                    </div>
+                  )}
+
+                  {/* Center slide */}
+                  <div 
+                    key={`center-${activeService._id || activeTab}`}
+                    style={{
+                      flex: '0 0 900px',
+                      maxWidth: '900px',
+                      transition: 'all 0.4s ease',
+                      zIndex: 5
+                    }}>
+                    <ServiceCard service={activeService} isMobile={false} />
+                  </div>
+
+                  {/* Right slide */}
+                  {nextService && (
+                    <div
+                      key={`next-${nextService._id || activeTab + 1}`}
+                      onClick={() => handleTabChange(activeTab + 1)}
+                      style={{
+                        flex: '0 0 280px',
+                        opacity: 0.3,
+                        transform: 'scale(0.75)',
+                        cursor: 'pointer',
+                        transition: 'all 0.4s ease',
+                        filter: 'blur(1px)'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '0.5';
+                        e.currentTarget.style.transform = 'scale(0.78)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '0.3';
+                        e.currentTarget.style.transform = 'scale(0.75)';
+                      }}
+                    >
+                      <MiniServiceCard service={nextService} />
+                    </div>
+                  )}
                 </div>
-
-                {/* Right slide */}
-                {nextService && (
-                  <div
-                    onClick={() => handleTabChange(activeTab + 1)}
-                    style={{
-                      flex: '0 0 280px',
-                      opacity: 0.3,
-                      transform: 'scale(0.75)',
-                      cursor: 'pointer',
-                      transition: 'all 0.4s ease',
-                      filter: 'blur(1px)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = '0.5';
-                      e.currentTarget.style.transform = 'scale(0.78)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = '0.3';
-                      e.currentTarget.style.transform = 'scale(0.75)';
-                    }}
-                  >
-                    <MiniServiceCard service={nextService} />
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -514,7 +659,6 @@ const ServiceCard = ({ service, isMobile }) => {
       background: 'linear-gradient(135deg, #2d9bff  0%, #2d9bff  50%, #2d9bff  100%)',
       borderRadius: isMobile ? '20px' : '24px',
       padding: isMobile ? '6px' : '8px',
-      // boxShadow: '0 20px 50px rgba(234, 88, 12, 0.3)'
     }}>
       <div style={{
         background: '#fff',
@@ -652,12 +796,10 @@ const ServiceCard = ({ service, isMobile }) => {
                   left: isMobile ? '15px' : '20px',
                   width: isMobile ? '80px' : '100px',
                   height: isMobile ? '80px' : '100px',
-                  // background: 'linear-gradient(135deg, #86efac 0%, #22c55e 100%)',
                   borderRadius: '16px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  // boxShadow: '0 15px 30px rgba(34, 197, 94, 0.25)',
                   overflow: 'hidden'
                 }}>
                   <img

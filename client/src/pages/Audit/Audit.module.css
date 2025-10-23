@@ -252,6 +252,18 @@
   }
 }
 
+/* Hide scrollbar while keeping functionality */
+.customscrollbar {
+  overflow-x: auto;          
+  overflow-y: hidden;       
+  -ms-overflow-style: none;   
+  scrollbar-width: none;    
+}
+
+.customscrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   .illustration {
     width: 500px;
@@ -313,21 +325,3 @@
     right: 20px;
   }
 }
-
-
-/* Hide scrollbar while keeping functionality */
-/* .customscrollbar {
-  overflow-x: auto;          
-  overflow-y: hidden;       
-  -ms-overflow-style: none;   
-  scrollbar-width: none;    
-}
-
-.customscrollbar::-webkit-scrollbar {
-  width: 0;                 
-  height: 0;
-} */
-
-
-
-
