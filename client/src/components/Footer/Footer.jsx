@@ -70,14 +70,14 @@ function Footer() {
               <Link to="/Services" className={styles.navLink}>
                 Services
               </Link>
-              {/* <div className={styles.dropdown}>
+              <div className={styles.dropdown}>
                 <span className={styles.navLink}>KPO</span>
                 <div className={styles.dropdownContent}>
                   <Link to="/KPOServices" className={styles.navLink}>
                     HR as a Service
                   </Link>
                 </div>
-              </div> */}
+              </div>
               <Link to="/solutions" className={styles.navLink}>
                 Solution
               </Link>
