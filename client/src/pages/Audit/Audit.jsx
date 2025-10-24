@@ -179,7 +179,6 @@ const Audit = () => {
               color: '#2d9bff',
               marginBottom: '12px'
             }}>
-              FEATURED INDUSTRIES
             </div>
             <h1 style={{
               fontSize: 'clamp(24px, 4vw, 48px)',
